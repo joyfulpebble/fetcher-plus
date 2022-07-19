@@ -1,26 +1,45 @@
 {
-  "name": "editor",
-  "version": "0.1.0",
+  "name": "json-editor",
+  "version": "0.0.1",
+  "author": "joyfulpebble",
+  "description": "",
+  "homepage": ".",
+  "main": "build/electron/main.js",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.11.45",
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@testing-library/user-event": "^14.2.0",
+    "@types/electron-devtools-installer": "^2.2.2",
+    "@types/jest": "^28.1.1",
+    "@types/node": "^17.0.40",
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5",
+    "electron-devtools-installer": "^3.2.0",
+    "electron-reload": "^1.5.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.7.4",
+    "typescript": "^4.7.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "postinstall": "electron-builder install-app-deps",
+    "electron:dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && tsc -p electron -w\" \"wait-on http://localhost:3000 && tsc -p electron && electron .\"",
+    "electron:build": "yarn build && tsc -p electron && electron-builder",
     "eject": "react-scripts eject"
+  },
+  "build": {
+    "extends": null,
+    "files": [
+      "build/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +58,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^7.2.1",
+    "cross-env": "^7.0.3",
+    "electron": "^19.0.3",
+    "electron-builder": "^23.0.3",
+    "wait-on": "^6.0.1"
   }
 }
