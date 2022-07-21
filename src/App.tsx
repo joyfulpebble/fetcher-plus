@@ -1,10 +1,9 @@
 import React from "react";
+import DefualtEditor from "./core/editor/DefualtEditor";
 
-function App() {
+function App(): JSX.Element {
   return (
-    <div>
-      test
-    </div>
+    <DefualtEditor/>
   );
 }
 
