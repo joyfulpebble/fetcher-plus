@@ -10,7 +10,7 @@ function createWindow() {
   const filePath: Array<string> = [];
   const mainWindow = new BrowserWindow({
     width: 1000,
-    height: 1000,
+    height: 700,
     webPreferences: {
       nodeIntegration: true
     }

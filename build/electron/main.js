@@ -8,7 +8,7 @@ function createWindow() {
     var filePath = [];
     var mainWindow = new electron_1.BrowserWindow({
         width: 1000,
-        height: 1000,
+        height: 700,
         webPreferences: {
             nodeIntegration: true
         }
