@@ -3,20 +3,43 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
 var electron_devtools_installer_1 = require("electron-devtools-installer");
 var path = require("path");
+var getFilePath_1 = require("./components/getFilePath");
 function createWindow() {
-    var win = new electron_1.BrowserWindow({
-        width: 800,
-        height: 600,
+    var filePath = [];
+    var mainWindow = new electron_1.BrowserWindow({
+        width: 1000,
+        height: 1000,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
+            nodeIntegration: true
         }
     });
+    var menu = electron_1.Menu.buildFromTemplate([
+        {
+            label: 'File',
+            submenu: [
+                {
+                    label: 'Open File',
+                    accelerator: 'Ctrl+O',
+                    click: function () {
+                        (0, getFilePath_1.default)(filePath, mainWindow);
+                    }
+                },
+                {
+                    label: 'Exit',
+                    click: function () {
+                        electron_1.app.quit();
+                    }
+                }
+            ]
+        }
+    ]);
+    electron_1.Menu.setApplicationMenu(menu);
     if (electron_1.app.isPackaged) {
-        win.loadURL("file://".concat(__dirname, "/../index.html"));
+        mainWindow.loadURL("file://".concat(__dirname, "/../index.html"));
     }
     else {
-        win.loadURL('http://localhost:3000/index.html');
-        win.webContents.openDevTools();
+        mainWindow.loadURL('http://localhost:3000/index.html');
+        mainWindow.webContents.openDevTools();
         require('electron-reload')(__dirname, {
             electron: path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron' + (process.platform === "win32" ? ".cmd" : "")),
             forceHardReset: true,

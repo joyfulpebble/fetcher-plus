@@ -1,5 +1,5 @@
 import React from "react";
-import DefualtEditor from "./core/editor/DefualtEditor";
+import DefualtEditor from "./editor/DefualtEditor";
 
 function App(): JSX.Element {
   return (

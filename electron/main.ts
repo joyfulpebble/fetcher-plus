@@ -1,23 +1,49 @@
-import { app, BrowserWindow }                      from 'electron';
+import { app, BrowserWindow, Menu }        from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 
+import * as fs from 'fs';
 import * as path from 'path';
 
+import getFilePath from './components/getFilePath'
+
 function createWindow() {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+  const filePath: Array<string> = [];
+  const mainWindow = new BrowserWindow({
+    width: 1000,
+    height: 1000,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      nodeIntegration: true
     }
   })
 
-  if (app.isPackaged) {
-    win.loadURL(`file://${__dirname}/../index.html`);
-  } else {
-    win.loadURL('http://localhost:3000/index.html');
+  const menu = Menu.buildFromTemplate([
+    {
+      label: 'File',
+      submenu: [
+        {
+           label:'Open File',
+           accelerator: 'Ctrl+O',
+           click() {
+            getFilePath(filePath, mainWindow);
+           } 
+       },
+       {
+           label:'Exit',
+           click() {
+              app.quit()
+           } 
+         }
+      ]
+    }
+  ])
+  Menu.setApplicationMenu(menu)
 
-    win.webContents.openDevTools();
+  if (app.isPackaged) {
+    mainWindow.loadURL(`file://${__dirname}/../index.html`);
+  } else {
+    mainWindow.loadURL('http://localhost:3000/index.html');
+
+    mainWindow.webContents.openDevTools();
 
     require('electron-reload')(__dirname, {
       electron: path.join(__dirname,
@@ -38,7 +64,7 @@ app.whenReady().then(() => {
     .catch((err) => console.log('An error occurred: ', err));
 
   createWindow();
-
+  
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
@@ -50,4 +76,5 @@ app.whenReady().then(() => {
       app.quit();
     }
   });
+
 });
