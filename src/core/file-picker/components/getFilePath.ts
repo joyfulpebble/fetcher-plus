@@ -1,9 +1,9 @@
 import { BrowserWindow, dialog } from "electron";
-import { filePath } from "../electron-types/electron-types";
+import { getFilePath }           from "../../../../types/file-picker.types";
 
 import * as fs from 'fs'
 
-const getFilePath: filePath = (path: Array<string>, mainWindow: BrowserWindow): string[] => {
+const getFilePath: getFilePath = (path: Array<string>, mainWindow: BrowserWindow): string[] => {
   let filePath: string[] = [];
 
   const files = dialog.showOpenDialog(mainWindow, {
@@ -24,12 +24,10 @@ const getFilePath: filePath = (path: Array<string>, mainWindow: BrowserWindow): 
       console.log(err);
     });
     
-    if (!files) {
-      alert(`You don't pick a file!`);
-    }
+  if (!files) {
+    alert(`You don't pick a file!`);
+  }
     
-    
-
   return path;
 }
 

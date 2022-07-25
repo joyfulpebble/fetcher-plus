@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, FC } from 'react';
 
 import Editor from "@monaco-editor/react";
-import files from "./files";
+import files  from "./files";
 
 function DefualtEditor() {
 

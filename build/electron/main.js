@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
 var electron_devtools_installer_1 = require("electron-devtools-installer");
 var path = require("path");
-var getFilePath_1 = require("./components/getFilePath");
+var window_menu_1 = require("./components/window-menu");
 function createWindow() {
     var filePath = [];
     var mainWindow = new electron_1.BrowserWindow({
@@ -13,27 +13,7 @@ function createWindow() {
             nodeIntegration: true
         }
     });
-    var menu = electron_1.Menu.buildFromTemplate([
-        {
-            label: 'File',
-            submenu: [
-                {
-                    label: 'Open File',
-                    accelerator: 'Ctrl+O',
-                    click: function () {
-                        (0, getFilePath_1.default)(filePath, mainWindow);
-                    }
-                },
-                {
-                    label: 'Exit',
-                    click: function () {
-                        electron_1.app.quit();
-                    }
-                }
-            ]
-        }
-    ]);
-    electron_1.Menu.setApplicationMenu(menu);
+    electron_1.Menu.setApplicationMenu((0, window_menu_1.default)(filePath, mainWindow));
     if (electron_1.app.isPackaged) {
         mainWindow.loadURL("file://".concat(__dirname, "/../index.html"));
     }

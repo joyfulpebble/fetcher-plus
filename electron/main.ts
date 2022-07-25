@@ -1,10 +1,8 @@
-import { app, BrowserWindow, Menu }        from 'electron';
+import { app, BrowserWindow, Menu }                from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 
-import * as fs from 'fs';
 import * as path from 'path';
-
-import getFilePath from './components/getFilePath'
+import MenuAssemblyFunction from './components/window-menu';
 
 function createWindow() {
   const filePath: Array<string> = [];
@@ -16,27 +14,7 @@ function createWindow() {
     }
   })
 
-  const menu = Menu.buildFromTemplate([
-    {
-      label: 'File',
-      submenu: [
-        {
-           label:'Open File',
-           accelerator: 'Ctrl+O',
-           click() {
-            getFilePath(filePath, mainWindow);
-           } 
-       },
-       {
-           label:'Exit',
-           click() {
-              app.quit()
-           } 
-         }
-      ]
-    }
-  ])
-  Menu.setApplicationMenu(menu)
+  Menu.setApplicationMenu(MenuAssemblyFunction(filePath, mainWindow))
 
   if (app.isPackaged) {
     mainWindow.loadURL(`file://${__dirname}/../index.html`);
