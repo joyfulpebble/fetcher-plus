@@ -1,8 +1,8 @@
 import { app, BrowserWindow, Menu }                from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 
-import * as path from 'path';
 import MenuAssemblyFunction from './components/window-menu';
+import * as path            from 'path';
 
 function createWindow() {
   const mainWindow = new BrowserWindow({

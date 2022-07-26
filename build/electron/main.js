@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
 var electron_devtools_installer_1 = require("electron-devtools-installer");
-var path = require("path");
 var window_menu_1 = require("./components/window-menu");
+var path = require("path");
 function createWindow() {
     var mainWindow = new electron_1.BrowserWindow({
         width: 1000,
