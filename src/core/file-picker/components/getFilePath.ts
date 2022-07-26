@@ -1,7 +1,7 @@
 import { BrowserWindow, dialog } from "electron";
 import { getFilePath }           from "../../../../types/file-picker.types";
 
-const getFilePath: getFilePath = (mainWindow: BrowserWindow): string[] => {
+const getFilePath: getFilePath = (mainWindow: BrowserWindow): any => {
   
   const options = {
     filters: [
@@ -11,7 +11,9 @@ const getFilePath: getFilePath = (mainWindow: BrowserWindow): string[] => {
 
   const files = dialog.showOpenDialogSync(mainWindow, options)
 
-  return files!
+  console.log(files![0]);
+  
+  return files![0]
 }
 
 export default getFilePath;

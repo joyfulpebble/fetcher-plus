@@ -8,7 +8,8 @@ var getFilePath = function (mainWindow) {
         ]
     };
     var files = electron_1.dialog.showOpenDialogSync(mainWindow, options);
-    return files;
+    console.log(files[0]);
+    return files[0];
 };
 exports.default = getFilePath;
 //# sourceMappingURL=getFilePath.js.map

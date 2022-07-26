@@ -3,7 +3,7 @@ import { BrowserWindow } from "electron";
 /* function interface */
 
 export interface getFilePath {
-  (mainWindow: BrowserWindow): string[]
+  (mainWindow: BrowserWindow): any
 }
 
 export interface menuAssemblyFunction {
