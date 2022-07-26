@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
 var getFilePath_1 = require("../../src/core/file-picker/components/getFilePath");
-var MenuAssemblyFunction = function (filePath, mainWindow) {
+var MenuAssemblyFunction = function (mainWindow) {
     var menuAssembly = electron_1.Menu.buildFromTemplate([
         {
             label: 'File',
@@ -11,7 +11,7 @@ var MenuAssemblyFunction = function (filePath, mainWindow) {
                     label: 'Open File',
                     accelerator: 'Ctrl+O',
                     click: function () {
-                        (0, getFilePath_1.default)(filePath, mainWindow);
+                        (0, getFilePath_1.default)(mainWindow);
                     }
                 },
                 {

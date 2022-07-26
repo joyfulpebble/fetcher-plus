@@ -5,7 +5,6 @@ import * as path from 'path';
 import MenuAssemblyFunction from './components/window-menu';
 
 function createWindow() {
-  const filePath: Array<string> = [];
   const mainWindow = new BrowserWindow({
     width: 1000,
     height: 700,
@@ -14,7 +13,7 @@ function createWindow() {
     }
   })
 
-  Menu.setApplicationMenu(MenuAssemblyFunction(filePath, mainWindow))
+  Menu.setApplicationMenu(MenuAssemblyFunction(mainWindow))
 
   if (app.isPackaged) {
     mainWindow.loadURL(`file://${__dirname}/../index.html`);

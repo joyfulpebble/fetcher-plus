@@ -5,7 +5,6 @@ var electron_devtools_installer_1 = require("electron-devtools-installer");
 var path = require("path");
 var window_menu_1 = require("./components/window-menu");
 function createWindow() {
-    var filePath = [];
     var mainWindow = new electron_1.BrowserWindow({
         width: 1000,
         height: 700,
@@ -13,7 +12,7 @@ function createWindow() {
             nodeIntegration: true
         }
     });
-    electron_1.Menu.setApplicationMenu((0, window_menu_1.default)(filePath, mainWindow));
+    electron_1.Menu.setApplicationMenu((0, window_menu_1.default)(mainWindow));
     if (electron_1.app.isPackaged) {
         mainWindow.loadURL("file://".concat(__dirname, "/../index.html"));
     }
