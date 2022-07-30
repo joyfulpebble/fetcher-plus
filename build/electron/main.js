@@ -12,19 +12,14 @@ function createWindow() {
             nodeIntegration: true
         }
     });
-    electron_1.Menu.setApplicationMenu((0, window_menu_1.default)(mainWindow));
-    if (electron_1.app.isPackaged) {
-        mainWindow.loadURL("file://".concat(__dirname, "/../index.html"));
-    }
-    else {
-        mainWindow.loadURL('http://localhost:3000/index.html');
-        mainWindow.webContents.openDevTools();
-        require('electron-reload')(__dirname, {
-            electron: path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron' + (process.platform === "win32" ? ".cmd" : "")),
-            forceHardReset: true,
-            hardResetMethod: 'exit'
-        });
-    }
+    electron_1.Menu.setApplicationMenu((0, window_menu_1.default)());
+    mainWindow.loadURL('http://localhost:3000/home');
+    mainWindow.webContents.openDevTools();
+    require('electron-reload')(__dirname, {
+        electron: path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron' + (process.platform === "win32" ? ".cmd" : "")),
+        forceHardReset: true,
+        hardResetMethod: 'exit'
+    });
 }
 electron_1.app.whenReady().then(function () {
     (0, electron_devtools_installer_1.default)(electron_devtools_installer_1.REACT_DEVELOPER_TOOLS)

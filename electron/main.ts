@@ -13,26 +13,22 @@ function createWindow() {
     }
   })
 
-  Menu.setApplicationMenu(MenuAssemblyFunction(mainWindow))
+  Menu.setApplicationMenu(MenuAssemblyFunction())
 
-  if (app.isPackaged) {
-    mainWindow.loadURL(`file://${__dirname}/../index.html`);
-  } else {
-    mainWindow.loadURL('http://localhost:3000/index.html');
+  mainWindow.loadURL('http://localhost:3000/home');
 
-    mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
-    require('electron-reload')(__dirname, {
-      electron: path.join(__dirname,
-        '..',
-        '..',
-        'node_modules',
-        '.bin',
-        'electron' + (process.platform === "win32" ? ".cmd" : "")),
-      forceHardReset: true,
-      hardResetMethod: 'exit'
-    });
-  }
+  require('electron-reload')(__dirname, {
+    electron: path.join(__dirname,
+      '..',
+      '..',
+      'node_modules',
+      '.bin',
+      'electron' + (process.platform === "win32" ? ".cmd" : "")),
+    forceHardReset: true,
+    hardResetMethod: 'exit'
+  });
 }
 
 app.whenReady().then(() => {

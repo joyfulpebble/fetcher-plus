@@ -1,10 +1,9 @@
 import { app, BrowserWindow, Menu } from "electron";
 
 import { Type_MenuAssemblyFunction }from "../../types/file-picker.types";
-import getFilePath                  from "../../src/core/file-picker/components/getFilePath";
-import getFileContent               from "../../src/core/file-picker/components/getFileContent"
+import pickFile from "./pick-file-menu";
 
-const MenuAssemblyFunction: Type_MenuAssemblyFunction = (mainWindow: BrowserWindow): Electron.Menu => {
+const MenuAssemblyFunction: Type_MenuAssemblyFunction = (): Electron.Menu => {
   const menuAssembly = Menu.buildFromTemplate([
     {
       label: 'File',
@@ -13,7 +12,7 @@ const MenuAssemblyFunction: Type_MenuAssemblyFunction = (mainWindow: BrowserWind
            label:'Open File',
            accelerator: 'Ctrl+O',
            click() {
-            getFileContent(getFilePath(mainWindow))
+            pickFile()
            } 
        },
        {

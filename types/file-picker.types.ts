@@ -3,11 +3,11 @@ import { BrowserWindow } from "electron";
 /* function interface */
 
 export interface Type_GetFilePath {
-  (mainWindow: BrowserWindow): string;
+  (window: BrowserWindow): string;
 }
 
 export interface Type_MenuAssemblyFunction {
-  (mainWindow: BrowserWindow): Electron.Menu;
+  (): Electron.Menu;
 }
 
 export interface Type_GetFileContent {
