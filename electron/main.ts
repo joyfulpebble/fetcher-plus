@@ -1,23 +1,21 @@
-import { app, BrowserWindow, Menu }                from 'electron';
+import { app, BrowserWindow }                      from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 
-import MenuAssemblyFunction from './components/window-menu';
-import * as path            from 'path';
+import * as path from 'path';
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1000,
     height: 700,
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true
     }
   })
 
-  Menu.setApplicationMenu(MenuAssemblyFunction())
+  mainWindow.loadURL('http://localhost:3000/welcome');
 
-  mainWindow.loadURL('http://localhost:3000/home');
-
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   require('electron-reload')(__dirname, {
     electron: path.join(__dirname,

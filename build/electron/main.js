@@ -2,19 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
 var electron_devtools_installer_1 = require("electron-devtools-installer");
-var window_menu_1 = require("./components/window-menu");
 var path = require("path");
 function createWindow() {
     var mainWindow = new electron_1.BrowserWindow({
         width: 1000,
         height: 700,
+        autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: true
         }
     });
-    electron_1.Menu.setApplicationMenu((0, window_menu_1.default)());
-    mainWindow.loadURL('http://localhost:3000/home');
-    mainWindow.webContents.openDevTools();
+    mainWindow.loadURL('http://localhost:3000/welcome');
+    // mainWindow.webContents.openDevTools();
     require('electron-reload')(__dirname, {
         electron: path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron' + (process.platform === "win32" ? ".cmd" : "")),
         forceHardReset: true,

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
-var pick_file_menu_1 = require("./pick-file-menu");
+// import pickFile from "./pick-file-menu";
 var MenuAssemblyFunction = function () {
     var menuAssembly = electron_1.Menu.buildFromTemplate([
         {
@@ -11,7 +11,7 @@ var MenuAssemblyFunction = function () {
                     label: 'Open File',
                     accelerator: 'Ctrl+O',
                     click: function () {
-                        (0, pick_file_menu_1.default)();
+                        // pickFile()
                     }
                 },
                 {
