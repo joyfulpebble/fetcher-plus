@@ -1,8 +1,7 @@
 import React from 'react';
-
 import Editor from '@monaco-editor/react';
 
-function DefualtEditor() {
+function DefaultEditor() {
 
   return (
     <Editor
@@ -13,4 +12,4 @@ function DefualtEditor() {
   )
 }
 
-export default DefualtEditor;
+export default DefaultEditor;

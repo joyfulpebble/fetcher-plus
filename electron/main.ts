@@ -13,9 +13,9 @@ function createWindow() {
     }
   })
 
-  mainWindow.loadURL('http://localhost:3000/welcome');
+  mainWindow.loadURL('http://localhost:3000/pick-file');
 
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   require('electron-reload')(__dirname, {
     electron: path.join(__dirname,
