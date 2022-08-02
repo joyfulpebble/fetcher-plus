@@ -1,22 +1,26 @@
-import React from 'react';
-import Service from '../core/components/API/Service';
+import React, { useEffect, useState } from 'react';
+import Service from '../components/API/Service';
 
 function PickFilePopup(): any {
-  const TEST_FETCH_URL = "https://jsonplaceholder.typicode.com/posts";
-  const TEST_FETCH_PARAMS = { 
+  const URL = "https://jsonplaceholder.typicode.com/posts";
+  const PARAMS = { 
     params: {
     _limit: 10
   }}
+  // ###
 
-  async function a() {
-    return await Service.getFile(TEST_FETCH_URL, TEST_FETCH_PARAMS)
+  const [fileContent, setFileContent] = useState({});
+
+  async function fetchFile() {
+    setFileContent(await Service.getFile(URL, PARAMS));
   }
 
-  a()
-
+  console.log(fileContent);
+  
   return (
     <div>
-      test
+      <button onClick={fetchFile}>fetch!</button>
+      <a href="http://localhost:3000/home">Go home</a>
     </div>
   );
 }
