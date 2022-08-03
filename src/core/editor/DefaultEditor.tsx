@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Editor from '@monaco-editor/react';
-import Service from '../../components/API/Service';
+import Service from '../components/API/Service';
+import FortmatToString from '../components/tools/FortmatToString';
 
 function DefaultEditor() {
 
@@ -11,13 +12,10 @@ function DefaultEditor() {
   }}
 
   const [content, setContent] = useState('');
-
-  const fortmatResponse = (res: any) => {
-    return JSON.stringify(res, null, '  ');
-  };
+  const [saveContent, setSaveContent] = useState(content)
   
   async function fetch() {
-    setContent(fortmatResponse(await Service.getContent(URL, PARAMS)));
+    setContent(FortmatToString(await Service.getContent(URL, PARAMS)));
   }
 
   useEffect(() => {
@@ -27,10 +25,13 @@ function DefaultEditor() {
   return (
     <div>
       <a href="http://localhost:3000/pick-file">Go pick-file</a>
+
       <Editor
         height="90vh"
         defaultLanguage="json"
-        defaultValue={`${content}`}
+        value={`${content}`}
+
+        onChange={element => setSaveContent(element!)}
         />
     </div>
   )
