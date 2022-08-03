@@ -12,7 +12,7 @@ function createWindow() {
             nodeIntegration: true
         }
     });
-    mainWindow.loadURL('http://localhost:3000/pick-file');
+    mainWindow.loadURL('http://localhost:3000/welcome');
     mainWindow.webContents.openDevTools();
     require('electron-reload')(__dirname, {
         electron: path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron' + (process.platform === "win32" ? ".cmd" : "")),

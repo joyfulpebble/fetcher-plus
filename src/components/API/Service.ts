@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default class Service {
-  static async getFile(path: string, params?: Object): Promise<Object> {
+  static async getContent(path: string, params?: Object): Promise<Object> {
     let response = null;
 
     if (!params) {

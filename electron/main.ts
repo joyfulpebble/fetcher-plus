@@ -13,7 +13,7 @@ function createWindow() {
     }
   })
 
-  mainWindow.loadURL('http://localhost:3000/pick-file');
+  mainWindow.loadURL('http://localhost:3000/welcome');
 
   mainWindow.webContents.openDevTools();
 
