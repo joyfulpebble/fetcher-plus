@@ -14,11 +14,8 @@ export default function Fetcher() {
   const [content, setContent] = useState('');
   
   async function fetch() {
-    setContent(FortmatToString(await Service.getContent(url, param))); 
-    console.log(content);
+    setContent(FortmatToString(await Service.getContent(url, param)));
   }
-  
-  
 
   return (
     <div>
