@@ -8,6 +8,8 @@ export default class Service {
       response = await axios.get(path);
     } else {
       response = await axios.get(path, params);
+      
+      console.log('getting...');
     }
 
     return response.data;

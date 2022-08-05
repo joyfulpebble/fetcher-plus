@@ -2,8 +2,8 @@ import React         from "react";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import DefaultEditor from "./core/editor/DefaultEditor";
-import FetchFile from "./pages/FetchFile";
+import EditPage from "./pages/EditPage";
+import FetchPage from "./pages/FetchPage";
 import WelcomePage   from "./pages/welcome/WelcomePage";
 
 function App(): JSX.Element {
@@ -11,8 +11,8 @@ function App(): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path='/welcome' element={<WelcomePage/>}/>
-        <Route path='/home' element={<DefaultEditor/>}/>
-        <Route path='/pick-file' element={<FetchFile/>}/>
+        <Route path='/edit' element={<EditPage/>}/>
+        <Route path='/pick-file' element={<FetchPage/>}/>
       </Routes>
     </BrowserRouter>
     
