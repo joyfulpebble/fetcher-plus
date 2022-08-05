@@ -1,6 +1,13 @@
-## Available Scripts in addition to the existing ones
-
-### `npm run electron:dev`
+[✨]new feature
 
 
-### `npm run electron:build`
+[⚙]code improvement
+
+
+[📄]update read.me file
+
+
+[🗃]decomposition
+
+
+[🎓]fix bug
