@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Editor from '@monaco-editor/react';
-import Service from '../components/API/Service';
-import FortmatToString from '../components/tools/FortmatToString';
-import { fetch } from '../fetcher/Fetcher';
 
-function DefaultEditor() {
+function DefaultEditor({ content }: any) {
 
- 
-
-  useEffect(() => {
-    fetch();
-  }, [])//url, param
+  
+  const [saveContent, setSaveContent] = useState(content);
 
   return (
-    <div>
-      <a href="http://localhost:3000/pick-file">Go pick-file</a>
-
+    <div style={{height: '100p'}}>
       <Editor
-        height="90vh"
+        height="99vh"
+        width="100vw"
+        theme='vs-dark'
         defaultLanguage="json"
-        value={`test`}//${content}
+        value={`${JSON.stringify(content)}`}
 
-        // onChange={element => setSaveContent(element!)}
+        onChange={element => setSaveContent(element!)}
         />
     </div>
   )
