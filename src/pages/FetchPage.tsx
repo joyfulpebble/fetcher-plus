@@ -1,13 +1,13 @@
 import React from 'react';
-import Fetcher from '../core/fetcher/Fetcher';
+// import Fetcher from '../core/fetcher/Fetcher';
 
 function PickFilePopup(): any {
   
   return (
     <div>
-      <a href="http://localhost:3000/home">Go home</a>
+      <a href="http://localhost:3000/edit">Go edit</a>
 
-      <Fetcher/>
+      {/* <Fetcher/> */}
     </div>
   );
 }

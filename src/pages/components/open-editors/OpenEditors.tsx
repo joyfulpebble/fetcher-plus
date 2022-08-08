@@ -8,11 +8,8 @@ function OpenEditors({pages, page, setPage}: any) {
             <button
               onClick={() => {
                 setPage(index)
-                // console.log(index+1);
-                
               }}
-              key={p}
-              className={page === p ? 'page page__current' : 'page'}>{p}</button>
+              key={p}>{p}</button>
           )}
     </div>
   )

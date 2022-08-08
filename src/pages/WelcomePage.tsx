@@ -4,7 +4,14 @@ function WelcomePage() {
   return (
     <div>
       WelcomePage
-      <a href="http://localhost:3000/edit">Go home</a>
+      
+      <br />
+      <br />
+      
+      <a href="http://localhost:3000/edit">Go edit</a>
+      
+      <br />
+
       <a href="http://localhost:3000/pick-file">Go pick-file</a>
     </div>
   )

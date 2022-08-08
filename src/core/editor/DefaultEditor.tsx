@@ -13,7 +13,7 @@ function DefaultEditor({ content }: any) {
         width="100vw"
         theme='vs-dark'
         defaultLanguage="json"
-        value={`${JSON.stringify(content)}`}
+        value={`${JSON.stringify(content, null, '   ')}`}
 
         onChange={element => setSaveContent(element!)}
         />
