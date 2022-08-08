@@ -4,10 +4,10 @@
 [⚙]code improvement
 
 
-[📄]update read.me file
+[📄]update readme.md file
 
 
-[🗃]decomposition
+[🗃]decomposition / code cleaning
 
 
 [🎓]fix bug
