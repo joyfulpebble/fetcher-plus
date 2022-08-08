@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
-// import Fetcher from '../../../core/fetcher/Fetcher'
 
-function SideBar() {
-  // const [ data, setData ] = useState<string[]>(Fetcher())
-
-  // console.log(data);
-  
+function SideBar() {  
 
   return (
     <div>

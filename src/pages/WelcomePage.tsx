@@ -9,10 +9,6 @@ function WelcomePage() {
       <br />
       
       <a href="http://localhost:3000/edit">Go edit</a>
-      
-      <br />
-
-      <a href="http://localhost:3000/pick-file">Go pick-file</a>
     </div>
   )
 }
