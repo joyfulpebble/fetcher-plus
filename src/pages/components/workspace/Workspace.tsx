@@ -4,37 +4,32 @@ import SetDataToState from '../../../core/components/tools/SetDataToState';
 import OpenEditors from '../open-editors/OpenEditors';
 import Test from './Test';
 
-function Workspace() {
-  const [editor, setEditor] = useState<any>([<Test/>])
-  const [page, setPage] = useState(0)
+function Workspace({url, params}: any) {
+    const [editor, setEditor] = useState<any>([/*<Test/>*/])
+    const [page, setPage] = useState(1)
+    
+    const [urlS, setUrlS] = useState(url);
+    const [paramsS, setParamsS] = useState(params);
+    
+    const setContentToEditor = async () => {
+      try{
+        const data: any = await SetDataToState(urlS, paramsS);
+        
+        editor.push(<DefaultEditor content={data}/>)
+      }
+      catch(err){
+        console.error(err)
+      }
+    };
 
-  const test_params: object = { params: { _limit: 10 } }
-  const test_url: string = 'https://jsonplaceholder.typicode.com/posts'
-  
-  const [url, setUrl] = useState(test_url);
-  const [params, setParams] = useState(test_params);
-  
-  const [content, setContent] = useState();
-  
-  const setContentToEditor = async () => {
-    try{
-      const data: any = await SetDataToState(url, params);
-      
-      editor.push(<DefaultEditor content={data}/>)
+    if(urlS){
+      setContentToEditor()
     }
-    catch(err){
-      console.error(err)
-    }
-  };
-
-  useEffect(() => {
-    setContentToEditor()
-  }, [])
 
   return (
     <div>
       <OpenEditors 
-        pages={['test', 'data']}
+        pages={[/*'test',*/ 'data']}
         page={page}
         setPage={setPage}
        />
