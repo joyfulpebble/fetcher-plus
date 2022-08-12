@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-function SideBar({setUrl}: any): JSX.Element {  
+function Popup({setUrl}: any): JSX.Element {  
 
   const urlRef = useRef<HTMLInputElement>(null);
 
@@ -27,4 +27,4 @@ function SideBar({setUrl}: any): JSX.Element {
   )
 }
 
-export default SideBar
+export default Popup;

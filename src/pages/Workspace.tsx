@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 
 import EditorWithContent from './components/editor-with-content/EditorWithContent';
-import DefaultEditor from '../core/editor/DefaultEditor';
 import StatusBar from './components/status-bar/StatusBar';
-import SideBar from './components/side-bar/SideBar';
+import Popup from './components/popup/Popup';
 
-function MainPage(): JSX.Element {
+function Workspace(): JSX.Element {
   // const test_params: object = { params: { _limit: 10 } }
   // const test_url: string = 'https://jsonplaceholder.typicode.com/posts'
   const [params, setParams] = useState();
@@ -14,12 +13,12 @@ function MainPage(): JSX.Element {
   return (
     <div>
       <div style={{display: 'flex', flexDirection: 'row'}}>
-        <SideBar setUrl={setUrl}/>
-        {url ? <EditorWithContent url={url} params={params}/> : <DefaultEditor options={{domReadOnly: true, readOnly: true}}/>}
+        <Popup setUrl={setUrl}/>
+        {url ? <EditorWithContent url={url} params={params}/> : null}
       </div>
       <StatusBar/>
     </div>
   )
 }
 
-export default MainPage;
+export default Workspace;
