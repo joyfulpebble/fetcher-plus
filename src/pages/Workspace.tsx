@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import EditorWithContent from './components/editor-with-content/EditorWithContent';
 import StatusBar from './components/status-bar/StatusBar';
-import Popup from './components/fetch-settings-popup/FetchSettingsPopup';
+import FetchSettingsPopup from './components/fetch-settings-popup/FetchSettingsPopup';
 import Modal from './components/UI/Modal/Modal';
 
 function Workspace(): JSX.Element {
@@ -15,7 +15,7 @@ function Workspace(): JSX.Element {
   return (
     <div>
       <Modal visible={visible}>
-        <Popup setUrl={setUrl} setVisible={setVisible}/>
+        <FetchSettingsPopup setUrl={setUrl} setVisible={setVisible}/>
       </Modal>
       <div style={{display: 'flex', flexDirection: 'row'}}>
         <div>
