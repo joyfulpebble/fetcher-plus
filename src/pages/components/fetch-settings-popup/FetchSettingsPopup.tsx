@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-function Popup({setUrl}: any): JSX.Element {  
+function Popup({setUrl, setVisible}: any): JSX.Element {  
 
   const urlRef = useRef<HTMLInputElement>(null);
 
@@ -8,6 +8,7 @@ function Popup({setUrl}: any): JSX.Element {
     e.preventDefault();
 
     setUrl(urlRef.current?.value);
+    setVisible(false)
   }
 
   return (
