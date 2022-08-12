@@ -1,7 +1,7 @@
-import React         from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import MainPage    from "./pages/MainPage";
+import Workspace    from "./pages/Workspace";
 import WelcomePage from "./pages/WelcomePage";
 
 function App(): JSX.Element {
@@ -9,7 +9,7 @@ function App(): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path='/welcome' element={<WelcomePage/>}/>
-        <Route path='/edit' element={<MainPage/>}/>
+        <Route path='/edit' element={<Workspace/>}/>
       </Routes>
     </BrowserRouter>
     

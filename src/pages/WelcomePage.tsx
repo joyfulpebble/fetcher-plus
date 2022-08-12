@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-function WelcomePage() {
+function WelcomePage(): JSX.Element {
   return (
     <div>
       WelcomePage

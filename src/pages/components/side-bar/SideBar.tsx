@@ -1,19 +1,17 @@
-import React, { useRef } from 'react'
+import React, { useRef } from 'react';
 
-function SideBar({setUrl}: any) {  
+function SideBar({setUrl}: any): JSX.Element {  
 
-  const urlRef = useRef<HTMLInputElement>(null)
+  const urlRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(e: any) {
     e.preventDefault();
-    setUrl(urlRef.current?.value)
+
+    setUrl(urlRef.current?.value);
   }
 
   return (
     <div>
-      SideBar
-      <br />
-
       <div>
         <form>
           <input 
