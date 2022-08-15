@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-function FetchSettingsPopup({setUrl, setVisible}: any): JSX.Element {  
+function FetchSettings({setUrl, setVisible}: any): JSX.Element {  
 
   const urlRef = useRef<HTMLInputElement>(null);
 
@@ -8,7 +8,6 @@ function FetchSettingsPopup({setUrl, setVisible}: any): JSX.Element {
     e.preventDefault();
 
     setUrl(urlRef.current?.value);
-    setVisible(false)
   }
 
   return (
@@ -28,4 +27,4 @@ function FetchSettingsPopup({setUrl, setVisible}: any): JSX.Element {
   )
 }
 
-export default FetchSettingsPopup;
+export default FetchSettings;
