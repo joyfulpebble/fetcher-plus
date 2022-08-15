@@ -1,0 +1,21 @@
+html{
+  list-style-type: none;
+}
+
+.SettingsWrapper{
+  width: 500px; 
+  max-height: 500px;
+  border: 1px solid gray; 
+  padding: 10; 
+  overflow: auto;
+  padding: 10px;
+}
+.ParamsList{
+  width: 100%;
+  position: relative;
+  display: none;
+
+  &.active{
+    display: block;
+  }
+}

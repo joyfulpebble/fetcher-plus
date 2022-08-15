@@ -8,7 +8,7 @@ function EditorWithContent({url, params}: any): JSX.Element {
   
   const setContentToEditor = async () => {
     try{
-      const data: any = await fetcher(url, params);
+      const data: object = await fetcher(url, params);
       
       setEditor(<DefaultEditor content={data}/>);
     }
