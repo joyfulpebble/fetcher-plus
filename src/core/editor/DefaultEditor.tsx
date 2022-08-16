@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import Editor from '@monaco-editor/react';
 
-function DefaultEditor({ content, options }: any): JSX.Element {
+function DefaultEditor({width, height, value, options, setContent, isNeedSave}: any): JSX.Element {
 
-  const [saveContent, setSaveContent] = useState(content);
+  const [editContent, setEditContent] = useState(value);
+  
+  useEffect(() => {
+    setContent(editContent);
+  }, [isNeedSave])
 
   return (
-    <div style={{height: '100p'}}>
+    <div>
       <Editor
-        height="99vh"
-        width="100vw"
+        width={width}
+        height={height}
 
         theme='vs-dark'
         
         defaultLanguage="json"
-        value={`${JSON.stringify(content, null, '   ')}`}
+        value={`${JSON.stringify(value, null, '   ')}`}
         
-        onChange={element => setSaveContent(element!)}
+        onChange={element => setEditContent(element!)}
         
         options={
           options

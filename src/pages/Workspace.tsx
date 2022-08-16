@@ -8,9 +8,11 @@ function Workspace(): JSX.Element {
   const test_params: object = { params: { _limit: 1 } }
   // const test_url: string = 'https://jsonplaceholder.typicode.com/posts'
   const [url, setUrl]         = useState('');
+  const [params, setParams]   = useState({});
 
+  console.log(url);
+  
   const [isChecked, setIsChecked] = useState(false);
-  const [params, setParams]   = useState(test_params);
 
   return (
     <div>
@@ -20,7 +22,8 @@ function Workspace(): JSX.Element {
           params={params}
           /> 
         : <FetchSettings 
-          setUrl={setUrl} 
+          setUrl={setUrl}
+          setParams={setParams}
           setIsChecked={setIsChecked} 
           isChecked={isChecked}
           />}

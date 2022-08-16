@@ -1,24 +1,22 @@
 import React, { useRef, useState } from 'react';
 import classes from './FetchSettings.module.scss'
 
-import ParamItem from '../UI/ParamItem';
-import AddParamBtn from '../UI/AddParamBtn';
+import DefaultEditor from '../../../core/editor/DefaultEditor';
 
-function FetchSettings({setUrl, setIsChecked, isChecked}: any): JSX.Element {  
+function FetchSettings({setUrl, setParams, setIsChecked, isChecked}: any): JSX.Element {  
 
-  const [paramsList, setParamsList] = useState< Array< JSX.Element > >([<ParamItem/>])
-
-  const classesParamsList: Array<string> =[classes.ParamsList];
-  if(isChecked){
-    classesParamsList.push(classes.active);
-  }
+  const [parameters, setParameters] = useState({});
+  const [isNeedSave, setIsNeedSave] = useState(false);
 
   const urlRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(e: any) {
     e.preventDefault();
-
+    console.log(parameters)
+    
+    setIsNeedSave(true)
     setUrl(urlRef.current?.value);
+    setParams(parameters)
   }
 
   return (
@@ -46,15 +44,8 @@ function FetchSettings({setUrl, setIsChecked, isChecked}: any): JSX.Element {
           </label>
         </form>
       </div>
-      <div className={classesParamsList.join(',')}>
-        <AddParamBtn setParamsList={setParamsList} paramsList={paramsList}/>
-        {paramsList
-          .map((element, index) => {
-            return(
-              <li key={index}>{element}</li>
-            )
-          })
-        }
+      <div>
+        <DefaultEditor width={'450px'} height={'400px'} value={{ "params": { "_limit": 1} }} options={{tabSize: 2}} setContent={setParameters} isNeedSave={isNeedSave}/>
       </div>
       <button onClick={handleSubmit}>submit</button>
     </div>
