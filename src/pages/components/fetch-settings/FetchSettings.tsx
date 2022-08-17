@@ -5,16 +5,17 @@ import DefaultEditor from '../../../core/editor/DefaultEditor';
 
 function FetchSettings({setUrl, setParams, setIsChecked, isChecked}: any): JSX.Element {  
 
-  const [parameters, setParameters] = useState({});
-  const [isNeedSave, setIsNeedSave] = useState(false);
+  const parametersDivClass = [classes.ParametersWrapper];
+  if(isChecked){
+    parametersDivClass.push(classes.active)
+  }
+  const [parameters, setParameters] = useState('');
 
   const urlRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(e: any) {
     e.preventDefault();
-    console.log(parameters)
     
-    setIsNeedSave(true)
     setUrl(urlRef.current?.value);
     setParams(parameters)
   }
@@ -44,8 +45,13 @@ function FetchSettings({setUrl, setParams, setIsChecked, isChecked}: any): JSX.E
           </label>
         </form>
       </div>
-      <div>
-        <DefaultEditor width={'450px'} height={'400px'} value={{ "params": { "_limit": 1} }} options={{tabSize: 2}} setContent={setParameters} isNeedSave={isNeedSave}/>
+      <div className={parametersDivClass.join(' ')}>
+        <DefaultEditor 
+        width={'450px'} 
+        height={'400px'} 
+        value={{ "params": {  } }} 
+        options={{tabSize: 2}} 
+        setContent={setParameters}/>
       </div>
       <button onClick={handleSubmit}>submit</button>
     </div>

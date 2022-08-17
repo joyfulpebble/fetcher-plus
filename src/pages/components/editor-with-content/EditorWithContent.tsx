@@ -12,7 +12,13 @@ function EditorWithContent({url, params}: any): JSX.Element {
     try{
       const data: object = await fetcher(url, params);
       
-      setEditor(<DefaultEditor width={'500px'} height={'500px'} value={data} options={{tabSize: 2}} setContent={setEditorContent} isNeedSave={false} />);
+      setEditor(
+      <DefaultEditor 
+        width={'500px'} 
+        height={'500px'} 
+        value={data} 
+        options={{tabSize: 2}} 
+        setContent={setEditorContent}/>);
     }
     catch(err){
       console.error(err);

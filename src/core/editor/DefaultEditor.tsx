@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Editor from '@monaco-editor/react';
 
-function DefaultEditor({width, height, value, options, setContent, isNeedSave}: any): JSX.Element {
+function DefaultEditor({width, height, value, options, setContent}: any): JSX.Element {
 
   const [editContent, setEditContent] = useState(value);
   
   useEffect(() => {
     setContent(editContent);
-  }, [isNeedSave])
+  }, [editContent])
 
   return (
     <div>
@@ -20,7 +20,7 @@ function DefaultEditor({width, height, value, options, setContent, isNeedSave}: 
         defaultLanguage="json"
         value={`${JSON.stringify(value, null, '   ')}`}
         
-        onChange={element => setEditContent(element!)}
+        onChange={element => {setEditContent(element!)}}
         
         options={
           options
