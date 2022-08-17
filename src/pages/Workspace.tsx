@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import FileSaver, { saveAs } from 'file-saver';
 
 import EditorWithContent from './components/editor-with-content/EditorWithContent';
 import StatusBar from './components/status-bar/StatusBar';
@@ -9,27 +10,26 @@ function Workspace(): JSX.Element {
   const [url, setUrl]         = useState('');
   const [params, setParams]   = useState('');
 
-  useEffect(() => {
-    console.log(params);
-    
-  }, [params])
-
   const [isChecked, setIsChecked] = useState(false);
+  let blob = new Blob([JSON.stringify({text: "hello world!"})], {type: 'application/json'});
 
   return (
     <div>
       {url 
-        ? <EditorWithContent 
+        ? 
+        <div>
+          <EditorWithContent 
           url={url} 
           params={params}
           /> 
+          <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>savefile</button>
+        </div>
         : <FetchSettings 
           setUrl={setUrl}
           setParams={setParams}
           setIsChecked={setIsChecked} 
           isChecked={isChecked}
           />}
-    
       <StatusBar/>
     </div>
   )
