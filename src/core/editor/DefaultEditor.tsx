@@ -18,7 +18,7 @@ function DefaultEditor({width, height, value, options, setContent}: any): JSX.El
         theme='vs-dark'
         
         defaultLanguage="json"
-        value={`${JSON.stringify(value, null, '   ')}`}
+        value={`${JSON.stringify(value, null, '  ')}`}
         
         onChange={element => {setEditContent(element!)}}
         

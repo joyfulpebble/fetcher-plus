@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import FileSaver, { saveAs } from 'file-saver';
+import FileSaver from 'file-saver';
 
 import EditorWithContent from './components/editor-with-content/EditorWithContent';
 import StatusBar from './components/status-bar/StatusBar';
@@ -10,8 +10,14 @@ function Workspace(): JSX.Element {
   const [url, setUrl]         = useState('');
   const [params, setParams]   = useState('');
 
+  const [editiorContent, setEditorContent] = useState('')
+
   const [isChecked, setIsChecked] = useState(false);
-  let blob = new Blob([JSON.stringify({text: "hello world!"})], {type: 'application/json'});
+  
+  let blob: any = null;
+  if(editiorContent != ''){
+    blob = new Blob([JSON.stringify(editiorContent, null, '  ')], {type: 'application/json'});
+  }
 
   return (
     <div>
@@ -21,15 +27,18 @@ function Workspace(): JSX.Element {
           <EditorWithContent 
           url={url} 
           params={params}
+          editorContent={setEditorContent}
           /> 
-          <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>savefile</button>
+          <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
         </div>
-        : <FetchSettings 
+        : 
+        <FetchSettings 
           setUrl={setUrl}
           setParams={setParams}
           setIsChecked={setIsChecked} 
           isChecked={isChecked}
-          />}
+        />
+      }
       <StatusBar/>
     </div>
   )

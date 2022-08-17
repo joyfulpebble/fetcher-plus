@@ -8,7 +8,7 @@ function WelcomePage(): JSX.Element {
       <br />
       <br />
       
-      <a href="http://localhost:3000/edit">Go edit</a>
+      <a href="http://localhost:3000/get-settings">get</a>
     </div>
   )
 }
