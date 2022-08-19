@@ -1,17 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import classes from './StatusBar.module.scss'
 
+function StatusBar({error}: any): JSX.Element {
+  useEffect(() => {
+    console.log(error);
+    
+  }, [error])
 
-export function displayError(error: any) {
-  console.log(error);
-}
+  const status_color = [classes.SideBarWrapper];
 
-function StatusBar({}: any): JSX.Element {
+  const ERR_CODE: number = error;
+  
+  if(ERR_CODE === 404){
+    status_color.push(classes.error)
+  }
 
   return (
-    <div className={classes.SideBarWrapper}>
-      status
+    <div className={status_color.join(' ')}>
+      <span>{`${ERR_CODE} error`}</span>
     </div>
   )
 }

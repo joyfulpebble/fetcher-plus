@@ -7,10 +7,12 @@ import FetchSettings from './components/fetch-settings/FetchSettings';
 
 function Workspace(): JSX.Element {
   // const test_url: string = 'https://jsonplaceholder.typicode.com/posts'
+  const [statusError, setStatusError] = useState('')
+
   const [url, setUrl]         = useState('');
   const [params, setParams]   = useState('');
 
-  const [editiorContent, setEditorContent] = useState('')
+  const [editiorContent, setEditorContent] = useState('');
 
   const [isChecked, setIsChecked] = useState(false);
   
@@ -28,6 +30,7 @@ function Workspace(): JSX.Element {
           url={url} 
           params={params}
           editorContent={setEditorContent}
+          setStatusError={setStatusError}
           /> 
           <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
         </div>
@@ -39,7 +42,7 @@ function Workspace(): JSX.Element {
           isChecked={isChecked}
         />
       }
-      <StatusBar/>
+      <StatusBar error={statusError} />
     </div>
   )
 }

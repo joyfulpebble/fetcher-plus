@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 
 import DefaultEditor from '../../../core/editor/DefaultEditor';
 import fetcher from '../../../core/components/tools/fetcher';
-import { AxiosError } from 'axios';
 
-function EditorWithContent({url, params, editorContent}: any): JSX.Element {
+function EditorWithContent({url, params, editorContent, setStatusError}: any): JSX.Element {
 
   const [editor, setEditor] = useState<JSX.Element>();
   
   const setContentToEditor = async () => {
-    const data: object = await fetcher(url, params);
-    
-    if(data != null){
+    const data: object | number = await fetcher(url, params);
+  
+    if(typeof data === 'number'){
+      setStatusError(data);
+    } else {
       setEditor(
         <DefaultEditor 
           width={'500px'} 
@@ -21,8 +22,6 @@ function EditorWithContent({url, params, editorContent}: any): JSX.Element {
           setContent={editorContent}
         />
       );
-    } else {
-      setEditor(<h1>Error!</h1>)
     }
   };
 
