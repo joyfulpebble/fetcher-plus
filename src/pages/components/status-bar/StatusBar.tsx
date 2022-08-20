@@ -1,24 +1,20 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import classes from './StatusBar.module.scss'
 
 function StatusBar({error}: any): JSX.Element {
-  useEffect(() => {
-    console.log(error);
-    
-  }, [error])
 
-  const status_color = [classes.SideBarWrapper];
-
-  const ERR_CODE: number = error;
+  const status_color: string[] = [classes.SideBarWrapper];
+  let status_massage: string = 'No problems';
   
-  if(ERR_CODE === 404){
-    status_color.push(classes.error)
+  if(error != null){
+    status_color.push(classes.error);
+    status_massage = `Error code: ${error}`;
   }
 
   return (
     <div className={status_color.join(' ')}>
-      <span>{`${ERR_CODE} error`}</span>
+      <span>{status_massage}</span>
     </div>
   )
 }

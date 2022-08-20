@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FileSaver from 'file-saver';
 
 import EditorWithContent from './components/editor-with-content/EditorWithContent';
 import StatusBar from './components/status-bar/StatusBar';
-import FetchSettings from './components/fetch-settings/FetchSettings';
+import GetSettings from './components/fetch-settings/GetSettings';
 
 function Workspace(): JSX.Element {
   // const test_url: string = 'https://jsonplaceholder.typicode.com/posts'
-  const [statusError, setStatusError] = useState('')
+  const [statusError, setStatusError] = useState(null)
 
   const [url, setUrl]         = useState('');
   const [params, setParams]   = useState('');
@@ -35,7 +35,7 @@ function Workspace(): JSX.Element {
           <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
         </div>
         : 
-        <FetchSettings 
+        <GetSettings 
           setUrl={setUrl}
           setParams={setParams}
           setIsChecked={setIsChecked} 

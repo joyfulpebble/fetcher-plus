@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
-import classes from './FetchSettings.module.scss'
+import classes from './GetSettings.module.scss'
 
 import DefaultEditor from '../../../core/editor/DefaultEditor';
 
-function FetchSettings({setUrl, setParams, setIsChecked, isChecked}: any): JSX.Element {  
+function GetSettings({setUrl, setParams, setIsChecked, isChecked}: any): JSX.Element {  
 
   const parametersDivClass = [classes.ParametersWrapper];
   if(isChecked){
@@ -58,4 +58,4 @@ function FetchSettings({setUrl, setParams, setIsChecked, isChecked}: any): JSX.E
   )
 }
 
-export default FetchSettings;
+export default GetSettings;
