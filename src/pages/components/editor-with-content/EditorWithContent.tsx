@@ -12,7 +12,7 @@ function EditorWithContent({url, params, editorContent, setStatusError}: any): J
     const data: object | number = await getMethodHandling(url, params);
   
     if(typeof data === 'number'){
-      setStatusError(data);
+      setStatusError([1, "Bad link"]);
       setError(true)
     } else {
       setEditor(

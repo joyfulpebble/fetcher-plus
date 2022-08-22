@@ -6,7 +6,6 @@
     url("../../../../../public/fonts/Idea/webfonts/JetBrainsMono-Medium.woff2") format("woff2"),
     url("../../../../../public/fonts/Idea/ttf/JetBrainsMono-Medium.ttf") format("woff");
 }
-
 @font-face {
   font-family: "Poppins";
   font-style: normal;
@@ -14,20 +13,20 @@
   src: local("Poppins"),
     url("../../../../../public/fonts/Poppins/ttf/Poppins-Medium.ttf") format("woff");
 }
+$status-bar-background: #2C2C2C;
+$body-background: #1E1E1E;
 
 body{
+  background-color: $body-background;
   padding: 0;
   margin: 0;
   overflow: hidden;
+  color: azure;
   
   font-family: "Poppins";
   font-size: 15px;
 }
 
-
-$base-color: #76BA99;
-$error-color: #FF5677;
-$warning-color: #F9B208;
 
 .SideBarWrapper{
   font-family: "Idea";
@@ -41,13 +40,15 @@ $warning-color: #F9B208;
   bottom: 0;
   width: 100%;
   height: 20px;
-  background-color: $base-color;
-  
-  &.error{
-    background-color: $error-color;
-  }
+  background-color: $status-bar-background; 
+}
 
-  &.warning{
-    background-color: $warning-color;
-  }
+.Problems{
+  width: 30px;
+  height: 20px;
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }

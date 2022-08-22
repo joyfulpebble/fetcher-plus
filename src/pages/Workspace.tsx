@@ -7,7 +7,7 @@ import GetSettings from './components/UI/fetch-settings/GetSettings';
 
 function Workspace(): JSX.Element {
   // const test_url: string = 'https://jsonplaceholder.typicode.com/posts'
-  const [statusError, setStatusError] = useState(null)
+  const [statusError, setStatusError] = useState(null);
 
   const [url, setUrl]         = useState('');
   const [params, setParams]   = useState('');
@@ -42,7 +42,7 @@ function Workspace(): JSX.Element {
           isChecked={isChecked}
         />
       }
-      <StatusBar error={statusError} />
+      <StatusBar warning={setStatusError} error={statusError} />
     </div>
   )
 }

@@ -1,20 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-import classes from './StatusBar.module.scss'
+import ErrorSVG from '../../icons/ErrorSVG';
+import classes from './StatusBar.module.scss';
 
-function StatusBar({error}: any): JSX.Element {
-
-  const status_color: string[] = [classes.SideBarWrapper];
-  let status_massage: string = 'No problems';
+function StatusBar({error, isOffline}: any): JSX.Element {
   
-  if(error != null){
-    status_color.push(classes.error);
-    status_massage = `Error code: ${error}`;
-  }
 
   return (
-    <div className={status_color.join(' ')}>
-      <span>{status_massage}</span>
+    <div className={classes.SideBarWrapper}>
+      <div> 
+        <div className={classes.Problems}>
+          <ErrorSVG/>
+          <span>{error ? error[0] : 0}</span>
+        </div>
+      </div>
     </div>
   )
 }
