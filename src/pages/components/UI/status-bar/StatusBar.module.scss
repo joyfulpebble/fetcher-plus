@@ -15,13 +15,14 @@
 }
 $status-bar-background: #2C2C2C;
 $body-background: #1E1E1E;
+$text-color: azure;
 
 body{
   background-color: $body-background;
   padding: 0;
   margin: 0;
   overflow: hidden;
-  color: azure;
+  color: $text-color;
   
   font-family: "Poppins";
   font-size: 15px;
