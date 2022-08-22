@@ -15,4 +15,4 @@
 [🎓]fix bug
 
 
-[🎨]working with sass
+[🎨]improving scss
