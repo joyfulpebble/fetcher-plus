@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import Editor from '@monaco-editor/react';
 
 function DefaultEditor({width, height, value, options, setContent}: any): JSX.Element {
@@ -9,6 +10,7 @@ function DefaultEditor({width, height, value, options, setContent}: any): JSX.El
     setContent(editContent);
   }, [editContent])
 
+
   return (
     <div>
       <Editor
@@ -17,13 +19,19 @@ function DefaultEditor({width, height, value, options, setContent}: any): JSX.El
 
         theme='vs-dark'
         
+        
         defaultLanguage="json"
         value={`${JSON.stringify(value, null, '  ')}`}
         
         onChange={element => {setEditContent(element!)}}
         
         options={
-          options
+          {
+          ...options,
+          fontLigatures: true,
+          fontFamily: "'Consolas', 'Courier New', monospace",
+          fontSize: 14
+          }
         }
         />
     </div>

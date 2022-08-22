@@ -1,0 +1,53 @@
+@font-face {
+  font-family: "Idea";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Idea"),    
+    url("../../../../../public/fonts/Idea/webfonts/JetBrainsMono-Medium.woff2") format("woff2"),
+    url("../../../../../public/fonts/Idea/ttf/JetBrainsMono-Medium.ttf") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Poppins"),
+    url("../../../../../public/fonts/Poppins/ttf/Poppins-Medium.ttf") format("woff");
+}
+
+body{
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  
+  font-family: "Poppins";
+  font-size: 15px;
+}
+
+
+$base-color: #76BA99;
+$error-color: #FF5677;
+$warning-color: #F9B208;
+
+.SideBarWrapper{
+  font-family: "Idea";
+  font-size: 13px;
+ 
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 20px;
+  background-color: $base-color;
+  
+  &.error{
+    background-color: $error-color;
+  }
+
+  &.warning{
+    background-color: $warning-color;
+  }
+}

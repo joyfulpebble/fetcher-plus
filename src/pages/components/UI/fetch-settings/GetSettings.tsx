@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import classes from './GetSettings.module.scss'
 
-import DefaultEditor from '../../../core/editor/DefaultEditor';
+import DefaultEditor from '../../../../core/editor/DefaultEditor';
 
 function GetSettings({setUrl, setParams, setIsChecked, isChecked}: any): JSX.Element {  
 
