@@ -16,21 +16,25 @@ function StatusBar({error}: any): JSX.Element {
   const [online, setOnline] = useState(checkNetConnection())
   
   return (
-    <div className={classes.SideBarWrapper}>
+    <div className={classes.StatusBarWrapper}>
       <div className={classes.Problems}>
         <ErrorSVG/>
         <span>{error ? 1 : 0}</span>
       </div>
-      <Tippy
-        content={<span>{online ? 'Internet connected' : 'No internet connection'}</span>}
-        animation='shift-away'
-        hideOnClick={false}
-        trigger='mouseenter'
-        >
-        <div>
-          {online ? <OnlineSVG/> : <OfflineSVG/>}
-        </div>
-      </Tippy>
+      <div className={classes.TippyWrapper}>
+        <Tippy
+          className={classes.InternetConnection}
+          content={<span >{online ? 'Internet connected' : 'No internet connection'}</span>}
+          animation='shift-away'
+          hideOnClick={false}
+          trigger='mouseenter'
+          placement='left'
+          >
+          <div>
+            {online ? <OnlineSVG/> : <OfflineSVG/>}
+          </div>
+        </Tippy>
+      </div>
     </div>
   )
 }

@@ -1,10 +1,18 @@
 @font-face {
-  font-family: "Idea";
+  font-family: "Idea-Medium";
   font-style: normal;
   font-weight: 400;
-  src: local("Idea"),    
+  src: local("Idea-Medium"),    
     url("../../../../public/fonts/Idea/webfonts/JetBrainsMono-Medium.woff2") format("woff2"),
     url("../../../../public/fonts/Idea/ttf/JetBrainsMono-Medium.ttf") format("woff");
+}
+@font-face {
+  font-family: "Idea-Light";
+  font-style: normal;
+  font-weight: 200;
+  src: local("Idea-Light"),    
+    url("../../../../public/fonts/Idea/webfonts/JetBrainsMono-Light.woff2") format("woff2"),
+    url("../../../../public/fonts/Idea/ttf/JetBrainsMono-Light.ttf") format("woff");
 }
 @font-face {
   font-family: "Poppins";
@@ -13,6 +21,7 @@
   src: local("Poppins"),
     url("../../../../public/fonts/Poppins/ttf/Poppins-Medium.ttf") format("woff");
 }
+
 $status-bar-background: #2C2C2C;
 $body-background: #1E1E1E;
 $text-color: azure;
@@ -27,23 +36,21 @@ body{
   font-family: "Poppins";
   font-size: 15px;
 }
-
-
-.SideBarWrapper{
-  font-family: "Idea";
+.StatusBarWrapper{
+  font-family: "Idea-Medium";
   font-size: 13px;
  
   display: flex;
   align-items: center;
-  padding: 0 5px;
+  justify-content: space-between;
+  padding: 0 10px;
 
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
   height: 20px;
   background-color: $status-bar-background; 
 }
-
 .Problems{
   width: 30px;
   height: 20px;
@@ -52,4 +59,14 @@ body{
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+.TippyWrapper{
+  margin-right: 20px;
+}
+.InternetConnection{
+  font-family: "Idea-Light";
+  font-size: 12px;
+  
+  width: auto;
+  height: 25px;
 }

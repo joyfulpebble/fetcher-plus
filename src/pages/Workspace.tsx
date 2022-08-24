@@ -15,7 +15,7 @@ function Workspace(): JSX.Element {
   const [editiorContent, setEditorContent] = useState('');
 
   const [isChecked, setIsChecked] = useState(false);
-  
+
   let blob: any = null;
   if(editiorContent != ''){
     blob = new Blob([JSON.stringify(editiorContent, null, '  ')], {type: 'application/json'});
