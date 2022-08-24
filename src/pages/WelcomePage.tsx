@@ -1,16 +1,8 @@
-import React, { useEffect } from 'react';
-import StatusBar from './components/UI/status-bar/StatusBar';
+import React from 'react';
+
+import StatusBar from './components/status-bar/StatusBar';
 
 function WelcomePage(): JSX.Element {
-
-  function poopityScoop(){
-    console.log(navigator.onLine)
-  }
-
-  useEffect(() => {
-    poopityScoop()
-  }, [])
-
   return (
     <div>
       WelcomePage
