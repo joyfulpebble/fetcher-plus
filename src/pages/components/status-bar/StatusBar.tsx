@@ -13,7 +13,10 @@ import classes from './StatusBar.module.scss';
 
 function StatusBar({error}: any): JSX.Element {
   // const [errorCount, setErrorCount] = useState();
-  const [online, setOnline] = useState(checkNetConnection())
+  const [online, setOnline] = useState(checkNetConnection());
+  
+  window.addEventListener('offline', (e) => { setOnline(false) });
+  window.addEventListener('online',  (e) => { setOnline(true) });
   
   return (
     <div className={classes.StatusBarWrapper}>
@@ -22,18 +25,34 @@ function StatusBar({error}: any): JSX.Element {
         <span>{error ? 1 : 0}</span>
       </div>
       <div className={classes.TippyWrapper}>
-        <Tippy
+      {online 
+        ? <Tippy
           className={classes.InternetConnection}
           content={<span >{online ? 'Internet connected' : 'No internet connection'}</span>}
           animation='shift-away'
           hideOnClick={false}
           trigger='mouseenter'
-          placement='left'
+          placement='top-end'
+          maxWidth={82}
           >
           <div>
-            {online ? <OnlineSVG/> : <OfflineSVG/>}
+            <OnlineSVG/>
+          </div>
+        </Tippy> 
+        : <Tippy
+          className={classes.InternetConnection}
+          content={<span >{online ? 'Internet connected' : 'No internet connection'}</span>}
+          animation='shift-away'
+          hideOnClick={false}
+          trigger='mouseenter'
+          placement='top-end'
+          maxWidth={88}
+          >
+          <div>
+            <OfflineSVG/>
           </div>
         </Tippy>
+        }
       </div>
     </div>
   )

@@ -1,3 +1,3 @@
-export default function checkNetConnection() {
+export default function checkNetConnection(): any {
   return navigator.onLine;
 }
