@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import checkNetConnection from '../../../core/components/tools/checkNetConnection';
 
 import ErrorSVG from '../icons/ErrorSVG';
+import OfflineTippy from './components/OfflineTippy';
 import OnlineTippy from './components/OnlineTippy';
 
-import OfflineSVG from '../icons/OfflineSVG';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/animations/shift-away.css';
+
 
 import classes from './StatusBar.module.scss';
 
@@ -27,19 +25,7 @@ function StatusBar({error}: any): JSX.Element {
       <div className={classes.TippyWrapper}>
       {online 
         ? <OnlineTippy online={online}/>
-        : <Tippy
-          className={classes.InternetConnection}
-          content={<span >{online ? 'Internet connected' : 'No internet connection'}</span>}
-          animation='shift-away'
-          hideOnClick={false}
-          trigger='mouseenter'
-          placement='top-end'
-          maxWidth={88}
-          >
-          <div>
-            <OfflineSVG/>
-          </div>
-        </Tippy>
+        : <OfflineTippy online={online}/>
         }
       </div>
     </div>
