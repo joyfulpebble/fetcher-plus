@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export default class Service {
   static async getContent(path: string, params?: any): Promise<Object> {

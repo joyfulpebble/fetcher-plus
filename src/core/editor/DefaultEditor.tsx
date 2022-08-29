@@ -10,7 +10,6 @@ function DefaultEditor({width, height, value, options, setContent}: any): JSX.El
     setContent(editContent);
   }, [editContent])
 
-
   return (
     <div>
       <Editor
@@ -18,7 +17,6 @@ function DefaultEditor({width, height, value, options, setContent}: any): JSX.El
         height={height}
 
         theme='vs-dark'
-        
         
         defaultLanguage="json"
         value={`${JSON.stringify(value, null, '  ')}`}

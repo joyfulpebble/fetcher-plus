@@ -6,6 +6,6 @@ export default async function getMethodHandling(url: string, param: any): Promis
 
     return response;
   } catch (error: any) {
-    return ['err', error]
+    return ['err', error];
   }
 }

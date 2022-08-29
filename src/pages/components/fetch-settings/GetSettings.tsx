@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import classes from './GetSettings.module.scss'
+import classes from './GetSettings.module.scss';
 
 import DefaultEditor from '../../../core/editor/DefaultEditor';
 
@@ -7,7 +7,7 @@ function GetSettings({setUrl, setParams, setIsChecked, isChecked}: any): JSX.Ele
 
   const parametersDivClass = [classes.ParametersWrapper];
   if(isChecked){
-    parametersDivClass.push(classes.active)
+    parametersDivClass.push(classes.active);
   }
   const [parameters, setParameters] = useState('');
 
@@ -17,7 +17,7 @@ function GetSettings({setUrl, setParams, setIsChecked, isChecked}: any): JSX.Ele
     e.preventDefault();
     
     setUrl(urlRef.current?.value);
-    setParams(parameters)
+    setParams(parameters);
   }
 
   return (
