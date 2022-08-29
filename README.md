@@ -6,9 +6,6 @@
 [⚙]code improvement
 
 
-[🔧]code formatting
-
-
 [📄]update readme.md file
 
 
