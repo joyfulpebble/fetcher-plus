@@ -11,8 +11,8 @@ import classes from '../StatusBar.module.scss';
 function OfflineTippy({online}: any): JSX.Element {
   return (
     <Tippy
-      className={classes.InternetConnection}
-      content={<span >{online ? 'Internet connected' : 'No internet connection'}</span>}
+      className={classes.InternetConnectionTippy}
+      content={<span >No internet connection</span>}
       animation='shift-away'
       hideOnClick={false}
       trigger='mouseenter'
