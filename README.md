@@ -9,7 +9,7 @@
 [📄]update readme.md file
 
 
-[🗃]decomposition / code cleaning
+[🗃]code cleaning
 
 
 [🎓]fix bug
