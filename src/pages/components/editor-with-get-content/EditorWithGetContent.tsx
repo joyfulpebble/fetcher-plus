@@ -5,7 +5,7 @@ import ErrorSVG from '../icons/ErrorSVG';
 import DefaultEditor from '../../../core/editor/DefaultEditor';
 import getMethodHandling from '../../../core/components/tools/getMethodHandling';
 
-function EditorWithContent({url, params, editorContent, errorStorage}: any): JSX.Element {
+function EditorWithGetContent({url, params, editorContent, errorStorage}: any): JSX.Element {
 
   const [editor, setEditor] = useState<JSX.Element>();
   const [error, setError]   = useState<any[]>([false]);
@@ -52,4 +52,4 @@ function EditorWithContent({url, params, editorContent, errorStorage}: any): JSX
   )
 }
 
-export default EditorWithContent;
+export default EditorWithGetContent;

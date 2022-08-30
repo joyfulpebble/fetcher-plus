@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import FileSaver from 'file-saver';
 
-import EditorWithContent from './components/editor-with-content/EditorWithContent';
+import EditorWithGetContent from './components/editor-with-get-content/EditorWithGetContent';
 import StatusBar from './components/status-bar/StatusBar';
 import GetSettings from './components/fetch-settings/GetSettings';
 
@@ -26,7 +26,7 @@ function Workspace(): JSX.Element {
       {url 
         ? 
         <div>
-          <EditorWithContent 
+          <EditorWithGetContent 
           url={url} 
           params={params}
           editorContent={setEditorContent}
