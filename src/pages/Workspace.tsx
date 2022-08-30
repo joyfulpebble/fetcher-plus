@@ -7,7 +7,7 @@ import GetSettings from './components/fetch-settings/GetSettings';
 
 function Workspace(): JSX.Element {
   // const test_url: string = 'https://jsonplaceholder.typicode.com/posts'
-  const [errorStorage, setErrorStorage] = useState(undefined);
+  const [tempErrorStorage, setTempErrorStorage] = useState(undefined);
 
   const [url, setUrl]         = useState('');
   const [params, setParams]   = useState('');
@@ -30,7 +30,7 @@ function Workspace(): JSX.Element {
           url={url} 
           params={params}
           editorContent={setEditorContent}
-          errorStorage={setErrorStorage}
+          errorStorage={setTempErrorStorage}
           /> 
           <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
           <button onClick={() => window.location.reload()}>go back</button>
@@ -43,7 +43,7 @@ function Workspace(): JSX.Element {
           isChecked={isChecked}
         />
       }
-      <StatusBar error={errorStorage} />
+      <StatusBar error={tempErrorStorage} />
     </div>
   )
 }

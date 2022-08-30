@@ -11,7 +11,7 @@ import classes from '../StatusBar.module.scss';
 function OfflineTippy({online}: any): JSX.Element {
   return (
     <Tippy
-      className={classes.InternetConnectionTippy}
+      className={classes.TippyWrapper}
       content={<span >No internet connection</span>}
       animation='shift-away'
       hideOnClick={false}
