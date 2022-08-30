@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import checkNetConnection from '../../../core/components/tools/checkNetConnection';
 
-import ErrorSVG from '../icons/ErrorSVG';
 import OfflineTippy from './components/OfflineTippy';
 import OnlineTippy from './components/OnlineTippy';
+import ErrorTippy from './components/ErrorTippy';
 
 import classes from './StatusBar.module.scss';
-
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/animations/shift-away.css';
 
 function StatusBar({error}: any): JSX.Element {
   const [errorCount, setErrorCount] = useState(error);
@@ -24,31 +20,16 @@ function StatusBar({error}: any): JSX.Element {
     }
   }, [error])
   
-  window.addEventListener('offline', (e) => { setOnline(false) });
-  window.addEventListener('online',  (e) => { setOnline(true) });
+  window.addEventListener('offline', () => { setOnline(false) });
+  window.addEventListener('online',  () => { setOnline(true) });
   
   return (
     <div className={classes.StatusBarWrapper}>
-      <Tippy
-        className={classes.TippyWrapper}
-        content={
-          <span 
-            title={errorStorage ? errorStorage : 'no errors'}>
-              {errorCount ? `Errors: ${errorCount}` : 'No problems'}
-          </span>
-        }
-        interactive={true}
-        appendTo={document.body}
-      >
-        <div className={classes.Problems}>
-          <ErrorSVG/>
-          <span>{errorCount ? errorCount : 0}</span>
-        </div>
-      </Tippy>
+        <ErrorTippy errorStorage={errorStorage} errorCount={errorCount}/>
       <div className={classes.InternetConnectionTippyWrapper}>
-      {online 
-        ? <OnlineTippy/>
-        : <OfflineTippy/>
+        {online 
+          ? <OnlineTippy/>
+          : <OfflineTippy/>
         }
       </div>
     </div>

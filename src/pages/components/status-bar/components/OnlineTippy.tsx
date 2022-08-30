@@ -1,8 +1,8 @@
 import React from 'react';
 
 import OnlineSVG from '../../icons/OnlineSVG';
-
 import Tippy from '@tippyjs/react';
+
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/animations/shift-away.css';
 
