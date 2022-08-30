@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import ErrorSVG from '../icons/ErrorSVG';
+
 import DefaultEditor from '../../../core/editor/DefaultEditor';
 import getMethodHandling from '../../../core/components/tools/getMethodHandling';
 
@@ -13,13 +15,10 @@ function EditorWithContent({url, params, editorContent, errorStorage}: any): JSX
 
     if(data[0] === 'err'){
       setEditor(
-        <DefaultEditor 
-          width={'500px'} 
-          height={'500px'} 
-          value={data[1]} 
-          options={{tabSize: 2, }} 
-          setContent={editorContent}
-        />
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center '}}>
+          <ErrorSVG w={200} h={200}/>
+          <span>Oops! Something went wrong.</span>
+        </div>
       );
       setError([true, data[1].message]);
       
