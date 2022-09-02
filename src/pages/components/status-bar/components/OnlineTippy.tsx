@@ -1,8 +1,8 @@
 import React from 'react';
 
-import OnlineSVG from '../../icons/OnlineSVG';
-
+import OnlineSVG from '../../../../components/icons/OnlineSVG';
 import Tippy from '@tippyjs/react';
+
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/animations/shift-away.css';
 
@@ -11,7 +11,7 @@ import classes from '../StatusBar.module.scss';
 function OnlineTippy(): JSX.Element {
   return (
     <Tippy
-    className={classes.InternetConnectionTippy}
+    className={classes.TippyWrapper}
     content={<span >Internet connected</span>}
     animation='shift-away'
     hideOnClick={false}

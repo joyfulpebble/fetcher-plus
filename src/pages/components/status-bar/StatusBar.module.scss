@@ -3,23 +3,23 @@
   font-style: normal;
   font-weight: 400;
   src: local("Idea-Medium"),    
-    url("../../../../public/fonts/Idea/webfonts/JetBrainsMono-Medium.woff2") format("woff2"),
-    url("../../../../public/fonts/Idea/ttf/JetBrainsMono-Medium.ttf") format("woff");
+    url("../../../components/fonts/Idea/webfonts/JetBrainsMono-Medium.woff2") format("woff2"),
+    url("../../../components/fonts/Idea/ttf/JetBrainsMono-Medium.ttf") format("woff");
 }
 @font-face {
   font-family: "Idea-Light";
   font-style: normal;
   font-weight: 200;
   src: local("Idea-Light"),    
-    url("../../../../public/fonts/Idea/webfonts/JetBrainsMono-Light.woff2") format("woff2"),
-    url("../../../../public/fonts/Idea/ttf/JetBrainsMono-Light.ttf") format("woff");
+    url("../../../components/fonts/Idea/webfonts/JetBrainsMono-Light.woff2") format("woff2"),
+    url("../../../components/fonts/Idea/ttf/JetBrainsMono-Light.ttf") format("woff");
 }
 @font-face {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
   src: local("Poppins"),
-    url("../../../../public/fonts/Poppins/ttf/Poppins-Medium.ttf") format("woff");
+    url("../../../components/fonts/Poppins/ttf/Poppins-Medium.ttf") format("woff");
 }
 
 $status-bar-background: #2C2C2C;
@@ -62,9 +62,8 @@ body{
 }
 .InternetConnectionTippyWrapper{
   margin-right: 20px;
-
 }
-.InternetConnectionTippy{
+.TippyWrapper{
   font-family: "Idea-Light";
   font-size: 12px;
 }
