@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import FileSaver from 'file-saver';
 
-import EditorWithGetContent from './components/editor-with-get-content/EditorWithGetContent';
+import EditorWithGetContent from '.././components/editor-with-get-content/EditorWithGetContent';
+import GetSettings from '.././components/get-settings/GetSettings';
 import StatusBar from './components/status-bar/StatusBar';
-import GetSettings from './components/fetch-settings/GetSettings';
 
 function Workspace(): JSX.Element {
   // const test_url: string = 'https://jsonplaceholder.typicode.com/posts'

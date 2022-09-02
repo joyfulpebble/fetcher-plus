@@ -1,6 +1,6 @@
 import React from 'react';
 
-import OnlineSVG from '../../icons/OnlineSVG';
+import OnlineSVG from '../../../../components/icons/OnlineSVG';
 import Tippy from '@tippyjs/react';
 
 import 'tippy.js/dist/tippy.css';
