@@ -1,6 +1,6 @@
 import React from 'react';
 
-import OfflineSVG from '../../icons/OfflineSVG';
+import OnlineSVG from '../../../../components/icons/OnlineSVG';
 
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -8,22 +8,22 @@ import 'tippy.js/animations/shift-away.css';
 
 import classes from '../StatusBar.module.scss';
 
-function OfflineTippy({online}: any): JSX.Element {
+function OnlineTippy(): JSX.Element {
   return (
     <Tippy
-      className={classes.InternetConnectionTippy}
-      content={<span >No internet connection</span>}
+      className={classes.TippyWrapper}
+      content={<span >Internet connected</span>}
       animation='shift-away'
       hideOnClick={false}
       trigger='mouseenter'
       placement='top-end'
-      maxWidth={88}
+      maxWidth={82}
       >
       <div>
-        <OfflineSVG/>
+        <OnlineSVG/>
       </div>
-    </Tippy>
+  </Tippy> 
   )
 }
 
-export default OfflineTippy;
+export default OnlineTippy;

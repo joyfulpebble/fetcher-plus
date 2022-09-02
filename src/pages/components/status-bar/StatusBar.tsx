@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import checkNetConnection from '../../../core/components/tools/checkNetConnection';
 
-import ErrorSVG from '../icons/ErrorSVG';
-import OfflineTippy from './components/OfflineTippy';
-import OnlineTippy from './components/OnlineTippy';
+import OfflineTippy from './tippy/OfflineTippy';
+import OnlineTippy from './tippy/OnlineTippy';
+import ErrorTippy from './tippy/ErrorTippy';
 
 import classes from './StatusBar.module.scss';
 
 function StatusBar({error}: any): JSX.Element {
   const [errorCount, setErrorCount] = useState(error);
+  const [errorText, setErrorText] = useState(error);
   const [online, setOnline] = useState(checkNetConnection());
   
   useEffect(() => {
     if(typeof error != 'undefined'){
       setErrorCount(error[0]);
+      setErrorText(error[1]);
     }
   }, [error])
   
@@ -22,10 +24,7 @@ function StatusBar({error}: any): JSX.Element {
   
   return (
     <div className={classes.StatusBarWrapper}>
-      <div className={classes.Problems}>
-        <ErrorSVG/>
-        <span>{errorCount ? errorCount : 0}</span>
-      </div>
+      <ErrorTippy errorCount={errorCount} errorText={errorText}/>
       <div className={classes.InternetConnectionTippyWrapper}>
       {online 
         ? <OnlineTippy/>
