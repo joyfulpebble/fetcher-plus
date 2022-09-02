@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import ErrorSVG from '../icons/ErrorSVG';
+import DefaultEditor from '../../../core/editor/DefaultEditor';
+import getMethodHandling from '../../../core/components/tools/getMethodHandling';
 
-import DefaultEditor from '../../core/editor/DefaultEditor';
-import getMethodHandling from '../../core/components/tools/getMethodHandling';
-
-function EditorWithGetContent({url, params, editorContent, errorStorage}: any): JSX.Element {
+function EditorWithContent({url, params, editorContent, errorStorage}: any): JSX.Element {
 
   const [editor, setEditor] = useState<JSX.Element>();
   const [error, setError]   = useState<any[]>([false]);
@@ -15,10 +13,13 @@ function EditorWithGetContent({url, params, editorContent, errorStorage}: any): 
 
     if(data[0] === 'err'){
       setEditor(
-        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center '}}>
-          <ErrorSVG w={200} h={200}/>
-          <span>Oops! Something went wrong.</span>
-        </div>
+        <DefaultEditor 
+          width={'500px'} 
+          height={'500px'} 
+          value={data[1]} 
+          options={{tabSize: 2, }} 
+          setContent={editorContent}
+        />
       );
       setError([true, data[1].message]);
       
@@ -52,4 +53,4 @@ function EditorWithGetContent({url, params, editorContent, errorStorage}: any): 
   )
 }
 
-export default EditorWithGetContent;
+export default EditorWithContent;

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import FileSaver from 'file-saver';
 
-import EditorWithGetContent from '.././components/editor-with-get-content/EditorWithGetContent';
-import GetSettings from '.././components/get-settings/GetSettings';
+import EditorWithContent from './components/editor-with-content/EditorWithContent';
 import StatusBar from './components/status-bar/StatusBar';
+import GetSettings from './components/fetch-settings/GetSettings';
 
 function Workspace(): JSX.Element {
   // const test_url: string = 'https://jsonplaceholder.typicode.com/posts'
-  const [tempErrorStorage, setTempErrorStorage] = useState(undefined);
+  const [errorStorage, setErrorStorage] = useState(undefined);
 
   const [url, setUrl]         = useState('');
   const [params, setParams]   = useState('');
@@ -26,11 +26,11 @@ function Workspace(): JSX.Element {
       {url 
         ? 
         <div>
-          <EditorWithGetContent 
+          <EditorWithContent 
           url={url} 
           params={params}
           editorContent={setEditorContent}
-          errorStorage={setTempErrorStorage}
+          errorStorage={setErrorStorage}
           /> 
           <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
           <button onClick={() => window.location.reload()}>go back</button>
@@ -43,7 +43,7 @@ function Workspace(): JSX.Element {
           isChecked={isChecked}
         />
       }
-      <StatusBar error={tempErrorStorage} />
+      <StatusBar error={errorStorage} />
     </div>
   )
 }
