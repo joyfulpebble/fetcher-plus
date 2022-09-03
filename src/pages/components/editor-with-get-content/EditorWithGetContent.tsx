@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-import DefaultEditor from '../../core/editor/DefaultEditor';
-import getMethodHandling from '../../core/components/tools/getMethodHandling';
-import ErrorSVG from '../icons/ErrorSVG';
+import DefaultEditor from '../../../core/editor/DefaultEditor';
+import getMethodHandling from '../../../core/components/tools/getMethodHandling';
+import ErrorSVG from '../../../components/icons/ErrorSVG';
 
 function EditorWithGetContent({url, params, editorContent, errorStorage}: any): JSX.Element {
-
   const [editor, setEditor] = useState<JSX.Element>();
   const [error, setError]   = useState<any[]>([false]);
-  
+
   const setContentToEditor = async () => {
     const data: any | object = await getMethodHandling(url, params);
 

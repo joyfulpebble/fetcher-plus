@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import StatusBar from './components/status-bar/StatusBar';
 
@@ -10,7 +11,7 @@ function WelcomePage(): JSX.Element {
       <br />
       <br />
       
-      <a href="http://localhost:3000/get-settings">get</a>
+      <Link to={"/get-fetch-form"}>get</Link>
       <StatusBar/>
     </div>
   )

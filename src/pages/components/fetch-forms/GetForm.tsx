@@ -1,23 +1,38 @@
 import React, { useRef, useState } from 'react';
+import { Navigate } from 'react-router-dom'
+
 import classes from './GetForm.module.scss';
 
-import DefaultEditor from '../../core/editor/DefaultEditor';
+import DefaultEditor from '../../../core/editor/DefaultEditor';
+import setValueInSessionStorage from '../../../core/components/tools/setValueInLocalStorage';
+import getCurrentDate from '../../../core/components/tools/getCurrentDate';
 
-function GetSettings({setUrl, setParams, setIsChecked, isChecked}: any): JSX.Element {  
+function GetForm(): JSX.Element {  
+
+  const [url, setUrl]         = useState('');
+  const [params, setParams]   = useState({});
+  const [isChecked, setIsChecked] = useState(false);
 
   const parametersDivClass = [classes.ParametersWrapper];
   if(isChecked){
     parametersDivClass.push(classes.active);
   }
   const [parameters, setParameters] = useState('');
+  const [needRedirect, setNeedRedirect] = useState(false)
 
   const urlRef = useRef<HTMLInputElement>(null);
 
+  
   function handleSubmit(e: any) {
     e.preventDefault();
     
-    setUrl(urlRef.current?.value);
-    setParams(parameters);
+    if(urlRef.current?.value){
+      let date = getCurrentDate();
+      setValueInSessionStorage(date, urlRef.current?.value);
+      setNeedRedirect(true);
+    } else {
+      console.log('err: no url');
+    }
   }
 
   return (
@@ -54,8 +69,13 @@ function GetSettings({setUrl, setParams, setIsChecked, isChecked}: any): JSX.Ele
         setContent={setParameters}/>
       </div>
       <button onClick={handleSubmit}>submit</button>
+      {needRedirect 
+        ? <Navigate 
+            to="/workspace"
+          /> 
+        : <></>}
     </div>
   )
 }
 
-export default GetSettings;
+export default GetForm;
