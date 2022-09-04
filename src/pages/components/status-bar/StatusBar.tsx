@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import checkNetConnection from '../../../core/components/tools/checkNetConnection';
+import checkNetConnection from '../../../core/tools/checkNetConnection';
 
 import OfflineTippy from './tippy/OfflineTippy';
 import OnlineTippy from './tippy/OnlineTippy';

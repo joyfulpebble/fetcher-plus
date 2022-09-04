@@ -4,8 +4,8 @@ import { Navigate } from 'react-router-dom'
 import classes from './GetForm.module.scss';
 
 import DefaultEditor from '../../../core/editor/DefaultEditor';
-import setValueInSessionStorage from '../../../core/components/tools/setValueInLocalStorage';
-import getCurrentDate from '../../../core/components/tools/getCurrentDate';
+import setValueInSessionStorage from '../../../core/tools/setValueInLocalStorage';
+import getCurrentDate from '../../../core/tools/getCurrentDate';
 
 function GetForm(): JSX.Element {  
 

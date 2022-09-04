@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import DefaultEditor from '../../../core/editor/DefaultEditor';
-import getMethodHandling from '../../../core/components/tools/getMethodHandling';
+import getMethodHandling from '../../../core/tools/getMethodHandling';
 import ErrorSVG from '../../../components/icons/ErrorSVG';
 
 function EditorWithGetContent({url, params, editorContent, errorStorage}: any): JSX.Element {
