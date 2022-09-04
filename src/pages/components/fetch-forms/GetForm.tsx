@@ -1,16 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom'
 
 import classes from './GetForm.module.scss';
 
 import DefaultEditor from '../../../core/editor/DefaultEditor';
-import setValueInSessionStorage from '../../../core/tools/setValueInLocalStorage';
 import getCurrentDate from '../../../core/tools/getCurrentDate';
 
 function GetForm(): JSX.Element {  
 
-  const [url, setUrl]         = useState('');
-  const [params, setParams]   = useState({});
+  useEffect(() => {
+    sessionStorage.clear()
+  }, [])
+  
   const [isChecked, setIsChecked] = useState(false);
 
   const parametersDivClass = [classes.ParametersWrapper];
@@ -22,13 +23,13 @@ function GetForm(): JSX.Element {
 
   const urlRef = useRef<HTMLInputElement>(null);
 
-  
   function handleSubmit(e: any) {
     e.preventDefault();
     
     if(urlRef.current?.value){
       let date = getCurrentDate();
-      setValueInSessionStorage(date, urlRef.current?.value);
+      // setValueInLocalStorage(date, urlRef.current?.value);
+      sessionStorage.setItem(date, JSON.stringify({url: urlRef.current?.value, params: parameters}));
       setNeedRedirect(true);
     } else {
       console.log('err: no url');

@@ -8,8 +8,8 @@ function FetchForm() {
   
   return (
     <div>
-        <GetForm/>
-        <StatusBar/>
+      <GetForm/>
+      <StatusBar/>
     </div>
   )
 }
