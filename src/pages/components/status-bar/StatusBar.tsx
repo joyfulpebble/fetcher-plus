@@ -8,9 +8,9 @@ import ErrorTippy from './tippy/ErrorTippy';
 import classes from './StatusBar.module.scss';
 
 function StatusBar({error}: any): JSX.Element {
-  const [errorCount, setErrorCount] = useState(error);
-  const [errorText, setErrorText] = useState(error);
-  const [online, setOnline] = useState(checkNetConnection());
+  const [errorCount, setErrorCount] = useState<number | undefined>(error);
+  const [errorText, setErrorText]   = useState<string | undefined>(error);
+  const [online, setOnline]         = useState<boolean>(checkNetConnection());
   
   useEffect(() => {
     if(typeof error != 'undefined'){

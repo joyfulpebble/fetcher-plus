@@ -4,7 +4,7 @@ import Editor from '@monaco-editor/react';
 
 function DefaultEditor({width, height, value, options, setContent}: any): JSX.Element {
 
-  const [editContent, setEditContent] = useState(value);
+  const [editContent, setEditContent] = useState<any>(value);
   
   useEffect(() => {
     setContent(editContent);

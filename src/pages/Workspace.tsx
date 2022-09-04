@@ -9,15 +9,15 @@ import getAllStorage from '../core/tools/getAllStorage';
 
 //'https://jsonplaceholder.typicode.com/posts'
 function Workspace(): JSX.Element {
-  const [tempErrorStorage, setTempErrorStorage] = useState(undefined);
+  const [tempErrorStorage, setTempErrorStorage] = useState<undefined | any[]>(undefined);
 
-  const storageData = getAllStorage(sessionStorage);
-  const parsedData = JSON.parse(storageData[0]);  
+  const storageData: any[] = getAllStorage(sessionStorage);
+  const parsedData: any    = JSON.parse(storageData[0]);  
   
-  let url = parsedData.url;
-  let params = parsedData.params;
+  let params: object = parsedData.params;
+  let url: string    = parsedData.url;
 
-  const [editiorContent, setEditorContent] = useState('');
+  const [editiorContent, setEditorContent] = useState<any>('');
 
   let blob: any = null;
   if(editiorContent != ''){

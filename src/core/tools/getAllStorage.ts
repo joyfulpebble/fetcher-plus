@@ -1,9 +1,9 @@
-export default function allStorage(storage: Storage): any {
-  let values = [],
-    keys = Object.keys(storage),
-    i = keys.length;
+export default function allStorage(storage: Storage): any[] {
+  let values: any[] = []
+  let keys: string[] = Object.keys(storage)
+  let i: number = keys.length;
 
-  while ( i-- ) {
+  while (i--) {
     values.push(storage.getItem(keys[i]));
   }
   return values;

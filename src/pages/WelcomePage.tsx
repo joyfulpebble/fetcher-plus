@@ -10,8 +10,8 @@ function WelcomePage(): JSX.Element {
     sessionStorage.clear()
   }, [])
 
-  const history = getAllStorage(localStorage);
-  const historyElem = JSON.parse(history[0]);
+  const history: any[]   = getAllStorage(localStorage);
+  const historyElem: any = JSON.parse(history[0]);
 
   console.log(historyElem);
   

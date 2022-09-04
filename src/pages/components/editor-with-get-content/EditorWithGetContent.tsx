@@ -19,6 +19,7 @@ function EditorWithGetContent({url, params, editorContent, errorStorage}: any): 
         </div>
       );
       setError([true, data[1].message]);
+
     } else {
       setEditor(
         <DefaultEditor 
