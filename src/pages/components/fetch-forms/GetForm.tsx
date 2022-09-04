@@ -22,17 +22,18 @@ function GetForm(): JSX.Element {
   const [needRedirect, setNeedRedirect] = useState(false)
 
   const urlRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(e: any) {
     e.preventDefault();
     
-    if(urlRef.current?.value){
+    if(urlRef.current?.value && nameRef.current?.value){
       let date = getCurrentDate();
-      // setValueInLocalStorage(date, urlRef.current?.value);
+      localStorage.setItem(date, JSON.stringify({name: nameRef.current?.value, time: date, url: urlRef.current?.value, params: parameters}));
       sessionStorage.setItem(date, JSON.stringify({url: urlRef.current?.value, params: parameters}));
       setNeedRedirect(true);
     } else {
-      console.log('err: no url');
+      console.log('err: не все поля заполнены');
     }
   }
 
@@ -46,6 +47,14 @@ function GetForm(): JSX.Element {
               ref={urlRef}
               type="text" 
               placeholder='Url...'
+            />
+          </label>
+          <label>
+            <span>File name:</span>
+            <input 
+              ref={nameRef}
+              type="text" 
+              placeholder='Some text...'
             />
           </label>
         </form>

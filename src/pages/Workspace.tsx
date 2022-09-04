@@ -26,7 +26,7 @@ function Workspace(): JSX.Element {
 
   return (
     <div>
-     <div>
+      <div>
         <EditorWithGetContent 
         url={url} 
         params={params}
