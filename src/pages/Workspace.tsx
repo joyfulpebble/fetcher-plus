@@ -36,7 +36,7 @@ function Workspace(): JSX.Element {
         editorContent={setEditorContent}
         errorStorage={setTempErrorStorage}
         getHandlingFunc={getMethodHandling}
-        getFunction={Service.getStatus}
+        getFunction={Service.getContent}
         /> 
         <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
         <Link to={'/get-fetch-form'}>Go back</Link>
