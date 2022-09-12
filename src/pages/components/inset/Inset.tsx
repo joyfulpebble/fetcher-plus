@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function Inset({elements, element, setElement}: any) {
   return (
@@ -8,11 +8,11 @@ function Inset({elements, element, setElement}: any) {
           <button
             onClick={() => setElement(e)}
             key={e}
-            className={element === e ? 'page page__current' : 'page'}>{e}</button>
+            className={element === e ? 'element element__current' : 'element'}>{e}</button>
         })
       }
     </>
   )
 }
 
-export default Inset
+export default Inset;
