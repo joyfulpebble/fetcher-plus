@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { Link, Navigate } from 'react-router-dom';
 
 import classes from './GetForm.module.scss';
 
@@ -7,11 +7,6 @@ import DefaultEditor from '../../../core/editor/DefaultEditor';
 import getCurrentDate from '../../../core/tools/getCurrentDate';
 
 function GetForm(): JSX.Element {  
-
-  useEffect(() => {
-    sessionStorage.clear();
-  }, [])
-  
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const parametersDivClass: string[] = [classes.ParametersWrapper];
@@ -28,6 +23,8 @@ function GetForm(): JSX.Element {
     e.preventDefault();
     
     if(urlRef.current?.value && nameRef.current?.value){
+      sessionStorage.clear();
+
       let date: string = getCurrentDate();
 
       localStorage.setItem(date, JSON.stringify({name: nameRef.current?.value, time: date, url: urlRef.current?.value, params: parameters}));
@@ -81,6 +78,7 @@ function GetForm(): JSX.Element {
           setContent={setParameters}/>
       </div>
       <button onClick={handleSubmit}>submit</button>
+      <Link to={'/welcome'}>Go home</Link>
       {needRedirect 
         ? <Navigate 
             to="/workspace"

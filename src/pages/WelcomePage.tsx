@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import StatusBar from './components/status-bar/StatusBar';
@@ -6,10 +6,6 @@ import StatusBar from './components/status-bar/StatusBar';
 import getAllStorage from '../core/tools/getAllStorage'
 
 function WelcomePage(): JSX.Element {
-  useEffect(() => {
-    sessionStorage.clear()
-  }, [])
-
   const history: any[]   = getAllStorage(localStorage);
   const historyElem: any = JSON.parse(history[0]);
 
