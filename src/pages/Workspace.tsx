@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import FileSaver from 'file-saver';
+import getAllStorage from '../core/tools/getAllStorage';
+import getMethodHandling from '../core/tools/getMethodHandling';
 
 import EditorWithGetContent from './components/editor-with-get-content/EditorWithGetContent';
 import StatusBar from './components/status-bar/StatusBar';
-import getAllStorage from '../core/tools/getAllStorage';
+import Service from '../core/API/Service';
 
 //'https://jsonplaceholder.typicode.com/posts'
 function Workspace(): JSX.Element {
@@ -26,18 +28,22 @@ function Workspace(): JSX.Element {
 
   return (
     <div>
+    <div style={{display: "flex", flexDirection: "row"}}>
       <div>
         <EditorWithGetContent 
         url={url} 
         params={params}
         editorContent={setEditorContent}
         errorStorage={setTempErrorStorage}
+        getHandlingFunc={getMethodHandling}
+        getFunction={Service.getStatus}
         /> 
         <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
         <Link to={'/get-fetch-form'}>Go back</Link>
       </div>
-      <StatusBar error={tempErrorStorage} />
     </div>
+      <StatusBar error={tempErrorStorage} />
+      </div>
   )
 }
 

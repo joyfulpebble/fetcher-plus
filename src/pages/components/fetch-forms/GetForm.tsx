@@ -24,7 +24,7 @@ function GetForm(): JSX.Element {
     
     if(urlRef.current?.value && nameRef.current?.value){
       sessionStorage.clear();
-
+      
       let date: string = getCurrentDate();
 
       localStorage.setItem(date, JSON.stringify({name: nameRef.current?.value, time: date, url: urlRef.current?.value, params: parameters}));

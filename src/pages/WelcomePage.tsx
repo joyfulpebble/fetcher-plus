@@ -7,9 +7,9 @@ import getAllStorage from '../core/tools/getAllStorage'
 
 function WelcomePage(): JSX.Element {
   const history: any[]   = getAllStorage(localStorage);
-  const historyElem: any = JSON.parse(history[0]);
+  const parsed_history: any = history.map((e: any) => JSON.parse(e));
 
-  console.log(historyElem);
+  console.log(parsed_history);
   
   return (
     <div>

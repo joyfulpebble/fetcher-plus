@@ -1,8 +1,8 @@
 import Service from "../API/Service";
 
-export default async function getMethodHandling(url: string, param: any): Promise<any> {  
+export default async function getMethodHandling(url: string, param: any, func: Function): Promise<any> {  
   try {
-    let response = await Service.getContent(url, param);
+    const response = await func(url, param);
 
     return response;
   } catch (error: any) {
