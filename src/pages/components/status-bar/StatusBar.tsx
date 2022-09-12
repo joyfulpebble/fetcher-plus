@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import checkNetConnection from '../../../core/tools/checkNetConnection';
+
+import Tools from '../../../core/tools/Tools';
 
 import OfflineTippy from './tippy/OfflineTippy';
 import OnlineTippy from './tippy/OnlineTippy';
@@ -10,7 +11,7 @@ import classes from './StatusBar.module.scss';
 function StatusBar({error}: any): JSX.Element {
   const [errorCount, setErrorCount] = useState<number | undefined>(error);
   const [errorText, setErrorText]   = useState<string | undefined>(error);
-  const [online, setOnline]         = useState<boolean>(checkNetConnection());
+  const [online, setOnline]         = useState<boolean>(Tools.checkNetConnection());
   
   useEffect(() => {
     if(typeof error != 'undefined'){

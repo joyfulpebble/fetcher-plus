@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 
+import Tools from '../../../core/tools/Tools';
+
 import classes from './GetForm.module.scss';
 
 import DefaultEditor from '../../../core/editor/DefaultEditor';
-import getCurrentDate from '../../../core/tools/getCurrentDate';
 
 function GetForm(): JSX.Element {  
   const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -25,7 +26,7 @@ function GetForm(): JSX.Element {
     if(urlRef.current?.value && nameRef.current?.value){
       sessionStorage.clear();
       
-      let date: string = getCurrentDate();
+      let date: string = Tools.getCurrentDate();
 
       localStorage.setItem(date, JSON.stringify({name: nameRef.current?.value, time: date, url: urlRef.current?.value, params: parameters}));
       sessionStorage.setItem(date, JSON.stringify({url: urlRef.current?.value, params: parameters}));

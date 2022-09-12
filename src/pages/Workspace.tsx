@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import FileSaver from 'file-saver';
-import getAllStorage from '../core/tools/getAllStorage';
-import getMethodHandling from '../core/tools/getMethodHandling';
+import Tools from '../core/tools/Tools';
 
 import EditorWithGetContent from './components/editor-with-get-content/EditorWithGetContent';
 import StatusBar from './components/status-bar/StatusBar';
@@ -13,7 +12,7 @@ import Service from '../core/API/Service';
 function Workspace(): JSX.Element {
   const [tempErrorStorage, setTempErrorStorage] = useState<undefined | any[]>(undefined);
 
-  const storageData: any[] = getAllStorage(sessionStorage);
+  const storageData: any[] = Tools.getAllStorage(sessionStorage);
   const parsedData: any    = JSON.parse(storageData[0]);  
   
   let params: object = parsedData.params;
@@ -35,7 +34,7 @@ function Workspace(): JSX.Element {
         params={params}
         editorContent={setEditorContent}
         errorStorage={setTempErrorStorage}
-        getHandlingFunc={getMethodHandling}
+        getHandlingFunc={Tools.getMethodHandling}
         getFunction={Service.getContent}
         /> 
         <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
