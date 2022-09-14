@@ -4,11 +4,14 @@ function Inset({elements, element, setElement}: any) {
   return (
     <>
       {
-        elements.map((e: any) => {
+        elements.map((e: any, i: number) => {
+          return (
           <button
-            onClick={() => setElement(e)}
-            key={e}
-            className={element === e ? 'element element__current' : 'element'}>{e}</button>
+            onClick={() => {
+              setElement(i)}}
+            key={i}
+          >{e}</button>
+          )
         })
       }
     </>
