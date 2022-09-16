@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 
-import Tools from '../../../core/tools/Tools';
+import Tools from '../../core/tools/Tools';
 
 import classes from './GetForm.module.scss';
 
-import DefaultEditor from '../../../core/editor/DefaultEditor';
+import DefaultEditor from '../../core/editor/DefaultEditor';
 
 function GetForm(): JSX.Element {  
   const [isChecked, setIsChecked] = useState<boolean>(false);

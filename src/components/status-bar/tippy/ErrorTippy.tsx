@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ErrorSVG from '../../../../components/icons/ErrorSVG';
+import ErrorSVG from '../../.svg/ErrorSVG';
 
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -14,7 +14,7 @@ function ErrorTippy({errorText, errorCount}: any) {
         className={classes.TippyWrapper}
         content={
           <span 
-            title={errorText ? errorText : 'no errors'}>
+            title={errorText ? errorText : 'No problems'}>
               {errorCount ? `Errors: ${errorCount}` : 'No problems'}
           </span>
         }

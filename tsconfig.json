@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "types/core-types/electron-types", "../showFile.ts", "types/API", "src/core/.tools"  ]
+, "types/core-types/electron-types", "../showFile.ts", "types/API", "src/core/.tools", "src/components/.svg"  ]
 }

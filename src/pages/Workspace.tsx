@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Tools from '../core/tools/Tools';
 import FileSaver from 'file-saver';
 
-import setGetEditors from './components/editors/get/lib/setGetEditors';
-import StatusBar from './components/status-bar/StatusBar';
-import Inset from './components/inset/Inset';
+import setGetEditors from '../components/editors/get/lib/setGetEditors';
+import StatusBar from '../components/status-bar/StatusBar';
+import Inset from '../components/inset/Inset';
 
 //'https://jsonplaceholder.typicode.com/posts'
 function Workspace(): JSX.Element {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import Tools from '../../../core/tools/Tools';
+import Tools from '../../core/tools/Tools';
 
 import OfflineTippy from './tippy/OfflineTippy';
 import OnlineTippy from './tippy/OnlineTippy';

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import GetForm from './components/fetch-forms/GetForm';
-import StatusBar from './components/status-bar/StatusBar';
+import GetForm from '../components/fetch-forms/GetForm';
+import StatusBar from '../components/status-bar/StatusBar';
 
 
 function FetchForm() {

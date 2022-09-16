@@ -2,8 +2,8 @@ import React from 'react';
 
 import EditorWithGetContent from '../EditorWithGetContent';
 
-import Service from '../../../../../core/API/Service';
-import Tools from '../../../../../core/tools/Tools';
+import Service from '../../../../core/API/Service';
+import Tools from '../../../../core/tools/Tools';
 
 function setGetEditors({setEditorContent, setTempErrorStorage}: any): any[] {
   const storageData: any[] = Tools.getAllStorage(sessionStorage);

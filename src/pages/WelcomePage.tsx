@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Tools from '../core/tools/Tools';
 
-import StatusBar from './components/status-bar/StatusBar';
+import StatusBar from '../components/status-bar/StatusBar';
 
 
 function WelcomePage(): JSX.Element {

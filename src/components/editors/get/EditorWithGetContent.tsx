@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import DefaultEditor from '../../../../core/editor/DefaultEditor';
+import DefaultEditor from '../../../core/editor/DefaultEditor';
 
-import ErrorSVG from '../../../../components/icons/ErrorSVG';
+import ErrorSVG from '../../.svg/ErrorSVG';
 
 function EditorWithGetContent({url, params, editorContent, errorStorage, getHandlingFunc, getFunction}: any): JSX.Element {
   const [editor, setEditor] = useState<JSX.Element>();
