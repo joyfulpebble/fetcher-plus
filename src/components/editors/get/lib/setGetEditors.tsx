@@ -5,7 +5,7 @@ import EditorWithGetContent from '../EditorWithGetContent';
 import Service from '../../../../core/API/Service';
 import Tools from '../../../../core/tools/Tools';
 
-function setGetEditors({setEditorContent, setTempErrorStorage}: any): any[] {
+function SetGetEditors({setEditorContent, setTempErrorStorage}: any): JSX.Element {
   const storageData: any[] = Tools.getAllStorage(sessionStorage);
   const parsedData: any    = JSON.parse(storageData[0]);  
   
@@ -47,7 +47,11 @@ function setGetEditors({setEditorContent, setTempErrorStorage}: any): any[] {
     />
   ];
 
-  return editors;
+  return (
+    <div className='editors' style={{display: 'flex'}}>
+      {editors.map((e, i) => <div key={i}>{e}</div>)}
+    </div>
+  );
 }
 
-export default setGetEditors;
+export default SetGetEditors;

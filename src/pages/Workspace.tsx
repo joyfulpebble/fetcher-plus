@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import FileSaver from 'file-saver';
 
-import setGetEditors from '../components/editors/get/lib/setGetEditors';
+import SetGetEditors from '../components/editors/get/lib/setGetEditors';
 import StatusBar from '../components/status-bar/StatusBar';
 import Inset from '../components/inset/Inset';
 
@@ -21,7 +21,6 @@ function Workspace(): JSX.Element {
   
   const [currentInset, setCurrentInset] = useState(0);
   const insetNames = ['data', 'headers', 'config', 'status'];
-  const editors = setGetEditors({setEditorContent, setTempErrorStorage});
 
   useEffect(() => {
     console.log(insetNames[currentInset]);
@@ -33,9 +32,10 @@ function Workspace(): JSX.Element {
     <div>
       <Inset elements={insetNames} element={currentInset} setElement={setCurrentInset}/>
       <div> 
-        <div className='editors' style={{display: 'flex'}}>
-          {editors.map((e, i) => <div key={i}>{e}</div>)}
-        </div>
+        <SetGetEditors
+          setEditorContent={setEditorContent}
+          setTempErrorStorage={setTempErrorStorage}
+        />
         <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
         <Link to={'/get-fetch-form'}>Go back</Link>
       </div>
