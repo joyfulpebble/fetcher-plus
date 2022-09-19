@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
 import DefaultEditor from '../../../core/editor/DefaultEditor';
+import Tools from '../../../core/tools/Tools';
 
 import ErrorSVG from '../../.svg/ErrorSVG';
 
-function EditorWithGetContent({url, params, editorContent, errorStorage, getHandlingFunc, getFunction}: any): JSX.Element {
+function EditorWithGetContent({editorContent, errorStorage, getHandlingFunc, getFunction}: any): JSX.Element {
   const [editor, setEditor] = useState<JSX.Element>();
   const [error, setError]   = useState<any[]>([false]);
+
+  const storageData: any[] = Tools.getAllStorage(sessionStorage);
+  const parsedData: any    = JSON.parse(storageData[0]);  
+  
+  let params: object = parsedData.params;
+  let url: string    = parsedData.url;
 
   const setContentToEditor = async () => {
     const data: any | object = await getHandlingFunc(url, params, getFunction);
