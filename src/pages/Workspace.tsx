@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import FileSaver from 'file-saver';
 
 import StatusBar from '../components/status-bar/StatusBar';
-import Inset from '../components/inset/Inset';
 import EditorWithGetContent from '../components/editors/get/EditorWithGetContent';
 import Tools from '../core/tools/Tools';
 import Service from '../core/API/Service';
@@ -18,15 +17,9 @@ function Workspace(): JSX.Element {
   if(editiorContent != ''){
     blob = new Blob([JSON.stringify(editiorContent, null, '  ')], {type: 'application/json'});
   }
-  
-  
-  const [currentInset, setCurrentInset] = useState(0);
-  const insetNames = ['data', 'headers', 'config', 'status'];
 
   return (
     <div>
-    <div>
-      <Inset elements={insetNames} element={currentInset} setElement={setCurrentInset}/>
       <div>
         <EditorWithGetContent
           editorContent={setEditorContent}
@@ -37,9 +30,8 @@ function Workspace(): JSX.Element {
         <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
         <Link to={'/get-fetch-form'}>Go back</Link>
       </div>
+        <StatusBar error={tempErrorStorage} />
     </div>
-      <StatusBar error={tempErrorStorage} />
-      </div>
   )
 }
 
