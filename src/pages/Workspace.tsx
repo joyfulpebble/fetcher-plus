@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import FileSaver from 'file-saver';
 
 import StatusBar from '../components/status-bar/StatusBar';
-import EditorWithGetContent from '../components/editors/get/EditorWithGetContent';
+import EditorWithGetContent from '../core/editor/get/EditorWithGetContent';
 import Tools from '../core/tools/Tools';
 import Service from '../core/API/Service';
 
