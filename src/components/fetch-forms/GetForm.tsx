@@ -6,6 +6,7 @@ import Tools from '../../core/tools/Tools';
 import classes from './GetForm.module.scss';
 
 import DefaultEditor from '../../core/editor/DefaultEditor';
+import Button from '../UI/Buttons/Button';
 
 function GetForm(): JSX.Element {  
   const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -78,8 +79,15 @@ function GetForm(): JSX.Element {
           options={{tabSize: 2}} 
           setContent={setParameters}/>
       </div>
-      <button onClick={handleSubmit}>submit</button>
-      <Link to={'/welcome'}>Go home</Link>
+      <Button
+        content={'submit'}
+        onClick={handleSubmit}
+      />
+      <Button
+        content={<Link to={'/welcome'}>Go home</Link>}
+        onClick={handleSubmit}
+      />
+      
       {needRedirect 
         ? <Navigate 
             to="/workspace"
