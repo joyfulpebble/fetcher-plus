@@ -1,0 +1,46 @@
+$submit-background: #5839af;
+$submit-focused-color: #4d309c;
+$back-background: #ebebeb;
+$back-focused-background: #d4d4d4;
+
+
+
+.SubmitButton{
+  color: white;
+  padding: 5px 14px;
+  background: $submit-background;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  outline: none;
+  margin: 5px;
+
+  &:hover{
+    background: $submit-focused-color;
+  }
+
+  a{
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.BackButton{
+  color: black;
+  padding: 5px 14px;
+  background: $back-background;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  outline: none;
+  margin: 5px;
+
+  &:hover{
+    background: $back-focused-background;
+  }
+
+  a{
+    color: black;
+    text-decoration: none;
+  }
+}

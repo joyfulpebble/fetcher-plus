@@ -6,7 +6,8 @@ import Tools from '../../core/tools/Tools';
 import classes from './GetForm.module.scss';
 
 import DefaultEditor from '../../core/editor/DefaultEditor';
-import Button from '../UI/Buttons/Button';
+import SubmitButton from '../UI/Buttons/SubmitButton';
+import BackButton from '../UI/Buttons/BackButton';
 
 function GetForm(): JSX.Element {  
   const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -79,11 +80,11 @@ function GetForm(): JSX.Element {
           options={{tabSize: 2}} 
           setContent={setParameters}/>
       </div>
-      <Button
+      <SubmitButton
         content={'submit'}
         onClick={handleSubmit}
       />
-      <Button
+      <BackButton
         content={<Link to={'/welcome'}>Go home</Link>}
         onClick={handleSubmit}
       />
