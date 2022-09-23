@@ -21,6 +21,8 @@ function ErrorTippy({errorText, errorCount}: any) {
         interactive={true}
         hideOnClick={false}
         appendTo={document.body}
+        animation='shift-away'
+        trigger='mouseenter'
       >
         <div className={classes.Problems}>
           <ErrorSVG/>

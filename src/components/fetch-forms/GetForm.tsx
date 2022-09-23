@@ -87,7 +87,6 @@ function GetForm(): JSX.Element {
         content={<Link to={'/welcome'}>Go home</Link>}
         onClick={handleSubmit}
       />
-      
       {needRedirect 
         ? <Navigate 
             to="/workspace"
