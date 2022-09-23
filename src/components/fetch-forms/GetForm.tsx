@@ -8,6 +8,7 @@ import classes from './GetForm.module.scss';
 import DefaultEditor from '../../core/editor/DefaultEditor';
 import SubmitButton from '../UI/Buttons/SubmitButton';
 import BackButton from '../UI/Buttons/BackButton';
+import Switch from '../UI/Switch/Switch';
 
 function GetForm(): JSX.Element {  
   const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -21,6 +22,10 @@ function GetForm(): JSX.Element {
 
   const urlRef  = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
+
+  function handleIsChecked() {    
+    setIsChecked(!isChecked);    
+  }
 
   function handleSubmit(e: any) {
     e.preventDefault();
@@ -60,17 +65,13 @@ function GetForm(): JSX.Element {
             />
           </label>
         </form>
-        <form>
-          <label>
-            <input
-              type="checkbox"
-              onChange={() => {
-                setIsChecked(!isChecked);
-              }}
-            />
-            <span>Add params.</span>
-          </label>
-        </form>
+      <form style={{display: 'flex', alignItems: 'center'}}>
+        <Switch 
+          onChange={handleIsChecked} 
+          checked={isChecked} 
+        />
+        <span style={{marginLeft: 5}}>Need params?</span>
+      </form>
       </div>
       <div className={parametersDivClass.join(' ')}>
         <DefaultEditor 
