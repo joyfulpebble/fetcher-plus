@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Tools from '../core/tools/Tools';
 
 import StatusBar from '../components/status-bar/StatusBar';
+import SubmitButton from '../components/UI/Buttons/SubmitButton';
 
 
 function WelcomePage(): JSX.Element {
@@ -19,7 +20,9 @@ function WelcomePage(): JSX.Element {
       <br />
       <br />
       
-      <Link to={"/get-fetch-form"}>get</Link>
+      <SubmitButton
+        content={<Link to={"/get-fetch-form"}>get</Link>}
+      />
       <StatusBar/>
     </div>
   )
