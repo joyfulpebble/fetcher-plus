@@ -1,7 +1,7 @@
 $submit-background: #5839af;
 $submit-focused-color: #4d309c;
-$back-background: #9e9e9e;
-$back-focused-background: #807f7f;
+$back-background: #ffff;
+$back-focused-background: #d8d8d8;
 
 .SubmitButton{
   color: white;
@@ -17,6 +17,7 @@ $back-focused-background: #807f7f;
 
   &:hover{
     background: $submit-focused-color;
+    transition: background-color .1s linear;
   }
 }
 
@@ -34,5 +35,6 @@ $back-focused-background: #807f7f;
 
   &:hover{
     background: $back-focused-background;
+    transition: background-color .1s linear;
   }
 }
