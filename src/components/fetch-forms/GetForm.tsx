@@ -9,6 +9,7 @@ import DefaultEditor from '../../core/editor/DefaultEditor';
 import SubmitButton from '../UI/Buttons/SubmitButton';
 import LinkButton from '../UI/Buttons/LinkButton';
 import Switch from '../UI/Switch/Switch';
+import Input from '../UI/Input/Input';
 
 function GetForm(): JSX.Element {  
   const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -50,18 +51,18 @@ function GetForm(): JSX.Element {
         <form>
           <label>
             <span>Fetch url:</span>
-            <input 
-              ref={urlRef}
+            <Input
+              innerRef={urlRef}
               type="text" 
               placeholder='Url...'
             />
           </label>
           <label>
             <span>File name:</span>
-            <input 
-              ref={nameRef}
+            <Input
+              innerRef={nameRef}
               type="text" 
-              placeholder='Some text...'
+              placeholder='Url...'
             />
           </label>
         </form>
