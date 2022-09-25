@@ -14,13 +14,6 @@
     url("../../../public/fonts/Idea/webfonts/JetBrainsMono-Light.woff2") format("woff2"),
     url("../../../public/fonts/Idea/ttf/JetBrainsMono-Light.ttf") format("woff");
 }
-@font-face {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Poppins"),
-    url("../../../public/fonts/Poppins/ttf/Poppins-Medium.ttf") format("woff");
-}
 
 $status-bar-background: #5839af;
 $body-background: #1E1E1E;

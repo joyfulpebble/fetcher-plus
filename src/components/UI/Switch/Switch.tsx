@@ -9,8 +9,9 @@ function Switch({...props}: any) {
       onColor={'#5839af'}
       activeBoxShadow={'none'}
       handleDiameter={13}
+      uncheckedIcon={false}
       height={17}
-      width={40}
+      width={35}
     />
   )
 }

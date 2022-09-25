@@ -7,7 +7,7 @@ import classes from './GetForm.module.scss';
 
 import DefaultEditor from '../../core/editor/DefaultEditor';
 import SubmitButton from '../UI/Buttons/SubmitButton';
-import BackButton from '../UI/Buttons/BackButton';
+import LinkButton from '../UI/Buttons/LinkButton';
 import Switch from '../UI/Switch/Switch';
 
 function GetForm(): JSX.Element {  
@@ -79,15 +79,16 @@ function GetForm(): JSX.Element {
           height={'400px'} 
           value={{ "params": {  } }} 
           options={{tabSize: 2}} 
-          setContent={setParameters}/>
+          setContent={setParameters}
+        />
       </div>
       <SubmitButton
-        content={'submit'}
+        content={'Submit'}
         onClick={handleSubmit}
       />
-      <BackButton
-        content={<Link to={'/welcome'}>Go home</Link>}
-        onClick={handleSubmit}
+      <LinkButton
+        content={'Go home'}
+        path={"/welcome"}
       />
       {needRedirect 
         ? <Navigate 
