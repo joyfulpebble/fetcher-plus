@@ -1,6 +1,6 @@
 import React from 'react';
 
-import GetConfigure from '../components/fetch-configurators/GetConfigure';
+import GetForm from '../components/fetch-forms/GetForm';
 import StatusBar from '../components/status-bar/StatusBar';
 
 
@@ -8,7 +8,7 @@ function FetchForm() {
   
   return (
     <div>
-      <GetConfigure/>
+      <GetForm/>
       <StatusBar/>
     </div>
   )

@@ -1,17 +1,16 @@
 import React, { useRef, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import Tools from '../../core/tools/Tools';
 
-import classes from './GetConfigure.module.scss';
+import classes from './GetForm.module.scss';
 
 import DefaultEditor from '../../core/editor/DefaultEditor';
 import SubmitButton from '../UI/Buttons/SubmitButton';
 import LinkButton from '../UI/Buttons/LinkButton';
 import Switch from '../UI/Switch/Switch';
-import GetForm from './components/GetForm';
 
-function GetConfigure(): JSX.Element {  
+function GetForm(): JSX.Element {  
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const parametersDivClass: string[] = [classes.ParametersWrapper];
@@ -48,12 +47,12 @@ function GetConfigure(): JSX.Element {
   return (
     <div className={classes.SettingsWrapper}>
       <div>
-        {/* <form>
+        <form>
           <label>
             <span>Fetch url:</span>
-            <Input
-              innerRef={urlRef}
-              type='text'
+            <input 
+              ref={urlRef}
+              type="text" 
               placeholder='Url...'
             />
           </label>
@@ -65,15 +64,14 @@ function GetConfigure(): JSX.Element {
               placeholder='Some text...'
             />
           </label>
-        </form> */}
-        <GetForm/>
-        <form style={{display: 'flex', alignItems: 'center'}}>
-          <Switch 
-            onChange={handleIsChecked} 
-            checked={isChecked} 
-          />
-          <span style={{marginLeft: 5}}>Need params?</span>
         </form>
+      <form style={{display: 'flex', alignItems: 'center'}}>
+        <Switch 
+          onChange={handleIsChecked} 
+          checked={isChecked} 
+        />
+        <span style={{marginLeft: 5}}>Need params?</span>
+      </form>
       </div>
       <div className={parametersDivClass.join(' ')}>
         <DefaultEditor 
@@ -101,4 +99,4 @@ function GetConfigure(): JSX.Element {
   )
 }
 
-export default GetConfigure;
+export default GetForm;
