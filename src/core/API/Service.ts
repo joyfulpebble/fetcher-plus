@@ -6,7 +6,7 @@ export default class Service {
     //   params = JSON.parse(params!);  
     // }
 
-    let response = await axios.get(path, params);    
+    let response = await axios.get(path, {params: params});    
 
     return response;
   };

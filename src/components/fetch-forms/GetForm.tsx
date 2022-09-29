@@ -18,7 +18,7 @@ function GetForm(): JSX.Element {
   if(isChecked){
     parametersDivClass.push(classes.active);
   }
-  const [parameters, setParameters]     = useState<any>('');
+  const parameters: any = [];
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
 
   function handleIsChecked() {    
@@ -30,25 +30,29 @@ function GetForm(): JSX.Element {
       
       let date: string = Tools.getCurrentDate();
 
-      localStorage.setItem(date, JSON.stringify({name: values.name, time: date, url: values.url, params: parameters}));
-      sessionStorage.setItem(date, JSON.stringify({url: values.url, params: parameters}));
+      localStorage.setItem(date, JSON.stringify({name: values.name, time: date, url: values.url, params: Object.fromEntries(parameters)}));
+      sessionStorage.setItem(date, JSON.stringify({url: values.url, params: Object.fromEntries(parameters)}));
       
       setNeedRedirect(true);
     } else {
       console.log('err: не все поля заполнены');
     }
   }
+  function handleSubmitParams(values: any) {
+    parameters.push(Object.values(values))
+
+    console.log(Object.fromEntries(parameters));
+    
+  }
 
   return (
     <div className={classes.SettingsWrapper}>
-      <div>
-        <Formik
-          initialValues={{ url: "https://jsonplaceholder.typicode.com/posts", name: "s" }}
-          onSubmit={(values) => {
-          handleSubmit(values)
-        }}
-        >
-        <Form id='main'>
+      <Formik
+        initialValues={{ url: "https://jsonplaceholder.typicode.com/posts", name: "s" }}
+        onSubmit={(values) => {
+        handleSubmit(values)
+      }}>
+        <Form id='main-request-data'>
           <label>
             <span>Fetch url:</span>
             <Field name="url" type="text" as={Input} placeholder={'Url...'}/>
@@ -66,18 +70,33 @@ function GetForm(): JSX.Element {
         />
         <span style={{marginLeft: 5}}>Need params?</span>
       </div>
-      </div>
       <div className={parametersDivClass.join(' ')}>
-        <Input
-          onChange={(e: any) => setParameters(e.target.value)}
-          type={'text'}
-          placeholder={'parameter...'}
-        />
+      <Formik
+        initialValues={{ name: "_limit", value: 0 }}
+        onSubmit={(values) => {
+        handleSubmitParams(values)
+      }}>
+        <Form id='data'>
+          <label>
+            <span>Parameter name:</span>
+            <Field name="name" type="text" as={Input} placeholder={'Name...'}/>
+          </label>
+          <label>
+            <span>Parameter value:</span>
+            <Field name="value" type="text" as={Input} placeholder={'Value...'}/>
+          </label>
+        </Form>
+      </Formik>
       </div>
       <SubmitButton
         content={'Submit'}
         type={'submit'}
-        form={'main'}
+        form={'main-request-data'}
+      />
+      <SubmitButton
+        content={'Submit params'}
+        type={'submit'}
+        form={'data'}
       />
       <LinkButton
         content={'Go home'}
