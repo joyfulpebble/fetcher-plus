@@ -42,42 +42,30 @@ function GetForm(): JSX.Element {
   return (
     <div className={classes.SettingsWrapper}>
       <div>
-        {/* <form>
+        <Formik
+          initialValues={{ url: "https://jsonplaceholder.typicode.com/posts", name: "s" }}
+          onSubmit={(values) => {
+          handleSubmit(values)
+        }}
+        >
+        <Form id='main'>
           <label>
             <span>Fetch url:</span>
-            <Input
-              innerRef={urlRef}
-              type="text" 
-              placeholder='Url...'
-            />
+            <Field name="url" type="text" as={Input} placeholder={'Url...'}/>
           </label>
           <label>
             <span>File name:</span>
-            <Input
-              innerRef={nameRef}
-              type="text" 
-              placeholder='Url...'
-            />
+            <Field name="name" type="text" as={Input} placeholder={'Name...'}/>
           </label>
-        </form> */}
-        <Formik
-        initialValues={{ url: "https://jsonplaceholder.typicode.com/posts", name: "s" }}
-        onSubmit={(values) => {
-          handleSubmit(values)
-        }}
-      >
-        <Form id='main'>
-          <Field name="url" type="text" as={Input} />
-          <Field name="name" type="text" />
         </Form>
       </Formik>
-      <form style={{display: 'flex', alignItems: 'center'}}>
+      <div style={{display: 'flex', alignItems: 'center'}}>
         <Switch 
           onChange={handleIsChecked} 
           checked={isChecked} 
         />
         <span style={{marginLeft: 5}}>Need params?</span>
-      </form>
+      </div>
       </div>
       <div className={parametersDivClass.join(' ')}>
         <Input
