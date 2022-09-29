@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { Formik, Field, Form } from "formik";
 
 import Tools from '../../core/tools/Tools';
 
 import classes from './GetForm.module.scss';
 
-import DefaultEditor from '../../core/editor/DefaultEditor';
 import SubmitButton from '../UI/Buttons/SubmitButton';
 import LinkButton from '../UI/Buttons/LinkButton';
 import Switch from '../UI/Switch/Switch';
@@ -19,25 +19,19 @@ function GetForm(): JSX.Element {
     parametersDivClass.push(classes.active);
   }
   const [parameters, setParameters]     = useState<any>('');
-  const [needRedirect, setNeedRedirect] = useState<boolean>(false)
-
-  const urlRef  = useRef<HTMLInputElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
+  const [needRedirect, setNeedRedirect] = useState<boolean>(false);
 
   function handleIsChecked() {    
-    setIsChecked(!isChecked);    
+    setIsChecked(!isChecked);        
   }
-
-  function handleSubmit(e: any) {
-    e.preventDefault();
-    
-    if(urlRef.current?.value && nameRef.current?.value){
+  function handleSubmit(values: any) {
+    if(values.name && values.url){
       sessionStorage.clear();
       
       let date: string = Tools.getCurrentDate();
 
-      localStorage.setItem(date, JSON.stringify({name: nameRef.current?.value, time: date, url: urlRef.current?.value, params: parameters}));
-      sessionStorage.setItem(date, JSON.stringify({url: urlRef.current?.value, params: parameters}));
+      localStorage.setItem(date, JSON.stringify({name: values.name, time: date, url: values.url, params: parameters}));
+      sessionStorage.setItem(date, JSON.stringify({url: values.url, params: parameters}));
       
       setNeedRedirect(true);
     } else {
@@ -48,7 +42,7 @@ function GetForm(): JSX.Element {
   return (
     <div className={classes.SettingsWrapper}>
       <div>
-        <form>
+        {/* <form>
           <label>
             <span>Fetch url:</span>
             <Input
@@ -65,7 +59,18 @@ function GetForm(): JSX.Element {
               placeholder='Url...'
             />
           </label>
-        </form>
+        </form> */}
+        <Formik
+        initialValues={{ url: "https://jsonplaceholder.typicode.com/posts", name: "s" }}
+        onSubmit={(values) => {
+          handleSubmit(values)
+        }}
+      >
+        <Form id='main'>
+          <Field name="url" type="text" as={Input} />
+          <Field name="name" type="text" />
+        </Form>
+      </Formik>
       <form style={{display: 'flex', alignItems: 'center'}}>
         <Switch 
           onChange={handleIsChecked} 
@@ -75,17 +80,16 @@ function GetForm(): JSX.Element {
       </form>
       </div>
       <div className={parametersDivClass.join(' ')}>
-        <DefaultEditor 
-          width={'450px'} 
-          height={'400px'} 
-          value={{ "params": {  } }} 
-          options={{tabSize: 2}} 
-          setContent={setParameters}
+        <Input
+          onChange={(e: any) => setParameters(e.target.value)}
+          type={'text'}
+          placeholder={'parameter...'}
         />
       </div>
       <SubmitButton
         content={'Submit'}
-        onClick={handleSubmit}
+        type={'submit'}
+        form={'main'}
       />
       <LinkButton
         content={'Go home'}
