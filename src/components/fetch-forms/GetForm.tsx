@@ -18,7 +18,7 @@ function GetForm(): JSX.Element {
   if(isChecked){
     parametersDivClass.push(classes.active);
   }
-  const parameters: any = [];
+  const parameters: any = [{_limit: '1', _limitsd: '1sfd', _limitsdsdfs: '1sfdsfsfs', _limitsdsdfssfdf: '1sfdsfsfssf'}];
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
 
   function handleIsChecked() {    
@@ -42,8 +42,16 @@ function GetForm(): JSX.Element {
     parameters.push(Object.values(values))
 
     console.log(Object.fromEntries(parameters));
-    
   }
+  function TransMatrix(A: any)       //На входе двумерный массив
+{
+    var m = A.length, n = A[0].length, AT: any = [];
+    for (var i = 0; i < n; i++)
+     { AT[ i ] = [];
+       for (var j = 0; j < m; j++) AT[ i ][j] = A[j][ i ];
+     }
+    return AT;
+}
 
   return (
     <div className={classes.SettingsWrapper}>
@@ -72,7 +80,7 @@ function GetForm(): JSX.Element {
       </div>
       <div className={parametersDivClass.join(' ')}>
       <Formik
-        initialValues={{ name: "_limit", value: 0 }}
+        initialValues={{ name: "_limit", value: 1 }}
         onSubmit={(values) => {
         handleSubmitParams(values)
       }}>
@@ -87,6 +95,16 @@ function GetForm(): JSX.Element {
           </label>
         </Form>
       </Formik>
+      <div>
+        {
+          parameters.map((e: any, i: number) => {
+            
+            console.log(TransMatrix(Object.entries(e)));
+            
+            // return <li key={i}>{a[i]}</li>
+          })
+        }
+      </div>
       </div>
       <SubmitButton
         content={'Submit'}
