@@ -19,6 +19,10 @@ function GetForm(): JSX.Element {
     parametersDivClass.push(classes.active);
   }
   const [parametersUsed, setParametersUsed] = useState<any>({});
+  const [displayedParametersNames, setDisplayedParametersNames] = useState<any[]>([]);
+  const [displayedParametersValues, setDisplayedParametersValues] = useState<any[]>([]);
+  const displayedParameters: Array<any[]> = [displayedParametersNames, displayedParametersValues]
+
   const displayedParameterNameref = useRef<HTMLInputElement>(null);
   const displayedParameterValueref = useRef<HTMLInputElement>(null);
 
@@ -42,12 +46,12 @@ function GetForm(): JSX.Element {
     }
   }
   function handleSubmitParams(values: any) {
-    
     parametersUsed[values.name] = values.value;
+    setDisplayedParametersNames([...displayedParametersNames, displayedParameterNameref.current?.value]);
+    setDisplayedParametersValues([...displayedParametersValues, displayedParameterValueref.current?.value]);
 
     console.log(parametersUsed);
-
-    console.log([displayedParameterValueref.current?.value, displayedParameterNameref.current?.value]);
+    console.log([displayedParametersNames, displayedParametersValues]);
   }
   
   return (
@@ -92,6 +96,12 @@ function GetForm(): JSX.Element {
           </label>
         </Form>
       </Formik>
+      {
+        displayedParameters[0].map((e: any, i: number) => {return ( <div key={i}>{e}</div> )})
+      }
+      {
+        displayedParameters[1].map((e: any, i: number) => {return ( <div key={i}>{e}</div> )})
+      }
       </div>
       <SubmitButton
         content={'Submit'}
