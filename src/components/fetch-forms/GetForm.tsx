@@ -48,17 +48,7 @@ function GetForm(): JSX.Element {
     console.log(parametersUsed);
 
     console.log([displayedParameterValueref.current?.value, displayedParameterNameref.current?.value]);
-    
-    // console.log(TransMatrix(Object.entries(parameters[0]))[1].map((e: any) => e));
   }
-  // function TransMatrix(A: any){
-  //   let m = A.length, n = A[0].length, AT: any = [];
-  //   for (let i = 0; i < n; i++){ 
-  //     AT[ i ] = [];
-  //     for (var j = 0; j < m; j++) AT[ i ][j] = A[j][ i ];
-  //   }
-  //   return AT;
-  // }
   
   return (
     <div className={classes.SettingsWrapper}>
