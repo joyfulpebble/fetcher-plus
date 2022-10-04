@@ -18,7 +18,10 @@ function GetForm(): JSX.Element {
   if(isChecked){
     parametersDivClass.push(classes.active);
   }
-  const parameters: any = [{_limit: '1', _limitsd: '1sfd', _limitsdsdfs: '1sfdsfsfs', _limitsdsdfssfdf: '1sfdsfsfssf'}];
+  const [parametersUsed, setParametersUsed] = useState<any>({});
+  const displayedParameterNameref = useRef<HTMLInputElement>(null);
+  const displayedParameterValueref = useRef<HTMLInputElement>(null);
+
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
 
   function handleIsChecked() {    
@@ -30,8 +33,8 @@ function GetForm(): JSX.Element {
       
       let date: string = Tools.getCurrentDate();
 
-      localStorage.setItem(date, JSON.stringify({name: values.name, time: date, url: values.url, params: Object.fromEntries(parameters)}));
-      sessionStorage.setItem(date, JSON.stringify({url: values.url, params: Object.fromEntries(parameters)}));
+      localStorage.setItem(date, JSON.stringify({name: values.name, time: date, url: values.url, params: parametersUsed}));
+      sessionStorage.setItem(date, JSON.stringify({url: values.url, params: parametersUsed}));
       
       setNeedRedirect(true);
     } else {
@@ -39,20 +42,24 @@ function GetForm(): JSX.Element {
     }
   }
   function handleSubmitParams(values: any) {
-    parameters.push(Object.values(values))
+    
+    parametersUsed[values.name] = values.value;
 
-    console.log(Object.fromEntries(parameters));
+    console.log(parametersUsed);
+
+    console.log([displayedParameterValueref.current?.value, displayedParameterNameref.current?.value]);
+    
+    // console.log(TransMatrix(Object.entries(parameters[0]))[1].map((e: any) => e));
   }
-  function TransMatrix(A: any)       //На входе двумерный массив
-{
-    var m = A.length, n = A[0].length, AT: any = [];
-    for (var i = 0; i < n; i++)
-     { AT[ i ] = [];
-       for (var j = 0; j < m; j++) AT[ i ][j] = A[j][ i ];
-     }
-    return AT;
-}
-
+  // function TransMatrix(A: any){
+  //   let m = A.length, n = A[0].length, AT: any = [];
+  //   for (let i = 0; i < n; i++){ 
+  //     AT[ i ] = [];
+  //     for (var j = 0; j < m; j++) AT[ i ][j] = A[j][ i ];
+  //   }
+  //   return AT;
+  // }
+  
   return (
     <div className={classes.SettingsWrapper}>
       <Formik
@@ -80,31 +87,21 @@ function GetForm(): JSX.Element {
       </div>
       <div className={parametersDivClass.join(' ')}>
       <Formik
-        initialValues={{ name: "_limit", value: 1 }}
+        initialValues={{name: '_limit', value: 1}}
         onSubmit={(values) => {
         handleSubmitParams(values)
       }}>
         <Form id='data'>
           <label>
             <span>Parameter name:</span>
-            <Field name="name" type="text" as={Input} placeholder={'Name...'}/>
+            <Field name="name" type="text" innerRef={displayedParameterValueref} as={Input} placeholder={'Name...'}/>
           </label>
           <label>
             <span>Parameter value:</span>
-            <Field name="value" type="text" as={Input} placeholder={'Value...'}/>
+            <Field name="value" type="text" innerRef={displayedParameterNameref} as={Input} placeholder={'Value...'}/>
           </label>
         </Form>
       </Formik>
-      <div>
-        {
-          parameters.map((e: any, i: number) => {
-            
-            console.log(TransMatrix(Object.entries(e)));
-            
-            // return <li key={i}>{a[i]}</li>
-          })
-        }
-      </div>
       </div>
       <SubmitButton
         content={'Submit'}
