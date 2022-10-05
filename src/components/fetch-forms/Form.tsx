@@ -1,5 +1,5 @@
 import React from 'react'
-import GetForm from './components/GetForm';
+import GetForm from './get-form/GetForm';
 
 function Form() {
   return (

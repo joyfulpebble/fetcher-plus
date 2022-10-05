@@ -10,6 +10,7 @@ import SubmitButton from '../../UI/Buttons/SubmitButton';
 import LinkButton from '../../UI/Buttons/LinkButton';
 import Switch from '../../UI/Switch/Switch';
 import Input from '../../UI/Input/Input';
+import FormWithToFields from '../../FormWithToFields';
 
 function GetForm(): JSX.Element {  
   const [displayedParametersValues, setDisplayedParametersValues] = useState<any[]>([]);
@@ -19,22 +20,22 @@ function GetForm(): JSX.Element {
   const [parametersUsed, setParametersUsed] = useState<any>({});
   const displayedParameters: Array<any[]> = [displayedParametersNames, displayedParametersValues]
 
-  const displayedParameterNameref = useRef<HTMLInputElement>(null);
-  const displayedParameterValueref = useRef<HTMLInputElement>(null);
+  const displayedParameterNameRef = useRef<HTMLInputElement>(null);
+  const displayedParameterValueRef = useRef<HTMLInputElement>(null);
 
   const parametersDivClass: string[] = [classes.ParametersWrapper];
   if(needParameters){
     parametersDivClass.push(classes.active);
   }
 
-  function handleIsCheckedParameters(needParameters: boolean): void {    
+  function handleIsCheckedParameters(): void {    
     setNeedParameters(!needParameters);        
   }
   function handleSubmitParams(values: any) {
     parametersUsed[values.name] = values.value;
     
-    setDisplayedParametersNames([...displayedParametersNames, displayedParameterNameref.current?.value]);
-    setDisplayedParametersValues([...displayedParametersValues, displayedParameterValueref.current?.value]);
+    setDisplayedParametersNames([...displayedParametersNames, displayedParameterNameRef.current?.value]);
+    setDisplayedParametersValues([...displayedParametersValues, displayedParameterValueRef.current?.value]);
   }
   function handleSubmitFetch(values: any) {
     if(values.name && values.url){
@@ -54,22 +55,15 @@ function GetForm(): JSX.Element {
   
   return (
     <div className={classes.SettingsWrapper}>
-      <Formik
-        initialValues={{ url: "https://jsonplaceholder.typicode.com/posts", name: "s" }}
-        onSubmit={(values) => {
-          handleSubmitFetch(values)
-      }}>
-        <Form id='main-request-data'>
-          <label>
-            <span>Fetch url:</span>
-            <Field name="url" type="text" as={Input} placeholder={'Url...'}/>
-          </label>
-          <label>
-            <span>File name:</span>
-            <Field name="name" type="text" as={Input} placeholder={'Name...'}/>
-          </label>
-        </Form>
-      </Formik>
+      <FormWithToFields
+          firstInitValueName={'url'}
+          secondInitValueName={'name'}
+          firstInitValue={'https://jsonplaceholder.typicode.com/posts'}
+          secondInitValue={'asd'}
+          firstInfoText={'Fetch url:'}
+          secondInfoText={'File name:'}
+          onSubmitFuncton={handleSubmitFetch}
+          formId={'main-request-data'}/>
       <div style={{display: 'flex', alignItems: 'center'}}>
         <Switch 
           onChange={handleIsCheckedParameters} 
@@ -78,22 +72,17 @@ function GetForm(): JSX.Element {
         <span style={{marginLeft: 5}}>Need params?</span>
       </div>
       <div className={parametersDivClass.join(' ')}>
-      <Formik
-        initialValues={{name: '_limit', value: 1}}
-        onSubmit={(values) => {
-        handleSubmitParams(values)
-      }}>
-        <Form id='data'>
-          <label>
-            <span>Parameter name:</span>
-            <Field name="name" type="text" innerRef={displayedParameterValueref} as={Input} placeholder={'Name...'}/>
-          </label>
-          <label>
-            <span>Parameter value:</span>
-            <Field name="value" type="text" innerRef={displayedParameterNameref} as={Input} placeholder={'Value...'}/>
-          </label>
-        </Form>
-      </Formik>
+        <FormWithToFields
+          firstInitValueName={'name'}
+          secondInitValueName={'value'}
+          firstInitValue={'_limit'}
+          secondInitValue={1}
+          firstInfoText={'Parameter name:'}
+          secondInfoText={'Parameter value:'}
+          firstRef={displayedParameterNameRef}
+          secondRef={displayedParameterValueRef}
+          onSubmitFuncton={handleSubmitParams}
+          formId={'data'}/>
       {
         displayedParameters[0].map((e: any, i: number) => {return ( <div key={i}>{e}</div> )})
       }
@@ -104,21 +93,17 @@ function GetForm(): JSX.Element {
       <SubmitButton
         content={'Submit'}
         type={'submit'}
-        form={'main-request-data'}
-      />
+        form={'main-request-data'}/>
       <SubmitButton
         content={'Submit params'}
         type={'submit'}
-        form={'data'}
-      />
+        form={'data'}/>
       <LinkButton
         content={'Go home'}
-        path={"/welcome"}
-      />
+        path={"/welcome"}/>
       {needRedirect 
         ? <Navigate 
-            to="/workspace"
-          /> 
+            to="/workspace"/> 
         : <></>}
     </div>
   )
