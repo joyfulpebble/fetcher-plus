@@ -4,7 +4,7 @@ import { Formik, Field, Form } from "formik";
 
 import Tools from '../../core/tools/Tools';
 
-import classes from './GetForm.module.scss';
+import classes from './Form.module.scss';
 
 import SubmitButton from '../UI/Buttons/SubmitButton';
 import LinkButton from '../UI/Buttons/LinkButton';
@@ -47,7 +47,7 @@ function GetForm(): JSX.Element {
       
       setNeedRedirect(true);
     } else {
-      console.log('err: не все поля заполнены');
+      console.error('не все поля заполнены');
     }
   }
   function handleSubmitParams(values: any) {
