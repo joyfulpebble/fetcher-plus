@@ -6,10 +6,10 @@ export default class Tools {
   static getAllStorage(storage: Storage): any[] {
     let values: any[] = []
     let keys: string[] = Object.keys(storage)
-    let i: number = keys.length;
+    let index: number = keys.length;
   
-    while (i--) {
-      values.push(storage.getItem(keys[i]));
+    while (index--) {
+      values.push(storage.getItem(keys[index]));
     }
     return values;
   };
@@ -28,5 +28,10 @@ export default class Tools {
     } catch (error: any) {
       return ['err', error];
     }
+  }
+  
+  static setDataToStorages(fetchCfgName: string | number, creationDate: string, fetchUrl: string, fetchParameters?: object): void {
+    localStorage.setItem(creationDate, JSON.stringify({name: fetchCfgName, time: creationDate, url: fetchUrl, params: fetchParameters ? fetchParameters : {}}))
+    sessionStorage.setItem(creationDate, JSON.stringify({url: fetchUrl, params: fetchParameters ? fetchParameters : {}}))
   }
 }

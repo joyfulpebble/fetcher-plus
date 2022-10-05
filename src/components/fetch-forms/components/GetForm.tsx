@@ -12,51 +12,44 @@ import Switch from '../../UI/Switch/Switch';
 import Input from '../../UI/Input/Input';
 
 function GetForm(): JSX.Element {  
-  const [needParameters, setNeedParameters] = useState<boolean>(false);
-
-  const parametersDivClass: string[] = [classes.ParametersWrapper];
-  if(needParameters){
-    parametersDivClass.push(classes.active);
-  }
-  const [parametersUsed, setParametersUsed] = useState<any>({});
-  const [displayedParametersNames, setDisplayedParametersNames] = useState<any[]>([]);
   const [displayedParametersValues, setDisplayedParametersValues] = useState<any[]>([]);
+  const [displayedParametersNames, setDisplayedParametersNames] = useState<any[]>([]);
+  const [needParameters, setNeedParameters] = useState<boolean>(false);
+  const [needRedirect, setNeedRedirect] = useState<boolean>(false);
+  const [parametersUsed, setParametersUsed] = useState<any>({});
   const displayedParameters: Array<any[]> = [displayedParametersNames, displayedParametersValues]
 
   const displayedParameterNameref = useRef<HTMLInputElement>(null);
   const displayedParameterValueref = useRef<HTMLInputElement>(null);
 
-  const [needRedirect, setNeedRedirect] = useState<boolean>(false);
+  const parametersDivClass: string[] = [classes.ParametersWrapper];
+  if(needParameters){
+    parametersDivClass.push(classes.active);
+  }
 
-  function handleIsCheckedParameters() {    
+  function handleIsCheckedParameters(needParameters: boolean): void {    
     setNeedParameters(!needParameters);        
   }
-  function setDataToStorages(fetchCfgName: string | number, creationDate: string, fetchUrl: string, fetchParameters?: object): void {
-    localStorage.setItem(creationDate, JSON.stringify({name: fetchCfgName, time: creationDate, url: fetchUrl, params: fetchParameters ? fetchParameters : {}}))
-    sessionStorage.setItem(creationDate, JSON.stringify({url: fetchUrl, params: fetchParameters ? fetchParameters : {}}))
+  function handleSubmitParams(values: any) {
+    parametersUsed[values.name] = values.value;
+    
+    setDisplayedParametersNames([...displayedParametersNames, displayedParameterNameref.current?.value]);
+    setDisplayedParametersValues([...displayedParametersValues, displayedParameterValueref.current?.value]);
   }
-  function handleSubmit(values: any) {
+  function handleSubmitFetch(values: any) {
     if(values.name && values.url){
       sessionStorage.clear();
       
       let date: string = Tools.getCurrentDate();
 
       needParameters 
-        ? setDataToStorages(values.name, date, values.url, parametersUsed)
-        : setDataToStorages(values.name, date, values.url)
+        ? Tools.setDataToStorages(values.name, date, values.url, parametersUsed)
+        : Tools.setDataToStorages(values.name, date, values.url)
       
       setNeedRedirect(true);
     } else {
       console.error('не все поля заполнены');
     }
-  }
-  function handleSubmitParams(values: any) {
-    parametersUsed[values.name] = values.value;
-    setDisplayedParametersNames([...displayedParametersNames, displayedParameterNameref.current?.value]);
-    setDisplayedParametersValues([...displayedParametersValues, displayedParameterValueref.current?.value]);
-
-    console.log(parametersUsed);
-    console.log([displayedParametersNames, displayedParametersValues]);
   }
   
   return (
@@ -64,7 +57,7 @@ function GetForm(): JSX.Element {
       <Formik
         initialValues={{ url: "https://jsonplaceholder.typicode.com/posts", name: "s" }}
         onSubmit={(values) => {
-        handleSubmit(values)
+          handleSubmitFetch(values)
       }}>
         <Form id='main-request-data'>
           <label>
