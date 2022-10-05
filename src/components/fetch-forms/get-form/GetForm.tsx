@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { Formik, Field, Form } from "formik";
 
 import Tools from '../../../core/tools/Tools';
 
@@ -9,7 +8,6 @@ import classes from './GetForm.module.scss';
 import SubmitButton from '../../UI/Buttons/SubmitButton';
 import LinkButton from '../../UI/Buttons/LinkButton';
 import Switch from '../../UI/Switch/Switch';
-import Input from '../../UI/Input/Input';
 import FormWithToFields from '../../FormWithToFields';
 
 function GetForm(): JSX.Element {  
@@ -82,22 +80,22 @@ function GetForm(): JSX.Element {
           firstRef={displayedParameterNameRef}
           secondRef={displayedParameterValueRef}
           onSubmitFuncton={handleSubmitParams}
-          formId={'data'}/>
+          formId={'parameters-data'}/>
       {
         displayedParameters[0].map((e: any, i: number) => {return ( <div key={i}>{e}</div> )})
       }
       {
         displayedParameters[1].map((e: any, i: number) => {return ( <div key={i}>{e}</div> )})
       }
+      <SubmitButton
+        content={'Submit params'}
+        type={'submit'}
+        form={'parameters-data'}/>
       </div>
       <SubmitButton
         content={'Submit'}
         type={'submit'}
         form={'main-request-data'}/>
-      <SubmitButton
-        content={'Submit params'}
-        type={'submit'}
-        form={'data'}/>
       <LinkButton
         content={'Go home'}
         path={"/welcome"}/>
