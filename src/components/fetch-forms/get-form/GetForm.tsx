@@ -9,6 +9,7 @@ import SubmitButton from '../../UI/Buttons/SubmitButton';
 import LinkButton from '../../UI/Buttons/LinkButton';
 import Switch from '../../UI/Switch/Switch';
 import FormWithToFields from '../../FormWithToFields';
+import SwitchDiv from '../../SwitchDiv';
 
 function GetForm(): JSX.Element {  
   const [displayedParametersValues, setDisplayedParametersValues] = useState<any[]>([]);
@@ -62,13 +63,10 @@ function GetForm(): JSX.Element {
           secondInfoText={'File name:'}
           onSubmitFuncton={handleSubmitFetch}
           formId={'main-request-data'}/>
-      <div style={{display: 'flex', alignItems: 'center'}}>
-        <Switch 
-          onChange={handleIsCheckedParameters} 
-          checked={needParameters} 
-        />
-        <span style={{marginLeft: 5}}>Need params?</span>
-      </div>
+      <SwitchDiv
+        needParameters={needParameters}
+        handleIsCheckedParameters={handleIsCheckedParameters}
+        spanText={'Need parameters?'}/>
       <div className={parametersDivClass.join(' ')}>
         <FormWithToFields
           firstInitValueName={'name'}
