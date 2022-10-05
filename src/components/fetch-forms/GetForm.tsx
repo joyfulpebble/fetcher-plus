@@ -12,10 +12,10 @@ import Switch from '../UI/Switch/Switch';
 import Input from '../UI/Input/Input';
 
 function GetForm(): JSX.Element {  
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [needParameters, setNeedParameters] = useState<boolean>(false);
 
   const parametersDivClass: string[] = [classes.ParametersWrapper];
-  if(isChecked){
+  if(needParameters){
     parametersDivClass.push(classes.active);
   }
   const [parametersUsed, setParametersUsed] = useState<any>({});
@@ -28,8 +28,12 @@ function GetForm(): JSX.Element {
 
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
 
-  function handleIsChecked() {    
-    setIsChecked(!isChecked);        
+  function handleIsCheckedParameters() {    
+    setNeedParameters(!needParameters);        
+  }
+  function setDataToStorages(fetchCfgName: string | number, creationDate: string, fetchUrl: string, fetchParameters?: object): void {
+    localStorage.setItem(creationDate, JSON.stringify({name: fetchCfgName, time: creationDate, url: fetchUrl, params: fetchParameters ? fetchParameters : {}}))
+    sessionStorage.setItem(creationDate, JSON.stringify({url: fetchUrl, params: fetchParameters ? fetchParameters : {}}))
   }
   function handleSubmit(values: any) {
     if(values.name && values.url){
@@ -37,8 +41,9 @@ function GetForm(): JSX.Element {
       
       let date: string = Tools.getCurrentDate();
 
-      localStorage.setItem(date, JSON.stringify({name: values.name, time: date, url: values.url, params: parametersUsed}));
-      sessionStorage.setItem(date, JSON.stringify({url: values.url, params: parametersUsed}));
+      needParameters 
+        ? setDataToStorages(values.name, date, values.url, parametersUsed)
+        : setDataToStorages(values.name, date, values.url)
       
       setNeedRedirect(true);
     } else {
@@ -74,8 +79,8 @@ function GetForm(): JSX.Element {
       </Formik>
       <div style={{display: 'flex', alignItems: 'center'}}>
         <Switch 
-          onChange={handleIsChecked} 
-          checked={isChecked} 
+          onChange={handleIsCheckedParameters} 
+          checked={needParameters} 
         />
         <span style={{marginLeft: 5}}>Need params?</span>
       </div>
