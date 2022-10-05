@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Form from '../components/fetch-forms/Form';
+import Form from '../components/Form';
 import StatusBar from '../components/status-bar/StatusBar';
 
 
