@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import WelcomePage from "./pages/WelcomePage";
 import Workspace from "./pages/Workspace";
-import FetchForm from "./pages/FetchForm";
+import FetchPage from "./pages/FetchPage";
 
 function App(): JSX.Element {
   return (
@@ -11,7 +11,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path='/welcome'      element={<WelcomePage/>}/>
         <Route path='/workspace' element={<Workspace/>}/>
-        <Route path='/get-fetch-form' element={<FetchForm/>}/>
+        <Route path='/get-fetch-form' element={<FetchPage/>}/>
       </Routes>
     </BrowserRouter>
     
