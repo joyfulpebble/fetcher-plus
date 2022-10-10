@@ -7,7 +7,6 @@ import classes from './GetForm.module.scss';
 
 import SubmitButton from '../../UI/Buttons/SubmitButton';
 import LinkButton from '../../UI/Buttons/LinkButton';
-import Switch from '../../UI/Switch/Switch';
 import FormWithToFields from '../../FormWithToFields';
 import SwitchDiv from '../../SwitchDiv';
 

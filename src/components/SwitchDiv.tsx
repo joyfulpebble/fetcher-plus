@@ -1,8 +1,9 @@
 import React from 'react';
+import { SwitchDivProps } from '../types/elements';
 
 import Switch from './UI/Switch/Switch';
 
-function SwitchDiv({needParameters, handleIsCheckedParameters, spanText}: any) {
+function SwitchDiv({needParameters, handleIsCheckedParameters, spanText}: SwitchDivProps) {
   return (
     <div style={{display: 'flex', alignItems: 'center'}}>
         <Switch 

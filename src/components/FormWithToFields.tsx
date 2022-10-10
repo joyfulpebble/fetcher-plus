@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Formik, Field, Form } from "formik";
 import Input from './UI/Input/Input';
+import { FormWithToFieldsProps } from '../types/elements';
 
 function FormWithToFields({
     firstInitValueName, 
@@ -14,11 +15,10 @@ function FormWithToFields({
     secondRef,
     onSubmitFuncton, 
     formId
-  }: any) {
+  }: FormWithToFieldsProps) {
   const initValues: any = {};
     initValues[firstInitValueName] = firstInitValue;
     initValues[secondInitValueName] = secondInitValue;
-
 
   return (
     <Formik
