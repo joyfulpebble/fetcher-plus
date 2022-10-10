@@ -2,10 +2,10 @@ import React from "react";
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
 interface DefaultEditorProps {
-  width: number;
-  height: number;
+  width: string;
+  height: string;
   value: any;
-  options?: monaco.editor.IDiffEditorConstructionOptions;
+  options?: object;
   setContent: React.Dispatch<any>;
 }
 
