@@ -30,8 +30,59 @@ export default class Tools {
     }
   }
   
-  static setDataToStorages(fetchCfgName: string | number, creationDate: string, fetchUrl: string, fetchParameters?: object): void {
-    localStorage.setItem(creationDate, JSON.stringify({name: fetchCfgName, time: creationDate, url: fetchUrl, params: fetchParameters ? fetchParameters : {}}))
-    sessionStorage.setItem(creationDate, JSON.stringify({url: fetchUrl, params: fetchParameters ? fetchParameters : {}}))
+  static setDataToSessionStorage(creationDate: string, fetchUrl: string, fetchParameters?: object): void {
+    sessionStorage.setItem(
+      creationDate, 
+      JSON.stringify({
+        url: fetchUrl, 
+        params: fetchParameters
+      })
+    );
   }
+
+  static setDataToLocalStorage(fetchCfgName: string | number, creationDate: string, fetchUrl: string, fetchParameters?: object): void {
+    localStorage.setItem(
+      creationDate, 
+      JSON.stringify({
+        name: fetchCfgName, 
+        time: creationDate, 
+        url: fetchUrl, 
+        params: fetchParameters
+      })  
+    );
+  }
+  
+  static setDataToStorage(storageType: string, needParameters: boolean, fetchCfgName: string | number, creationDate: string, fetchUrl: string, fetchParameters: object): void {
+    switch (storageType) {
+      case 'all':
+        if(needParameters) {
+          this.setDataToSessionStorage(creationDate, fetchUrl, fetchParameters);
+          this.setDataToLocalStorage(fetchCfgName, creationDate, fetchUrl, fetchParameters);
+        } else {
+          this.setDataToLocalStorage(fetchCfgName, creationDate, fetchUrl, {});
+          this.setDataToSessionStorage(creationDate, fetchUrl, {});
+        };
+      break;
+      
+      case 'local':
+        if(needParameters) {
+          this.setDataToLocalStorage(fetchCfgName, creationDate, fetchUrl, fetchParameters);
+        } else {
+          this.setDataToLocalStorage(fetchCfgName, creationDate, fetchUrl, {});
+        };
+      break;
+
+      case 'session':
+        if(needParameters) {
+          this.setDataToSessionStorage(creationDate, fetchUrl, fetchParameters);
+        } else {
+          this.setDataToSessionStorage(creationDate, fetchUrl, {});
+        };
+      break;
+
+      default:
+        break;
+    }
+  }
+  
 }

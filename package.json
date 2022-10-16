@@ -62,5 +62,17 @@
     "electron": "^19.0.3",
     "electron-builder": "^23.0.3",
     "wait-on": "^6.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

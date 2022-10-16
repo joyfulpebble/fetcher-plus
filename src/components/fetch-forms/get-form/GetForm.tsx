@@ -16,6 +16,7 @@ function GetForm(): JSX.Element {
   const [needParameters, setNeedParameters] = useState<boolean>(false);
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
   const [parametersUsed, setParametersUsed] = useState<any>({});
+  const [storageType, setStorageType] = useState<string>('all');
   const displayedParameters: Array<any[]> = [displayedParametersNames, displayedParametersValues]
 
   const displayedParameterNameRef = useRef<HTMLInputElement>(null);
@@ -41,9 +42,7 @@ function GetForm(): JSX.Element {
       
       let date: string = Tools.getCurrentDate();
 
-      needParameters 
-        ? Tools.setDataToStorages(values.name, date, values.url, parametersUsed)
-        : Tools.setDataToStorages(values.name, date, values.url)
+      Tools.setDataToStorage(storageType, needParameters, values.name, date, values.url, parametersUsed);
       
       setNeedRedirect(true);
     } else {
