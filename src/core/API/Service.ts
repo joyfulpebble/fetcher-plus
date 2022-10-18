@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestHeaders } from 'axios';
 
 export default class Service {
   static async GET(path: string, params?: any): Promise<Object> {
@@ -7,16 +7,9 @@ export default class Service {
     return response;
   };
 
-  static async POST(path: string, data: any, hearders: object): Promise<void> {
-    let request = axios({
-      method: 'post',
-      url: path,
-      data: data,
-      headers: {
-        ...hearders
-      }
-    });
-
-    return
+  static async POST(path: string, data: any, hearders: AxiosRequestHeaders | undefined): Promise<void> {
+    let request = axios.post(path, data, {headers: hearders});
+    
+    return;
   }
 }
