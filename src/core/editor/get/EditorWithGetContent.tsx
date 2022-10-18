@@ -5,7 +5,7 @@ import Tools from '../../tools/Tools';
 
 import ErrorSVG from '../../../components/.svg/ErrorSVG';
 
-function EditorWithGetContent({editorContent, errorStorage, getHandlingFunc, getFunction}: any): JSX.Element {
+function EditorWithGetContent(editorContent: any, errorStorage: any, getHandlingFunc: any, getFunction: any): JSX.Element {
   const [editor, setEditor] = useState<JSX.Element>();
   const [error, setError]   = useState<any[]>([false]);
 
