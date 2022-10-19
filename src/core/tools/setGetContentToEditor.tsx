@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
-import DefaultEditor from '../editor/DefaultEditor';
 import Tools from './Tools';
 
+import DefaultEditor from '../editor/DefaultEditor';
 import ErrorSVG from '../../components/.svg/ErrorSVG';
 
 function SetGetContentToEditor({editorContent, errorStorage, getHandlingFunc, getFunction}: any): JSX.Element {

@@ -12,9 +12,6 @@ function Workspace(): JSX.Element {
   const [tempErrorStorage, setTempErrorStorage] = useState<undefined | any[]>(undefined);
   const [editiorContent, setEditorContent] = useState<any>('');
   
-  let method = Service.GET;
-  const method_handling = Tools.getMethodHandling;
-  
   let blob: any = null;
   if(editiorContent != ''){
     blob = new Blob([JSON.stringify(editiorContent, null, '  ')], {type: 'application/json'});
