@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import DefaultEditor from '../DefaultEditor';
-import Tools from '../../tools/Tools';
+import DefaultEditor from '../editor/DefaultEditor';
+import Tools from './Tools';
 
-import ErrorSVG from '../../../components/.svg/ErrorSVG';
+import ErrorSVG from '../../components/.svg/ErrorSVG';
 
-function EditorWithGetContent(editorContent: any, errorStorage: any, getHandlingFunc: any, getFunction: any): JSX.Element {
+function SetGetContentToEditor({editorContent, errorStorage, getHandlingFunc, getFunction}: any): JSX.Element {
   const [editor, setEditor] = useState<JSX.Element>();
   const [error, setError]   = useState<any[]>([false]);
 
@@ -15,7 +15,7 @@ function EditorWithGetContent(editorContent: any, errorStorage: any, getHandling
   let params: object = parsedData.params;
   let url: string    = parsedData.url;
 
-  const setContentToEditor = async () => {
+  const setContent = async () => {
     const data: any | object = await getHandlingFunc(url, params, getFunction);
 
     if(data[0] === 'err'){
@@ -41,7 +41,7 @@ function EditorWithGetContent(editorContent: any, errorStorage: any, getHandling
   };
 
   useEffect(() => {
-    setContentToEditor();
+    setContent();
   }, [])
 
   useEffect(() => {
@@ -57,4 +57,4 @@ function EditorWithGetContent(editorContent: any, errorStorage: any, getHandling
   )
 }
 
-export default EditorWithGetContent;
+export default SetGetContentToEditor;
