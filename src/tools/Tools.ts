@@ -30,9 +30,9 @@ export default class Tools {
     }
   }
   
-  static setDataToSessionStorage(creationDate: string, fetchUrl: string, fetchParameters?: object): void {
+  static setDataToSessionStorage(fetchUrl: string, fetchParameters?: object): void {
     sessionStorage.setItem(
-      creationDate, 
+      'get', 
       JSON.stringify({
         url: fetchUrl, 
         params: fetchParameters
@@ -56,11 +56,11 @@ export default class Tools {
     switch (storageType) {
       case 'all':
         if(needParameters) {
-          this.setDataToSessionStorage(creationDate, fetchUrl, fetchParameters);
+          this.setDataToSessionStorage(fetchUrl, fetchParameters);
           this.setDataToLocalStorage(fetchCfgName, creationDate, fetchUrl, fetchParameters);
         } else {
           this.setDataToLocalStorage(fetchCfgName, creationDate, fetchUrl, {});
-          this.setDataToSessionStorage(creationDate, fetchUrl, {});
+          this.setDataToSessionStorage(fetchUrl, {});
         };
       break;
       
@@ -74,9 +74,9 @@ export default class Tools {
 
       case 'session':
         if(needParameters) {
-          this.setDataToSessionStorage(creationDate, fetchUrl, fetchParameters);
+          this.setDataToSessionStorage(fetchUrl, fetchParameters);
         } else {
-          this.setDataToSessionStorage(creationDate, fetchUrl, {});
+          this.setDataToSessionStorage(fetchUrl, {});
         };
       break;
 

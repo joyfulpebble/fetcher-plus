@@ -37,11 +37,8 @@ function GetForm(): JSX.Element {
     setDisplayedParametersValues([...displayedParametersValues, displayedParameterValueRef.current?.value]);
   }
   function handleSubmitFetch(values: any) {
-    if(values.name && values.url){
-      sessionStorage.clear();
-      
+    if(values.name && values.url){      
       let date: string = Tools.getCurrentDate();
-
       Tools.setDataToStorage(storageType, needParameters, values.name, date, values.url, parametersUsed);
       
       setNeedRedirect(true);
