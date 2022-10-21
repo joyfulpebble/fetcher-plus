@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import Tools from '../core/tools/Tools';
+import Tools from '../tools/Tools';
 
 import StatusBar from '../components/status-bar/StatusBar';
 import LinkButton from '../components/UI/Buttons/LinkButton';

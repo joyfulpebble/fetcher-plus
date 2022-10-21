@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import Tools from '../../../core/tools/Tools';
+import Tools from '../../../tools/Tools';
 
 import classes from './GetForm.module.scss';
 

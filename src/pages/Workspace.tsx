@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FileSaver from 'file-saver';
 
-import SetGetContentToEditor from '../core/tools/setGetContentToEditor';
+import SetGetContentToEditor from '../tools/setGetContentToEditor';
 import StatusBar from '../components/status-bar/StatusBar';
-import Service from '../core/API/Service';
-import Tools from '../core/tools/Tools';
+import Service from '../API/Service';
+import Tools from '../tools/Tools';
 
 //'https://jsonplaceholder.typicode.com/posts'
 function Workspace(): JSX.Element {
