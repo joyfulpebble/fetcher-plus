@@ -12,10 +12,10 @@ import SwitchDiv from '../../SwitchDiv';
 
 function GetForm(): JSX.Element {
   const [parameters, setParameters] = useState<any>({});
+  const [displayedParameters, setDisplayedParameters] = useState<any[]>([Object.keys(parameters), Object.values(parameters)])
   const [needParameters, setNeedParameters] = useState<boolean>(false);
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
   const [storageType, setStorageType] = useState<string>('all');
-
   const displayedParameterNameRef = useRef<HTMLInputElement>(null);
   const displayedParameterValueRef = useRef<HTMLInputElement>(null);
 
@@ -28,7 +28,7 @@ function GetForm(): JSX.Element {
   }
   function handleSubmitParams(values: any) {
     parameters[values.name] = values.value;
-    
+    setDisplayedParameters([Object.keys(parameters), Object.values(parameters)])
   }
   function handleSubmitFetch(values: any) {
     if(values.name && values.url){      
@@ -69,10 +69,10 @@ function GetForm(): JSX.Element {
           onSubmitFuncton={handleSubmitParams}
           formId={'parameters-data'}/>
       {
-        Object.keys(parameters)
+        displayedParameters[0].map((e: any) => e)
       }
       {
-        Object.values(parameters)
+        displayedParameters[1].map((e: any) => e)
       }
       <SubmitButton
         content={'Submit params'}
