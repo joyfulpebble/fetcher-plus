@@ -10,14 +10,11 @@ import LinkButton from '../../UI/Buttons/LinkButton';
 import FormWithToFields from '../../FormWithToFields';
 import SwitchDiv from '../../SwitchDiv';
 
-function GetForm(): JSX.Element {  
-  const [displayedParametersValues, setDisplayedParametersValues] = useState<any[]>([]);
-  const [displayedParametersNames, setDisplayedParametersNames] = useState<any[]>([]);
+function GetForm(): JSX.Element {
+  const [parameters, setParameters] = useState<any>({});
   const [needParameters, setNeedParameters] = useState<boolean>(false);
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
-  const [parametersUsed, setParametersUsed] = useState<any>({});
   const [storageType, setStorageType] = useState<string>('all');
-  const displayedParameters: Array<any[]> = [displayedParametersNames, displayedParametersValues]
 
   const displayedParameterNameRef = useRef<HTMLInputElement>(null);
   const displayedParameterValueRef = useRef<HTMLInputElement>(null);
@@ -26,20 +23,17 @@ function GetForm(): JSX.Element {
   if(needParameters){
     parametersDivClass.push(classes.active);
   }
-
   function handleIsCheckedParameters(): void {    
     setNeedParameters(!needParameters);        
   }
   function handleSubmitParams(values: any) {
-    parametersUsed[values.name] = values.value;
+    parameters[values.name] = values.value;
     
-    setDisplayedParametersNames([...displayedParametersNames, displayedParameterNameRef.current?.value]);
-    setDisplayedParametersValues([...displayedParametersValues, displayedParameterValueRef.current?.value]);
   }
   function handleSubmitFetch(values: any) {
     if(values.name && values.url){      
       let date: string = Tools.getCurrentDate();
-      Tools.setDataToStorage(storageType, needParameters, values.name, date, values.url, parametersUsed);
+      Tools.setDataToStorage(storageType, needParameters, values.name, date, values.url, parameters);
       
       setNeedRedirect(true);
     } else {
@@ -75,10 +69,10 @@ function GetForm(): JSX.Element {
           onSubmitFuncton={handleSubmitParams}
           formId={'parameters-data'}/>
       {
-        displayedParameters[0].map((e: any, i: number) => {return ( <div key={i}>{e}</div> )})
+        Object.keys(parameters)
       }
       {
-        displayedParameters[1].map((e: any, i: number) => {return ( <div key={i}>{e}</div> )})
+        Object.values(parameters)
       }
       <SubmitButton
         content={'Submit params'}
