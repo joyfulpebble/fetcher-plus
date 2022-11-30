@@ -9,10 +9,11 @@ import SubmitButton from '../../UI/Buttons/SubmitButton';
 import LinkButton from '../../UI/Buttons/LinkButton';
 import FormWithToFields from '../../FormWithToFields';
 import SwitchDiv from '../../SwitchDiv';
+import List from '../../List';
 
 function GetForm(): JSX.Element {
   const [parameters, setParameters] = useState<any>({});
-  const [displayedParameters, setDisplayedParameters] = useState<any[]>([Object.keys(parameters), Object.values(parameters)])
+  // const [displayedParameters, setDisplayedParameters] = useState<any[]>([Object.keys(parameters), Object.values(parameters)])
   const [needParameters, setNeedParameters] = useState<boolean>(false);
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
   const [storageType, setStorageType] = useState<string>('all');
@@ -28,7 +29,8 @@ function GetForm(): JSX.Element {
   }
   function handleSubmitParams(values: any) {
     parameters[values.name] = values.value;
-    setDisplayedParameters([Object.keys(parameters), Object.values(parameters)])
+    
+    // setDisplayedParameters([Object.keys(parameters), Object.values(parameters)])
   }
   function handleSubmitFetch(values: any) {
     if(values.name && values.url){      
@@ -40,6 +42,7 @@ function GetForm(): JSX.Element {
       console.error('не все поля заполнены');
     }
   }
+  // let a = Object.entries(parameters)
   
   return (
     <div className={classes.SettingsWrapper}>
@@ -68,12 +71,18 @@ function GetForm(): JSX.Element {
           secondRef={displayedParameterValueRef}
           onSubmitFuncton={handleSubmitParams}
           formId={'parameters-data'}/>
-      {
-        displayedParameters[0].map((e: any) => e)
-      }
-      {
-        displayedParameters[1].map((e: any) => e)
-      }
+      {/* {
+        a.map((e:any, i:number) => {
+          return (
+          <div key={i} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', marginBottom: 5}}>
+            <List key={i+1} array={e}/>
+            <SubmitButton key={i+2} content={'del'} onClick={() => {
+              delete parameters[`${e[0]}`]
+            }}/>
+          </div>
+            )
+        })
+      } */}
       <SubmitButton
         content={'Submit params'}
         type={'submit'}
