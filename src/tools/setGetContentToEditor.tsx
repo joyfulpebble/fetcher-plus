@@ -8,18 +8,21 @@ function SetGetContentToEditor({editorContent, errorStorage, getHandlingFunc, ge
   const [editor, setEditor] = useState<JSX.Element>();
   const [error, setError]   = useState<any[]>([false]);
 
-  const storageData: any[] = Tools.getAllStorage(sessionStorage);
-  const parsedData: any    = JSON.parse(storageData[0]);  
-  
-  let params: object = parsedData.params;
-  let url: string    = parsedData.url;
+  interface GetConfigType {
+    url: string;
+    params: object;
+  }
 
+  const storageData: GetConfigType = JSON.parse(localStorage.getItem('GET_CFG') || '');
+  const params = storageData.params;
+  const url    = storageData.url;
+  
   const setContent = async () => {
     const data: any | object = await getHandlingFunc(url, params, getFunction);
 
     if(data[0] === 'err'){
       setEditor(
-        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center '}}>
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
           <ErrorSVG w={200} h={200}/>
           <span>Oops! Something went wrong.</span>
         </div>

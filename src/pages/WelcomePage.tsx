@@ -7,8 +7,8 @@ import LinkButton from '../components/UI/Buttons/LinkButton';
 
 
 function WelcomePage(): JSX.Element {
-  const history: any[]   = Tools.getAllStorage(localStorage);
-  const parsed_history: any = history.map((e: any) => JSON.parse(e));
+  const history = localStorage.getItem('REQUEST_HISTORY') || '[]'
+  const parsed_history = JSON.parse(history)
 
   console.log(parsed_history);
   

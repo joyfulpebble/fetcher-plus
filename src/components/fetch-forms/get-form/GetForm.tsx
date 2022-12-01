@@ -16,7 +16,6 @@ function GetForm(): JSX.Element {
   // const [displayedParameters, setDisplayedParameters] = useState<any[]>([Object.keys(parameters), Object.values(parameters)])
   const [needParameters, setNeedParameters] = useState<boolean>(false);
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
-  const [storageType, setStorageType] = useState<string>('all');
   const displayedParameterNameRef = useRef<HTMLInputElement>(null);
   const displayedParameterValueRef = useRef<HTMLInputElement>(null);
 
@@ -30,19 +29,21 @@ function GetForm(): JSX.Element {
   function handleSubmitParams(values: any) {
     parameters[values.name] = values.value;
     
-    // setDisplayedParameters([Object.keys(parameters), Object.values(parameters)])
   }
   function handleSubmitFetch(values: any) {
     if(values.name && values.url){      
-      let date: string = Tools.getCurrentDate();
-      Tools.setDataToStorage(storageType, needParameters, values.name, date, values.url, parameters);
+      localStorage.getItem('GET_CFG')
+        ? localStorage.removeItem('GET_CFG')
+        : console.log('config is empty')
+        
+      const date: string = Tools.getCurrentDate();
       
+      Tools.setDataToStorage(needParameters, values.name, date, values.url, parameters);
       setNeedRedirect(true);
     } else {
       console.error('не все поля заполнены');
     }
   }
-  // let a = Object.entries(parameters)
   
   return (
     <div className={classes.SettingsWrapper}>
@@ -71,22 +72,10 @@ function GetForm(): JSX.Element {
           secondRef={displayedParameterValueRef}
           onSubmitFuncton={handleSubmitParams}
           formId={'parameters-data'}/>
-      {/* {
-        a.map((e:any, i:number) => {
-          return (
-          <div key={i} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', marginBottom: 5}}>
-            <List key={i+1} array={e}/>
-            <SubmitButton key={i+2} content={'del'} onClick={() => {
-              delete parameters[`${e[0]}`]
-            }}/>
-          </div>
-            )
-        })
-      } */}
-      <SubmitButton
-        content={'Submit params'}
-        type={'submit'}
-        form={'parameters-data'}/>
+        <SubmitButton
+          content={'Submit params'}
+          type={'submit'}
+          form={'parameters-data'}/>
       </div>
       <SubmitButton
         content={'Submit'}
