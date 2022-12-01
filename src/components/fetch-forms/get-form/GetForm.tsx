@@ -13,22 +13,24 @@ import List from '../../List';
 
 function GetForm(): JSX.Element {
   const [parameters, setParameters] = useState<any>({});
-  // const [displayedParameters, setDisplayedParameters] = useState<any[]>([Object.keys(parameters), Object.values(parameters)])
+  const [displayedParameters, setDisplayedParameters] = useState<any[]>([])
   const [needParameters, setNeedParameters] = useState<boolean>(false);
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
   const displayedParameterNameRef = useRef<HTMLInputElement>(null);
   const displayedParameterValueRef = useRef<HTMLInputElement>(null);
 
-  const parametersDivClass: string[] = [classes.ParametersWrapper];
+  const parametersDivClasses: string[] = [classes.ParametersWrapper];
   if(needParameters){
-    parametersDivClass.push(classes.active);
+    parametersDivClasses.push(classes.active);
   }
   function handleIsCheckedParameters(): void {    
     setNeedParameters(!needParameters);        
   }
   function handleSubmitParams(values: any) {
     parameters[values.name] = values.value;
-    
+    setDisplayedParameters(Object.entries(parameters).map(entry => ({[entry[0]]: entry[1]})));
+
+    // console.log(displayedParameters);
   }
   function handleSubmitFetch(values: any) {
     if(values.name && values.url){      
@@ -60,7 +62,7 @@ function GetForm(): JSX.Element {
         needParameters={needParameters}
         handleIsCheckedParameters={handleIsCheckedParameters}
         spanText={'Need parameters?'}/>
-      <div className={parametersDivClass.join(' ')}>
+      <div className={parametersDivClasses.join(' ')}>
         <FormWithToFields
           firstInitValueName={'name'}
           secondInitValueName={'value'}
@@ -72,6 +74,9 @@ function GetForm(): JSX.Element {
           secondRef={displayedParameterValueRef}
           onSubmitFuncton={handleSubmitParams}
           formId={'parameters-data'}/>
+        <List 
+          array={displayedParameters} 
+          elementsType={'object'}/>
         <SubmitButton
           content={'Submit params'}
           type={'submit'}

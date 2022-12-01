@@ -16,4 +16,4 @@ function Switch({...props}: any) {
   )
 }
 
-export default Switch
+export default Switch;
