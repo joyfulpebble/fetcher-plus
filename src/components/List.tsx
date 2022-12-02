@@ -5,20 +5,18 @@ function List({array, elementsType}: any): JSX.Element {
   let updatedArray = null;
   if(elementsType === 'object') {
     updatedArray = array.map((e: any) => {
-      let a = Object.keys(e);
-      let b = Object.values(e);
+      let objectKeys = Object.keys(e);
+      let objectValues = Object.values(e);
 
-      let c =  [...a, ...b]
-      return c
+      const result =  [...objectKeys, ...objectValues];
+      return result
     })
-    
-    console.log(updatedArray);
   }
   
   return (
     updatedArray.map((e: any, i: number) => {
       return (
-        <div>
+        <div key={i}>
           <div key={e[0]}>{e[0]}</div>
           <div key={e[1]}>{e[1]}</div>
         </div>
@@ -27,4 +25,4 @@ function List({array, elementsType}: any): JSX.Element {
   )
 }
 
-export default List
+export default List;
