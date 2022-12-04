@@ -9,7 +9,7 @@ import SubmitButton from '../../UI/Buttons/SubmitButton';
 import LinkButton from '../../UI/Buttons/LinkButton';
 import FormWithToFields from '../../FormWithToFields';
 import SwitchDiv from '../../SwitchDiv';
-import List from '../../List';
+import List from '../../ParamsList';
 
 function GetForm(): JSX.Element {
   const [parameters, setParameters] = useState<any>({});
@@ -28,9 +28,8 @@ function GetForm(): JSX.Element {
   }
   function handleSubmitParams(values: any) {
     parameters[values.name] = values.value;
+    
     setDisplayedParameters(Object.entries(parameters).map(entry => ({[entry[0]]: entry[1]})));
-
-    // console.log(displayedParameters);
   }
   function handleSubmitFetch(values: any) {
     if(values.name && values.url){      
@@ -74,13 +73,13 @@ function GetForm(): JSX.Element {
           secondRef={displayedParameterValueRef}
           onSubmitFuncton={handleSubmitParams}
           formId={'parameters-data'}/>
-        <List 
-          array={displayedParameters} 
-          elementsType={'object'}/>
         <SubmitButton
           content={'Submit params'}
           type={'submit'}
           form={'parameters-data'}/>
+        <List 
+          array={displayedParameters} 
+          elementsType={'object'}/>
       </div>
       <SubmitButton
         content={'Submit'}
