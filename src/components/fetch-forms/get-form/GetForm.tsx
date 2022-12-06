@@ -9,7 +9,7 @@ import SubmitButton from '../../UI/Buttons/SubmitButton';
 import LinkButton from '../../UI/Buttons/LinkButton';
 import FormWithToFields from '../../FormWithToFields';
 import SwitchDiv from '../../SwitchDiv';
-import List from '../../ParamsList';
+import ParamsList from '../../ParamsList';
 
 function GetForm(): JSX.Element {
   const [parameters, setParameters] = useState<any>({});
@@ -28,8 +28,23 @@ function GetForm(): JSX.Element {
   }
   function handleSubmitParams(values: any) {
     parameters[values.name] = values.value;
+
+    const changedParamsObject = Object.entries(parameters).map(entry => ({[entry[0]]: entry[1]}));
+
+    function convertToArrays() {
+      let updatedArray = changedParamsObject.map((e: any) => {
+        const objectKeys: string[] = Object.keys(e);
+        const objectValues: (string | number)[] = Object.values(e);
+        
+        const result =  [...objectKeys, ...objectValues];
+        return result;
+      })
+      return updatedArray;
+    }
     
-    setDisplayedParameters(Object.entries(parameters).map(entry => ({[entry[0]]: entry[1]})));
+    const parametersMatrix = convertToArrays();
+    setDisplayedParameters(parametersMatrix);        
+    
   }
   function handleSubmitFetch(values: any) {
     if(values.name && values.url){      
@@ -77,9 +92,8 @@ function GetForm(): JSX.Element {
           content={'Submit params'}
           type={'submit'}
           form={'parameters-data'}/>
-        <List 
-          array={displayedParameters} 
-          elementsType={'object'}/>
+        <ParamsList 
+          matrix={displayedParameters}/>
       </div>
       <SubmitButton
         content={'Submit'}

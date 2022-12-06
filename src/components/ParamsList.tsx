@@ -1,46 +1,44 @@
+import { createFileList } from '@testing-library/user-event/dist/types/utils';
 import React, { useEffect, useState } from 'react'
 import SubmitButton from './UI/Buttons/SubmitButton'
 
-function List({array, elementsType}: any): JSX.Element {
-  function arrFunc() {
-    let updatedArray: (string | number)[] = array.map((e: any) => {
-      let objectKeys: string[] = Object.keys(e);
-      let objectValues: (string | number)[] = Object.values(e);
-      
-      const result =  [...objectKeys, ...objectValues];
-      return result;
-    })
-    return updatedArray;
-  }
-  
-  const func = arrFunc()
-  const [listContent, setListContent] = useState(func);
-  
-  function secFunc(func: (string | number)[], index: number) {
-    let newArr = func.splice(index, 1);
+function ParamsList({matrix}: any): JSX.Element {
+  const [listContent, setListContent] = useState<Element>();
+  let /*[*/parametersMatrix/*, setParametersMatrix] = useState(*/=matrix/*);*/
 
-    console.log(func);
-    return func
-  }
-  const a: any = func.map((e: any, i: number) => {
-    return (
-      <div key={i}>
-        <div key={e[0]}>{e[0]}</div>
-        <div key={e[1]}>{e[1]}</div>
-        <button onClick={() => {
-          let newArr = secFunc(func, i)
-          setListContent(newArr)
-        }}>-</button>
-      </div>
-    )
-  })
-  
-  useEffect(() => {
+  function deleteParameterFromList(index: number) {
+    const newMatrix = matrix.filter((e: string | number) => { return e !== matrix[index] });
     
-    setListContent(a);
+    parametersMatrix = newMatrix// setParametersMatrix(newMatrix)
+    setListContent(newMatrix)
+      
+    console.log(parametersMatrix);
+  }
+  
+  function createList(): Element{
+    const result: Element = parametersMatrix.map((e: any, i: number) => {
+      return (
+        <div key={i}>
+          <div key={e[0]}>{e[0]}</div>
+          <div key={e[1]}>{e[1]}</div>
+          <button onClick={() => {
+            deleteParameterFromList(i)         
+          }}>-</button>
+        </div>
+      )
+    })
 
-  }, [array])
-   
+    return result;
+  }
+
+  useEffect(() => {
+    const newList = createList()
+
+    setListContent(newList);
+    console.log(newList);
+    
+  }, [parametersMatrix])
+
   return (
     <>
       {listContent}
@@ -48,4 +46,4 @@ function List({array, elementsType}: any): JSX.Element {
   )
 }
 
-export default List;
+export default ParamsList;
