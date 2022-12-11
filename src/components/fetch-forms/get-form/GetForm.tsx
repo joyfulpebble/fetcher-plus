@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect} from 'react';
 import { Navigate } from 'react-router-dom';
-
 import Tools from '../../../tools/Tools';
 
 import classes from './GetForm.module.scss';
@@ -16,6 +15,7 @@ function GetForm(): JSX.Element {
   const [displayedParameters, setDisplayedParameters] = useState<any[]>([])
   const [needParameters, setNeedParameters] = useState<boolean>(false);
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
+
   const displayedParameterNameRef = useRef<HTMLInputElement>(null);
   const displayedParameterValueRef = useRef<HTMLInputElement>(null);
 
@@ -26,7 +26,7 @@ function GetForm(): JSX.Element {
   function handleIsCheckedParameters(): void {    
     setNeedParameters(!needParameters);        
   }
-  function handleSubmitParams(values: any) {
+  function handleSubmitParams(values: any): void {
     parameters[values.name] = values.value;
 
     const changedParamsObject = Object.entries(parameters).map(entry => ({[entry[0]]: entry[1]}));
@@ -42,12 +42,11 @@ function GetForm(): JSX.Element {
       return updatedArray;
     }
     
-    const parametersMatrix = convertToArrays();
-    setDisplayedParameters(parametersMatrix);        
-    
+    const parametersMatrix = convertToArrays();     
+    setDisplayedParameters(parametersMatrix)
   }
   function handleSubmitFetch(values: any) {
-    if(values.name && values.url){      
+    if(values.name && values.url){
       localStorage.getItem('GET_CFG')
         ? localStorage.removeItem('GET_CFG')
         : console.log('config is empty')
@@ -60,7 +59,7 @@ function GetForm(): JSX.Element {
       console.error('не все поля заполнены');
     }
   }
-  
+
   return (
     <div className={classes.SettingsWrapper}>
       <FormWithToFields
@@ -93,7 +92,10 @@ function GetForm(): JSX.Element {
           type={'submit'}
           form={'parameters-data'}/>
         <ParamsList 
-          matrix={displayedParameters}/>
+          disParameters={displayedParameters}
+          setParameters={setDisplayedParameters}
+          a={setParameters}
+          parameters={parameters}/>
       </div>
       <SubmitButton
         content={'Submit'}
