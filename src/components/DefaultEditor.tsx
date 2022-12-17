@@ -1,32 +1,31 @@
 import React, { useEffect, useState } from 'react';
 
 import Editor from '@monaco-editor/react';
-import { DefaultEditorProps } from '../types/default-editor';
+import { DefaultEditorProps } from '../types';
 
-function DefaultEditor({width, height, value, options, setContent}: DefaultEditorProps): JSX.Element {
-
-  const [editContent, setEditContent] = useState<any>(value);
+function DefaultEditor({EditorWidth, EditorHeight, EditorInitValue, EditorConfig, ContentToSaveFunc}: DefaultEditorProps): JSX.Element {
+  const [editedContent, setEditedContent] = useState<string>(EditorInitValue);
   
   useEffect(() => {
-    setContent(editContent);
-  }, [editContent])
+    ContentToSaveFunc(editedContent);     
+  }, [editedContent])
 
   return (
     <div>
       <Editor
-        width={width}
-        height={height}
+        width={EditorWidth}
+        height={EditorHeight}
 
         theme='vs-dark'
         
         defaultLanguage="json"
-        value={JSON.stringify(value, null, '  ')}
+        value={JSON.stringify(EditorInitValue, null, '  ')}
         
-        onChange={element => {setEditContent(element!)}}
+        onChange={element => {setEditedContent(element!)}}
         
         options={
           {
-          ...options,
+          ...EditorConfig,
           fontLigatures: true,
           fontFamily: "'Consolas', 'Courier New', monospace",
           fontSize: 14

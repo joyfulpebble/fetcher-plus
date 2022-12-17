@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormWithToFieldsProps } from '../types/elements';
+import { FormWithToFieldsProps } from '../types';
 
 import { Formik, Field, Form } from "formik";
 import Input from './UI/Input/Input';

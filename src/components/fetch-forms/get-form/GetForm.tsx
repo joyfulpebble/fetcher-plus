@@ -4,7 +4,7 @@ import Tools from '../../../tools/Tools';
 
 import classes from './GetForm.module.scss';
 
-import SubmitButton from '../../UI/Buttons/SubmitButton';
+import CustomButton from '../../UI/Buttons/CustomButton';
 import LinkButton from '../../UI/Buttons/LinkButton';
 import FormWithToFields from '../../FormWithToFields';
 import SwitchDiv from '../../SwitchDiv';
@@ -87,8 +87,8 @@ function GetForm(): JSX.Element {
           secondRef={displayedParameterValueRef}
           onSubmitFuncton={handleSubmitParams}
           formId={'parameters-data'}/>
-        <SubmitButton
-          content={'Submit params'}
+        <CustomButton
+          children={'Submit params'}
           type={'submit'}
           form={'parameters-data'}/>
         <ParamsList 
@@ -97,8 +97,8 @@ function GetForm(): JSX.Element {
           a={setParameters}
           parameters={parameters}/>
       </div>
-      <SubmitButton
-        content={'Submit'}
+      <CustomButton
+        children={'Submit'}
         type={'submit'}
         form={'main-request-data'}/>
       <LinkButton

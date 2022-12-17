@@ -1,5 +1,5 @@
 import React from 'react';
-import { SwitchDivProps } from '../types/elements';
+import { SwitchDivProps } from '../types';
 
 import Switch from './UI/Switch/Switch';
 

@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import Tools from './Tools';
+import { requestConfigs, SetGetContentToEditorProps } from '../types';
 
 import DefaultEditor from '../components/DefaultEditor';
 import ErrorSVG from '../components/.svg/ErrorSVG';
 
-function SetGetContentToEditor({editorContent, errorStorage, getHandlingFunc, getFunction}: any): JSX.Element {
+function SetGetContentToEditor({ContentTosaveFunc, SetErrorFunction, HandlingRequestFunc, RequestFunction}: SetGetContentToEditorProps): JSX.Element {
   const [editor, setEditor] = useState<JSX.Element>();
   const [error, setError]   = useState<any[]>([false]);
 
-  interface GetConfigType {
-    url: string;
-    params: object;
-  }
-
-  const storageData: GetConfigType = JSON.parse(localStorage.getItem('GET_CFG') || '');
-  const params = storageData.params;
-  const url    = storageData.url;
+  const getConfig: string = localStorage.getItem('GET_CFG') || JSON.stringify({url: "", params: {}});
+  const parsedGetConfig: requestConfigs.GetConfigType = JSON.parse(getConfig);
+  const {params, url} = parsedGetConfig;
   
   const setContent = async () => {
-    const data: any | object = await getHandlingFunc(url, params, getFunction);
+    const data: any | object = await HandlingRequestFunc(url, params, RequestFunction);
 
     if(data[0] === 'err'){
       setEditor(
@@ -28,15 +23,14 @@ function SetGetContentToEditor({editorContent, errorStorage, getHandlingFunc, ge
         </div>
       );
       setError([true, data[1].message]);
-
     } else {
       setEditor(
         <DefaultEditor 
-          width={'500px'} 
-          height={'500px'} 
-          value={data} 
-          options={{tabSize: 2}} 
-          setContent={editorContent}
+          EditorWidth={'500px'} 
+          EditorHeight={'500px'} 
+          EditorInitValue={data} 
+          EditorConfig={{tabSize: 2}} 
+          ContentToSaveFunc={ContentTosaveFunc}
         />
       );
     }
@@ -48,7 +42,7 @@ function SetGetContentToEditor({editorContent, errorStorage, getHandlingFunc, ge
 
   useEffect(() => {
     if(error[0]){
-      errorStorage([1, error[1]]);
+      SetErrorFunction([1, error[1]]);
     }
   }, [error])
 

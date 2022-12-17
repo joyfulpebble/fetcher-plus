@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import SubmitButton from './UI/Buttons/SubmitButton'
 
 function ParamsList({disParameters, setParameters, a, parameters}: any): JSX.Element {
   const [listContent, setListContent] = useState<Element>();
   let updatedMatrix = disParameters;
-  let d;
   
   function deleteParameterFromList(index: number) {
     const newMatrix = disParameters.filter((e: string | number) => { return e !== disParameters[index] });

@@ -10,21 +10,21 @@ import Tools from '../tools/Tools';
 //'https://jsonplaceholder.typicode.com/posts'
 function Workspace(): JSX.Element {
   const [tempErrorStorage, setTempErrorStorage] = useState<undefined | any[]>(undefined);
-  const [editiorContent, setEditorContent] = useState<any>('');
+  const [contentToSave, setContentToSave] = useState<string>('');
   
   let blob: any = null;
-  if(editiorContent != ''){
-    blob = new Blob([JSON.stringify(editiorContent, null, '  ')], {type: 'application/json'});
+  if(contentToSave != ''){
+    blob = new Blob([JSON.stringify(contentToSave, null, '  ')], {type: 'application/json'});
   }
 
   return (
     <div>
       <div>
        <SetGetContentToEditor
-          editorContent={setEditorContent}
-          errorStorage={setTempErrorStorage}
-          getHandlingFunc={Tools.getMethodHandling}
-          getFunction={Service.GET}
+          ContentTosaveFunc={setContentToSave}
+          SetErrorFunction={setTempErrorStorage}
+          HandlingRequestFunc={Tools.getMethodHandling}
+          RequestFunction={Service.GET}
         />
         <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
         <Link to={'/get-fetch-form'}>Go back</Link>

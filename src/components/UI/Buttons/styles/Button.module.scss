@@ -1,12 +1,12 @@
-$submit-background: #5839af;
-$submit-focused-color: #4d309c;
-$back-background: #ffff;
-$back-focused-background: #d8d8d8;
+$button-background: #5839af;
+$button-focused-color: #4d309c;
+$link-background: #ffff;
+$link-focused-background: #d8d8d8;
 
-.SubmitButton{
+.Button{
   color: white;
   padding: 5px 14px;
-  background: $submit-background;
+  background: $button-background;
   border: none;
   border-radius: 7px;
   cursor: pointer;
@@ -16,7 +16,7 @@ $back-focused-background: #d8d8d8;
   font-size: 15px;
 
   &:hover{
-    background: $submit-focused-color;
+    background: $button-focused-color;
     transition: background-color .1s linear;
   }
 }
@@ -24,7 +24,7 @@ $back-focused-background: #d8d8d8;
 .LinkButton{
   color: black;
   padding: 5px 14px;
-  background: $back-background;
+  background: $link-background;
   border: none;
   border-radius: 7px;
   cursor: pointer;
@@ -34,7 +34,7 @@ $back-focused-background: #d8d8d8;
   font-size: 15px;
 
   &:hover{
-    background: $back-focused-background;
+    background: $link-focused-background;
     transition: background-color .1s linear;
   }
 }
