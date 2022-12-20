@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import FileSaver from 'file-saver';
 
 import SetGetContentToEditor from '../tools/setGetContentToEditor';
-import StatusBar from '../components/status-bar/StatusBar';
+import StatusBar from '../components/layouts/status-bar/StatusBar';
 import Service from '../API/Service';
 import Tools from '../tools/Tools';
 

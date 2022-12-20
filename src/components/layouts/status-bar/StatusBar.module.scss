@@ -3,16 +3,16 @@
   font-style: normal;
   font-weight: 400;
   src:    
-    url("../../fonts/Idea/woff2/JetBrainsMono-Medium.woff2") format("woff2"),
-    url("../../fonts/Idea/ttf/JetBrainsMono-Medium.ttf") format("woff");
+    url("../../../assets/fonts/Idea/woff2/JetBrainsMono-Medium.woff2") format("woff2"),
+    url("../../../assets/fonts/Idea/ttf/JetBrainsMono-Medium.ttf") format("woff");
 }
 @font-face {
   font-family: "Idea-Light";
   font-style: normal;
   font-weight: 200;
   src: 
-    url("../../fonts/Idea/woff2/JetBrainsMono-Light.woff2") format("woff2"),
-    url("../../fonts/Idea/ttf/JetBrainsMono-Light.ttf") format("woff");
+    url("../../../assets/fonts/Idea/woff2/JetBrainsMono-Light.woff2") format("woff2"),
+    url("../../../assets/fonts/Idea/ttf/JetBrainsMono-Light.ttf") format("woff");
 }
 
 $status-bar-background: #5839af;

@@ -9,8 +9,8 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/welcome'      element={<WelcomePage/>}/>
-        <Route path='/workspace' element={<Workspace/>}/>
+        <Route path='/welcome'        element={<WelcomePage/>}/>
+        <Route path='/workspace'      element={<Workspace/>}/>
         <Route path='/get-fetch-form' element={<FetchPage/>}/>
       </Routes>
     </BrowserRouter>

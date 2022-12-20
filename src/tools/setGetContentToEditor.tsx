@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { requestConfigs, SetGetContentToEditorProps } from '../types';
 
 import DefaultEditor from '../components/DefaultEditor';
-import ErrorSVG from '../components/.svg/ErrorSVG';
+import ErrorSVG from '../assets/svg/ErrorSVG';
 
 function SetGetContentToEditor({ContentTosaveFunc, SetErrorFunction, HandlingRequestFunc, RequestFunction}: SetGetContentToEditorProps): JSX.Element {
   const [editor, setEditor] = useState<JSX.Element>();

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Tools from '../tools/Tools';
 
-import StatusBar from '../components/status-bar/StatusBar';
+import StatusBar from '../components/layouts/status-bar/StatusBar';
 import LinkButton from '../components/UI/Buttons/LinkButton';
 
 

@@ -1,14 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import Tools from '../../../tools/Tools';
+import Tools from '../../../../tools/Tools';
 
 import classes from './GetForm.module.scss';
 
-import CustomButton from '../../UI/Buttons/CustomButton';
-import LinkButton from '../../UI/Buttons/LinkButton';
-import FormWithToFields from '../../FormWithToFields';
-import SwitchDiv from '../../SwitchDiv';
-import ParamsList from '../../ParamsList';
+import CustomButton from '../../../UI/Buttons/CustomButton';
+import LinkButton from '../../../UI/Buttons/LinkButton';
+import FormWithToFields from '../../../FormWithToFields';
+import SwitchDiv from '../../../SwitchDiv';
+import ParamsList from '../../../ParamsList';
 
 function GetForm(): JSX.Element {
   const [parameters, setParameters] = useState<any>({});
