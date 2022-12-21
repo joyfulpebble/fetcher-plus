@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { requestConfigs, SetGetContentToEditorProps } from '../types';
+
+import { SetGetContentToEditorProps } from '../types/elements';
+import { GetConfigType } from '../types/request_configs';
 
 import DefaultEditor from '../components/DefaultEditor';
 import ErrorSVG from '../assets/svg/ErrorSVG';
@@ -9,7 +11,7 @@ function SetGetContentToEditor({ContentTosaveFunc, SetErrorFunction, HandlingReq
   const [error, setError]   = useState<any[]>([false]);
 
   const getConfig: string = localStorage.getItem('GET_CFG') || JSON.stringify({url: "", params: {}});
-  const parsedGetConfig: requestConfigs.GetConfigType = JSON.parse(getConfig);
+  const parsedGetConfig: GetConfigType = JSON.parse(getConfig);
   const {params, url} = parsedGetConfig;
   
   const setContent = async () => {

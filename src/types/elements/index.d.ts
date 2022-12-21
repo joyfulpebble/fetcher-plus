@@ -1,13 +1,6 @@
 import React, { ReactNode } from "react";
 import monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
-declare module requestConfigs {
-  export interface GetConfigType {
-    url: string;
-    params: object;
-  }
-}
-
 export interface DefaultEditorProps {
   EditorWidth: string;
   EditorHeight: string;
