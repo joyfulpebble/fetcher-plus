@@ -1,6 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+
 import Tools from '../../../../tools/Tools';
+import { getConfigSlice } from '../../../../store/reducers/GetConfigSlice';
+import { useAppDispatch } from '../../../../hooks/redux';
 
 import classes from './GetForm.module.scss';
 
@@ -13,12 +16,16 @@ import ParamsList from '../../../ParamsList';
 function GetForm(): JSX.Element {
   const [parameters, setParameters] = useState<any>({});
   const [displayedParameters, setDisplayedParameters] = useState<any[]>([])
+  
   const [needParameters, setNeedParameters] = useState<boolean>(false);
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
-
+  
   const displayedParameterNameRef = useRef<HTMLInputElement>(null);
   const displayedParameterValueRef = useRef<HTMLInputElement>(null);
-
+  
+  const { updateConfig } = getConfigSlice.actions;
+  const dispatch = useAppDispatch();
+  
   const parametersDivClasses: string[] = [classes.ParametersWrapper];
   if(needParameters){
     parametersDivClasses.push(classes.active);
@@ -46,13 +53,18 @@ function GetForm(): JSX.Element {
     setDisplayedParameters(parametersMatrix)
   }
   function handleSubmitFetch(values: any) {
-    if(values.name && values.url){
-      localStorage.getItem('GET_CFG')
-        ? localStorage.removeItem('GET_CFG')
-        : console.log('config is empty')
-        
+    if(values.name && values.url){        
       const date: string = Tools.getCurrentDate();
-      
+
+      dispatch(
+        updateConfig(
+          {
+            params: parameters,
+            url: values.url
+          }
+        )
+      )
+
       Tools.setDataToStorage(needParameters, values.name, date, values.url, parameters);
       setNeedRedirect(true);
     } else {
@@ -90,7 +102,8 @@ function GetForm(): JSX.Element {
         <CustomButton
           children={'Submit params'}
           type={'submit'}
-          form={'parameters-data'}/>
+          form={'parameters-data'}
+          />
         <ParamsList 
           disParameters={displayedParameters}
           setParameters={setDisplayedParameters}
@@ -107,7 +120,7 @@ function GetForm(): JSX.Element {
       {needRedirect 
         ? <Navigate 
             to="/workspace"/> 
-        : <></>}
+        : <></>}      
     </div>
   )
 }

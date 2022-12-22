@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useAppSelector } from '../hooks/redux';
 
 import { SetGetContentToEditorProps } from '../types/elements';
-import { GetConfigType } from '../types/request_configs';
 
 import DefaultEditor from '../components/DefaultEditor';
 import ErrorSVG from '../assets/svg/ErrorSVG';
@@ -10,9 +10,7 @@ function SetGetContentToEditor({ContentTosaveFunc, SetErrorFunction, HandlingReq
   const [editor, setEditor] = useState<JSX.Element>();
   const [error, setError]   = useState<any[]>([false]);
 
-  const getConfig: string = localStorage.getItem('GET_CFG') || JSON.stringify({url: "", params: {}});
-  const parsedGetConfig: GetConfigType = JSON.parse(getConfig);
-  const {params, url} = parsedGetConfig;
+  const {params, url} = useAppSelector(state => state.getConfig);
   
   const setContent = async () => {
     const data: any | object = await HandlingRequestFunc(url, params, RequestFunction);
