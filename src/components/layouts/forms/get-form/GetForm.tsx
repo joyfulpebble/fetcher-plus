@@ -5,7 +5,12 @@ import Tools from '../../../../tools/Tools';
 import { getConfigSlice } from '../../../../store/reducers/GetConfigSlice';
 import { useAppDispatch } from '../../../../hooks/redux';
 
-import classes from './GetForm.module.scss';
+import { Entries } from 'type-fest';
+import { 
+  DynamicObjectKeys, 
+  RequestMainData, 
+  RequestParametersData 
+  } from '../../../../types/simple_models';
 
 import CustomButton from '../../../UI/Buttons/CustomButton';
 import LinkButton from '../../../UI/Buttons/LinkButton';
@@ -13,9 +18,11 @@ import FormWithToFields from '../../../FormWithToFields';
 import SwitchDiv from '../../../SwitchDiv';
 import ParamsList from '../../../ParamsList';
 
+import classes from './GetForm.module.scss';
+
 function GetForm(): JSX.Element {
-  const [parameters, setParameters] = useState<any>({});
-  const [displayedParameters, setDisplayedParameters] = useState<any[]>([])
+  const [parameters, setParameters] = useState<DynamicObjectKeys>({});
+  const [displayedParameters, setDisplayedParameters] = useState<Entries<typeof parameters>>([])
   
   const [needParameters, setNeedParameters] = useState<boolean>(false);
   const [needRedirect, setNeedRedirect] = useState<boolean>(false);
@@ -25,72 +32,55 @@ function GetForm(): JSX.Element {
   
   const { updateConfig } = getConfigSlice.actions;
   const dispatch = useAppDispatch();
-  
-  const parametersDivClasses: string[] = [classes.ParametersWrapper];
-  if(needParameters){
-    parametersDivClasses.push(classes.active);
-  }
-  function handleIsCheckedParameters(): void {    
-    setNeedParameters(!needParameters);        
-  }
-  function handleSubmitParams(values: any): void {
-    parameters[values.name] = values.value;
 
-    const changedParamsObject = Object.entries(parameters).map(entry => ({[entry[0]]: entry[1]}));
-
-    function convertToArrays() {
-      let updatedArray = changedParamsObject.map((e: any) => {
-        const objectKeys: string[] = Object.keys(e);
-        const objectValues: (string | number)[] = Object.values(e);
-        
-        const result =  [...objectKeys, ...objectValues];
-        return result;
-      })
-      return updatedArray;
-    }
+  function handleSubmitParams(values: RequestParametersData): void {
+    parameters[values.parameter_name] = values.parameter_value;
     
-    const parametersMatrix = convertToArrays();     
+    const parametersMatrix = Object.entries(parameters);
     setDisplayedParameters(parametersMatrix)
   }
-  function handleSubmitFetch(values: any) {
-    if(values.name && values.url){        
-      const date: string = Tools.getCurrentDate();
+  function handleSubmitFetch(values: RequestMainData): void {
+    if(!values.request_name && values.request_url) return console.error('не все поля заполнены');  
+    
+    const date: string = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
 
-      dispatch(
-        updateConfig(
-          {
-            params: parameters,
-            url: values.url
-          }
-        )
+    dispatch(
+      updateConfig(
+        {
+          params: parameters,
+          url: values.request_url
+        }
       )
+    )
 
-      Tools.setDataToStorage(needParameters, values.name, date, values.url, parameters);
-      setNeedRedirect(true);
-    } else {
-      console.error('не все поля заполнены');
-    }
+    Tools.setDataToStorage(needParameters, values.request_name, date, values.request_url, parameters);
+
+    setNeedRedirect(true);
   }
 
   return (
     <div className={classes.SettingsWrapper}>
       <FormWithToFields
-          firstInitValueName={'url'}
-          secondInitValueName={'name'}
+          firstInitValueName={'request_url'}
+          secondInitValueName={'request_name'}
           firstInitValue={'https://jsonplaceholder.typicode.com/posts'}
           secondInitValue={'asd'}
           firstInfoText={'Fetch url:'}
           secondInfoText={'File name:'}
           onSubmitFuncton={handleSubmitFetch}
-          formId={'main-request-data'}/>
+          formId={'main-request-data'}
+      />
       <SwitchDiv
         needParameters={needParameters}
-        handleIsCheckedParameters={handleIsCheckedParameters}
-        spanText={'Need parameters?'}/>
-      <div className={parametersDivClasses.join(' ')}>
+        spanText={'Need parameters?'}
+        handleIsCheckedParameters={() => {
+          setNeedParameters(!needParameters);  
+        }}
+      />
+      <div className={`${classes.ParametersWrapper} ${needParameters ? classes.active : ''}`}>
         <FormWithToFields
-          firstInitValueName={'name'}
-          secondInitValueName={'value'}
+          firstInitValueName={'parameter_name'}
+          secondInitValueName={'parameter_value'}
           firstInitValue={'_limit'}
           secondInitValue={1}
           firstInfoText={'Parameter name:'}
@@ -98,29 +88,35 @@ function GetForm(): JSX.Element {
           firstRef={displayedParameterNameRef}
           secondRef={displayedParameterValueRef}
           onSubmitFuncton={handleSubmitParams}
-          formId={'parameters-data'}/>
+          formId={'parameters-data'}
+        />
         <CustomButton
           children={'Submit params'}
           type={'submit'}
           form={'parameters-data'}
-          />
+        />
         <ParamsList 
           disParameters={displayedParameters}
           setParameters={setDisplayedParameters}
           a={setParameters}
-          parameters={parameters}/>
+          parameters={parameters}
+        />
       </div>
       <CustomButton
         children={'Submit'}
         type={'submit'}
-        form={'main-request-data'}/>
+        form={'main-request-data'}
+      />
       <LinkButton
         content={'Go home'}
-        path={"/welcome"}/>
-      {needRedirect 
-        ? <Navigate 
-            to="/workspace"/> 
-        : <></>}      
+        path={"/welcome"}
+      />
+      {
+        needRedirect 
+          ? 
+            <Navigate to="/workspace"/> 
+          : <></>
+      }      
     </div>
   )
 }

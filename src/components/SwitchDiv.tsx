@@ -1,4 +1,3 @@
-import React from 'react';
 import { SwitchDivProps } from '../types/elements';
 
 import Switch from './UI/Switch/Switch';
@@ -7,8 +6,8 @@ function SwitchDiv({needParameters, handleIsCheckedParameters, spanText}: Switch
   return (
     <div style={{display: 'flex', alignItems: 'center'}}>
         <Switch 
-          onChange={handleIsCheckedParameters} 
-          checked={needParameters} 
+          onChange={handleIsCheckedParameters}
+          checked={needParameters}
         />
         <span style={{marginLeft: 5}}>{spanText}</span>
       </div>
