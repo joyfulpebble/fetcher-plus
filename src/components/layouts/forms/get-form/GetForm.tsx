@@ -15,10 +15,10 @@ import {
 import CustomButton from '../../../UI/Buttons/CustomButton';
 import LinkButton from '../../../UI/Buttons/LinkButton';
 import FormWithToFields from '../../../FormWithToFields';
-import SwitchDiv from '../../../SwitchDiv';
+import Switch from '../../../UI/Switch/Switch';
 import ParamsList from '../../../ParamsList';
 
-import classes from './GetForm.module.scss';
+import classes from './style/GetForm.module.scss';
 
 function GetForm(): JSX.Element {
   const [parameters, setParameters] = useState<DynamicObjectKeys>({});
@@ -33,13 +33,14 @@ function GetForm(): JSX.Element {
   const { updateConfig } = getConfigSlice.actions;
   const dispatch = useAppDispatch();
 
-  function handleSubmitParams(values: RequestParametersData): void {
+  const handleSubmitParams = (values: RequestParametersData): void => {
     parameters[values.parameter_name] = values.parameter_value;
     
     const parametersMatrix = Object.entries(parameters);
     setDisplayedParameters(parametersMatrix)
-  }
-  function handleSubmitFetch(values: RequestMainData): void {
+  };
+
+  const handleSubmitFetch = (values: RequestMainData): void => {
     if(!values.request_name && values.request_url) return console.error('не все поля заполнены');  
     
     const date: string = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
@@ -56,7 +57,7 @@ function GetForm(): JSX.Element {
     Tools.setDataToStorage(needParameters, values.request_name, date, values.request_url, parameters);
 
     setNeedRedirect(true);
-  }
+  };
 
   return (
     <div className={classes.SettingsWrapper}>
@@ -70,7 +71,7 @@ function GetForm(): JSX.Element {
           onSubmitFuncton={handleSubmitFetch}
           formId={'main-request-data'}
       />
-      <SwitchDiv
+      <Switch
         needParameters={needParameters}
         spanText={'Need parameters?'}
         handleIsCheckedParameters={() => {
