@@ -29,7 +29,7 @@ export interface FormWithToFieldsProps {
   formId: string;
 }
 
-export interface SwitchDivProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface SwitchProps extends React.HTMLAttributes<HTMLButtonElement> {
   needParameters: boolean;
   handleIsCheckedParameters: () => void;
   spanText: string | number;
