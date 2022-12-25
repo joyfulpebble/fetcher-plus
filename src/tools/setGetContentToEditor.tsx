@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../hooks/redux';
 
-import { SetGetContentToEditorProps } from '../types/elements';
+import { SetGetContentToEditorProps } from '../../types/elements';
 
 import DefaultEditor from '../components/DefaultEditor';
 import ErrorSVG from '../assets/svg/ErrorSVG';

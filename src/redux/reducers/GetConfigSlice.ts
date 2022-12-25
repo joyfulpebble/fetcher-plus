@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { GetConfigType } from "../../types/request_configs";
+import { GetConfigType } from "../../../types/request_configs";
 
 const initState: GetConfigType = {
   params: {},
