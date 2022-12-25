@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+import { ParamsListProps } from '../types/elements';
 import { DynamicObjectKeys } from '../types/simple_models';
 
-function ParamsList({displayedParameters, setDisplayedParameters, setParameters, parameters}: any): JSX.Element {
+function ParamsList({displayedParameters, parameters, setDisplayedParameters, setParameters}: ParamsListProps): JSX.Element {
   const [list, setList] = useState<JSX.Element[] | undefined>();
   const newDisplayedParameters: (number | string)[][] = displayedParameters;
   
@@ -19,7 +20,7 @@ function ParamsList({displayedParameters, setDisplayedParameters, setParameters,
     }
     
     setDisplayedParameters(parametersAsArrays);
-    setParameters(Object.assign({}, objectWithoutIndexElement/*, newParametersObject*/))
+    setParameters(Object.assign({}, objectWithoutIndexElement))
   };
   
   const createList = (): JSX.Element[] => {    

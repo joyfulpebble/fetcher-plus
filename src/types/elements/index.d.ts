@@ -25,7 +25,7 @@ export interface FormWithToFieldsProps {
   secondInitValue: string | number;
   secondInfoText: string | number,
   secondRef?: React.RefObject<HTMLInputElement>;
-  onSubmitFuncton ;
+  onSubmitFuncton: (values: typeof values) => DynamicObjectKeys;
   formId: string;
 }
 
@@ -33,4 +33,11 @@ export interface SwitchProps extends React.HTMLAttributes<HTMLButtonElement> {
   needParameters: boolean;
   handleIsCheckedParameters: () => void;
   spanText: string | number;
+}
+
+export interface ParamsListProps {
+  displayedParameters:  ObjectEntries<DynamicObjectKeys>;
+  setDisplayedParameters:  React.Dispatch<React.SetStateAction<ObjectEntries<DynamicObjectKeys>>>;
+  parameters: DynamicObjectKeys;
+  setParameters: React.Dispatch<React.SetStateAction<DynamicObjectKeys>>;
 }
