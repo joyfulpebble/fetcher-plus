@@ -3,12 +3,6 @@ export default class Tools {
     return navigator.onLine;
   };
 
-  static getCurrentDate(): string {
-    const currentDate: Date = new Date();
-  
-    return currentDate.toLocaleString();
-  };
-
   static async getMethodHandling(url: string, param: any, func: Function): Promise<any> {  
     try {
       const response = await func(url, param);
@@ -19,16 +13,6 @@ export default class Tools {
     }
   }
   
-  static setGetConfigToStorage(fetchUrl: string, fetchParameters?: object): void {
-    localStorage.setItem(
-      'GET_CFG', 
-      JSON.stringify({
-        url: fetchUrl, 
-        params: fetchParameters
-      })
-    );
-  }
-
   static setRequestDataToStorage(
       fetchCfgName: string | number, 
       creationDate: string, 
@@ -68,10 +52,8 @@ export default class Tools {
     ): void {
     if(needParameters) {
       this.setRequestDataToStorage(fetchCfgName, creationDate, fetchUrl, fetchParameters);
-      this.setGetConfigToStorage(fetchUrl, fetchParameters);
     } else {
       this.setRequestDataToStorage(fetchCfgName, creationDate, fetchUrl, {});
-      this.setGetConfigToStorage(fetchUrl, {});
     };
   }
 }
