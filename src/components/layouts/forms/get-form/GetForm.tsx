@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import Tools from '../../../../tools/Tools';
-import { getConfigSlice } from '../../../../store/reducers/GetConfigSlice';
+import { getConfigSlice } from '../../../../redux/reducers/GetConfigSlice';
 import { useAppDispatch } from '../../../../hooks/redux';
 
 import { Entries } from 'type-fest';
@@ -10,7 +10,7 @@ import {
   DynamicObjectKeys, 
   RequestMainData, 
   RequestParametersData 
-  } from '../../../../types/simple_models';
+  } from '../../../../../types/simple_models';
 
 import CustomButton from '../../../UI/Buttons/CustomButton';
 import LinkButton from '../../../UI/Buttons/LinkButton';

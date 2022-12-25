@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import { ParamsListProps } from '../types/elements';
-import { DynamicObjectKeys } from '../types/simple_models';
+import { ParamsListProps } from '../../types/elements';
+import { DynamicObjectKeys } from '../../types/simple_models';
 
 function ParamsList({displayedParameters, parameters, setDisplayedParameters, setParameters}: ParamsListProps): JSX.Element {
   const [list, setList] = useState<JSX.Element[] | undefined>();

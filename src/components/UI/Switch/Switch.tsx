@@ -1,7 +1,7 @@
 import React from 'react';
 import SwitchToggle from 'react-switch';
 
-import { SwitchProps } from '../../../types/elements';
+import { SwitchProps } from '../../../../types/elements';
 
 function Switch({handleIsCheckedParameters, needParameters, spanText}: SwitchProps): JSX.Element {
   return (

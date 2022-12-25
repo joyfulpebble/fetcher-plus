@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Editor from '@monaco-editor/react';
-import { DefaultEditorProps } from '../types/elements';
+import { DefaultEditorProps } from '../../types/elements';
 
 function DefaultEditor({EditorWidth, EditorHeight, EditorInitValue, EditorConfig, ContentToSaveFunc}: DefaultEditorProps): JSX.Element {
   const [editedContent, setEditedContent] = useState<string>(EditorInitValue);
