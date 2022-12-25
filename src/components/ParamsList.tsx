@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
-function ParamsList({disParameters, setParameters, a, parameters}: any): JSX.Element {
-  const [listContent, setListContent] = useState<Element>();
-  let updatedMatrix = disParameters;
+import { DynamicObjectKeys } from '../types/simple_models';
+
+function ParamsList({displayedParameters, setDisplayedParameters, setParameters, parameters}: any): JSX.Element {
+  const [list, setList] = useState<JSX.Element[] | undefined>();
+  const newDisplayedParameters: (number | string)[][] = displayedParameters;
   
-  function deleteParameterFromList(index: number) {
-    const newMatrix = disParameters.filter((e: string | number) => { return e !== disParameters[index] });
-    updatedMatrix = newMatrix
+  const deleteParameterFromList = (index: number): void => {
+    const PARAMETER_KEY_FROM_LIST: string = `${index}`;
+    delete parameters[PARAMETER_KEY_FROM_LIST];
+
+    const parametersAsArrays: (number | string)[][] = displayedParameters.filter((e: string | number) => { return e !== displayedParameters[index] });
+    const parametersAsObjects: DynamicObjectKeys[] = parametersAsArrays.map((e: any) => { return e.reduce((a:any, v:any) => ({ ...a, [e[0]]: v}), {}) });    
+    let objectWithoutIndexElement: DynamicObjectKeys = {};    
     
-    setListContent(newMatrix);
-    setParameters(newMatrix);
-
-    let c = updatedMatrix.map((e: any) => { return e.reduce((a:any, v:any) => ({ ...a, [e[0]]: v}), {}) });
-    let b: any = {};
-
-    for (let i = 0; i < c.length; i++) {
-      b = Object.assign({}, b, c[i])
+    for (let i = 0; i < parametersAsObjects.length; i++) {
+      objectWithoutIndexElement = Object.assign({}, objectWithoutIndexElement, parametersAsObjects[i]);      
     }
-  
-    let bn = `${index}`
-    let afdsfdfa: any = delete parameters[bn]
     
-    a(Object.assign({}, b, afdsfdfa))
-  }
+    setDisplayedParameters(parametersAsArrays);
+    setParameters(Object.assign({}, objectWithoutIndexElement/*, newParametersObject*/))
+  };
   
-  function createList(): Element{
-    const result: Element = updatedMatrix.map((e: any, i: number) => {
+  const createList = (): JSX.Element[] => {    
+    return newDisplayedParameters.map((e: any, i: number) => {
       return (
         <div key={i}>
           <div key={e[0]}>{e[0]}</div>
@@ -35,20 +33,18 @@ function ParamsList({disParameters, setParameters, a, parameters}: any): JSX.Ele
           }}>-</button>
         </div>
       )
-    })
-    
-    return result;
-  }
+    });
+  };
   
   useEffect(() => {
-    const newList = createList()
+    const newList = createList();
     
-    setListContent(newList);    
-  }, [disParameters])
+    setList(newList);    
+  }, [displayedParameters])
 
   return (
     <>
-      {listContent}
+      {list?.map(( e: JSX.Element ) => { return e })}
     </>
   )
 }

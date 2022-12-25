@@ -97,10 +97,10 @@ function GetForm(): JSX.Element {
           form={'parameters-data'}
         />
         <ParamsList 
-          disParameters={displayedParameters}
-          setParameters={setDisplayedParameters}
-          a={setParameters}
+          displayedParameters={displayedParameters}
+          setDisplayedParameters={setDisplayedParameters}
           parameters={parameters}
+          setParameters={setParameters}
         />
       </div>
       <CustomButton
