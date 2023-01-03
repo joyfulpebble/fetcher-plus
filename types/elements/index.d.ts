@@ -4,16 +4,9 @@ import monaco from 'monaco-editor/esm/vs/editor/editor.api';
 export interface DefaultEditorProps {
   EditorWidth: string;
   EditorHeight: string;
-  EditorInitValue: string;
+  EditorInitValue: any;
   EditorConfig?: monaco.editor.IStandaloneEditorConstructionOptions | undefined;
   ContentToSaveFunc: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export interface SetGetContentToEditorProps {
-  ContentTosaveFunc: React.Dispatch<React.SetStateAction<string>>;
-  SetErrorFunction: React.Dispatch<React.SetStateAction<any[] | undefined>>
-  HandlingRequestFunc: (url: string, param: any, func: Function) => Promise<Object>;
-  RequestFunction: (path: string, params?: any) => Promise<Object>;
 }
 
 export interface FormWithToFieldsProps {

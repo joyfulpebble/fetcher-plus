@@ -3,15 +3,15 @@ export default class Tools {
     return navigator.onLine;
   };
 
-  static async getMethodHandling(url: string, param: any, func: Function): Promise<any> {  
-    try {
-      const response = await func(url, param);
+  // static async getMethodHandling(url: string, param: any, func: Function): Promise<any> {  
+  //   try {
+  //     const response = await func(url, param);
       
-      return response;
-    } catch (error: any) {
-      return ['err', error];
-    }
-  }
+  //     return response;
+  //   } catch (error: any) {
+  //     return ['err', error];
+  //   }
+  // }
   
   static setRequestDataToStorage(
       fetchCfgName: string | number, 
