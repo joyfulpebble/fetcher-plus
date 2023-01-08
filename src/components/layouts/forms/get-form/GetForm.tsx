@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 import Tools from '../../../../tools/Tools';
 import { getConfigSlice } from '../../../../redux/reducers/GetConfigSlice';
-import { useAppDispatch } from '../../../../hooks/redux';
+import { useAppDispatch } from '../../../../hooks/redux/redux';
 
 import { Entries } from 'type-fest';
 import { 

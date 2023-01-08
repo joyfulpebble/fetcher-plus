@@ -4,45 +4,45 @@ import FileSaver from 'file-saver';
 
 import StatusBar from '../components/layouts/status-bar/StatusBar';
 import DefaultEditor from '../components/DefaultEditor';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { getMethod } from '../redux/actions/GetMethod';
+import { useAppDispatch, useAppSelector } from '../hooks/redux/redux';
+import { useFetching } from '../hooks/react/useFetching';
+import Service from '../API/Service';
 
 //'https://jsonplaceholder.typicode.com/posts'
 function Workspace(): JSX.Element {
-  const [tempErrorStorage, setTempErrorStorage] = useState<undefined | any[]>(undefined);
   const [contentToSave, setContentToSave] = useState<string>('');
-
-  const dispatch = useAppDispatch();
+  const [response, setResponse] = useState<string>('{"error": "no response :/" }');
+  
   const { url, params } = useAppSelector(state => state.getConfig)
+  const [ fetchUrl, error ] = useFetching(async () => {
+    const response = await Service.GET(url, params);
+      
+    setResponse(JSON.stringify(response));
+  })
   
-  
-  
-  useEffect(() => {
-    dispatch(getMethod(url, params))
-  }, [])
-  
-  const { data } = useAppSelector(state => state.getMethod);
-  // console.log(JSON.parse(data));
-
   let blob: any = null;
   if(contentToSave != ''){
     blob = new Blob([JSON.stringify(contentToSave, null, '  ')], {type: 'application/json'});
   }
-
+  
+  useEffect(() => {
+    fetchUrl()    
+  }, [])
+  
   return (
     <div>
       <div>
         <DefaultEditor 
           EditorWidth={'500px'} 
           EditorHeight={'500px'}
-          EditorInitValue={JSON.parse(data)} 
+          EditorInitValue={JSON.parse(response)} 
           EditorConfig={{tabSize: 2}} 
           ContentToSaveFunc={() => {}}
         />
         <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
-        <Link to={'/get-fetch-form'}>Go back</Link>
       </div>
-        <StatusBar error={tempErrorStorage} />
+    <Link to={'/get-fetch-form'}>Go back</Link>
+    <StatusBar error={[1, error]} />
     </div>
   )
 }

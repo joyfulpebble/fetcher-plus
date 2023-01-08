@@ -11,7 +11,6 @@ import {
 import storage from "redux-persist/lib/storage";
  
 import getConfigReducer from "./reducers/GetConfigSlice";
-import getMethodReducer from './reducers/GetMethodSlice';
 
 const persistConfig = {
   key: 'root',
@@ -20,7 +19,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   'getConfig': getConfigReducer,
-  'getMethod': getMethodReducer
 });
 
 const persistReduser = persistReducer(persistConfig, rootReducer)
