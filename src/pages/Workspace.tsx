@@ -13,7 +13,7 @@ import LinkButton from '../components/UI/Buttons/LinkButton';
 
 function Workspace(): JSX.Element {
   const [contentToSave, setContentToSave] = useState<string>('');
-  const [response, setResponse] = useState<string>('');
+  const [response, setResponse] = useState<string>('{}');
   
   const { url, params } = useAppSelector(state => state.getConfig)
   const [ fetchUrl, error ] = useFetching(async () => {
