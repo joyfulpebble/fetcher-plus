@@ -1,24 +1,24 @@
 import React, { useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import Tools from '../../../../tools/Tools';
-import { getConfigSlice } from '../../../../redux/reducers/GetConfigSlice';
-import { useAppDispatch } from '../../../../hooks/redux/redux';
+import Tools from '../../../tools/Tools';
+import { getConfigSlice } from '../../../redux/reducers/GetConfigSlice';
+import { useAppDispatch } from '../../../hooks/redux/redux';
 
 import { Entries } from 'type-fest';
 import { 
   DynamicObjectKeys, 
   RequestMainData, 
   RequestParametersData 
-  } from '../../../../../types/simple_models';
+  } from '../../../../types/simple_models';
 
-import CustomButton from '../../../UI/Buttons/CustomButton';
-import LinkButton from '../../../UI/Buttons/LinkButton';
-import FormWithToFields from '../../../FormWithToFields';
-import Switch from '../../../UI/Switch/Switch';
-import ParamsList from '../../../ParamsList';
+import CustomButton from '../../UI/Buttons/CustomButton';
+import LinkButton from '../../UI/Buttons/LinkButton';
+import FormWithToFields from '../../FormWithToFields';
+import Switch from '../../UI/Switch/Switch';
+import ParamsList from '../../ParamsList';
 
-import classes from './style/GetForm.module.scss';
+import classes from './GetForm.module.scss';
 
 function GetForm(): JSX.Element {
   const [parameters, setParameters] = useState<DynamicObjectKeys>({});

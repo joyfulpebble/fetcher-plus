@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import FileSaver from 'file-saver';
 
-import StatusBar from '../components/layouts/status-bar/StatusBar';
-import DefaultEditor from '../components/DefaultEditor';
-import { useAppDispatch, useAppSelector } from '../hooks/redux/redux';
-import { useFetching } from '../hooks/react/useFetching';
+import FileSaver from 'file-saver';
 import Service from '../API/Service';
 
-//'https://jsonplaceholder.typicode.com/posts'
+import StatusBar from '../components/layouts/status-bar/StatusBar';
+import { useFetching } from '../hooks/react/useFetching';
+import DefaultEditor from '../components/DefaultEditor';
+import { useAppSelector } from '../hooks/redux/redux';
+
 function Workspace(): JSX.Element {
   const [contentToSave, setContentToSave] = useState<string>('');
-  const [response, setResponse] = useState<string>('{"error": "no response :/" }');
+  const [response, setResponse] = useState<string>('');
   
   const { url, params } = useAppSelector(state => state.getConfig)
   const [ fetchUrl, error ] = useFetching(async () => {
@@ -26,7 +26,7 @@ function Workspace(): JSX.Element {
   }
   
   useEffect(() => {
-    fetchUrl()    
+    fetchUrl();    
   }, [])
   
   return (
@@ -35,9 +35,9 @@ function Workspace(): JSX.Element {
         <DefaultEditor 
           EditorWidth={'500px'} 
           EditorHeight={'500px'}
-          EditorInitValue={JSON.parse(response)} 
+          EditorInitValue={response} 
           EditorConfig={{tabSize: 2}} 
-          ContentToSaveFunc={() => {}}
+          ContentToSaveFunc={setContentToSave}
         />
         <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
       </div>

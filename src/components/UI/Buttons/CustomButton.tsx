@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from './styles/Button.module.scss';
+import classes from './Button.module.scss';
 
 function CustomButton({children, ...props}: any): JSX.Element {
   return (

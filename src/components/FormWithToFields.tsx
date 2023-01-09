@@ -1,8 +1,9 @@
 import React from 'react';
-import { FormWithToFieldsProps } from '../../types/elements';
 
 import { Formik, Field, Form } from "formik";
 import Input from './UI/Input/Input';
+
+import { FormWithToFieldsProps } from '../../types/elements';
 
 function FormWithToFields({
     firstInitValueName, 

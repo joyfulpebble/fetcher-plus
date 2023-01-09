@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import classes from './styles/Button.module.scss';
+import classes from './Button.module.scss';
 
 function LinkButton({content, path}: any): JSX.Element {
   return (

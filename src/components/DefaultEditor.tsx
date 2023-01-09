@@ -15,14 +15,10 @@ function DefaultEditor({EditorWidth, EditorHeight, EditorInitValue, EditorConfig
       <Editor
         width={EditorWidth}
         height={EditorHeight}
-
         theme='vs-dark'
-        
         defaultLanguage="json"
-        value={JSON.stringify(EditorInitValue, null, '  ')}
-        
+        value={JSON.stringify(JSON.parse(EditorInitValue), null, '  ')}
         onChange={element => {setEditedContent(element!)}}
-        
         options={
           {
           ...EditorConfig,
