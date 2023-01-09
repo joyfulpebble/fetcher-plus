@@ -8,6 +8,8 @@ import StatusBar from '../components/layouts/status-bar/StatusBar';
 import { useFetching } from '../hooks/react/useFetching';
 import DefaultEditor from '../components/DefaultEditor';
 import { useAppSelector } from '../hooks/redux/redux';
+import { withErrorBoundary } from 'react-error-boundary';
+import LinkButton from '../components/UI/Buttons/LinkButton';
 
 function Workspace(): JSX.Element {
   const [contentToSave, setContentToSave] = useState<string>('');
@@ -47,4 +49,12 @@ function Workspace(): JSX.Element {
   )
 }
 
-export default Workspace;
+export default withErrorBoundary(Workspace, {
+  fallback: <div>
+      Error
+      <LinkButton
+        content={'Go back'}
+        path={"/get-fetch-form"}
+      />
+    </div>
+});
