@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
 
-const initState: AxiosError[] = [];
+const initState: string[] = [];
 
 export const statusErrorSlice = createSlice({
   name: 'getConfig',
   initialState: initState,
   reducers: {
-    addError(state, action: PayloadAction<AxiosError[]>) {
-      state = [...state, ...action.payload];
+    addError(state, action: PayloadAction<string>) {
+      state = [...state, action.payload];
     },
 
     clearStorage(state) {

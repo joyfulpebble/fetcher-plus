@@ -26,7 +26,7 @@ function ErrorTippy({errorText, errorCount}: any) {
       >
         <div className={classes.Problems}>
           <ErrorSVG/>
-          <span>{errorCount ? errorCount : 0}</span>
+          <span>{errorCount}</span>
         </div>
       </Tippy>
   )
