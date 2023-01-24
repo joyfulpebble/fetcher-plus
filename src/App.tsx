@@ -1,8 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { withErrorBoundary } from "react-error-boundary"
 
 import WelcomePage from "./pages/WelcomePage";
 import Workspace from "./pages/Workspace";
 import FetchPage from "./pages/FetchPage";
+
+import LinkButton from "./components/UI/Buttons/LinkButton";
 
 function App(): JSX.Element {
   return (
@@ -16,4 +19,14 @@ function App(): JSX.Element {
   );
 }
 
-export default App;
+export default withErrorBoundary(App, {
+  fallback: <div>
+      Error
+      
+      <LinkButton
+        content={'Go back'}
+        path={"/get-fetch-form"}
+      />
+    </div>
+  
+});;
