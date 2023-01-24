@@ -1,13 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initState: string[] = [];
+interface errorsArrayStateI {
+  errors: [string]
+}
+
+const initState: errorsArrayStateI = {
+  errors: ['']
+};
 
 export const statusErrorSlice = createSlice({
   name: 'getConfig',
   initialState: initState,
   reducers: {
     addError(state, action: PayloadAction<string>) {
-      state = [...state, action.payload];
+      state.errors.push(action.payload)
     },
 
     clearStorage(state) {

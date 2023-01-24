@@ -14,7 +14,7 @@ function ErrorTippy({errorText, errorCount}: any) {
         className={classes.TippyWrapper}
         content={
           <span 
-            title={errorText ? errorText : 'No problems'}>
+            title={errorText}>
               {errorCount ? `Errors: ${errorCount}` : 'No problems'}
           </span>
         }
