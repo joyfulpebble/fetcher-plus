@@ -1,5 +1,6 @@
 import React from "react";
-import CustomButton from "./PrimaryButton";
+
+import DangerButton from "./DangerButton";
 
 interface BuggyButtonState {
   releaseBugs: boolean;
@@ -25,9 +26,9 @@ class BuggyButton extends React.Component<any, BuggyButtonState> {
     }
 
     return (
-      <CustomButton variant="outlined" onClick={this.handleClick} color="error">
+      <DangerButton variant="outlined" onClick={this.handleClick} color="error">
         Scary Button!
-      </CustomButton>
+      </DangerButton>
     );
   }
 }
