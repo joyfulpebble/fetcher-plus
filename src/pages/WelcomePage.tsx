@@ -1,4 +1,5 @@
 import StatusBar from '../components/layouts/status-bar/StatusBar';
+import BuggyButton from '../components/UI/Buttons/BuggyButton';
 import LinkButton from '../components/UI/Buttons/LinkButton';
 
 function WelcomePage(): JSX.Element {
@@ -18,6 +19,10 @@ function WelcomePage(): JSX.Element {
         content={'get'}
         path={"/get-fetch-form"}
       />
+      <br />
+
+      <BuggyButton/>
+      
       <StatusBar/>
     </div>
   )
