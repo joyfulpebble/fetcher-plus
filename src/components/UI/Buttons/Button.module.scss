@@ -1,12 +1,12 @@
-$button-background: #5839af;
-$button-focused-color: #4d309c;
-$link-background: #ffff;
-$link-focused-background: #d8d8d8;
+$primary-button-background: #5839af;
+$primary-button-focused-color: #4d309c;
+$redirect-button-background: #ffff;
+$redirect-button-focused-background: #d8d8d8;
 
-.Button{
+.PrimaryButton{
   color: white;
   padding: 5px 14px;
-  background: $button-background;
+  background: $primary-button-background;
   border: none;
   border-radius: 7px;
   cursor: pointer;
@@ -16,15 +16,15 @@ $link-focused-background: #d8d8d8;
   font-size: 15px;
 
   &:hover{
-    background: $button-focused-color;
+    background: $primary-button-focused-color;
     transition: background-color .1s linear;
   }
 }
 
-.LinkButton{
+.RedirectButton{
   color: black;
   padding: 5px 14px;
-  background: $link-background;
+  background: $redirect-button-background;
   border: none;
   border-radius: 7px;
   cursor: pointer;
@@ -34,7 +34,7 @@ $link-focused-background: #d8d8d8;
   font-size: 15px;
 
   &:hover{
-    background: $link-focused-background;
+    background: $redirect-button-focused-background;
     transition: background-color .1s linear;
   }
 }

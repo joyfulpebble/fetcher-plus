@@ -1,5 +1,5 @@
 import React from "react";
-import CustomButton from "./CustomButton";
+import CustomButton from "./PrimaryButton";
 
 interface BuggyButtonState {
   releaseBugs: boolean;

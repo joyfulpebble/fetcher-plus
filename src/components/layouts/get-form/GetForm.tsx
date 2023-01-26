@@ -12,8 +12,8 @@ import {
   RequestParametersData 
   } from '../../../../types/simple_models';
 
-import CustomButton from '../../UI/Buttons/CustomButton';
-import LinkButton from '../../UI/Buttons/LinkButton';
+import CustomButton from '../../UI/Buttons/PrimaryButton';
+import LinkButton from '../../UI/Buttons/RedirectButton';
 import FormWithToFields from '../../FormWithToFields';
 import Switch from '../../UI/Switch/Switch';
 import ParamsList from '../../ParamsList';
