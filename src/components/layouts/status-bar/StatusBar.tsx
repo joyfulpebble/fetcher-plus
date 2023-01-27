@@ -18,7 +18,7 @@ function StatusBar(): JSX.Element {
   
   return (
     <div className={classes.StatusBarWrapper}>
-      <ErrorTippy errorCount={errorsArray.length - 1} errorText={errorsArray.length > 1 ? 'API Error' : 'No problems'}/>
+      <ErrorTippy errorCount={errorsArray.length} errorText={errorsArray.length > 1 ? 'API Error' : 'No problems'}/>
       <div className={classes.InternetConnectionTippyWrapper}>
       {online 
         ? <OnlineTippy/>

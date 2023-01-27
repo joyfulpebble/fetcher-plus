@@ -16,6 +16,7 @@ import  statusErrorReducer from "./reducers/StatusErrorSlice";
 const persistConfig = {
   key: 'root',
   storage: storage,
+  blacklist: ['requestError']
 }
 
 const rootReducer = combineReducers({

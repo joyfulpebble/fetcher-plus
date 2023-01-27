@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface errorsArrayStateI {
-  errors: [string]
+  errors: Array<string | null>
 }
 
 const initState: errorsArrayStateI = {
-  errors: ['']
+  errors: []
 };
 
 export const statusErrorSlice = createSlice({
