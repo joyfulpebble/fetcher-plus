@@ -7,11 +7,11 @@ function createWindow() {
     var mainWindow = new electron_1.BrowserWindow({
         width: 1000,
         height: 700,
-        autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: true
         }
     });
+    mainWindow.setMenuBarVisibility(false);
     mainWindow.loadURL('http://localhost:3000/welcome');
     mainWindow.webContents.openDevTools();
     require('electron-reload')(__dirname, {

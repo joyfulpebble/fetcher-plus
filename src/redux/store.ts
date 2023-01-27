@@ -11,7 +11,7 @@ import {
 import storage from "redux-persist/lib/storage";
  
 import getConfigReducer from "./reducers/GetConfigSlice";
-import  statusErrorReducer from "./reducers/StatusErrorSlice";
+import statusErrorReducer from "./reducers/StatusErrorSlice";
 
 const persistConfig = {
   key: 'root',

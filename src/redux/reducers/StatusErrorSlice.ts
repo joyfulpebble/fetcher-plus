@@ -13,11 +13,11 @@ export const statusErrorSlice = createSlice({
   initialState: initState,
   reducers: {
     addError(state, action: PayloadAction<string>) {
-      state.errors.push(action.payload)
+      state.errors.push(action.payload);
     },
 
-    clearStorage(state) {
-      state = initState
+    clearErrorStorage(state) {
+      state.errors = [];
     }
   }
 })
