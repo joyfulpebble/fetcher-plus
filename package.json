@@ -4,7 +4,7 @@
   "author": "joyfulpebble",
   "description": "",
   "homepage": ".",
-  "main": "build/electron/main.js",
+  "main": "electron/build/electron/main.js",
   "private": true,
   "dependencies": {
     "@monaco-editor/react": "^4.4.5",
