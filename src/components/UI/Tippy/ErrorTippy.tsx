@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ErrorSVG from '../../../../assets/svg/ErrorSVG';
+import ErrorSVG from '../../../assets/svg/ErrorSVG';
 
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';

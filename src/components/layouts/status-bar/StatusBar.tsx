@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import Tools from '../../../tools/Tools';
 import { useAppSelector } from '../../../hooks/redux/redux';
 
-import OfflineTippy from './tippy/OfflineTippy';
-import OnlineTippy from './tippy/OnlineTippy';
-import ErrorTippy from './tippy/ErrorTippy';
+import OfflineTippy from '../../UI/Tippy/OfflineTippy';
+import OnlineTippy from '../../UI/Tippy/OnlineTippy';
+import ErrorTippy from '../../UI/Tippy/ErrorTippy';
 
 import classes from './StatusBar.module.scss';
 
