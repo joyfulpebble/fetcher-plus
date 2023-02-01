@@ -7,7 +7,7 @@ const initState: RequestErrorsStateI = {
 };
 
 export const statusErrorSlice = createSlice({
-  name: 'getConfig',
+  name: 'requestError',
   initialState: initState,
   reducers: {
     addError(state, action: PayloadAction<string>) {

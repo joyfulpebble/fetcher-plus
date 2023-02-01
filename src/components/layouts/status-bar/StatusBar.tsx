@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Tools from '../../../tools/Tools';
 import { useAppSelector } from '../../../hooks/redux/redux';
@@ -10,17 +10,29 @@ import ErrorTippy from './tippy/ErrorTippy';
 import classes from './StatusBar.module.scss';
 
 function StatusBar(): JSX.Element {
-  const [online, setOnline] = useState<boolean>(Tools.checkNetConnection());
+  const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
+
+  useEffect(() => {
+    const handleStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    window.addEventListener('online', handleStatusChange);
+    window.addEventListener('offline', handleStatusChange);
+
+    return () => {
+      window.removeEventListener('online', handleStatusChange);
+      window.removeEventListener('offline', handleStatusChange);
+    };
+  }, [isOnline]);
+  
   const errorsArray = useAppSelector(state => state.requestError).errors;
-    
-  window.addEventListener('offline', (e) => { setOnline(false) });
-  window.addEventListener('online',  (e) => { setOnline(true) });
   
   return (
     <div className={classes.StatusBarWrapper}>
       <ErrorTippy errorCount={errorsArray.length} errorText={errorsArray.length > 1 ? 'API Error' : 'No problems'}/>
       <div className={classes.InternetConnectionTippyWrapper}>
-      {online 
+      {isOnline 
         ? <OnlineTippy/>
         : <OfflineTippy/>
         }
