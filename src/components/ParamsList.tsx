@@ -1,31 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ParamsListProps } from '../../types/elements';
 import { DynamicObjectKeys } from '../../types/simple_models';
 
 function ParamsList({displayedParameters, parameters, setDisplayedParameters, setParameters}: ParamsListProps): JSX.Element {
   const [list, setList] = useState<JSX.Element[] | undefined>();
-  const newDisplayedParameters: Array<(number | string)[]> = displayedParameters;
   
-  const deleteParameterFromList = (index: number): void => {
+  function deleteParameterFromList(index: number): void {
     const PARAMETER_KEY_FROM_LIST: string = `${index}`;
     delete parameters[PARAMETER_KEY_FROM_LIST];
 
-    const parametersAsArrays: Array<(number | string)[]> = displayedParameters.filter((element: string | number) => { return element !== displayedParameters[index] });
-    const parametersAsObjects: DynamicObjectKeys[] = parametersAsArrays.map((element: any) => { return element.reduce((name: any, value: any) => ({ ...name, [ element[0] ]: value}), {}) });
-      
-    let objectWithoutIndexElement: DynamicObjectKeys = {};    
-    
-    for (let i = 0; i < parametersAsObjects.length; i++) {
-      objectWithoutIndexElement = Object.assign({}, objectWithoutIndexElement, parametersAsObjects[i]);      
-    }
-    
+    const parametersAsArrays: Array<(number | string)[]> = displayedParameters.filter((element: string | number) => { 
+      return element !== displayedParameters[index];
+    });
+    const parametersAsObject: DynamicObjectKeys = Object.fromEntries(parametersAsArrays);    
+
     setDisplayedParameters(parametersAsArrays);
-    setParameters(Object.assign({}, objectWithoutIndexElement))
+    setParameters(parametersAsObject)
   };
   
   const createList = (): JSX.Element[] => {    
-    return newDisplayedParameters.map((e: any, i: number) => {
+    return displayedParameters.map((e: any, i: number) => {
       return (
         <div key={i}>
           <div key={e[0]}>{e[0]}</div>
