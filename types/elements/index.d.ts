@@ -34,3 +34,8 @@ export interface ParamsListProps {
   parameters: DynamicObjectKeys;
   setParameters: React.Dispatch<React.SetStateAction<DynamicObjectKeys>>;
 }
+
+export interface ListPropsI {
+  array: Array<string | number | Array<string | number>>
+  deleteFunction: (index: number) => void;
+}
