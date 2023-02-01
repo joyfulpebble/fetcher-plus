@@ -5,14 +5,15 @@ import { DynamicObjectKeys } from '../../types/simple_models';
 
 function ParamsList({displayedParameters, parameters, setDisplayedParameters, setParameters}: ParamsListProps): JSX.Element {
   const [list, setList] = useState<JSX.Element[] | undefined>();
-  const newDisplayedParameters: (number | string)[][] = displayedParameters;
+  const newDisplayedParameters: Array<(number | string)[]> = displayedParameters;
   
   const deleteParameterFromList = (index: number): void => {
     const PARAMETER_KEY_FROM_LIST: string = `${index}`;
     delete parameters[PARAMETER_KEY_FROM_LIST];
 
-    const parametersAsArrays: (number | string)[][] = displayedParameters.filter((e: string | number) => { return e !== displayedParameters[index] });
-    const parametersAsObjects: DynamicObjectKeys[] = parametersAsArrays.map((e: any) => { return e.reduce((a:any, v:any) => ({ ...a, [e[0]]: v}), {}) });    
+    const parametersAsArrays: Array<(number | string)[]> = displayedParameters.filter((element: string | number) => { return element !== displayedParameters[index] });
+    const parametersAsObjects: DynamicObjectKeys[] = parametersAsArrays.map((element: any) => { return element.reduce((name: any, value: any) => ({ ...name, [ element[0] ]: value}), {}) });
+      
     let objectWithoutIndexElement: DynamicObjectKeys = {};    
     
     for (let i = 0; i < parametersAsObjects.length; i++) {

@@ -8,9 +8,9 @@ import { useAppDispatch } from '../../../hooks/redux/redux';
 import { Entries } from 'type-fest';
 import { 
   DynamicObjectKeys, 
-  RequestMainData, 
-  RequestParametersData 
-  } from '../../../../types/simple_models';
+  MainInfoOfRequestFromFields, 
+  InfoOfParamsFromFields 
+  } from '../../../../types/simple_models/index';
 
 import CustomButton from '../../UI/Buttons/PrimaryButton';
 import LinkButton from '../../UI/Buttons/RedirectButton';
@@ -33,14 +33,14 @@ function GetForm(): JSX.Element {
   const { updateConfig } = getConfigSlice.actions;
   const dispatch = useAppDispatch();
 
-  const handleSubmitParams = (values: RequestParametersData): void => {
+  const handleSubmitParams = (values: InfoOfParamsFromFields): void => {
     parameters[values.parameter_name] = values.parameter_value;
     
     const parametersMatrix = Object.entries(parameters);
     setDisplayedParameters(parametersMatrix)
   };
 
-  const handleSubmitFetch = (values: RequestMainData): void => {
+  const handleSubmitFetch = (values: MainInfoOfRequestFromFields): void => {
     if(!values.request_name && values.request_url) return console.error('не все поля заполнены');  
     
     const date: string = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });

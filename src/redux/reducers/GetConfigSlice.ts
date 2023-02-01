@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { GetConfigType } from "../../../types/request_configs";
+import { GetConfigI } from "../../../types/request_configs";
 
-const initState: GetConfigType = {
+const initState: GetConfigI = {
   params: {},
   url: ''
 } 
@@ -15,7 +15,7 @@ export const getConfigSlice = createSlice({
       state = initState;
     },
 
-    updateConfig(state, action: PayloadAction<GetConfigType>) {
+    updateConfig(state, action: PayloadAction<GetConfigI>) {
       state.params = action.payload.params;
       state.url = action.payload.url;
     }

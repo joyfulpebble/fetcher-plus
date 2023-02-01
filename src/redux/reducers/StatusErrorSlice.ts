@@ -1,10 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface errorsArrayStateI {
-  errors: Array<string | null>
-}
+import { RequestErrorsStateI } from "../../../types/simple_models";
 
-const initState: errorsArrayStateI = {
+const initState: RequestErrorsStateI = {
   errors: []
 };
 

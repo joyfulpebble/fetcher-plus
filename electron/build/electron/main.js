@@ -7,7 +7,7 @@ function createWindow() {
     var mainWindow = new electron_1.BrowserWindow({
         width: 1000,
         height: 700,
-        titleBarStyle: 'customButtonsOnHover',
+        // titleBarStyle: 'hidden',
         webPreferences: {
             nodeIntegration: true
         }

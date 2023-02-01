@@ -1,21 +1,21 @@
-/* 
-  functional types 
-*/
-
 export interface DynamicObjectKeys {
   [key: string]: string | number;
 }
 
-/* 
-  unique types
-*/
-
-export interface RequestMainData {
+export interface MainInfoOfRequestFromFields {
   request_name: string;
   request_url: string;
 }
 
-export interface RequestParametersData {
+export interface InfoOfParamsFromFields {
   parameter_name: string;
   parameter_value: string;
+}
+
+export interface RequestErrorsStateI {
+  errors: Array<string | null>
+}
+
+export interface ErrorBoundaryState {
+  error: boolean;
 }

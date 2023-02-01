@@ -1,11 +1,8 @@
 import React from "react";
-
-interface ErrorBoundaryState {
-  error: boolean;
-}
+import { ErrorBoundaryState } from "../../types/simple_models";
 
 class ErrorBoundary extends React.Component<any, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryState) {
+  constructor(props: {}) {
     super(props);
     this.state = { 
       error: false

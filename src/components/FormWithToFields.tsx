@@ -1,9 +1,8 @@
-import React from 'react';
-
 import { Formik, Field, Form } from "formik";
 import Input from './UI/Input/Input';
 
 import { FormWithToFieldsProps } from '../../types/elements';
+import { DynamicObjectKeys } from "../../types/simple_models";
 
 function FormWithToFields({
     firstInitValueName, 
@@ -17,7 +16,7 @@ function FormWithToFields({
     onSubmitFuncton, 
     formId
   }: FormWithToFieldsProps) {
-  const initValues: any = {};
+  const initValues: DynamicObjectKeys = {};
     initValues[firstInitValueName] = firstInitValue;
     initValues[secondInitValueName] = secondInitValue;
 

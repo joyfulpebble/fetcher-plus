@@ -1,5 +1,4 @@
 import axios, { AxiosRequestHeaders } from 'axios';
-import { GetConfigType } from '../../types/request_configs';
 
 export default class Service {
   static async GET(path: string, params?: object): Promise<Object> {

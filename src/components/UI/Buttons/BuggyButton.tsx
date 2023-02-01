@@ -6,8 +6,8 @@ interface BuggyButtonState {
   releaseBugs: boolean;
 }
 
-class BuggyButton extends React.Component<any, BuggyButtonState> {
-  constructor(props: BuggyButtonState) {
+class BuggyButton extends React.Component<{}, BuggyButtonState> {
+  constructor(props: {}) {
     super(props);
     this.state = {
       releaseBugs: false,
