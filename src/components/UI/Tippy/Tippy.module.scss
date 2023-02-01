@@ -1,0 +1,23 @@
+.Problems{
+  width: 30px;
+  height: 20px;
+  margin-left: 2px;
+  cursor: pointer;
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.InternetConnectionTippyWrapper{
+  margin-top: 2px;
+  margin-right: 25px;
+  
+  cursor: pointer;
+}
+.TippyWrapper{
+  cursor: pointer;
+
+  font-family: "Idea-Light";
+  font-size: 12px;
+}

@@ -6,7 +6,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/animations/shift-away.css';
 
-import classes from '../StatusBar.module.scss';
+import classes from './Tippy.module.scss';
 
 function OfflineTippy({online}: any): JSX.Element {
   return (
