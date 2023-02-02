@@ -1,5 +1,5 @@
 import React from "react";
-import { ErrorBoundaryState } from "../../types/simple_models";
+import { ErrorBoundaryState } from "../types/simple_models";
 
 class ErrorBoundary extends React.Component<any, ErrorBoundaryState> {
   constructor(props: {}) {

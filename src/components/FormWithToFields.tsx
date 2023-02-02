@@ -1,8 +1,8 @@
 import { Formik, Field, Form } from "formik";
 import Input from './UI/Input/Input';
 
-import { FormWithToFieldsProps } from '../../types/elements';
-import { DynamicObjectKeys } from "../../types/simple_models";
+import { FormWithToFieldsProps } from '../types/elements';
+import { DynamicObjectKeys } from "../types/simple_models";
 
 function FormWithToFields({
     firstInitValueName, 

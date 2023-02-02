@@ -10,7 +10,7 @@ import {
   DynamicObjectKeys, 
   MainInfoOfRequestFromFields, 
   InfoOfParamsFromFields 
-  } from '../../../../types/simple_models/index';
+  } from '../../../types/simple_models/index';
 
 import CustomButton from '../../UI/Buttons/PrimaryButton';
 import LinkButton from '../../UI/Buttons/RedirectButton';

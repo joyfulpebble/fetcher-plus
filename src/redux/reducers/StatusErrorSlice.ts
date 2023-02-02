@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { RequestErrorsStateI } from "../../../types/simple_models";
+import { RequestErrorsStateI } from "../../types/simple_models";
 
 const initState: RequestErrorsStateI = {
   errors: []

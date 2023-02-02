@@ -1,5 +1,5 @@
-import { ParamsListProps } from '../../types/elements';
-import { DynamicObjectKeys } from '../../types/simple_models';
+import { ParamsListProps } from '../types/elements';
+import { DynamicObjectKeys } from '../types/simple_models';
 
 import List from './UI/List/List';
 

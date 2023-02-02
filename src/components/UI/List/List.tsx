@@ -1,4 +1,4 @@
-import { ListPropsI } from '../../../../types/elements';
+import { ListPropsI } from '../../../types/elements';
 
 function List({array, deleteFunction}: ListPropsI): JSX.Element {
   const listElements = array.map((elem: any, index: number) => {
