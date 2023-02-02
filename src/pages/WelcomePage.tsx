@@ -5,7 +5,6 @@ import LinkButton from '../components/UI/Buttons/RedirectButton';
 function WelcomePage(): JSX.Element {
   const history = localStorage.getItem('REQUEST_HISTORY') || '[]'
   const parsed_history = JSON.parse(history)
-
   // console.log(parsed_history);
   
   return (
@@ -19,9 +18,7 @@ function WelcomePage(): JSX.Element {
         content={'get'}
         path={"/get-fetch-form"}
       />
-      <br />
 
-      <BuggyButton/>
       
       <StatusBar/>
     </div>

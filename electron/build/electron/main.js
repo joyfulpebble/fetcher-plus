@@ -5,7 +5,7 @@ var electron_devtools_installer_1 = require("electron-devtools-installer");
 var path = require("path");
 function createWindow() {
     var mainWindow = new electron_1.BrowserWindow({
-        width: 1000,
+        width: 1400,
         height: 700,
         // titleBarStyle: 'hidden',
         webPreferences: {

@@ -4,7 +4,7 @@ import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-insta
 import * as path from 'path';
 function createWindow() {
   const mainWindow = new BrowserWindow({
-    width: 1000,
+    width: 1400,
     height: 700,
     // titleBarStyle: 'hidden',
     webPreferences: {

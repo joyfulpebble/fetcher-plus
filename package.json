@@ -33,7 +33,7 @@
     "electron:build": "yarn build && tsc -p electron && electron-builder",
     "test": "react-scripts test",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "react:build": "react-scripts build",
     "postinstall": "electron-builder install-app-deps",
     "eject": "react-scripts eject"
   },
