@@ -1,6 +1,6 @@
-import getConfigSlice from "../redux/reducers/GetConfigSlice";
+import getConfigSlice from "../../../redux/reducers/getConfigSlice";
 
-import { GetConfigI } from "../types/request_configs";
+import { GetConfigI } from "../../../types/request_configs";
 
 const initState: GetConfigI = {
   params: {},
@@ -13,4 +13,4 @@ describe('getConfigSlice', () => {
 
     expect(result).toEqual(initState)
   })
-} );
+});

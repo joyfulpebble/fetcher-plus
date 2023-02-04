@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import Tools from '../../../tools/Tools';
-import { getConfigSlice } from '../../../redux/reducers/GetConfigSlice';
+import { getConfigSlice } from '../../../redux/reducers/getConfigSlice';
 import { useAppDispatch } from '../../../hooks/redux/redux';
 
 import { Entries } from 'type-fest';

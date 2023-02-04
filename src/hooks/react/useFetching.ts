@@ -1,4 +1,4 @@
-import { statusErrorSlice } from "../../redux/reducers/StatusErrorSlice";
+import { statusErrorSlice } from "../../redux/reducers/statusErrorSlice";
 import { useAppDispatch } from "../redux/redux";
 
 import { AxiosError } from "axios";
