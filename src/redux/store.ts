@@ -11,7 +11,7 @@ import {
 import storage from "redux-persist/lib/storage";
  
 import getConfigReducer from "./reducers/getConfigSlice";
-import statusErrorReducer from "./reducers/statusErrorSlice";
+import requestErrorReducer from "./reducers/requestErrorSlice";
 
 const persistConfig = {
   key: 'root',
@@ -21,7 +21,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   'getConfig': getConfigReducer,
-  'requestError': statusErrorReducer
+  'requestError': requestErrorReducer
 });
 
 const persistReduser = persistReducer(persistConfig, rootReducer)
