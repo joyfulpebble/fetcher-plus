@@ -6,7 +6,7 @@ const initState: RequestErrorsStateI = {
   errors: []
 };
 
-export const statusErrorSlice = createSlice({
+export const requestErrorSlice = createSlice({
   name: 'requestError',
   initialState: initState,
   reducers: {
@@ -20,4 +20,4 @@ export const statusErrorSlice = createSlice({
   }
 })
 
-export default statusErrorSlice.reducer;
+export default requestErrorSlice.reducer;
