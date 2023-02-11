@@ -1,5 +1,5 @@
 import axios from "axios";
-import getResponseTime from "../tools/getResponseTime";
+import getResponseTime from "../tools/api-tools/getResponseTime";
 
 export const main_instance = axios.create();    
 
