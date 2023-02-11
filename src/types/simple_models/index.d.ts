@@ -1,5 +1,5 @@
 export interface DynamicObjectKeys {
-  [key: string]: string | number;
+  [key: string]: string | number | Date;
 }
 
 export interface MainInfoOfRequestFromFields {

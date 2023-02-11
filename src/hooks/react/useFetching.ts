@@ -1,11 +1,11 @@
-import { statusErrorSlice } from "../../redux/reducers/requestErrorSlice";
+import { requestErrorSlice } from "../../redux/reducers/requestErrorSlice";
 import { useAppDispatch } from "../redux/redux";
 
 import { AxiosError } from "axios";
 
 export const useFetching = (callback: () => void): [ () => void ] => {
   const dispatch = useAppDispatch();
-  const { addError } = statusErrorSlice.actions;
+  const { addError } = requestErrorSlice.actions;
 
   const fetching = async () => {
     try {
