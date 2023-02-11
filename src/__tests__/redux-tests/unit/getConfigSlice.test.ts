@@ -1,7 +1,7 @@
 import getConfigReducer, { getConfigSlice } from "../../../redux/reducers/getConfigSlice";
 
 import { AnyAction } from "@reduxjs/toolkit";
-import { GetConfigI } from "../../../types/request_configs";
+import { GetConfigI } from "../../../types/api_models";
 
 const { clearConfig, updateConfig } = getConfigSlice.actions
 const initialState: GetConfigI = {

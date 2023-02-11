@@ -1,8 +1,8 @@
-import { API } from './API';
+import { main_instance } from "./api-config";
 
 export default class Service {
   static async GET(path: string, params?: object): Promise<Object> {
-    let response = await API.get(path, params)
+    const response = await main_instance.get(path, params);
     
     return response;
   };

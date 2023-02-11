@@ -1,24 +1,8 @@
-import axios, { 
-  AxiosRequestConfig, 
-  AxiosResponse 
-} from "axios";
+import { AxiosInstance } from "axios";
+import { InterceptorI, InterceptorResponseI } from "../types/api_models";
 
-export const API = axios.create();    
-
-interface InterceptorT extends AxiosRequestConfig {
-  metadata?: {
-    endTime?: number;
-    startTime?: number;
-    duration?: number
-  };
-}
-
-interface InterceptorResponseT extends AxiosResponse {
-  config: InterceptorT;
-  duration?: number;
-}
-
-API.interceptors.request.use((config: InterceptorT) => {
+export default function getResponseTime (axios_instance: AxiosInstance) {
+  axios_instance.interceptors.request.use((config: InterceptorI) => {
     config.metadata = { startTime: +new Date()};
 
     return config;
@@ -28,7 +12,7 @@ API.interceptors.request.use((config: InterceptorT) => {
   }
 );
 
-API.interceptors.response.use((response: InterceptorResponseT) => {
+axios_instance.interceptors.response.use((response: InterceptorResponseI) => {
     response.config.metadata!.endTime = +new Date();
     response.config.metadata!.duration = response.config.metadata!.endTime - response.config.metadata!.startTime!;
     
@@ -41,3 +25,4 @@ API.interceptors.response.use((response: InterceptorResponseT) => {
     return Promise.reject(error);
   }
 );
+}
