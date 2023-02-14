@@ -4435,6 +4435,11 @@
     "defined" "^1.0.0"
     "minimist" "^1.2.6"
 
+"dexie@^3.2.3":
+  "integrity" "sha512-iHayBd4UYryDCVUNa3PMsJMEnd8yjyh5p7a+RFeC8i8n476BC9wMhVvqiImq5zJZJf5Tuer+s4SSj+AA3x+ZbQ=="
+  "resolved" "https://registry.npmjs.org/dexie/-/dexie-3.2.3.tgz"
+  "version" "3.2.3"
+
 "didyoumean@^1.2.2":
   "integrity" "sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw=="
   "resolved" "https://registry.npmjs.org/didyoumean/-/didyoumean-1.2.2.tgz"
