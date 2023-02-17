@@ -1,13 +1,32 @@
-import Dexie from "dexie";
+import { openDB, DBSchema } from 'idb';
 
-interface tableT {
-  [tableName: string]: string | null;
+interface MyDB extends DBSchema {
+  'favourite-number': {
+    key: string;
+    value: number;
+  };
+  // products: {
+  //   value: {
+  //     name: string;
+  //     price: number;
+  //     productCode: string;
+  //   };
+  //   key: string;
+  //   indexes: { 'by-price': number };
+  // };
 }
 
-const createIndexdb = (dbname: string, table: tableT) => {
-  const db = new Dexie(dbname);
-  db.version(1).stores(table);
-  db.open();
+export async function demo() {
+  const db = await openDB<MyDB>('my-db', 1, {
+    upgrade(db) {
+      db.createObjectStore('favourite-number');
 
-  return db;
-};
+    //   const productStore = db.createObjectStore('products', {
+    //     keyPath: 'productCode',
+    //   });
+    //   productStore.createIndex('by-price', 'price');
+    },
+  });
+
+  await db.put('favourite-number', 7, 'Jen');
+}
