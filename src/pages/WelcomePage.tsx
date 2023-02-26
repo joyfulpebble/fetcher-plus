@@ -1,14 +1,15 @@
 import StatusBar from '../components/layouts/status-bar/StatusBar';
-import BuggyButton from '../components/UI/Buttons/BuggyButton';
 import LinkButton from '../components/UI/Buttons/RedirectButton';
-import { demo } from '../tools/indexdb-tools/create_db';
+
+import { request_history_db } from '../hooks/idb/request-history-db'
+import { idb_set } from '../tools/idb-tools/idbMethods';
 
 function WelcomePage(): JSX.Element {
   const history = localStorage.getItem('REQUEST_HISTORY') || '[]'
   const parsed_history = JSON.parse(history)
   // console.log(parsed_history);
   
-  demo()
+  idb_set('test-key', {key: 'value'}, request_history_db, 'history')
 
   return (
     <div>
