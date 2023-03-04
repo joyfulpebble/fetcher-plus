@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import Tools from '../../../tools/Tools';
 import { getConfigSlice } from '../../../redux/reducers/getConfigSlice';
 import { useAppDispatch } from '../../../hooks/redux/redux';
 
@@ -19,6 +18,8 @@ import Switch from '../../UI/Switch/Switch';
 import ParamsList from '../../ParamsList';
 
 import classes from './GetForm.module.scss';
+import { idb_set } from '../../../tools/idb-tools/idbMethods';
+import { request_history_db } from '../../../hooks/idb/request-history-db';
 
 function GetForm(): JSX.Element {
   const [parameters, setParameters] = useState<DynamicObjectKeys>({});
@@ -44,7 +45,12 @@ function GetForm(): JSX.Element {
     if(!values.request_name && values.request_url) return console.error('не все поля заполнены');  
     
     const date: string = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
-
+    const requestHistoryItem = {
+      date: date,
+      url: values.request_url, 
+      parameters: parameters ? parameters : {}
+    }
+    
     dispatch(
       updateConfig(
         {
@@ -52,10 +58,8 @@ function GetForm(): JSX.Element {
           url: values.request_url
         }
       )
-    )
-
-    Tools.setDataToStorage(needParameters, values.request_name, date, values.request_url, parameters);
-
+    );
+    idb_set(values.request_name, requestHistoryItem, request_history_db, 'history')  
     setNeedRedirect(true);
   };
 
