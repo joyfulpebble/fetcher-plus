@@ -40,7 +40,7 @@ function GetForm(): JSX.Element {
     const parametersMatrix = Object.entries(parameters);
     setDisplayedParameters(parametersMatrix)
   };
-
+  
   const handleSubmitFetch = (values: MainInfoOfRequestFromFields): void => {
     if(!values.request_name && values.request_url) return console.error('не все поля заполнены');  
     
@@ -51,16 +51,17 @@ function GetForm(): JSX.Element {
       parameters: parameters ? parameters : {}
     }
     
+    
+    idb_set(values.request_name, requestHistoryItem, request_history_db, 'history');  
     dispatch(
       updateConfig(
         {
           params: parameters,
           url: values.request_url
         }
-      )
-    );
-    idb_set(values.request_name, requestHistoryItem, request_history_db, 'history')  
-    setNeedRedirect(true);
+        )
+        );
+        setNeedRedirect(true);
   };
 
   return (

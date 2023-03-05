@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 import { InterceptorI, InterceptorResponseI } from "../../types/api_models";
 
-export default function getResponseTime (axios_instance: AxiosInstance) {
+export default function getResponseTime(axios_instance: AxiosInstance) {
   axios_instance.interceptors.request.use((config: InterceptorI) => {
       config.metadata = { startTime: +new Date()};
 

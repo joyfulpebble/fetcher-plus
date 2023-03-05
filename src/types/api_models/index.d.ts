@@ -15,6 +15,6 @@ export interface InterceptorI extends AxiosRequestConfig {
 }
 
 export interface InterceptorResponseI extends AxiosResponse {
-  config: InterceptorT;
+  config: InterceptorI;
   duration?: number;
 }
