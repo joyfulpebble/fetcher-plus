@@ -8,15 +8,17 @@ import { useAppSelector } from '../hooks/redux/redux';
 
 import DefaultEditor from '../components/DefaultEditor';
 import StatusBar from '../components/layouts/status-bar/StatusBar';
+import { AxiosResponse } from 'axios';
 
 function Workspace(): JSX.Element {
   const [contentToSave, setContentToSave] = useState<string>('');
   const [response, setResponse] = useState<string>('{}');
   
-  const { url, params } = useAppSelector(state => state.getConfig)
+  const { url, params, request_name } = useAppSelector(state => state.getConfig);
+
   const [ fetchUrl ] = useFetching(async () => {
-    const response = await Service.GET(url, params);
-      
+    const response: AxiosResponse = await Service.GET(url, params);
+
     setResponse(JSON.stringify(response));
   });
   
@@ -39,7 +41,7 @@ function Workspace(): JSX.Element {
           EditorConfig={{tabSize: 2}} 
           ContentToSaveFunc={setContentToSave}
         />
-        <button onClick={() => FileSaver.saveAs(blob, "unnamed.json")}>save file</button>
+        <button onClick={() => FileSaver.saveAs(blob, request_name)}>save file</button>
       </div>
     <Link to={'/get-fetch-form'}>Go back</Link>
     <StatusBar/>

@@ -57,11 +57,12 @@ function GetForm(): JSX.Element {
       updateConfig(
         {
           params: parameters,
-          url: values.request_url
+          url: values.request_url,
+          request_name: values.request_name
         }
-        )
-        );
-        setNeedRedirect(true);
+      )
+    );
+    setNeedRedirect(true);
   };
 
   return (

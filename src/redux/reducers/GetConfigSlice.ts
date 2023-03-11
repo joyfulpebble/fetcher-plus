@@ -3,8 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GetConfigI } from "../../types/api_models";
 
 const initState: GetConfigI = {
+  url: '',
+  request_name: '',
   params: {},
-  url: ''
 } 
 
 export const getConfigSlice = createSlice({
@@ -18,6 +19,7 @@ export const getConfigSlice = createSlice({
     updateConfig(state, action: PayloadAction<GetConfigI>) {
       state.params = action.payload.params;
       state.url = action.payload.url;
+      state.request_name = action.payload.request_name;
     }
   }
 })

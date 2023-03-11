@@ -3,6 +3,7 @@ import { DynamicObjectKeys } from "../simple_models";
 
 export interface GetConfigI {
   url: string;
+  request_name: string;
   params: DynamicObjectKeys;
 }
 
