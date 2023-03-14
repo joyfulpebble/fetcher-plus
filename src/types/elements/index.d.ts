@@ -1,12 +1,13 @@
 import React, { ReactNode } from "react";
 import monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import { AxiosResponse } from "axios";
 
 export interface DefaultEditorProps {
   EditorWidth: string;
   EditorHeight: string;
   EditorInitValue: any;
   EditorConfig?: monaco.editor.IStandaloneEditorConstructionOptions | undefined;
-  ContentToSaveFunc: React.Dispatch<React.SetStateAction<string>>;
+  ContentToSaveFunc: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export interface FormWithToFieldsProps {

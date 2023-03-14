@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
 
 import FileSaver from 'file-saver';
 import Service from '../API/Service';
@@ -8,29 +9,32 @@ import { useAppSelector } from '../hooks/redux/redux';
 
 import DefaultEditor from '../components/DefaultEditor';
 import StatusBar from '../components/layouts/status-bar/StatusBar';
-import { AxiosResponse } from 'axios';
+import { DynamicObjectKeys } from '../types/simple_models';
 
 function Workspace(): JSX.Element {
-  const [contentToSave, setContentToSave] = useState<string>('');
-  const [response, setResponse] = useState<string>('{}');
+  const [contentToSave, setContentToSave] = useState<any>({});
+  const [response, setResponse] = useState<AxiosResponse | {}>({});
+  const [responseType, setResponseType] = useState<string>('');
   
   const { url, params, request_name } = useAppSelector(state => state.getConfig);
 
   const [ fetchUrl ] = useFetching(async () => {
     const response: AxiosResponse = await Service.GET(url, params);
+      JSON.stringify(response)
 
-    setResponse(JSON.stringify(response));
+    setResponseType(response.headers['content-type']);
+    setResponse(response);
   });
+
+  /** */
+  const blob_request_data = new Blob([JSON.stringify(contentToSave.data, null, '  ')], {type: responseType});
   
-  let blob: any = null;
-  if(contentToSave != ''){
-    blob = new Blob([JSON.stringify(contentToSave, null, '  ')], {type: 'application/json'});
-  }
+  /** */
 
   useEffect(() => {
     fetchUrl();
   }, []);
-  
+
   return (
     <div>
       <div>
@@ -41,7 +45,10 @@ function Workspace(): JSX.Element {
           EditorConfig={{tabSize: 2}} 
           ContentToSaveFunc={setContentToSave}
         />
-        <button onClick={() => FileSaver.saveAs(blob, request_name)}>save file</button>
+        {/*  */}
+        <button onClick={() => FileSaver.saveAs(blob_request_data, request_name)}>save request data</button>
+
+        {/*  */}
       </div>
     <Link to={'/get-fetch-form'}>Go back</Link>
     <StatusBar/>
