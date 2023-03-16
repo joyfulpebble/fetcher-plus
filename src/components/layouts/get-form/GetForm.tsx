@@ -74,14 +74,14 @@ function GetForm(): JSX.Element {
   return (
     <div className={classes.SettingsWrapper}>
       <FormWithToFields
-          firstInitValueName={'request_url'}
-          secondInitValueName={'request_name'}
-          firstInitValue={'https://jsonplaceholder.typicode.com/posts'}
-          secondInitValue={'asd'}
-          firstInfoText={'Fetch url:'}
-          secondInfoText={'File name:'}
-          onSubmitFuncton={handleSubmitFetch}
-          formId={'main-request-data'}
+        firstInitValueName={'request_url'}
+        secondInitValueName={'request_name'}
+        firstInitValue={'https://jsonplaceholder.typicode.com/posts'}
+        secondInitValue={'asd'}
+        firstInfoText={'Fetch url:'}
+        secondInfoText={'File name:'}
+        onSubmitFuncton={handleSubmitFetch}
+        formId={'main-request-data'}
       />
       <Switch
         needParameters={needParameters}
@@ -108,12 +108,14 @@ function GetForm(): JSX.Element {
           type={'submit'}
           form={'parameters-data'}
         />
-        <ParamsList 
-          displayedParameters={displayedParameters}
-          setDisplayedParameters={setDisplayedParameters}
-          parameters={parameters}
-          setParameters={setParameters}
-        />
+        <div className={classes.ParametersList}>
+          <ParamsList 
+            displayedParameters={displayedParameters}
+            setDisplayedParameters={setDisplayedParameters}
+            parameters={parameters}
+            setParameters={setParameters}
+          />
+        </div>
       </div>
       <CustomButton
         children={'Submit'}
