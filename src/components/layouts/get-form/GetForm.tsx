@@ -68,7 +68,7 @@ function GetForm(): JSX.Element {
         }
       )
     );
-    // setNeedRedirect(true);
+    setNeedRedirect(true);
   };
 
   return (
