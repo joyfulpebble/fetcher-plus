@@ -8,7 +8,7 @@ import { useFetching } from '../hooks/react/useFetching';
 import { useAppSelector } from '../hooks/redux/redux';
 
 import DefaultEditor from '../components/DefaultEditor';
-import StatusBar from '../components/layouts/status-bar/StatusBar';
+import StatusBar from '../components/layouts/statusbar/StatusBar';
 
 function Workspace(): JSX.Element {
   const [contentToSave, setContentToSave] = useState<any>({});

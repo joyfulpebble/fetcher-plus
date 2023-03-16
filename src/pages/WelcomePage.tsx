@@ -1,4 +1,4 @@
-import StatusBar from '../components/layouts/status-bar/StatusBar';
+import StatusBar from '../components/layouts/statusbar/StatusBar';
 import LinkButton from '../components/UI/Buttons/RedirectButton';
 
 import { request_history_db } from '../hooks/idb/request-history-db'
