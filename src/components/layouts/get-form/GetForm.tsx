@@ -6,10 +6,11 @@ import { useAppDispatch } from '../../../hooks/redux/redux';
 
 import { Entries } from 'type-fest';
 import { 
-  DynamicObjectKeys, 
-  MainInfoOfRequestFromFields, 
-  InfoOfParamsFromFields 
-  } from '../../../types/simple_models/index';
+  DynamicObjectKeysI, 
+  MainInfoOfRequestFromFieldsI, 
+  InfoOfParamsFromFieldsI, 
+  RequestHistoryItemI
+  } from '../../../types/simple_models';
 
 import CustomButton from '../../UI/Buttons/PrimaryButton';
 import LinkButton from '../../UI/Buttons/RedirectButton';
@@ -22,7 +23,7 @@ import { idb_set } from '../../../tools/idb-tools/idbMethods';
 import { request_history_db } from '../../../hooks/idb/request-history-db';
 
 function GetForm(): JSX.Element {
-  const [parameters, setParameters] = useState<DynamicObjectKeys>({});
+  const [parameters, setParameters] = useState<DynamicObjectKeysI>({});
   const [displayedParameters, setDisplayedParameters] = useState<Entries<typeof parameters>>([])
   
   const [needParameters, setNeedParameters] = useState<boolean>(false);
@@ -34,35 +35,40 @@ function GetForm(): JSX.Element {
   const { updateConfig } = getConfigSlice.actions;
   const dispatch = useAppDispatch();
 
-  const handleSubmitParams = (values: InfoOfParamsFromFields): void => {
+  const handleSubmitParams = (values: InfoOfParamsFromFieldsI): void => {
     parameters[values.parameter_name] = values.parameter_value;
     
     const parametersMatrix = Object.entries(parameters);
     setDisplayedParameters(parametersMatrix)
   };
   
-  const handleSubmitFetch = (values: MainInfoOfRequestFromFields): void => {
-    if(!values.request_name && values.request_url) return console.error('не все поля заполнены');  
+  const handleSubmitFetch = (values: MainInfoOfRequestFromFieldsI): void => {
+    if(!values.request_name && values.request_url) return console.error('не все поля заполнены');
     
-    const date: string = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
-    const requestHistoryItem = {
-      date: date,
-      url: values.request_url, 
-      parameters: parameters ? parameters : {}
-    }
+    const request_id: number = new Date().getTime();
+
+    const request_date: string = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
+    const request_time: string = new Date().toLocaleTimeString('en-GB');
+
+    const requestHistoryItem: RequestHistoryItemI = {
+      date: request_date,
+      time: request_time,
+      name: values.request_name,
+      url:  values.request_url, 
+      parameters: parameters ? parameters : {},
+    };
     
-    
-    idb_set(values.request_name, requestHistoryItem, request_history_db, 'history');  
+    idb_set(request_id, requestHistoryItem, request_history_db, 'history');  
     dispatch(
       updateConfig(
         {
-          params: parameters,
-          url: values.request_url,
-          request_name: values.request_name
+          url:          values.request_url,
+          params:       parameters,
+          request_name: values.request_name,
         }
       )
     );
-    setNeedRedirect(true);
+    // setNeedRedirect(true);
   };
 
   return (

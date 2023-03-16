@@ -9,7 +9,6 @@ import { useAppSelector } from '../hooks/redux/redux';
 
 import DefaultEditor from '../components/DefaultEditor';
 import StatusBar from '../components/layouts/status-bar/StatusBar';
-import { DynamicObjectKeys } from '../types/simple_models';
 
 function Workspace(): JSX.Element {
   const [contentToSave, setContentToSave] = useState<any>({});

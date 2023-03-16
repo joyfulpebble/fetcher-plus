@@ -2,7 +2,7 @@ import { Formik, Field, Form } from "formik";
 import Input from './UI/Input/Input';
 
 import { FormWithToFieldsProps } from '../types/elements';
-import { DynamicObjectKeys } from "../types/simple_models";
+import { DynamicObjectKeysI } from "../types/simple_models";
 
 function FormWithToFields({
     firstInitValueName, 
@@ -16,7 +16,7 @@ function FormWithToFields({
     onSubmitFuncton, 
     formId
   }: FormWithToFieldsProps) {
-  const initValues: DynamicObjectKeys = {};
+  const initValues: DynamicObjectKeysI = {};
     initValues[firstInitValueName] = firstInitValue;
     initValues[secondInitValueName] = secondInitValue;
 

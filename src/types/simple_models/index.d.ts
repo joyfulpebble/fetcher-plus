@@ -1,13 +1,13 @@
-export interface DynamicObjectKeys {
+export interface DynamicObjectKeysI {
   [key: string]: string | number | Date;
 }
 
-export interface MainInfoOfRequestFromFields {
+export interface MainInfoOfRequestFromFieldsI {
   request_name: string;
   request_url: string;
 }
 
-export interface InfoOfParamsFromFields {
+export interface InfoOfParamsFromFieldsI {
   parameter_name: string;
   parameter_value: string;
 }
@@ -16,6 +16,14 @@ export interface RequestErrorsStateI {
   errors: Array<string | null>
 }
 
-export interface ErrorBoundaryState {
+export interface RequestHistoryItemI {
+  date: string;
+  time: string;
+  name: string;
+  url: string;
+  parameters: DynamicObjectKeysI;
+}
+
+export interface ErrorBoundaryStateI {
   error: boolean;
 }

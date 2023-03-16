@@ -1,5 +1,5 @@
 import { ParamsListProps } from '../types/elements';
-import { DynamicObjectKeys } from '../types/simple_models';
+import { DynamicObjectKeysI } from '../types/simple_models';
 
 import List from './UI/List/List';
 
@@ -11,7 +11,7 @@ function ParamsList({displayedParameters, parameters, setDisplayedParameters, se
     const parametersAsArrays: Array<(number | string)[]> = displayedParameters.filter((element: string | number) => { 
       return element !== displayedParameters[index];
     });
-    const parametersAsObject: DynamicObjectKeys = Object.fromEntries(parametersAsArrays);    
+    const parametersAsObject: DynamicObjectKeysI = Object.fromEntries(parametersAsArrays);    
 
     setDisplayedParameters(parametersAsArrays);
     setParameters(parametersAsObject)
