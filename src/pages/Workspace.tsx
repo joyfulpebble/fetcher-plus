@@ -19,7 +19,6 @@ function Workspace(): JSX.Element {
 
   const [ fetchUrl ] = useFetching(async () => {
     const response: AxiosResponse = await Service.GET(url, params);
-      JSON.stringify(response)
 
     setResponseType(response.headers['content-type']);
     setResponse(response);

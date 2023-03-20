@@ -7,7 +7,7 @@ export const useFetching = (callback: () => void): [ () => void ] => {
   const dispatch = useAppDispatch();
   const { addError } = requestErrorSlice.actions;
 
-  const fetching = async () => {
+  const fetch = async () => {
     try {
       await callback();
     } catch (e) {
@@ -19,5 +19,5 @@ export const useFetching = (callback: () => void): [ () => void ] => {
     }
   }
   
-  return [ fetching ];
+  return [ fetch ];
 }

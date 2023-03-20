@@ -18,13 +18,9 @@ function createWindow() {
 
   require('electron-reload')(__dirname, {
     electron: path.join(__dirname,
-      '..',
-      '..',
       'node_modules',
       '.bin',
-      'electron' + (process.platform === "win32" ? ".cmd" : "")),
-    forceHardReset: true,
-    hardResetMethod: 'exit'
+      'electron' + (process.platform === "win32" ? ".cmd" : ""))
   });
 }
 

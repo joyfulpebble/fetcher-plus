@@ -40,3 +40,7 @@ export interface ListPropsI {
   array: Array<string | number | Array<string | number>>
   deleteFunction: (index: number) => void;
 }
+
+export type OnlineStatusProviderProps = {
+  children: React.ReactNode;
+};

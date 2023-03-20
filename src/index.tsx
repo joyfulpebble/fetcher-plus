@@ -7,6 +7,7 @@ import { setupStore } from './redux/store';
 
 import App from './App';
 import ErrorBoundary from './components/ErrorBoundary';
+import { OnlineStatusProvider } from './hooks/react/useOnlineStatus';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 const store = setupStore();
@@ -16,7 +17,9 @@ root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <ErrorBoundary>
-        <App />
+        <OnlineStatusProvider>
+          <App />
+        </OnlineStatusProvider>
       </ErrorBoundary>
     </PersistGate>
   </Provider>
