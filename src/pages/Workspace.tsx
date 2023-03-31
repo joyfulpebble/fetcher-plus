@@ -8,7 +8,7 @@ import { useFetching } from '../hooks/react/useFetching';
 import { useAppSelector } from '../hooks/redux/redux';
 
 import DefaultEditor from '../components/DefaultEditor';
-import StatusBar from '../components/layouts/statusbar/StatusBar';
+import Statusbar from '../components/layouts/statusbar/Statusbar';
 
 function Workspace(): JSX.Element {
   const [contentToSave, setContentToSave] = useState<any>({});
@@ -49,7 +49,7 @@ function Workspace(): JSX.Element {
         {/*  */}
       </div>
     <Link to={'/get-fetch-form'}>Go back</Link>
-    <StatusBar/>
+    <Statusbar/>
     </div>
   )
 }

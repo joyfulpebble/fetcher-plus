@@ -18,7 +18,7 @@ import FormWithToFields from '../../FormWithToFields';
 import Switch from '../../UI/Switch/Switch';
 import ParamsList from '../../ParamsList';
 
-import classes from './GetForm.module.scss';
+import classes from '../../../styles/modules/GetForm.module.scss';
 import { idb_set } from '../../../tools/idb-tools/idbMethods';
 import { request_history_db } from '../../../hooks/idb/request-history-db';
 

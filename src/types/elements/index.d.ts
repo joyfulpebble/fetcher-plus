@@ -44,3 +44,7 @@ export interface ListPropsI {
 export type OnlineStatusProviderProps = {
   children: React.ReactNode;
 };
+
+export interface NetConnetctionProps {
+  isOnline: boolean;
+}

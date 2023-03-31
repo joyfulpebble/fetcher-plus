@@ -6,7 +6,9 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1400,
     height: 700,
-    // titleBarStyle: 'hidden',
+    minWidth: 800,
+    minHeight: 600,
+    backgroundColor: '#1E1E1E',
     webPreferences: {
       nodeIntegration: true
     }

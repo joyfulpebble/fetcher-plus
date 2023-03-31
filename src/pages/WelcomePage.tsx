@@ -1,4 +1,4 @@
-import StatusBar from '../components/layouts/statusbar/StatusBar';
+import Statusbar from '../components/layouts/statusbar/Statusbar';
 import LinkButton from '../components/UI/Buttons/RedirectButton';
 
 function WelcomePage(): JSX.Element {
@@ -16,7 +16,7 @@ function WelcomePage(): JSX.Element {
       />
 
       
-      <StatusBar/>
+      <Statusbar/>
     </div>
   )
 }

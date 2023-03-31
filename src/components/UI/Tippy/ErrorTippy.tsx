@@ -1,21 +1,18 @@
-import React from 'react';
-
 import ErrorSVG from '../../../assets/svg/ErrorSVG';
 
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/animations/shift-away.css';
 
-import classes from './Tippy.module.scss';
+import classes from '../../../styles/modules/Tippy.module.scss';
 
-function ErrorTippy({errorText, errorCount}: any) {
+function ErrorTippy({errorCount}: any) {
   return (
     <Tippy
         className={classes.TippyWrapper}
         content={
-          <span 
-            title={errorText}>
-              {errorCount ? `Errors: ${errorCount}` : 'No problems'}
+          <span>
+            {errorCount ? `Errors: ${errorCount}` : 'No problems'}
           </span>
         }
         interactive={true}
@@ -23,10 +20,10 @@ function ErrorTippy({errorText, errorCount}: any) {
         appendTo={document.body}
         animation='shift-away'
         trigger='mouseenter'
-      >
+        >
         <div className={classes.Problems}>
-          <ErrorSVG/>
-          <span>{errorCount}</span>
+          <div style={{marginTop: '2.5px'}} children={<ErrorSVG w={15} h={15}/>}/>   
+          <span style={{marginBottom: '0.5px'}}>{errorCount}</span>
         </div>
       </Tippy>
   )

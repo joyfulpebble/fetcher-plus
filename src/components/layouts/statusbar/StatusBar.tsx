@@ -1,27 +1,24 @@
 import { useAppSelector } from '../../../hooks/redux/redux';
 
-import OfflineTippy from '../../UI/Tippy/OfflineTippy';
-import OnlineTippy from '../../UI/Tippy/OnlineTippy';
 import ErrorTippy from '../../UI/Tippy/ErrorTippy';
 
-import classes from './StatusBar.module.scss';
 import { useOnlineStatus } from '../../../hooks/react/useOnlineStatus';
+import NetConnectionContainer from '../../UI/containers/NetConnectionContainer';
 
-function StatusBar(): JSX.Element {
-  const isOnline = useOnlineStatus();
+import classes from '../../../styles/modules/Statusbar.module.scss';
+
+function Statusbar(): JSX.Element {
+  const isOnline: boolean = useOnlineStatus();
   const errorsArray = useAppSelector(state => state.requestError).errors;
   
   return (
     <div className={classes.StatusBarWrapper}>
-      <ErrorTippy errorCount={errorsArray.length} errorText={errorsArray.length > 1 ? 'API Error' : 'No problems'}/>
+      <ErrorTippy errorCount={errorsArray.length}/>
       <div className={classes.InternetConnectionTippyWrapper}>
-      {isOnline 
-        ? <OnlineTippy/>
-        : <OfflineTippy/>
-        }
+        <NetConnectionContainer isOnline={isOnline}/>
       </div>
     </div>
   )
 }
 
-export default StatusBar;
+export default Statusbar;

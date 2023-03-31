@@ -1,13 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var electron_1 = require("electron");
-var electron_devtools_installer_1 = require("electron-devtools-installer");
-var path = require("path");
+const electron_1 = require("electron");
+const electron_devtools_installer_1 = require("electron-devtools-installer");
+const path = require("path");
 function createWindow() {
-    var mainWindow = new electron_1.BrowserWindow({
+    const mainWindow = new electron_1.BrowserWindow({
         width: 1400,
         height: 700,
-        // titleBarStyle: 'hidden',
+        minWidth: 800,
+        minHeight: 600,
+        backgroundColor: '#1E1E1E',
         webPreferences: {
             nodeIntegration: true
         }
@@ -19,17 +21,17 @@ function createWindow() {
         electron: path.join(__dirname, 'node_modules', '.bin', 'electron' + (process.platform === "win32" ? ".cmd" : ""))
     });
 }
-electron_1.app.whenReady().then(function () {
+electron_1.app.whenReady().then(() => {
     (0, electron_devtools_installer_1.default)(electron_devtools_installer_1.REACT_DEVELOPER_TOOLS)
-        .then(function (name) { return console.log("Added Extension:  ".concat(name)); })
-        .catch(function (err) { return console.log('An error occurred: ', err); });
+        .then((name) => console.log(`Added Extension:  ${name}`))
+        .catch((err) => console.log('An error occurred: ', err));
     createWindow();
-    electron_1.app.on('activate', function () {
+    electron_1.app.on('activate', () => {
         if (electron_1.BrowserWindow.getAllWindows().length === 0) {
             createWindow();
         }
     });
-    electron_1.app.on('window-all-closed', function () {
+    electron_1.app.on('window-all-closed', () => {
         if (process.platform !== 'darwin') {
             electron_1.app.quit();
         }

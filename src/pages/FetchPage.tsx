@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import Form from '../components/FetchForm';
-import StatusBar from '../components/layouts/statusbar/StatusBar';
+import Statusbar from '../components/layouts/statusbar/Statusbar';
 
 import { useAppDispatch } from '../hooks/redux/redux';
 import { requestErrorSlice } from '../redux/reducers/requestErrorSlice';
@@ -17,7 +17,7 @@ function FetchForm() {
   return (
     <div>
       <Form/>
-      <StatusBar/>
+      <Statusbar/>
     </div>
   )
 }

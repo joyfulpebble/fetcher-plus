@@ -1,0 +1,22 @@
+@mixin get-fonts() {
+  @import url("../font-face/Idea/IdeaMedium.css");
+}
+@include get-fonts();
+
+$status-bar-background: #5839af;
+
+.StatusBarWrapper{
+  font-family: "IdeaMedium";
+  font-size: 13px;
+ 
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 8px;
+
+  width: 100vw;
+  height: 22px;
+  background-color: $status-bar-background; 
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+}

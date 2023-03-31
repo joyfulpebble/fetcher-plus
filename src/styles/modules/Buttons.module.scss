@@ -1,3 +1,10 @@
+@mixin get-fonts() {
+  @import url("../font-face/Poppins/PoppinsLight.css");
+}
+@include get-fonts();
+
+$button-font-size: 13px;
+
 $primary-button-background: #5839af;
 $primary-button-focused-color: #4d309c;
 
@@ -9,15 +16,15 @@ $redirect-button-focused-background: #d8d8d8;
 
 .PrimaryButton{
   color: white;
-  padding: 5px 14px;
+  padding: 5.25px 14px;
   background: $primary-button-background;
   border: none;
   border-radius: 7px;
   cursor: pointer;
   outline: none;
   text-decoration: none;
-  font-family: "Assistant";
-  font-size: 15px;
+  font-family: "PoppinsLight";
+  font-size: $button-font-size;
 
   &:hover{
     background: $primary-button-focused-color;
@@ -34,8 +41,8 @@ $redirect-button-focused-background: #d8d8d8;
   cursor: pointer;
   outline: none;
   text-decoration: none;
-  font-family: "Assistant";
-  font-size: 15px;
+  font-family: "PoppinsLight";
+  font-size: $button-font-size;
 
   &:hover{
     background: $danger-button-focused-color;
@@ -45,15 +52,15 @@ $redirect-button-focused-background: #d8d8d8;
 
 .RedirectButton{
   color: black;
-  padding: 5px 14px;
+  padding: 5.5px 14px;
   background: $redirect-button-background;
   border: none;
   border-radius: 7px;
   cursor: pointer;
   outline: none;
   text-decoration: none;
-  font-family: "Assistant";
-  font-size: 15px;
+  font-family: "PoppinsLight";
+  font-size: $button-font-size;
 
   &:hover{
     background: $redirect-button-focused-background;

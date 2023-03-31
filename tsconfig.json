@@ -19,8 +19,5 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx"
-  },
-  "include": [
-    "src"
-, "types/core-types/electron-types", "../showFile.ts", "types/API", "src/core/.tools", "src/components/.svg"  ]
+  }
 }

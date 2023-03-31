@@ -4,6 +4,8 @@ import WelcomePage from "./pages/WelcomePage";
 import Workspace from "./pages/Workspace";
 import FetchPage from "./pages/FetchPage";
 
+import './styles/main.scss'
+
 function App(): JSX.Element {
   return (
     <BrowserRouter>

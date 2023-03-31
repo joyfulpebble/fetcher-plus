@@ -1,12 +1,10 @@
-import React from 'react';
-
 import OnlineSVG from '../../../assets/svg/OnlineSVG';
 
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/animations/shift-away.css';
 
-import classes from './Tippy.module.scss';
+import classes from '../../../styles/modules/Tippy.module.scss';
 
 function OnlineTippy(): JSX.Element {
   return (

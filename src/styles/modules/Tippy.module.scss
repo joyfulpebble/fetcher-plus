@@ -1,7 +1,13 @@
+@mixin get-fonts() {
+  @import url("../font-face/Idea/IdeaLight.css");
+}
+@include get-fonts();
+
 .Problems{
-  width: 30px;
+  width: fit-content;
+  min-width: 28px;
+  max-width: 80px;
   height: 20px;
-  margin-left: 2px;
   cursor: pointer;
   
   display: flex;
@@ -9,15 +15,14 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .InternetConnectionTippyWrapper{
-  margin-top: 2px;
-  margin-right: 25px;
-  
   cursor: pointer;
+  margin-top: 2px;
 }
+
 .TippyWrapper{
   cursor: pointer;
-
-  font-family: "Idea-Light";
+  font-family: "IdeaLight";
   font-size: 12px;
 }
