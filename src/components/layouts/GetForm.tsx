@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { getConfigSlice } from '../../../redux/reducers/getConfigSlice';
-import { useAppDispatch } from '../../../hooks/redux/redux';
+import { getConfigSlice } from '../../redux/reducers/getConfigSlice';
+import { useAppDispatch } from '../../hooks/redux/redux';
 
 import { Entries } from 'type-fest';
 import { 
@@ -10,17 +10,17 @@ import {
   MainInfoOfRequestFromFieldsI, 
   InfoOfParamsFromFieldsI, 
   RequestHistoryItemI
-  } from '../../../types/simple_models';
+  } from '../../types/simple_models';
 
-import CustomButton from '../../UI/Buttons/PrimaryButton';
-import LinkButton from '../../UI/Buttons/RedirectButton';
-import FormWithToFields from '../../FormWithToFields';
-import Switch from '../../UI/Switch/Switch';
-import ParamsList from '../../ParamsList';
+import CustomButton from '../UI/Buttons/PrimaryButton';
+import LinkButton from '../UI/Buttons/RedirectButton';
+import FormWithToFields from '../FormWithToFields';
+import Switch from '../UI/Switch/Switch';
+import ParamsList from '../ParamsList';
 
-import classes from '../../../styles/modules/GetForm.module.scss';
-import { idb_set } from '../../../tools/idb-tools/idbMethods';
-import { request_history_db } from '../../../hooks/idb/request-history-db';
+import classes from '../../styles/modules/GetForm.module.scss';
+import { idb_set } from '../../tools/idb-tools/idbMethods';
+import { request_history_db } from '../../hooks/idb/request-history-db';
 
 function GetForm(): JSX.Element {
   const [parameters, setParameters] = useState<DynamicObjectKeysI>({});
