@@ -14,7 +14,7 @@ import {
 
 import CustomButton from '../UI/Buttons/PrimaryButton';
 import LinkButton from '../UI/Buttons/RedirectButton';
-import FormWithToFields from '../FormWithToFields';
+import FormWithTwoFields from '../FormWithTwoFields';
 import Switch from '../UI/Switch/Switch';
 import ParamsList from '../ParamsList';
 
@@ -72,26 +72,29 @@ function GetForm(): JSX.Element {
   };
 
   return (
-    <div className={classes.SettingsWrapper}>
-      <FormWithToFields
-        firstInitValueName={'request_url'}
-        secondInitValueName={'request_name'}
-        firstInitValue={'https://jsonplaceholder.typicode.com/posts'}
-        secondInitValue={'asd'}
-        firstInfoText={'Fetch url:'}
-        secondInfoText={'File name:'}
-        onSubmitFuncton={handleSubmitFetch}
-        formId={'main-request-data'}
-      />
-      <Switch
-        needParameters={needParameters}
-        spanText={'Need parameters?'}
-        handleIsCheckedParameters={() => {
-          setNeedParameters(!needParameters);  
-        }}
-      />
+    <div className={classes.PageWrapper}>
+      <div className={classes.SettingsWrapper}>
+        <FormWithTwoFields
+          firstInitValueName={'request_url'}
+          secondInitValueName={'request_name'}
+          firstInitValue={'https://jsonplaceholder.typicode.com/posts'}
+          secondInitValue={'asd'}
+          firstInfoText={'Fetch url:'}
+          secondInfoText={'File name:'}
+          onSubmitFuncton={handleSubmitFetch}
+          formId={'main-request-data'}
+        />
+      <div className={classes.ButtonsWrapper}>
+        <Switch
+          needParameters={needParameters}
+          spanText={'Need parameters?'}
+          handleIsCheckedParameters={() => {
+            setNeedParameters(!needParameters);  
+          }}
+        />
+      </div>
       <div className={`${classes.ParametersWrapper} ${needParameters ? classes.active : ''}`}>
-        <FormWithToFields
+        <FormWithTwoFields
           firstInitValueName={'parameter_name'}
           secondInitValueName={'parameter_value'}
           firstInitValue={'_limit'}
@@ -103,11 +106,13 @@ function GetForm(): JSX.Element {
           onSubmitFuncton={handleSubmitParams}
           formId={'parameters-data'}
         />
-        <CustomButton
-          children={'Submit params'}
-          type={'submit'}
-          form={'parameters-data'}
-        />
+        <div className={classes.ParametersAddButton}>
+          <CustomButton
+            children={'Add parameter'}
+            type={'submit'}
+            form={'parameters-data'}
+          />
+        </div>
         <div className={classes.ParametersList}>
           <ParamsList 
             displayedParameters={displayedParameters}
@@ -116,22 +121,25 @@ function GetForm(): JSX.Element {
             setParameters={setParameters}
           />
         </div>
+        </div>
+        <div>
+          <CustomButton
+            children={'Submit'}
+            type={'submit'}
+            form={'main-request-data'}
+          />
+          <LinkButton
+            content={'Go home'}
+            path={"/welcome"}
+          />
+        </div>
+        {
+          needRedirect 
+            ? 
+              <Navigate to="/workspace"/> 
+            : <></>
+        }      
       </div>
-      <CustomButton
-        children={'Submit'}
-        type={'submit'}
-        form={'main-request-data'}
-      />
-      <LinkButton
-        content={'Go home'}
-        path={"/welcome"}
-      />
-      {
-        needRedirect 
-          ? 
-            <Navigate to="/workspace"/> 
-          : <></>
-      }      
     </div>
   )
 }

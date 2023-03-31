@@ -25,6 +25,8 @@ $redirect-button-focused-background: #d8d8d8;
   text-decoration: none;
   font-family: "PoppinsLight";
   font-size: $button-font-size;
+  margin-top: 15px;
+  margin-right: 15px;
 
   &:hover{
     background: $primary-button-focused-color;
@@ -43,6 +45,8 @@ $redirect-button-focused-background: #d8d8d8;
   text-decoration: none;
   font-family: "PoppinsLight";
   font-size: $button-font-size;
+  margin-top: 15px;
+  margin-right: 15px;
 
   &:hover{
     background: $danger-button-focused-color;
@@ -61,6 +65,8 @@ $redirect-button-focused-background: #d8d8d8;
   text-decoration: none;
   font-family: "PoppinsLight";
   font-size: $button-font-size;
+  margin-top: 15px;
+  margin-right: 15px;
 
   &:hover{
     background: $redirect-button-focused-background;
