@@ -1,4 +1,4 @@
-import classes from '../../../styles/modules/Input.module.scss'
+import classes from './Input.module.scss'
 
 function Input({innerRef, ...props}: any): JSX.Element {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from '../../../styles/modules/Buttons.module.scss';
+import classes from './Buttons.module.scss';
 
 function DangerButton({children, ...props}: any): JSX.Element {
   return (

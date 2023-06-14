@@ -1,5 +1,5 @@
 @mixin get-fonts() {
-  @import url("../font-face/Idea/IdeaLight.css");
+  @import url("../../../styles/font-face/Idea/IdeaLight.css");
 }
 @include get-fonts();
 

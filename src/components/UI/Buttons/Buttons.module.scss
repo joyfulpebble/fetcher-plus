@@ -1,5 +1,5 @@
 @mixin get-fonts() {
-  @import url("../font-face/Poppins/PoppinsLight.css");
+  @import url("../../../styles/font-face/Poppins/PoppinsLight.css");
 }
 @include get-fonts();
 

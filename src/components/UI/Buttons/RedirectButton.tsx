@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import classes from '../../../styles/modules/Buttons.module.scss';
+import classes from './Buttons.module.scss';
 
 function RedirectButton({content, path}: any): JSX.Element {
   return (

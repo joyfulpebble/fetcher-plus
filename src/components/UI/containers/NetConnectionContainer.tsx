@@ -7,13 +7,13 @@ import OnlineTippy from '../../UI/Tippy/OnlineTippy';
 
 function NetConnectionContainer({isOnline}: NetConnetctionProps) {
   return (
-    <div>
+    <>
       {
         isOnline 
           ? <OnlineTippy/> 
           : <OfflineTippy/> 
       }
-    </div>
+    </>
   )
 }
 

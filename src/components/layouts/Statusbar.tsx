@@ -5,7 +5,7 @@ import ErrorTippy from '../UI/Tippy/ErrorTippy';
 import { useOnlineStatus } from '../../hooks/react/useOnlineStatus';
 import NetConnectionContainer from '../UI/containers/NetConnectionContainer';
 
-import classes from '../../styles/modules/Statusbar.module.scss';
+import classes from './Statusbar.module.scss';
 
 function Statusbar(): JSX.Element {
   const isOnline: boolean = useOnlineStatus();

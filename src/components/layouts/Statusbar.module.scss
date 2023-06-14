@@ -1,5 +1,5 @@
 @mixin get-fonts() {
-  @import url("../font-face/Idea/IdeaMedium.css");
+  @import url("../../styles/font-face/Idea/IdeaMedium.css");
 }
 @include get-fonts();
 

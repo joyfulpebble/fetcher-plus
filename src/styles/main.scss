@@ -1,6 +1,7 @@
 @mixin get-fonts() {
   @import url("./font-face/Poppins/PoppinsLight.css");
 }
+
 @include get-fonts();
 
 $body-background: #1E1E1E;
@@ -8,13 +9,25 @@ $text-color: azure;
 
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
+*::after { box-sizing: border-box }
+
+ul[class], ol[class] { 
+  padding: 0;
+  list-style: none;
 }
 
-ul[class],
-ol[class] {
-  padding: 0;
+a:not([class]) { text-decoration-skip-ink: auto }
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
 }
 
 body,
@@ -35,11 +48,6 @@ dd {
   padding: 0;
 }
 
-ul[class],
-ol[class] {
-  list-style: none;
-}
-
 body{
   background-color: $body-background;
   color: $text-color;
@@ -52,20 +60,4 @@ body{
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-}
-
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-input,
-button,
-textarea,
-select {
-  font: inherit;
 }

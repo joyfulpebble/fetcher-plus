@@ -1,7 +1,7 @@
 import { Formik, Field, Form } from "formik";
 import Input from './UI/Input/Input';
 
-import classes from "../styles/modules/FormWithTwoFields.module.scss";
+import classes from "./FormWithTwoFields.module.scss";
 
 import { FormWithToFieldsProps } from '../types/elements';
 import { DynamicObjectKeysI } from "../types/simple_models";
@@ -25,7 +25,7 @@ function FormWithToFields({
   return (
     <Formik
         initialValues={initValues}
-        onSubmit={(values: object) => {
+        onSubmit={(values: DynamicObjectKeysI) => {
           onSubmitFuncton(values);
       }}>
       <Form id={formId} className={classes.FormWrapper}>
