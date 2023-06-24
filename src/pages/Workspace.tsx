@@ -48,7 +48,7 @@ function Workspace(): JSX.Element {
 
         {/*  */}
       </div>
-    <Link to={'/get-fetch-form'}>Go back</Link>
+    <Link to={'/home'}>Go back</Link>
     <Statusbar/>
     </div>
   )

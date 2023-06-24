@@ -15,7 +15,7 @@ function createWindow() {
         }
     });
     mainWindow.setMenuBarVisibility(false);
-    mainWindow.loadURL('http://localhost:3000/welcome');
+    mainWindow.loadURL('http://localhost:3000/home');
     mainWindow.webContents.openDevTools();
     require('electron-reload')(__dirname, {
         electron: path.join(__dirname, 'node_modules', '.bin', 'electron' + (process.platform === "win32" ? ".cmd" : ""))

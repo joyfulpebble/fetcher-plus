@@ -12,7 +12,7 @@ function WelcomePage(): JSX.Element {
       
       <LinkButton
         content={'get'}
-        path={"/get-fetch-form"}
+        path={"/workspace"}
       />
 
       
