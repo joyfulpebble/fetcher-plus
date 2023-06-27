@@ -3,21 +3,18 @@ import { useAppDispatch } from "../redux/redux";
 
 import { AxiosError } from "axios";
 
-export const useFetching = (callback: () => void): [ () => void ] => {
-  const dispatch = useAppDispatch();
-  const { addError } = requestErrorSlice.actions;
+export const useFetching = (callback: () => void): [() => void] => {
+	const dispatch = useAppDispatch(),
+		{ addError } = requestErrorSlice.actions,
+		fetch = async () => {
+			try {
+				await callback();
+			} catch (e) {
+				const err = e as AxiosError;
 
-  const fetch = async () => {
-    try {
-      await callback();
-    } catch (e) {
-      const err = e as AxiosError;    
-      
-      dispatch(
-        addError(JSON.stringify(err))
-      )  
-    }
-  }
-  
-  return [ fetch ];
-}
+				dispatch(addError(JSON.stringify(err)));
+			}
+		};
+
+	return [fetch];
+};

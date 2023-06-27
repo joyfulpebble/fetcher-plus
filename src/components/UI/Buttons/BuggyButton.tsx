@@ -3,34 +3,38 @@ import React from "react";
 import DangerButton from "./DangerButton";
 
 interface BuggyButtonState {
-  releaseBugs: boolean;
+	releaseBugs: boolean;
 }
 
 class BuggyButton extends React.Component<{}, BuggyButtonState> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      releaseBugs: false,
-    };
-  }
+	constructor(props: {}) {
+		super(props);
+		this.state = {
+			releaseBugs: false
+		};
+	}
 
-  handleClick = () => {
-    this.setState({
-      releaseBugs: true,
-    });
-  };
+	handleClick = () => {
+		this.setState({
+			releaseBugs: true
+		});
+	};
 
-  render() {
-    if (this.state.releaseBugs) {
-      throw new Error("Test crash!");
-    }
+	render() {
+		if (this.state.releaseBugs) {
+			throw new Error("Test crash!");
+		}
 
-    return (
-      <DangerButton variant="outlined" onClick={this.handleClick} color="error">
-        Scary Button!
-      </DangerButton>
-    );
-  }
+		return (
+			<DangerButton
+				variant="outlined"
+				onClick={this.handleClick}
+				color="error"
+			>
+				Scary Button!
+			</DangerButton>
+		);
+	}
 }
 
 export default BuggyButton;

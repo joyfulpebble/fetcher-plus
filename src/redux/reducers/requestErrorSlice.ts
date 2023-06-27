@@ -3,21 +3,21 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RequestErrorsStateI } from "../../types/simple_models";
 
 const initState: RequestErrorsStateI = {
-  errors: []
+	errors: []
 };
 
 export const requestErrorSlice = createSlice({
-  name: 'requestError',
-  initialState: initState,
-  reducers: {
-    addError(state, action: PayloadAction<string>) {
-      state.errors.push(action.payload);
-    },
+	name: "requestError",
+	initialState: initState,
+	reducers: {
+		addError(state, action: PayloadAction<string>) {
+			state.errors.push(action.payload);
+		},
 
-    clearErrorStorage(state) {
-      state.errors = [];
-    }
-  }
-})
+		clearErrorStorage(state) {
+			state.errors = [];
+		}
+	}
+});
 
 export default requestErrorSlice.reducer;

@@ -1,12 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import classes from './Buttons.module.scss';
+import classes from "./Buttons.module.scss";
 
-function RedirectButton({content, path}: any): JSX.Element {
-  return (
-    <Link className={classes.RedirectButton} to={path}>{content}</Link>
-  )
+function RedirectButton({ content, path }: any): JSX.Element {
+	return (
+		<Link
+			className={classes.RedirectButton}
+			to={path}
+		>
+			{content}
+		</Link>
+	);
 }
 
 export default RedirectButton;

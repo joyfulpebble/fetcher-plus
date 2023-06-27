@@ -1,10 +1,8 @@
-import React from 'react'
-import FetchForm from './layouts/GetForm';
+import React from "react";
+import FetchForm from "./layouts/GetForm";
 
 function Form() {
-  return (
-    <FetchForm/>
-  )
+	return <FetchForm />;
 }
 
 export default Form;

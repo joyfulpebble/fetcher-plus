@@ -1,8 +1,9 @@
 @font-face {
-  font-family: "IdeaMedium";
-  font-style: normal;
-  font-weight: 400;
-  src:    
-    url("../../../assets/fonts/Idea/woff2/JetBrainsMono-Medium.woff2") format("woff2"),
-    url("../../../assets/fonts/Idea/ttf/JetBrainsMono-Medium.ttf") format("woff");
+	font-family: "IdeaMedium";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../../../assets/fonts/Idea/woff2/JetBrainsMono-Medium.woff2")
+			format("woff2"),
+		url("../../../assets/fonts/Idea/ttf/JetBrainsMono-Medium.ttf")
+			format("woff");
 }

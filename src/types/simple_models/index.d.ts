@@ -1,29 +1,29 @@
 export interface DynamicObjectKeysI {
-  [key: string]: string | number | Date;
+	[key: string]: string | number | Date;
 }
 
 export interface MainInfoOfRequestFromFieldsI {
-  request_name: string;
-  request_url: string;
+	request_name: string;
+	request_url: string;
 }
 
 export interface InfoOfParamsFromFieldsI {
-  parameter_name: string;
-  parameter_value: string;
+	parameter_name: string;
+	parameter_value: string;
 }
 
 export interface RequestErrorsStateI {
-  errors: Array<string | null>
+	errors: Array<string | null>;
 }
 
 export interface RequestHistoryItemI {
-  date: string;
-  time: string;
-  name: string;
-  url: string;
-  parameters: DynamicObjectKeysI;
+	date: string;
+	time: string;
+	name: string;
+	url: string;
+	parameters: DynamicObjectKeysI;
 }
 
 export interface ErrorBoundaryStateI {
-  error: boolean;
+	error: boolean;
 }

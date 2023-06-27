@@ -1,5 +1,5 @@
 @mixin get-fonts() {
-  @import url("../../../styles/font-face/Poppins/PoppinsLight.css");
+	@import url("../../../styles/font-face/Poppins/PoppinsLight.css");
 }
 @include get-fonts();
 
@@ -8,68 +8,68 @@ $button-font-size: 13px;
 $primary-button-background: #5839af;
 $primary-button-focused-color: #4d309c;
 
-$danger-button-background: #FD8A8A;
+$danger-button-background: #fd8a8a;
 $danger-button-focused-color: #e76d6d;
 
 $redirect-button-background: #ffff;
 $redirect-button-focused-background: #d8d8d8;
 
-.PrimaryButton{
-  color: white;
-  padding: 5.25px 14px;
-  background: $primary-button-background;
-  border: none;
-  border-radius: 7px;
-  cursor: pointer;
-  outline: none;
-  text-decoration: none;
-  font-family: "PoppinsLight";
-  font-size: $button-font-size;
-  margin-top: 15px;
-  margin-right: 15px;
+.PrimaryButton {
+	color: white;
+	padding: 5.25px 14px;
+	background: $primary-button-background;
+	border: none;
+	border-radius: 7px;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-family: "PoppinsLight";
+	font-size: $button-font-size;
+	margin-top: 15px;
+	margin-right: 15px;
 
-  &:hover{
-    background: $primary-button-focused-color;
-    transition: background-color .1s linear;
-  }
+	&:hover {
+		background: $primary-button-focused-color;
+		transition: background-color 0.1s linear;
+	}
 }
 
-.DangerButton{
-  color: white;
-  padding: 5px 14px;
-  background: $danger-button-background;
-  border: none;
-  border-radius: 7px;
-  cursor: pointer;
-  outline: none;
-  text-decoration: none;
-  font-family: "PoppinsLight";
-  font-size: $button-font-size;
-  margin-top: 15px;
-  margin-right: 15px;
+.DangerButton {
+	color: white;
+	padding: 5px 14px;
+	background: $danger-button-background;
+	border: none;
+	border-radius: 7px;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-family: "PoppinsLight";
+	font-size: $button-font-size;
+	margin-top: 15px;
+	margin-right: 15px;
 
-  &:hover{
-    background: $danger-button-focused-color;
-    transition: background-color .1s linear;
-  }
+	&:hover {
+		background: $danger-button-focused-color;
+		transition: background-color 0.1s linear;
+	}
 }
 
-.RedirectButton{
-  color: black;
-  padding: 5.5px 14px;
-  background: $redirect-button-background;
-  border: none;
-  border-radius: 7px;
-  cursor: pointer;
-  outline: none;
-  text-decoration: none;
-  font-family: "PoppinsLight";
-  font-size: $button-font-size;
-  margin-top: 15px;
-  margin-right: 15px;
+.RedirectButton {
+	color: black;
+	padding: 5.5px 14px;
+	background: $redirect-button-background;
+	border: none;
+	border-radius: 7px;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-family: "PoppinsLight";
+	font-size: $button-font-size;
+	margin-top: 15px;
+	margin-right: 15px;
 
-  &:hover{
-    background: $redirect-button-focused-background;
-    transition: background-color .1s linear;
-  }
+	&:hover {
+		background: $redirect-button-focused-background;
+		transition: background-color 0.1s linear;
+	}
 }

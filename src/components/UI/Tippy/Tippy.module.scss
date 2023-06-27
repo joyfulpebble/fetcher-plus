@@ -1,28 +1,28 @@
 @mixin get-fonts() {
-  @import url("../../../styles/font-face/Idea/IdeaLight.css");
+	@import url("../../../styles/font-face/Idea/IdeaLight.css");
 }
 @include get-fonts();
 
-.Problems{
-  width: fit-content;
-  min-width: 28px;
-  max-width: 80px;
-  height: 20px;
-  cursor: pointer;
-  
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+.Problems {
+	width: fit-content;
+	min-width: 28px;
+	max-width: 80px;
+	height: 20px;
+	cursor: pointer;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.InternetConnectionTippyWrapper{
-  cursor: pointer;
-  margin-top: 2px;
+.InternetConnectionTippyWrapper {
+	cursor: pointer;
+	margin-top: 2px;
 }
 
-.TippyWrapper{
-  cursor: pointer;
-  font-family: "IdeaLight";
-  font-size: 12px;
+.TippyWrapper {
+	cursor: pointer;
+	font-family: "IdeaLight";
+	font-size: 12px;
 }

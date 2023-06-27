@@ -1,7 +1,6 @@
 @font-face {
-  font-family: "PoppinsLight";
-  font-style: normal;
-  font-weight: 400;
-  src:    
-    url("../../../assets/fonts/Poppins/ttf/Poppins-Light.ttf") format("woff");
+	font-family: "PoppinsLight";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../../../assets/fonts/Poppins/ttf/Poppins-Light.ttf") format("woff");
 }

@@ -1,9 +1,13 @@
-import classes from './Input.module.scss'
+import classes from "./Input.module.scss";
 
-function Input({innerRef, ...props}: any): JSX.Element {
-  return (
-    <input className={classes.Input} ref={innerRef} {...props}/>
-  )
+function Input({ innerRef, ...props }: any): JSX.Element {
+	return (
+		<input
+			className={classes.Input}
+			ref={innerRef}
+			{...props}
+		/>
+	);
 }
 
 export default Input;

@@ -1,33 +1,38 @@
 @mixin get-fonts() {
-  @import url("./font-face/Poppins/PoppinsLight.css");
+	@import url("./font-face/Poppins/PoppinsLight.css");
 }
 
 @include get-fonts();
 
-$body-background: #1E1E1E;
+$body-background: #1e1e1e;
 $text-color: azure;
 
 *,
 *::before,
-*::after { box-sizing: border-box }
-
-ul[class], ol[class] { 
-  padding: 0;
-  list-style: none;
+*::after {
+	box-sizing: border-box;
 }
 
-a:not([class]) { text-decoration-skip-ink: auto }
+ul[class],
+ol[class] {
+	padding: 0;
+	list-style: none;
+}
+
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
 
 img {
-  max-width: 100%;
-  display: block;
+	max-width: 100%;
+	display: block;
 }
 
 input,
 button,
 textarea,
 select {
-  font: inherit;
+	font: inherit;
 }
 
 body,
@@ -44,20 +49,20 @@ figcaption,
 blockquote,
 dl,
 dd {
-  margin: 0;  
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
-body{
-  background-color: $body-background;
-  color: $text-color;
-  
-  font-family: "PoppinsLight";
-  
-  overflow: hidden;
-  height: 100%;
-  min-height: 100vh;
-  scroll-behavior: smooth;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
+body {
+	background-color: $body-background;
+	color: $text-color;
+
+	font-family: "PoppinsLight";
+
+	overflow: hidden;
+	height: 100%;
+	min-height: 100vh;
+	scroll-behavior: smooth;
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
 }
