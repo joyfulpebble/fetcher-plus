@@ -1,12 +1,7 @@
 {
+	"extends": "../tsconfig.json",
 	"compilerOptions": {
-		"target": "ES6",
-		"module": "commonjs",
-		"sourceMap": false,
-		"strict": true,
 		"outDir": "./build",
-		"rootDir": "../",
-		"noEmitOnError": true,
-		"typeRoots": ["node_modules/@types"]
+		"rootDir": "../"
 	}
 }

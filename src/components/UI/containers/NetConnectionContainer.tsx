@@ -1,5 +1,3 @@
-import React from "react";
-
 import { NetConnetctionProps } from "../../../types/elements";
 
 import OfflineTippy from "../../UI/Tippy/OfflineTippy";

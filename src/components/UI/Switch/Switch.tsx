@@ -1,4 +1,3 @@
-import React from "react";
 import SwitchToggle from "react-switch";
 
 import { SwitchProps } from "../../../types/elements";

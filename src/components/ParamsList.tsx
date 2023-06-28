@@ -13,12 +13,10 @@ function ParamsList({
 		const PARAMETER_KEY_FROM_LIST: string = `${index}`;
 		delete parameters[PARAMETER_KEY_FROM_LIST];
 
-		const parametersAsArrays: Array<(number | string)[]> =
-				displayedParameters.filter(
-					(element: string | number) => element !== displayedParameters[index]
-				),
-			parametersAsObject: DynamicObjectKeysI =
-				Object.fromEntries(parametersAsArrays);
+		const parametersAsArrays: [string, string | number][] = displayedParameters.filter(
+			(element: [string, string | number]) => element !== displayedParameters[index]
+		);
+		const parametersAsObject: DynamicObjectKeysI = Object.fromEntries(parametersAsArrays);
 
 		setDisplayedParameters(parametersAsArrays);
 		setParameters(parametersAsObject);

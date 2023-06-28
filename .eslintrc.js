@@ -9,13 +9,10 @@ module.exports = {
 	overrides: [
 		{
 			files: ["src/**/*.ts?(x)"],
-			extends: [
-				"prettier",
-				"plugin:jest/all",
-				"@typescript-eslint/recommended"
-			],
+			extends: ["prettier"],
 			parser: "@typescript-eslint/parser",
 			parserOptions: {
+				project: "./tsconfig.json",
 				sourceType: "module",
 				ecmaVersion: 2022,
 				ecmaFeatures: {
@@ -61,7 +58,7 @@ module.exports = {
 			}
 		],
 		"linebreak-style": ["warn", "unix"],
-		"max-len": ["error", { code: 80 }],
+		"max-len": ["error", { code: 100 }],
 		"new-parens": "error",
 		"no-async-promise-executor": "error",
 		"no-await-in-loop": "error",
@@ -96,7 +93,6 @@ module.exports = {
 		],
 		"no-var": "error",
 		"no-whitespace-before-property": "error",
-		"one-var": "error",
 		"prefer-exponentiation-operator": "warn",
 		"quotes": ["warn", "double"],
 		"require-await": "warn",

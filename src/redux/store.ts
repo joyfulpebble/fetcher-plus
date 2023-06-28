@@ -1,28 +1,20 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import {
-	persistReducer,
-	FLUSH,
-	REHYDRATE,
-	PAUSE,
-	PERSIST,
-	PURGE,
-	REGISTER
-} from "redux-persist";
+import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import getConfigReducer from "./reducers/getConfigSlice";
 import requestErrorReducer from "./reducers/requestErrorSlice";
 
 const persistConfig = {
-		key: "root",
-		storage: storage,
-		blacklist: ["requestError"]
-	},
-	rootReducer = combineReducers({
-		getConfig: getConfigReducer,
-		requestError: requestErrorReducer
-	}),
-	persistReduser = persistReducer(persistConfig, rootReducer);
+	key: "root",
+	storage: storage,
+	blacklist: ["requestError"]
+};
+const rootReducer = combineReducers({
+	getConfig: getConfigReducer,
+	requestError: requestErrorReducer
+});
+const persistReduser = persistReducer(persistConfig, rootReducer);
 
 export const setupStore = () =>
 	configureStore({

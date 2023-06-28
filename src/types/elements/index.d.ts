@@ -1,6 +1,7 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import monaco from "monaco-editor/esm/vs/editor/editor.api";
-import { AxiosResponse } from "axios";
+import { DynamicObjectKeysI } from "../simple_models";
+import { ObjectEntries } from "type-fest/source/entries";
 
 export interface DefaultEditorProps {
 	EditorWidth: string;
@@ -19,7 +20,7 @@ export interface FormWithToFieldsProps {
 	secondInitValue: string | number;
 	secondInfoText: string | number;
 	secondRef?: React.RefObject<HTMLInputElement>;
-	onSubmitFuncton: (values: typeof values) => DynamicObjectKeys;
+	onSubmitFuncton: (values: DynamicObjectKeysI) => void;
 	formId: string;
 }
 
@@ -30,12 +31,10 @@ export interface SwitchProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 export interface ParamsListProps {
-	displayedParameters: ObjectEntries<DynamicObjectKeys>;
-	setDisplayedParameters: React.Dispatch<
-		React.SetStateAction<ObjectEntries<DynamicObjectKeys>>
-	>;
-	parameters: DynamicObjectKeys;
-	setParameters: React.Dispatch<React.SetStateAction<DynamicObjectKeys>>;
+	displayedParameters: [string, string | number][];
+	setDisplayedParameters: React.Dispatch<React.SetStateAction<[string, string | number][]>>;
+	parameters: DynamicObjectKeysI;
+	setParameters: React.Dispatch<React.SetStateAction<DynamicObjectKeysI>>;
 }
 
 export interface ListPropsI {

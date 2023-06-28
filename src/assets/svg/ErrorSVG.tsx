@@ -1,5 +1,3 @@
-import React from "react";
-
 function ErrorSVG({ w = 15, h = 16 }: any): JSX.Element {
 	return (
 		<svg

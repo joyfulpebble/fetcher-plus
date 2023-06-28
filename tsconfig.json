@@ -1,19 +1,40 @@
 {
+	"include": [
+		"./src/**/*",
+		"./electron/**/*",
+		".eslintrc.js"
+	],
+	"exclude": [
+		"dist",
+		"node_modules"
+	],
 	"compilerOptions": {
-		"target": "ES6",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"esModuleInterop": true,
+		// * ts-config options
 		"allowSyntheticDefaultImports": true,
-		"strict": true,
+		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"noFallthroughCasesInSwitch": true,
-		"module": "esnext",
+		"isolatedModules": false,
+		"jsx": "react-jsx",
+		"lib": [
+			"dom",
+			"dom.iterable",
+			"esnext",
+		],
+		"module": "ES6",
 		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
 		"noEmit": true,
-		"jsx": "react-jsx"
+		"outDir": "dist",
+		"resolveJsonModule": true,
+		"sourceMap": false,
+		"target": "ES6",
+		// * ts-strict options
+		"alwaysStrict": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"strictNullChecks": true,
+		"strictBindCallApply": true,
+		// * ts-lint options
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true
 	}
 }

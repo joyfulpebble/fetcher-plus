@@ -8,8 +8,8 @@ import NetConnectionContainer from "../UI/containers/NetConnectionContainer";
 import classes from "./Statusbar.module.scss";
 
 function Statusbar(): JSX.Element {
-	const isOnline: boolean = useOnlineStatus(),
-		errorsArray = useAppSelector((state) => state.requestError).errors;
+	const isOnline: boolean = useOnlineStatus();
+	const errorsArray = useAppSelector((state) => state.requestError).errors;
 
 	return (
 		<div className={classes.StatusBarWrapper}>

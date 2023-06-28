@@ -4,11 +4,11 @@ import { Navigate } from "react-router-dom";
 import { getConfigSlice } from "../../redux/reducers/getConfigSlice";
 import { useAppDispatch } from "../../hooks/redux/redux";
 
-import { Entries } from "type-fest";
+// import { Entries } from "type-fest";
 import {
 	DynamicObjectKeysI,
-	MainInfoOfRequestFromFieldsI,
-	InfoOfParamsFromFieldsI,
+	// MainInfoOfRequestFromFieldsI,
+	// InfoOfParamsFromFieldsI,
 	RequestHistoryItemI
 } from "../../types/simple_models";
 
@@ -23,49 +23,50 @@ import { idb_set } from "../../tools/idb-tools/idbMethods";
 import { request_history_db } from "../../hooks/idb/request-history-db";
 
 function GetForm(): JSX.Element {
-	const [parameters, setParameters] = useState<DynamicObjectKeysI>({}),
-		[displayedParameters, setDisplayedParameters] = useState<
-			Entries<typeof parameters>
-		>([]),
-		[needParameters, setNeedParameters] = useState<boolean>(false),
-		[needRedirect, setNeedRedirect] = useState<boolean>(false),
-		displayedParameterNameRef = useRef<HTMLInputElement>(null),
-		displayedParameterValueRef = useRef<HTMLInputElement>(null),
-		{ updateConfig } = getConfigSlice.actions,
-		dispatch = useAppDispatch(),
-		handleSubmitParams = (values: InfoOfParamsFromFieldsI): void => {
-			parameters[values.parameter_name] = values.parameter_value;
+	const [parameters, setParameters] = useState<DynamicObjectKeysI>({});
+	const [displayedParameters, setDisplayedParameters] = useState<[string, string | number][]>([]);
+	const [needParameters, setNeedParameters] = useState<boolean>(false);
+	const [needRedirect, setNeedRedirect] = useState<boolean>(false);
+	const displayedParameterNameRef = useRef<HTMLInputElement>(null);
+	const displayedParameterValueRef = useRef<HTMLInputElement>(null);
 
-			const parametersMatrix = Object.entries(parameters);
-			setDisplayedParameters(parametersMatrix);
-		},
-		handleSubmitFetch = (values: MainInfoOfRequestFromFieldsI): void => {
-			if (!values.request_name && values.request_url)
-				return console.error("не все поля заполнены");
+	const { updateConfig } = getConfigSlice.actions;
+	const dispatch = useAppDispatch();
 
-			const request_id: number = new Date().getTime(),
-				request_date: string = new Date().toLocaleString("en-GB", {
-					timeZone: "UTC"
-				}),
-				request_time: string = new Date().toLocaleTimeString("en-GB"),
-				requestHistoryItem: RequestHistoryItemI = {
-					date: request_date,
-					time: request_time,
-					name: values.request_name,
-					url: values.request_url,
-					parameters: parameters ? parameters : {}
-				};
+	const handleSubmitParams = (values: DynamicObjectKeysI): void => {
+		parameters[values.parameter_name] = values.parameter_value;
 
-			idb_set(request_id, requestHistoryItem, request_history_db, "history");
-			dispatch(
-				updateConfig({
-					url: values.request_url,
-					params: parameters,
-					request_name: values.request_name
-				})
-			);
-			setNeedRedirect(true);
+		const parametersMatrix = Object.entries(parameters);
+		setDisplayedParameters(parametersMatrix);
+	};
+
+	const handleSubmitFetch = (values: DynamicObjectKeysI): void => {
+		if (!values.request_name && values.request_url) return console.error("не все поля заполнены");
+
+		const request_id: number = new Date().getTime();
+		const request_date: string = new Date().toLocaleString("en-GB", {
+			timeZone: "UTC"
+		});
+
+		const request_time: string = new Date().toLocaleTimeString("en-GB");
+		const requestHistoryItem: RequestHistoryItemI = {
+			date: request_date,
+			time: request_time,
+			name: String(values.request_name),
+			url: String(values.request_url),
+			parameters: parameters ? parameters : {}
 		};
+
+		idb_set(request_id, requestHistoryItem, request_history_db, "history");
+		dispatch(
+			updateConfig({
+				url: String(values.request_url),
+				params: parameters,
+				request_name: String(values.request_name)
+			})
+		);
+		setNeedRedirect(true);
+	};
 
 	return (
 		<div className={classes.PageWrapper}>
@@ -89,11 +90,7 @@ function GetForm(): JSX.Element {
 						}}
 					/>
 				</div>
-				<div
-					className={`${classes.ParametersWrapper} ${
-						needParameters ? classes.active : ""
-					}`}
-				>
+				<div className={`${classes.ParametersWrapper} ${needParameters ? classes.active : ""}`}>
 					<FormWithTwoFields
 						firstInitValueName={"parameter_name"}
 						secondInitValueName={"parameter_value"}

@@ -12,6 +12,7 @@ function createWindow() {
 		minHeight: 600,
 		backgroundColor: "#1E1E1E",
 		webPreferences: {
+			contextIsolation: true,
 			nodeIntegration: true
 		}
 	});

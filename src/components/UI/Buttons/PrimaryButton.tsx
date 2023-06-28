@@ -1,5 +1,3 @@
-import React from "react";
-
 import classes from "./Buttons.module.scss";
 
 function PrimaryButton({ children, ...props }: any): JSX.Element {

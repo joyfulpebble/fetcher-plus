@@ -9,7 +9,7 @@ function WelcomePage(): JSX.Element {
 			<br />
 			<LinkButton
 				content={"get"}
-				path={"/workspace"}
+				path={"/get-fetch-form"}
 			/>
 			<Statusbar />
 		</div>

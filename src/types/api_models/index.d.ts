@@ -1,10 +1,10 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { DynamicObjectKeys } from "../simple_models";
+import { DynamicObjectKeysI } from "../simple_models";
 
 export interface GetConfigI {
 	url: string;
 	request_name: string;
-	params: DynamicObjectKeys;
+	params: DynamicObjectKeysI;
 }
 
 export interface InterceptorI extends AxiosRequestConfig {

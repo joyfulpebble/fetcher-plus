@@ -11,23 +11,20 @@ import DefaultEditor from "../components/DefaultEditor";
 import Statusbar from "../components/layouts/Statusbar";
 
 function Workspace(): JSX.Element {
-	const [contentToSave, setContentToSave] = useState<any>({}),
-		[response, setResponse] = useState<AxiosResponse | {}>({}),
-		[responseType, setResponseType] = useState<string>(""),
-		{ url, params, request_name } = useAppSelector((state) => state.getConfig),
-		[fetchUrl] = useFetching(async () => {
-			const response: AxiosResponse = await Service.GET(url, params);
+	const [contentToSave, setContentToSave] = useState<any>({});
+	const [response, setResponse] = useState<AxiosResponse | {}>({});
+	const [responseType, setResponseType] = useState<string>("");
+	const { url, params, request_name } = useAppSelector((state) => state.getConfig);
+	const [fetchUrl] = useFetching(async () => {
+		const response: AxiosResponse = await Service.GET(url, params);
 
-			setResponseType(response.headers["content-type"]);
-			setResponse(response);
-		}),
-		/** */
-		blob_request_data = new Blob(
-			[JSON.stringify(contentToSave.data, null, "  ")],
-			{
-				type: responseType
-			}
-		);
+		setResponseType(response.headers["content-type"]);
+		setResponse(response);
+	});
+	/** */
+	const blob_request_data = new Blob([JSON.stringify(contentToSave.data, null, "  ")], {
+		type: responseType
+	});
 
 	/** */
 
@@ -46,9 +43,7 @@ function Workspace(): JSX.Element {
 					ContentToSaveFunc={setContentToSave}
 				/>
 				{/*  */}
-				<button
-					onClick={() => FileSaver.saveAs(blob_request_data, request_name)}
-				>
+				<button onClick={() => FileSaver.saveAs(blob_request_data, request_name)}>
 					save request data
 				</button>
 
