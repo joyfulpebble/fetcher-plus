@@ -105,10 +105,11 @@ function GetForm(): JSX.Element {
 					/>
 					<div className={classes.ParametersAddButton}>
 						<CustomButton
-							children={"Add parameter"}
 							type={"submit"}
 							form={"parameters-data"}
-						/>
+						>
+							Add parameter
+						</CustomButton>
 					</div>
 					<div className={classes.ParametersList}>
 						<ParamsList
@@ -121,10 +122,11 @@ function GetForm(): JSX.Element {
 				</div>
 				<div>
 					<CustomButton
-						children={"Submit"}
 						type={"submit"}
 						form={"main-request-data"}
-					/>
+					>
+						Submit
+					</CustomButton>
 					<LinkButton
 						content={"Go home"}
 						path={"/welcome"}

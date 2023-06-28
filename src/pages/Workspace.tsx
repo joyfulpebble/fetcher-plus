@@ -30,7 +30,7 @@ function Workspace(): JSX.Element {
 
 	useEffect(() => {
 		fetchUrl();
-	}, []);
+	});
 
 	return (
 		<div>

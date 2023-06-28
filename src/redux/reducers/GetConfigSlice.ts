@@ -13,6 +13,7 @@ export const getConfigSlice = createSlice({
 	initialState: initState,
 	reducers: {
 		clearConfig(state) {
+			// eslint-disable-next-line no-unused-vars
 			state = initState;
 		},
 

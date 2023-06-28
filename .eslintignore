@@ -3,4 +3,4 @@
 
 # production
 /dist
-/electron/build
+/electron

@@ -12,7 +12,7 @@ function FetchForm() {
 
 	useEffect(() => {
 		dispatch(clearErrorStorage());
-	}, []);
+	});
 
 	return (
 		<div>

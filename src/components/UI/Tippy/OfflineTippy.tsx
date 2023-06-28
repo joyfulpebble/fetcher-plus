@@ -6,7 +6,7 @@ import "tippy.js/animations/shift-away.css";
 
 import classes from "./Tippy.module.scss";
 
-function OfflineTippy({ online }: any): JSX.Element {
+function OfflineTippy(): JSX.Element {
 	return (
 		<Tippy
 			className={classes.TippyWrapper}

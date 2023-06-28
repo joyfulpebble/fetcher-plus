@@ -1,7 +1,6 @@
 import React from "react";
 import monaco from "monaco-editor/esm/vs/editor/editor.api";
 import { DynamicObjectKeysI } from "../simple_models";
-import { ObjectEntries } from "type-fest/source/entries";
 
 export interface DefaultEditorProps {
 	EditorWidth: string;
@@ -20,6 +19,7 @@ export interface FormWithToFieldsProps {
 	secondInitValue: string | number;
 	secondInfoText: string | number;
 	secondRef?: React.RefObject<HTMLInputElement>;
+	// eslint-disable-next-line no-unused-vars
 	onSubmitFuncton: (values: DynamicObjectKeysI) => void;
 	formId: string;
 }
@@ -39,6 +39,7 @@ export interface ParamsListProps {
 
 export interface ListPropsI {
 	array: Array<string | number | Array<string | number>>;
+	// eslint-disable-next-line no-unused-vars
 	deleteFunction: (index: number) => void;
 }
 
