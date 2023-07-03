@@ -1,14 +1,5 @@
 import React from "react";
-import monaco from "monaco-editor/esm/vs/editor/editor.api";
 import { DynamicObjectKeysI } from "../simple_models";
-
-export interface DefaultEditorProps {
-	EditorWidth: string;
-	EditorHeight: string;
-	EditorInitValue: any;
-	EditorConfig?: monaco.editor.IStandaloneEditorConstructionOptions | undefined;
-	ContentToSaveFunc: React.Dispatch<React.SetStateAction<any>>;
-}
 
 export interface FormWithToFieldsProps {
 	firstInitValueName: number | string;

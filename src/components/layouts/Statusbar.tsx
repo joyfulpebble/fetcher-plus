@@ -7,7 +7,7 @@ import NetConnectionContainer from "../UI/containers/NetConnectionContainer";
 
 import classes from "./Statusbar.module.scss";
 
-function Statusbar(): JSX.Element {
+function Statusbar({ ...props }): JSX.Element {
 	const isOnline: boolean = useOnlineStatus();
 	const errorsArray = useAppSelector((state) => state.requestError).errors;
 

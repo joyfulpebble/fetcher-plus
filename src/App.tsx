@@ -4,7 +4,6 @@ import WelcomePage from "./pages/WelcomePage";
 import Workspace from "./pages/Workspace";
 
 import "./styles/main.scss";
-import FetchPage from "./pages/FetchPage";
 
 function App(): JSX.Element {
 	return (
@@ -18,10 +17,10 @@ function App(): JSX.Element {
 					path="/workspace"
 					element={<Workspace />}
 				/>
-				<Route
+				{/* <Route
 					path="/get-fetch-form"
 					element={<FetchPage />}
-				/>
+				/> */}
 			</Routes>
 		</BrowserRouter>
 	);

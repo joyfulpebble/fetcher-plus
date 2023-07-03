@@ -1,0 +1,32 @@
+.Layout {
+	width: auto;
+	height: auto;
+	max-width: 1920px;
+	max-height: 1080px;
+
+	display: grid;
+	grid:
+		"Sidebar Collections MainProcess Response" 100vh
+		/ 50px 1fr 1fr 1fr;
+	gap: 0px;
+}
+
+.Sidebar {
+	grid-area: Sidebar;
+
+	border: 1px solid red;
+
+	word-break: break-all;
+}
+.Collections {
+	grid-area: Collections;
+	border: 1px solid red;
+}
+.MainProcess {
+	grid-area: MainProcess;
+	border: 1px solid red;
+}
+.Response {
+	grid-area: Response;
+	border: 1px solid red;
+}

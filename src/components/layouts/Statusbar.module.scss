@@ -6,6 +6,12 @@
 $status-bar-background: #5839af;
 
 .StatusBarWrapper {
+	width: 100vw;
+	height: 20px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+
 	font-family: "IdeaMedium";
 	font-size: 13px;
 
@@ -13,10 +19,5 @@ $status-bar-background: #5839af;
 	justify-content: space-between;
 	padding: 2px 8px;
 
-	width: 100vw;
-	height: 22px;
 	background-color: $status-bar-background;
-	position: absolute;
-	left: 0px;
-	bottom: 0px;
 }
