@@ -53,6 +53,13 @@ dd {
 	padding: 0;
 }
 
+html,
+body,
+#app,
+#app > div {
+	height: 100%;
+}
+
 body {
 	background-color: $body-background;
 	color: $text-color;
@@ -60,8 +67,6 @@ body {
 	font-family: "PoppinsLight";
 
 	overflow: hidden;
-	// width: 100%;
-	// height: 100%;
 	min-height: 100vh;
 	scroll-behavior: smooth;
 	text-rendering: optimizeSpeed;

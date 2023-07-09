@@ -3,14 +3,21 @@ import LinkButton from "../components/UI/Buttons/RedirectButton";
 
 function WelcomePage(): JSX.Element {
 	return (
-		<div>
-			WelcomePage
-			<br />
-			<br />
-			<LinkButton
-				content={"workspace"}
-				path={"/workspace"}
-			/>
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "space-between",
+				height: "100vh"
+			}}
+		>
+			<h1>WelcomePage</h1>
+			<div>
+				<LinkButton
+					content={"workspace"}
+					path={"/workspace"}
+				/>
+			</div>
 			<Statusbar />
 		</div>
 	);
