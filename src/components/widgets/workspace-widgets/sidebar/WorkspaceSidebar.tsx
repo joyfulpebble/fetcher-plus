@@ -1,7 +1,9 @@
+import classes from "./WorkspaceSidebar.module.scss";
+
 function WorkspaceSidebar() {
 	return (
 		<>
-			<div>Sidebar</div>
+			<div className={classes.Sidebar}>Sidebar</div>
 		</>
 	);
 }
