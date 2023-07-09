@@ -1,9 +1,9 @@
-import { useAppSelector } from "../../hooks/redux/redux";
+import { useAppSelector } from "../../../hooks/redux/redux";
 
-import ErrorTippy from "../UI/Tippy/ErrorTippy";
+import ErrorTippy from "../../UI/Tippy/ErrorTippy";
 
-import { useOnlineStatus } from "../../hooks/react/useOnlineStatus";
-import NetConnectionContainer from "../UI/containers/NetConnectionContainer";
+import { useOnlineStatus } from "../../../hooks/react/useOnlineStatus";
+import NetConnectionContainer from "../../UI/containers/NetConnectionContainer";
 
 import classes from "./Statusbar.module.scss";
 

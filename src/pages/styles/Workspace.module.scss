@@ -1,29 +1,10 @@
-.WorkspaceWrapper {
+.WorkspacePageWrapper {
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
 }
-.Layout {
+.WorkspaceMainLayout {
 	height: 100%;
 	display: flex;
 	flex-direction: row;
-}
-.Sidebar {
-	width: 50px;
-	word-break: break-all;
-}
-.Collections {
-}
-.MainProcess {
-}
-.Response {
-}
-.Footer {
-}
-.Header {
-	height: 50px;
-	padding: 0 15px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
 }

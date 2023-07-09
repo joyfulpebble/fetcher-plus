@@ -1,4 +1,4 @@
-import Statusbar from "../components/layouts/Statusbar";
+import Statusbar from "../components/widgets/Statusbar/Statusbar";
 import LinkButton from "../components/UI/Buttons/RedirectButton";
 
 function WelcomePage(): JSX.Element {
