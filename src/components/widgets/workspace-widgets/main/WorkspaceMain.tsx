@@ -1,7 +1,8 @@
 import { Allotment, setSashSize } from "allotment";
-import "allotment/dist/style.css";
+import RequestForm from "./components/RequestForm";
 
-import classes from "./WorkspaceMain.module.scss";
+import "allotment/dist/style.css";
+import "./WorkspaceMain.module.scss";
 
 function WorkspaceMain() {
 	setSashSize(4);
@@ -9,13 +10,13 @@ function WorkspaceMain() {
 		<>
 			<Allotment defaultSizes={[300, 800, 700]}>
 				<Allotment.Pane minSize={300}>
-					<div className={classes.Collections}>Collections</div>
+					<div>Collections</div>
 				</Allotment.Pane>
 				<Allotment.Pane minSize={0}>
-					<div className={classes.Request}>Request</div>
+					<RequestForm></RequestForm>
 				</Allotment.Pane>
 				<Allotment.Pane minSize={1}>
-					<div className={classes.Response}>Response</div>
+					<div>Response</div>
 				</Allotment.Pane>
 			</Allotment>
 		</>
