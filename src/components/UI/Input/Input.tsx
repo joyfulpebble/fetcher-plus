@@ -4,12 +4,11 @@ interface InputPropsI extends React.HTMLAttributes<HTMLInputElement> {
 	ref?: React.LegacyRef<HTMLInputElement> | undefined;
 }
 
-function Input({ ref, ...props }: InputPropsI): JSX.Element {
+function Input({ ref }: InputPropsI): JSX.Element {
 	return (
 		<input
 			className={classes.Input}
 			ref={ref}
-			{...props}
 		/>
 	);
 }

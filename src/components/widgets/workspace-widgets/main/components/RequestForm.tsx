@@ -1,4 +1,5 @@
-import RequestInput from "./request-input/RequestInput";
+import Button from "../../../../UI/Buttons/Button";
+import Input from "../../../../UI/Input/Input";
 
 import classes from "./RequestForm.module.scss";
 
@@ -8,8 +9,9 @@ function RequestForm() {
 			<div className={classes.FormWrapper}>
 				<div className={classes.RequestConfigWrapper}>
 					<select></select>
-					<RequestInput />
+					<Input />
 				</div>
+				<Button content="Send" />
 			</div>
 		</>
 	);

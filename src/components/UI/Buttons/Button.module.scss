@@ -1,0 +1,56 @@
+.PrimaryButton {
+	color: white;
+	padding: 8px 16px;
+	height: 34px;
+	border: none;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-family: "PoppinsLight";
+	font-size: 12px;
+	border-radius: 0.25rem;
+	background-color: var(--color-default);
+
+	&:hover {
+		background: var(--color-default-hover);
+		transition: background-color 0.1s linear;
+	}
+}
+
+.DangerButton {
+	color: white;
+	padding: 8px 16px;
+	height: 34px;
+	border: none;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-family: "PoppinsLight";
+	font-size: 12px;
+	border-radius: 0.25rem;
+	background-color: #f07369;
+
+	&:hover {
+		background: #f07269b3;
+		transition: background-color 0.1s linear;
+	}
+}
+
+.SecondaryButton {
+	color: white;
+	padding: 8px 16px;
+	height: 34px;
+	border: none;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-family: "PoppinsLight";
+	font-size: 12px;
+	border-radius: 0.25rem;
+	background-color: #ffffff14;
+
+	&:hover {
+		background: #ffffff0a;
+		transition: background-color 0.1s linear;
+	}
+}
