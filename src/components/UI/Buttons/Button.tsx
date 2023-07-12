@@ -13,7 +13,7 @@ interface ButtonPropsI extends React.HTMLAttributes<HTMLDivElement> {
 function Button({ content, buttonStyle, disabled, butonType }: ButtonPropsI): JSX.Element {
 	return (
 		<>
-			<div className={classes.PrimaryButton}>{content}</div>
+			<div className={`${classes.Button} ${classes.Primary}`}>{content}</div>
 		</>
 	);
 }

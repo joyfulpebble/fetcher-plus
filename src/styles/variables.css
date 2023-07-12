@@ -1,0 +1,24 @@
+:root {
+	--theme-dark-bg-lvl-1: #1e1e1e;
+
+	--color-default: #614fd1;
+	--color-default-hover: #604fd1b3;
+	--color-default-disabled: #6b5ccc80;
+	--color-danger: #f07369;
+	--color-danger-hover: #f07269b3;
+	--color-danger-disabled: #f0726980;
+	--color-secondary: #ffffff14;
+	--color-secondary-hover: #ffffff0a;
+	--color-secondary-disabled: #ffffff05;
+
+	--padding-default: 8px 16px;
+
+	--margin-right-default: 8px;
+
+	--border-size: 1px;
+	--border-radius-default: 4px;
+
+	--font-color-default: #ffff;
+	--font-size-paragraph: 12px;
+	--font-height: 18px;
+}

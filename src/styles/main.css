@@ -1,11 +1,4 @@
-@mixin get-fonts() {
-	@import url("./font-face/Poppins/PoppinsLight.css");
-}
-
-@include get-fonts();
-
-$body-background: #1e1e1e;
-$text-color: azure;
+@import url("./font-face/Poppins/PoppinsLight.css");
 
 *,
 *::before,
@@ -61,14 +54,11 @@ body,
 }
 
 body {
-	background-color: $body-background;
-	color: $text-color;
-
+	background-color: var(--theme-dark-bg-lvl-1);
+	color: var(--font-color-default);
 	font-family: "PoppinsLight";
-
 	overflow: hidden;
 	min-height: 100vh;
 	scroll-behavior: smooth;
 	text-rendering: optimizeSpeed;
-	line-height: 1.5;
 }
