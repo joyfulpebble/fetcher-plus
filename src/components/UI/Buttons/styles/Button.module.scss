@@ -1,4 +1,4 @@
-.Button {
+.button {
 	cursor: pointer;
 	height: 34px;
 	padding: var(--padding-default);
@@ -10,29 +10,42 @@
 	font-family: "PoppinsLight";
 	font-size: var(--font-size-paragraph);
 }
-.Primary {
+
+.primary {
 	background-color: var(--color-default);
 
 	&:hover {
 		background: var(--color-default-hover);
 		transition: background-color 0.1s linear;
 	}
+	&:disabled {
+		cursor: no-drop;
+		background-color: var(--color-default);
+	}
 }
 
-.Danger {
+.danger {
 	background-color: var(--color-danger);
 
 	&:hover {
 		background: var(--color-danger-hover);
 		transition: background-color 0.1s linear;
 	}
+	&:disabled {
+		cursor: no-drop;
+		background-color: var(--color-danger);
+	}
 }
 
-.Secondary {
+.secondary {
 	background-color: var(--color-secondary);
 
 	&:hover {
 		background: var(--color-secondary-hover);
 		transition: background-color 0.1s linear;
+	}
+	&:disabled {
+		cursor: no-drop;
+		background-color: var(--color-secondary);
 	}
 }

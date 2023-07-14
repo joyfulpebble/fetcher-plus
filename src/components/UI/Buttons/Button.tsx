@@ -1,9 +1,9 @@
-import classes from "./Button.module.scss";
+import classes from "./styles/Button.module.scss";
 
 type ButtonStylesT = "primary" | "secondary" | "danger";
 type BuyttonTypeT = "default" | "link";
 
-interface ButtonPropsI extends React.HTMLAttributes<HTMLDivElement> {
+interface ButtonPropsI extends React.HTMLAttributes<Element> {
 	content: string;
 	disabled?: boolean;
 	buttonStyle?: ButtonStylesT;
@@ -13,7 +13,12 @@ interface ButtonPropsI extends React.HTMLAttributes<HTMLDivElement> {
 function Button({ content, buttonStyle, disabled, butonType }: ButtonPropsI): JSX.Element {
 	return (
 		<>
-			<div className={`${classes.Button} ${classes.Primary}`}>{content}</div>
+			<button
+				disabled={disabled}
+				className={`${classes.button} ${classes.primary} `}
+			>
+				{content}
+			</button>
 		</>
 	);
 }
