@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import classes from "./styles/Button.module.scss";
+import "./styles/Button.scss";
 
 type ButtonStylesT = "primary" | "secondary" | "danger";
 interface RedirectButtonPropsI extends React.HTMLAttributes<HTMLButtonElement> {
@@ -18,7 +18,7 @@ function RedirectButton({
 }: RedirectButtonPropsI): JSX.Element {
 	return (
 		<>
-			<button className={`${classes.button} ${classes.secondary}`}>
+			<button className={"button secondary"}>
 				<Link to={path}>{content}</Link>
 			</button>
 		</>

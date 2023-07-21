@@ -5,16 +5,16 @@ import ErrorTippy from "../../UI/Tippy/ErrorTippy";
 import { useOnlineStatus } from "../../../hooks/react/useOnlineStatus";
 import NetConnectionContainer from "../../UI/containers/NetConnectionContainer";
 
-import classes from "./Statusbar.module.scss";
+import "./Statusbar.scss";
 
 function Statusbar({ ...props }): JSX.Element {
 	const isOnline: boolean = useOnlineStatus();
 	const errorsArray = useAppSelector((state) => state.requestError).errors;
 
 	return (
-		<div className={classes.StatusBarWrapper}>
+		<div className={"statusbar_wrapper"}>
 			<ErrorTippy errorCount={errorsArray.length} />
-			<div className={classes.InternetConnectionTippyWrapper}>
+			<div className={"net_connection"}>
 				<NetConnectionContainer isOnline={isOnline} />
 			</div>
 		</div>

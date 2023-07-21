@@ -1,4 +1,4 @@
-import classes from "./Input.module.scss";
+import "./Input.scss";
 
 interface InputPropsI extends React.HTMLAttributes<HTMLInputElement> {
 	ref?: React.LegacyRef<HTMLInputElement> | undefined;
@@ -7,7 +7,7 @@ interface InputPropsI extends React.HTMLAttributes<HTMLInputElement> {
 function Input({ ref }: InputPropsI): JSX.Element {
 	return (
 		<input
-			className={classes.Input}
+			className={"input"}
 			ref={ref}
 		/>
 	);

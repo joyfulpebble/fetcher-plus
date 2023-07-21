@@ -1,4 +1,4 @@
-import classes from "./styles/Button.module.scss";
+import "./styles/Button.scss";
 
 type ButtonStylesT = "primary" | "secondary" | "danger";
 type BuyttonTypeT = "default" | "link";
@@ -15,7 +15,7 @@ function Button({ content, buttonStyle, disabled, butonType }: ButtonPropsI): JS
 		<>
 			<button
 				disabled={disabled}
-				className={`${classes.button} ${classes.primary} `}
+				className={"button primary"}
 			>
 				{content}
 			</button>

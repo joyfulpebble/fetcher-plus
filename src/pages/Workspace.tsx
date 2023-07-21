@@ -3,18 +3,18 @@ import WorkspaceSidebar from "../components/widgets/workspace-widgets/sidebar/Wo
 import WorkspaceMain from "../components/widgets/workspace-widgets/main/WorkspaceMain";
 import Statusbar from "../components/widgets/Statusbar/Statusbar";
 
-import classes from "./styles/Workspace.module.scss";
+import "./styles/Workspace.scss";
 
 function Workspace(): JSX.Element {
 	return (
 		<>
-			<div className={classes.WorkspacePageWrapper}>
+			<div className={"workspace_wrapper"}>
 				<WorkspaceHeader />
-				<section className={classes.WorkspaceMainLayout}>
+				<section className={"workspace_main_wrapper"}>
 					<WorkspaceSidebar />
 					<WorkspaceMain />
 				</section>
-				<Statusbar className={classes.Footer} />
+				<Statusbar />
 			</div>
 		</>
 	);

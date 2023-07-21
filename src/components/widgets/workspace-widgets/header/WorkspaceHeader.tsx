@@ -1,11 +1,11 @@
 import RedirectButton from "../../../UI/Buttons/RedirectButton";
 
-import classes from "./WorkspaceHeader.module.scss";
+import "./WorkspaceHeader.scss";
 
 function WorkspaceHeader() {
 	return (
 		<>
-			<div className={classes.Header}>
+			<div className={"header"}>
 				<RedirectButton
 					path="/home"
 					content={"go home"}

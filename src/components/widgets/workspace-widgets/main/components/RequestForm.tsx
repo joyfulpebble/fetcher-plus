@@ -1,13 +1,13 @@
 import Button from "../../../../UI/Buttons/Button";
 import Input from "../../../../UI/Input/Input";
 
-import classes from "./RequestForm.module.scss";
+import "./RequestForm.scss";
 
 function RequestForm() {
 	return (
 		<>
-			<div className={classes.FormWrapper}>
-				<div className={classes.RequestConfigWrapper}>
+			<div className={"form_wrapper"}>
+				<div className={"request_config_wrapper"}>
 					<select></select>
 					<Input />
 				</div>

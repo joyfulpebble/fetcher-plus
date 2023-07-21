@@ -4,12 +4,12 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/shift-away.css";
 
-import classes from "./Tippy.module.scss";
+import "./styles/Tippy.scss";
 
 function OnlineTippy(): JSX.Element {
 	return (
 		<Tippy
-			className={classes.TippyWrapper}
+			className={"tippy_wrapper"}
 			content={<span>Internet connected</span>}
 			animation="shift-away"
 			hideOnClick={false}
