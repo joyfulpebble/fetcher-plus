@@ -97,7 +97,7 @@ module.exports = {
 			{
 				functions: false,
 				classes: true,
-				variables: true,
+				variables: false,
 				allowNamedExports: true
 			}
 		],

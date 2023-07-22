@@ -1,5 +1,5 @@
-import { requestErrorSlice } from "../../redux/reducers/requestErrorSlice";
-import { useAppDispatch } from "../redux/redux";
+import { requestErrorSlice } from "../redux/reducers/requestErrorSlice";
+import { useAppDispatch } from "./redux/redux";
 
 import { AxiosError } from "axios";
 

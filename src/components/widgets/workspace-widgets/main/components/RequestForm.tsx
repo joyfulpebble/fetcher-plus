@@ -11,7 +11,12 @@ function RequestForm() {
 					<select></select>
 					<Input />
 				</div>
-				<Button content="Send" />
+				<Button
+					content="Send"
+					buttonStyle="primary"
+					butonType="default"
+					disabled={true}
+				/>
 			</div>
 		</>
 	);

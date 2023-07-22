@@ -9,7 +9,6 @@
 		"node_modules"
 	],
 	"compilerOptions": {
-		// * ts-config options
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
@@ -27,13 +26,11 @@
 		"resolveJsonModule": true,
 		"sourceMap": false,
 		"target": "ES6",
-		// * ts-strict options
 		"alwaysStrict": true,
 		"noImplicitAny": true,
 		"noImplicitThis": true,
 		"strictNullChecks": true,
 		"strictBindCallApply": true,
-		// * ts-lint options
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true
 	}
