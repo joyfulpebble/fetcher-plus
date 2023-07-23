@@ -2,14 +2,14 @@
 	--theme-dark-bg-lvl-1: #1e1e1e;
 
 	--color-default: #614fd1;
-	--color-default-hover: #604fd1b3;
-	--color-default-disabled: #6b5ccc80;
+	--color-default-hover: #604fd1cc;
+	--color-default-disabled: #6b5ccc99;
 	--color-danger: #f07369;
-	--color-danger-hover: #f07269b3;
-	--color-danger-disabled: #f0726980;
-	--color-secondary: #ffffff26;
-	--color-secondary-hover: #ffffff1a;
-	--color-secondary-disabled: #ffffff0d;
+	--color-danger-hover: #f07269cc;
+	--color-danger-disabled: #f0726999;
+	--color-secondary: #ffffff;
+	--color-secondary-hover: #ffffffcc;
+	--color-secondary-disabled: #ffffff99;
 
 	--padding-default: 8px 16px;
 
@@ -18,7 +18,8 @@
 	--border-size: 1px;
 	--border-radius-default: 4px;
 
-	--font-color-default: #ffff;
+	--font-color-default: white;
+	--font-color-secondary: black;
 	--font-size-paragraph: 12px;
 	--font-height: 18px;
 }

@@ -14,8 +14,9 @@ function WelcomePage(): JSX.Element {
 			<h1>WelcomePage</h1>
 			<div>
 				<LinkButton
-					content={"workspace"}
-					path={"/workspace"}
+					content={"Go to workspace"}
+					redirectPath={"/workspace"}
+					buttonStyle="secondary"
 				/>
 			</div>
 			<Statusbar />

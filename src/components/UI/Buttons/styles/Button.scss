@@ -11,6 +11,16 @@
 	font-size: var(--font-size-paragraph);
 }
 
+.redirect {
+	text-decoration: none;
+	color: var(--font-color-secondary);
+
+	&.disabled {
+		cursor: no-drop;
+		pointer-events: none;
+	}
+}
+
 .primary {
 	background-color: var(--color-default);
 
@@ -20,7 +30,7 @@
 	}
 	&:disabled {
 		cursor: no-drop;
-		background-color: var(--color-default);
+		background-color: var(--color-default-disabled);
 	}
 }
 
@@ -33,7 +43,7 @@
 	}
 	&:disabled {
 		cursor: no-drop;
-		background-color: var(--color-danger);
+		background-color: var(--color-danger-disabled);
 	}
 }
 
@@ -46,6 +56,6 @@
 	}
 	&:disabled {
 		cursor: no-drop;
-		background-color: var(--color-secondary);
+		background-color: var(--color-secondary-disabled);
 	}
 }

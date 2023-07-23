@@ -14,8 +14,7 @@ function RequestForm() {
 				<Button
 					content="Send"
 					buttonStyle="primary"
-					butonType="default"
-					disabled={true}
+					disabled={false}
 				/>
 			</div>
 		</>

@@ -29,7 +29,6 @@ class BuggyButton extends React.Component<{}, BuggyButtonState> {
 			<Button
 				onClick={this.handleClick}
 				content="Сломать BCE!!!"
-				butonType="default"
 				buttonStyle="danger"
 				disabled={false}
 			/>
