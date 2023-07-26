@@ -1,8 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+/* eslint-disable no-duplicate-imports */
+import { createSlice } from "@reduxjs/toolkit";
 
-import { RequestErrorsStateI } from "../../types/simple_models";
+import type { ReduxT } from "../../types/redux";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
-const initState: RequestErrorsStateI = {
+const initState: ReduxT.RequestErrorsStateI = {
 	errors: []
 };
 

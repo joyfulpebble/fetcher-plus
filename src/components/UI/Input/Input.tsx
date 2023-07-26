@@ -1,6 +1,8 @@
+import type { HTMLAttributes } from "react";
+
 import "./Input.scss";
 
-interface InputPropsI extends React.HTMLAttributes<HTMLInputElement> {
+interface InputPropsI extends HTMLAttributes<HTMLInputElement> {
 	ref?: React.LegacyRef<HTMLInputElement> | undefined;
 }
 

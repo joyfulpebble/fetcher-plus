@@ -1,12 +1,12 @@
 import SwitchToggle from "react-switch";
 
-import { SwitchProps } from "../../../types/elements";
+import type { ElementsT } from "../../../types/elements";
 
 function Switch({
 	handleIsCheckedParameters,
 	needParameters,
 	spanText
-}: SwitchProps): JSX.Element {
+}: ElementsT.SwitchProps): JSX.Element {
 	return (
 		<div style={{ display: "flex", alignItems: "center" }}>
 			<SwitchToggle

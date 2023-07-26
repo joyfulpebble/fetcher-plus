@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { GetConfigI } from "../../types/api_models";
+import type { APIT } from "../../types/api";
 
-const initState: GetConfigI = {
+const initState: APIT.GetConfigI = {
 	url: "",
 	request_name: "",
 	params: {}
@@ -17,7 +17,7 @@ export const getConfigSlice = createSlice({
 			state = initState;
 		},
 
-		updateConfig(state, action: PayloadAction<GetConfigI>) {
+		updateConfig(state, action: PayloadAction<APIT.GetConfigI>) {
 			state.params = action.payload.params;
 			state.url = action.payload.url;
 			state.request_name = action.payload.request_name;

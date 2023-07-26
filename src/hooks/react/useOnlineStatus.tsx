@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { OnlineStatusProviderProps } from "../../types/elements";
+import type { ElementsT } from "../../types/elements";
 
 const OnlineStatusContext = React.createContext(true);
 
-export const OnlineStatusProvider = (props: OnlineStatusProviderProps) => {
+export const OnlineStatusProvider = (props: ElementsT.OnlineStatusProviderProps) => {
 	const [onlineStatus, setOnlineStatus] = useState<boolean>(true);
 
 	useEffect(() => {

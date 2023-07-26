@@ -1,6 +1,9 @@
+/* eslint-disable no-duplicate-imports */
 import axios from "axios";
 import getResponseTime from "../tools/api-tools/getResponseTime";
 
-export const main_instance = axios.create();
+import type { AxiosInstance } from "axios";
+
+export const main_instance: AxiosInstance = axios.create();
 
 getResponseTime(main_instance);

@@ -1,12 +1,10 @@
-import getConfigReducer, {
-	getConfigSlice
-} from "../../../redux/reducers/getConfigSlice";
+import getConfigReducer, { getConfigSlice } from "../../../redux/reducers/getConfigSlice";
 
 import { AnyAction } from "@reduxjs/toolkit";
-import { GetConfigI } from "../../../types/api_models";
+import type { APIT } from "../../../types/api";
 
 const { clearConfig, updateConfig } = getConfigSlice.actions,
-	initialState: GetConfigI = {
+	initialState: APIT.GetConfigI = {
 		params: {},
 		url: "",
 		request_name: ""
@@ -27,7 +25,7 @@ describe("getConfigSlice", () => {
 	});
 
 	it('should update config state with "updateConfig" action', () => {
-		const payload: GetConfigI = {
+		const payload: APIT.GetConfigI = {
 				url: "https://some-url-here",
 				params: {
 					some_parameter: "here"

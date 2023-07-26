@@ -1,6 +1,6 @@
-import { ListPropsI } from "../../../types/elements";
+import type { ElementsT } from "../../../types/elements";
 
-function List({ array, deleteFunction }: ListPropsI): JSX.Element {
+function List({ array, deleteFunction }: ElementsT.ListPropsI): JSX.Element {
 	const listElements = array.map((elem: any, index: number) => (
 		<div key={index}>
 			<div key={elem[0]}>{elem[0]}</div>

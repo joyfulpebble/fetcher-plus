@@ -1,12 +1,10 @@
-import requestErrorReduser, {
-	requestErrorSlice
-} from "../../../redux/reducers/requestErrorSlice";
+import requestErrorReduser, { requestErrorSlice } from "../../../redux/reducers/requestErrorSlice";
 
-import { RequestErrorsStateI } from "../../../types/simple_models";
+import type { ReduxT } from "../../../types/redux";
 import { AnyAction } from "@reduxjs/toolkit";
 
 const { addError, clearErrorStorage } = requestErrorSlice.actions,
-	initialState: RequestErrorsStateI = {
+	initialState: ReduxT.RequestErrorsStateI = {
 		errors: []
 	};
 

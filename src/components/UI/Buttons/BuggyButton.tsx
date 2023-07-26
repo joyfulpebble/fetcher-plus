@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 
 import Button from "./Button";
 
@@ -6,7 +6,7 @@ interface BuggyButtonState {
 	releaseBugs: boolean;
 }
 
-class BuggyButton extends React.Component<{}, BuggyButtonState> {
+class BuggyButton extends Component<{}, BuggyButtonState> {
 	constructor(props: {}) {
 		super(props);
 		this.state = {
