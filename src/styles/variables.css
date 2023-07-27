@@ -1,6 +1,7 @@
 :root {
 	--theme-dark-bg-lvl-1: #1e1e1e;
 
+	--color-none: #ffffff00;
 	--color-default: #614fd1;
 	--color-default-hover: #604fd1cc;
 	--color-default-disabled: #6b5ccc99;
@@ -15,11 +16,12 @@
 
 	--margin-right-default: 8px;
 
-	--border-size: 1px;
+	--border-size-default: 1px;
 	--border-radius-default: 4px;
+	--border-color-default: #ffffff14;
 
-	--font-color-default: white;
-	--font-color-secondary: black;
+	--font-color-white: white;
+	--font-color-black: black;
 	--font-size-paragraph: 12px;
 	--font-height: 18px;
 }

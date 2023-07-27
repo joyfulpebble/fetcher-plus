@@ -1,0 +1,19 @@
+.method_select_wrapper {
+	width: 100px;
+	height: 34px;
+
+	padding: var(--padding-default);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border-style: solid;
+	border-width: var(--border-size-default);
+	border-top-color: var(--border-color-default);
+	border-bottom-color: var(--border-color-default);
+	border-left-color: var(--border-color-default);
+	border-right-color: var(--color-none);
+	background-color: var(--border-color-default);
+	border-top-left-radius: var(--border-radius-default);
+	border-bottom-left-radius: var(--border-radius-default);
+}

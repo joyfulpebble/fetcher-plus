@@ -57,7 +57,7 @@ body,
 
 body {
 	background-color: var(--theme-dark-bg-lvl-1);
-	color: var(--font-color-default);
+	color: var(--font-color-white);
 	font-family: "PoppinsLight";
 	overflow: hidden;
 	min-height: 100vh;
