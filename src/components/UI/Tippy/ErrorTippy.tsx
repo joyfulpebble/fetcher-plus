@@ -1,8 +1,6 @@
 import ErrorSVG from "../../../assets/svg/ErrorSVG";
 
 import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/animations/shift-away.css";
 
 import "./styles/Tippy.scss";
 

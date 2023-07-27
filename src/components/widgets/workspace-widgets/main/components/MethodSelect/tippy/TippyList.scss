@@ -1,0 +1,10 @@
+.tippy_list_element {
+	padding: 5px 10px;
+	color: white;
+	cursor: pointer;
+	border-radius: var(--border-radius-default);
+
+	&:hover {
+		background-color: var(--border-color-default);
+	}
+}
