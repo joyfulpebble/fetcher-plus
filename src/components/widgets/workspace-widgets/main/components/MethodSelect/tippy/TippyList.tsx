@@ -1,19 +1,24 @@
-// import TippyListItem from "./TippyListItem";
+import { memo } from "react";
 
+import Divider from "../../../../../../UI/Divider/Divider";
 import "./TippyList.scss";
 
 interface TippyListI {
 	methodsArr: Array<string>;
-	selectItem: React.Dispatch<React.SetStateAction<string>>;
+	selectedMethod: string;
+	selectMethod: React.Dispatch<React.SetStateAction<string>>;
 }
-
-function TippyList({ methodsArr, selectItem }: TippyListI) {
+const TippyList = memo(function TippyList({
+	methodsArr,
+	selectedMethod,
+	selectMethod
+}: TippyListI) {
 	const list: JSX.Element[] = methodsArr.map((element: any, index: number) => (
 		<div
-			className="tippy_list_element"
+			className={`tippy_list_element ${selectedMethod === element ? "selected" : ""}`}
 			key={index}
 			onClick={() => {
-				selectItem(element);
+				selectMethod(element);
 			}}
 		>
 			{element}
@@ -22,9 +27,11 @@ function TippyList({ methodsArr, selectItem }: TippyListI) {
 
 	return (
 		<>
-			<div>{list}</div>
+			<div>
+				{list}
+				<Divider />
+			</div>
 		</>
 	);
-}
-
+});
 export default TippyList;

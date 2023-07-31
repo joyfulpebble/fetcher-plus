@@ -7,16 +7,18 @@ import "./MethodSelect.scss";
 
 function MethodSelect() {
 	const methods_array = ["GET", "PUT", "POST", "PATCH", "DELETE"];
-	const [method, setMethod] = useState<string>(methods_array[0]);
+	const [selectedMethod, setSelectedMethod] = useState<string>(methods_array[0]);
 
 	return (
 		<>
 			<Tippy
+				className="tippy_method_select_wrapper"
 				placement="bottom"
 				content={
 					<TippyList
 						methodsArr={methods_array}
-						selectItem={setMethod}
+						selectedMethod={selectedMethod}
+						selectMethod={setSelectedMethod}
 					/>
 				}
 				interactive={true}
@@ -24,16 +26,15 @@ function MethodSelect() {
 				animation="shift-away"
 				trigger="click"
 				arrow={false}
-				offset={[0, 0]}
+				offset={[0, 5]}
 				maxWidth={100}
 			>
-				<input
-					type="text"
+				<div
 					id="tippy-select-request-method"
 					className="method_select_wrapper"
-					value={method}
-					readOnly
-				></input>
+				>
+					{selectedMethod}
+				</div>
 			</Tippy>
 		</>
 	);

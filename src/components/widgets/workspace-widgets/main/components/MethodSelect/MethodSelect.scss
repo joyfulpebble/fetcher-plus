@@ -1,5 +1,9 @@
-.method_select_wrapper {
+.tippy_method_select_wrapper {
 	width: 100px;
+}
+
+.method_select_wrapper {
+	width: 120px;
 	height: 34px;
 
 	padding: var(--padding-default);
@@ -7,13 +11,13 @@
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
+	background-color: var(--border-color-default);
 	border-style: solid;
 	border-width: var(--border-size-default);
 	border-top-color: var(--border-color-default);
 	border-bottom-color: var(--border-color-default);
 	border-left-color: var(--border-color-default);
 	border-right-color: var(--color-none);
-	background-color: var(--border-color-default);
 	border-top-left-radius: var(--border-radius-default);
 	border-bottom-left-radius: var(--border-radius-default);
 }
