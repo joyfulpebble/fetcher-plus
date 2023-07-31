@@ -1,12 +1,15 @@
 .tippy_method_select_wrapper {
 	width: 120px;
+	user-select: none;
 }
 
 .method_select_wrapper {
+	user-select: none;
 	width: 120px;
-	height: 34px;
-
+	height: var(--height-base-element);
 	padding: var(--padding-default);
+	font-weight: 400;
+	font-size: var(--font-size-large-paragraph);
 	display: flex;
 	align-items: center;
 	justify-content: center;

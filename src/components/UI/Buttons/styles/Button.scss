@@ -1,19 +1,22 @@
 .button {
 	cursor: pointer;
-	height: 34px;
+	user-select: none;
+	height: var(--height-base-element);
 	padding: var(--padding-default);
 	border: none;
 	outline: none;
 	border-radius: var(--border-radius-default);
 	color: var(--font-color-default);
 	text-decoration: none;
-	font-family: "PoppinsLight";
+	font-family: "Inter";
+	font-weight: 400;
 	font-size: var(--font-size-paragraph);
 }
 
 .redirect {
 	text-decoration: none;
-	color: var(--font-color-black);
+	font-weight: 500;
+	color: var(--font-color-dark);
 
 	&.disabled {
 		cursor: no-drop;

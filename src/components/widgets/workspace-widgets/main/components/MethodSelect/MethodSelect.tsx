@@ -6,7 +6,7 @@ import TippyList from "./tippy/TippyList";
 import "./MethodSelect.scss";
 
 function MethodSelect() {
-	const methods_array = ["GET", "PUT", "POST", "PATCH", "DELETE"];
+	const methods_array = ["GET", "POST", "PUT", "PATCH", "DELETE"];
 	const [selectedMethod, setSelectedMethod] = useState<string>(methods_array[0]);
 
 	return (

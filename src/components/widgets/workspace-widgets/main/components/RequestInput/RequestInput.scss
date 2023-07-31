@@ -1,15 +1,16 @@
 .request_input {
 	width: 100%;
-	height: 34px;
+	height: var(--height-base-element);
 	min-width: 50px;
 
 	background-color: #ffffff14;
-	padding: 8px 16px;
+	padding: var(--padding-default);
 	outline: none;
 
-	font-family: "PoppinsLight";
-	font-size: 12px;
-	line-height: 18px;
+	font-family: "Inter";
+	font-weight: 400;
+	font-size: var(--font-size-paragraph);
+	line-height: var(--font-line-height);
 	color: var(--font-color-white);
 
 	border-style: solid;

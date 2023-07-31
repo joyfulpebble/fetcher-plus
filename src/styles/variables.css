@@ -12,16 +12,30 @@
 	--color-secondary-hover: #ffffffcc;
 	--color-secondary-disabled: #ffffff99;
 
+	--focus-border: var(--color-default);
+	--separator-border: var(--border-color-default);
+
+	--height-base-element: 34px;
+
 	--padding-default: 8px 16px;
+	--padding-t5-l10: 5px 10px;
+	--padding-l15-r15: 0 15px;
 
-	--margin-right-default: 8px;
-
+	--margin-r8: 8px;
+	--margin-b3: 3px;
+	
 	--border-size-default: 1px;
 	--border-radius-default: 4px;
 	--border-color-default: #ffffff14;
 
-	--font-color-white: white;
-	--font-color-black: black;
-	--font-size-paragraph: 12px;
-	--font-height: 18px;
+	--font-color-light: white;
+	--font-color-red: #f07369;
+	--font-color-blue: #4f67d1;
+	--font-color-purple: #7160dd;
+	--font-color-yellow: #eed37c;
+	--font-color-orange: #f0aa69;
+	--font-color-dark: black;
+	--font-size-paragraph: 13px;
+	--font-size-large-paragraph: 15px;
+	--font-line-height: 20px;
 }

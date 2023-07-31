@@ -1,17 +1,36 @@
 .tippy_list_element {
+	font-weight: 400;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	padding: 5px 10px;
-	color: white;
 	cursor: pointer;
+	padding: var(--padding-t5-l10);
+	color: var(--font-color-light);
 	border-radius: var(--border-radius-default);
+	margin-bottom: var(--margin-b3);
+
+	&.get {
+		color: var(--font-color-yellow);
+	}
+	&.post {
+		color: var(--font-color-purple);
+	}
+	&.put {
+		color: var(--font-color-orange);
+	}
+	&.delete {
+		color: var(--font-color-red);
+	}
+	&.patch {
+		color: var(--font-color-blue);
+	}
+
+	&.selected {
+		background-color: var(--border-color-default);
+	}
 
 	&:hover {
 		background-color: var(--border-color-default);
 	}
 }
 
-.selected {
-	background-color: var(--border-color-default);
-}

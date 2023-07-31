@@ -1,6 +1,4 @@
-@import url("./font-face/Poppins/PoppinsLight.css");
-@import url("./font-face/Idea/IdeaLight.css");
-@import url("./font-face/Idea/IdeaMedium.css");
+@import url("./font-face/Inter.css");
 
 *,
 *::before,
@@ -23,12 +21,29 @@ img {
 	display: block;
 }
 
-input,
-button,
-textarea,
-select {
+input::selection,
+button::selection,
+textarea::selection,
+select::selection,
+div::selection {
 	font: inherit;
+	color: var(--font-color-light);
+	background: var(--color-default);
 }
+
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+p::selection,
+span::selection,
+ul[class]::selection,
+ol[class]::selection,
+li::selection {
+	color: var(--font-color-light);
+	background: var(--color-default);
+}
+
 
 body,
 h1,
@@ -57,10 +72,9 @@ body,
 
 body {
 	background-color: var(--theme-dark-bg-lvl-1);
-	color: var(--font-color-white);
-	font-family: "PoppinsLight";
+	color: var(--font-color-light);
+	font-family: "Inter";
 	overflow: hidden;
-	min-height: 100vh;
 	scroll-behavior: smooth;
 	text-rendering: optimizeSpeed;
 }
