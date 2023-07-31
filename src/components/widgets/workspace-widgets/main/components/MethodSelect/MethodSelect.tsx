@@ -26,8 +26,8 @@ function MethodSelect() {
 				animation="shift-away"
 				trigger="click"
 				arrow={false}
-				offset={[0, 5]}
-				maxWidth={100}
+				offset={[10, 5]}
+				maxWidth={120}
 			>
 				<div
 					id="tippy-select-request-method"

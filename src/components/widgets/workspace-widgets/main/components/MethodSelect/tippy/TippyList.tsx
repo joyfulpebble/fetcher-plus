@@ -1,6 +1,6 @@
-import { memo } from "react";
-
+import { IconCheck } from "@tabler/icons-react";
 import Divider from "../../../../../../UI/Divider/Divider";
+
 import "./TippyList.scss";
 
 interface TippyListI {
@@ -8,11 +8,7 @@ interface TippyListI {
 	selectedMethod: string;
 	selectMethod: React.Dispatch<React.SetStateAction<string>>;
 }
-const TippyList = memo(function TippyList({
-	methodsArr,
-	selectedMethod,
-	selectMethod
-}: TippyListI) {
+function TippyList({ methodsArr, selectedMethod, selectMethod }: TippyListI) {
 	const list: JSX.Element[] = methodsArr.map((element: any, index: number) => (
 		<div
 			className={`tippy_list_element ${selectedMethod === element ? "selected" : ""}`}
@@ -21,6 +17,12 @@ const TippyList = memo(function TippyList({
 				selectMethod(element);
 			}}
 		>
+			{selectedMethod === element ? (
+				<IconCheck
+					size={15}
+					style={{ marginRight: 8 }}
+				/>
+			) : null}
 			{element}
 		</div>
 	));
@@ -33,5 +35,5 @@ const TippyList = memo(function TippyList({
 			</div>
 		</>
 	);
-});
+}
 export default TippyList;

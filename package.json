@@ -8,6 +8,7 @@
 	"private": true,
 	"dependencies": {
 		"@reduxjs/toolkit": "1.9.1",
+		"@tabler/icons-react": "2.30.0",
 		"@tippyjs/react": "4.2.6",
 		"allotment": "1.19.0",
 		"axios": "0.27.2",
