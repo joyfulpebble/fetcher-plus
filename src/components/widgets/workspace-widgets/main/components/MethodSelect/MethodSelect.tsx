@@ -1,6 +1,7 @@
-import Tippy from "@tippyjs/react";
 import { useState } from "react";
 
+import { IconChevronDown } from "@tabler/icons-react";
+import Tippy from "@tippyjs/react";
 import TippyList from "./tippy/TippyList";
 
 import "./MethodSelect.scss";
@@ -26,7 +27,7 @@ function MethodSelect() {
 				animation="shift-away"
 				trigger="click"
 				arrow={false}
-				offset={[10, 5]}
+				offset={[5, 5]}
 				maxWidth={120}
 			>
 				<div
@@ -34,6 +35,10 @@ function MethodSelect() {
 					className="method_select_wrapper"
 				>
 					{selectedMethod}
+					<IconChevronDown
+						size={15}
+						stroke={2}
+					/>
 				</div>
 			</Tippy>
 		</>

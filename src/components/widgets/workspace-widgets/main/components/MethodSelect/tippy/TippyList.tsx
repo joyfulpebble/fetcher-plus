@@ -11,7 +11,9 @@ interface TippyListI {
 function TippyList({ methodsArr, selectedMethod, selectMethod }: TippyListI) {
 	const list: JSX.Element[] = methodsArr.map((element: any, index: number) => (
 		<div
-			className={`tippy_list_element ${selectedMethod === element ? "selected" : ""} ${element.toLowerCase()}`}
+			className={`tippy_list_element ${
+				selectedMethod === element ? "selected" : ""
+			} ${element.toLowerCase()}`}
 			key={index}
 			onClick={() => {
 				selectMethod(element);
@@ -19,8 +21,8 @@ function TippyList({ methodsArr, selectedMethod, selectMethod }: TippyListI) {
 		>
 			{selectedMethod === element ? (
 				<IconCheck
-					size={16}
-					stroke={2.25}
+					size={15}
+					stroke={2.5}
 					style={{ marginRight: 8 }}
 				/>
 			) : null}

@@ -2,7 +2,6 @@ import { Allotment, setSashSize } from "allotment";
 import RequestForm from "./components/RequestForm";
 
 import "allotment/dist/style.css";
-import "./WorkspaceMain.scss";
 
 function WorkspaceMain() {
 	setSashSize(4);

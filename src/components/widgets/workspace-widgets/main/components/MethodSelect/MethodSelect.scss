@@ -2,17 +2,16 @@
 	width: 120px;
 	user-select: none;
 }
-
 .method_select_wrapper {
 	user-select: none;
-	width: 120px;
+	width: 140px;
 	height: var(--height-base-element);
-	padding: var(--padding-default);
+	padding: var(--padding-t5-l10);
 	font-weight: 400;
 	font-size: var(--font-size-large-paragraph);
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 	cursor: pointer;
 	background-color: var(--border-color-default);
 	border-style: solid;
