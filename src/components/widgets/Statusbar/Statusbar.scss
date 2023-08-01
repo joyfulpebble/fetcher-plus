@@ -4,15 +4,16 @@ $status-bar-background: #5839af;
 	width: 100vw;
 	height: 20px;
 
-	font-family: "IdeaMedium";
+	background-color: $status-bar-background;
+
+	font-family: "Idea";
+	font-weight: normal;
 	font-size: 13px;
 
 	display: flex;
 	justify-content: space-between;
 	padding-left: 8px;
 	padding-right: 8px;
-
-	background-color: $status-bar-background;
 }
 
 .net_connection {

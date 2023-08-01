@@ -1,0 +1,47 @@
+@font-face {
+	font-display: swap;
+	font-family: "Idea";
+	font-style: normal;
+	font-weight: 200;
+	src: url("../../assets/fonts/Idea/JetBrainsMono-Thin.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Idea";
+	font-style: italic;
+	font-weight: 200;
+	src: url("../../assets/fonts/Idea/JetBrainsMono-ThinItalic.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Idea";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../../assets/fonts/Idea/JetBrainsMono-Regular.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Idea";
+	font-style: italic;
+	font-weight: 200;
+	src: url("../../assets/fonts/Idea/JetBrainsMono-Italic.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Idea";
+	font-style: normal;
+	font-weight: bold;
+	src: url("../../assets/fonts/Idea/JetBrainsMono-Bold.woff2") format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "Idea";
+	font-style: italic;
+	font-weight: bold;
+	src: url("../../assets/fonts/Idea/JetBrainsMono-BoldItalic.woff2") format("woff2");
+}

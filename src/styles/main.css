@@ -1,4 +1,5 @@
 @import url("./font-face/Inter.css");
+@import url("./font-face/Idea.css");
 
 *,
 *::before,
@@ -43,7 +44,6 @@ li::selection {
 	color: var(--font-color-light);
 	background: var(--color-default);
 }
-
 
 body,
 h1,

@@ -23,7 +23,7 @@
 
 	--margin-r8: 8px;
 	--margin-b3: 3px;
-	
+
 	--border-size-default: 1px;
 	--border-radius-default: 4px;
 	--border-color-default: #ffffff14;
@@ -38,4 +38,5 @@
 	--font-size-paragraph: 13px;
 	--font-size-large-paragraph: 15px;
 	--font-line-height: 20px;
+	--font-letter-spacing-1: 1px;
 }

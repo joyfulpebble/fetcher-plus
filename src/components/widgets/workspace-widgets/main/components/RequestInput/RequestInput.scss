@@ -4,15 +4,16 @@
 	min-width: 50px;
 
 	background-color: #ffffff14;
+	color: var(--font-color-white);
 	padding: var(--padding-default);
-	outline: none;
 
 	font-family: "Inter";
 	font-weight: 400;
 	font-size: var(--font-size-paragraph);
 	line-height: var(--font-line-height);
-	color: var(--font-color-white);
+	letter-spacing: var(--font-letter-spacing-1);
 
+	outline: none;
 	border-style: solid;
 	border-width: var(--border-size-default);
 	border-color: var(--border-color-default);
