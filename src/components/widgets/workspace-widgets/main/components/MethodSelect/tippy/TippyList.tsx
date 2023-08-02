@@ -1,14 +1,11 @@
 import { IconCheck } from "@tabler/icons-react";
 import Divider from "../../../../../../UI/Divider/Divider";
 
+import type { ElementsT } from "../../../../../../../types/elements";
+
 import "./TippyList.scss";
 
-interface TippyListI {
-	methodsArr: Array<string>;
-	selectedMethod: string;
-	selectMethod: React.Dispatch<React.SetStateAction<string>>;
-}
-function TippyList({ methodsArr, selectedMethod, selectMethod }: TippyListI) {
+function TippyList({ methodsArr, selectedMethod, selectMethod }: ElementsT.TippyListI) {
 	const list: JSX.Element[] = methodsArr.map((element: any, index: number) => (
 		<div
 			className={`tippy_list_element ${

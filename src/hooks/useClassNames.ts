@@ -1,18 +1,13 @@
-type ValueT = string | number | boolean | undefined | null;
-type MappingT = Record<string, unknown>;
-// eslint-disable-next-line no-use-before-define
-type ArgumentT = ValueT | MappingT | ArgumentArrayT;
-type ArgumentArrayT = Array<ArgumentT>;
-type HasOwnWithoutScopeT = (value: PropertyKey) => boolean;
+import type { HooksT } from "../types/hooks";
 
 export const useClassNames = () => {
-	const customHasOwn: HasOwnWithoutScopeT = {}.hasOwnProperty;
+	const customHasOwn: HooksT.UseClassnamesT.HasOwnWithoutScopeT = {}.hasOwnProperty;
 
-	function classNames(...args: ArgumentT[]): string {
+	function classNames(...args: HooksT.UseClassnamesT.ArgumentT[]): string {
 		const final_classes_array: Array<string> = [""];
 
 		for (let i = 0; i < args.length; i++) {
-			const argument: ArgumentT = args[i];
+			const argument: HooksT.UseClassnamesT.ArgumentT = args[i];
 			if (!argument) continue;
 
 			if (typeof argument === "string" || typeof argument === "number") {

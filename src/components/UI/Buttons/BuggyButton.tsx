@@ -1,12 +1,9 @@
 import { Component } from "react";
-
 import Button from "./Button";
 
-interface BuggyButtonState {
-	releaseBugs: boolean;
-}
+import type { ElementsT } from "../../../types/elements";
 
-class BuggyButton extends Component<{}, BuggyButtonState> {
+class BuggyButton extends Component<{}, ElementsT.BuggyButtonState> {
 	constructor(props: {}) {
 		super(props);
 		this.state = {

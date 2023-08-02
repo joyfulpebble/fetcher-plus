@@ -1,12 +1,8 @@
-import type { HTMLAttributes } from "react";
+import type { ElementsT } from "../../../types/elements";
 
 import "./Input.scss";
 
-interface InputPropsI extends HTMLAttributes<HTMLInputElement> {
-	ref?: React.LegacyRef<HTMLInputElement> | undefined;
-}
-
-function Input({ ref }: InputPropsI): JSX.Element {
+function Input({ ref }: ElementsT.InputPropsI): JSX.Element {
 	return (
 		<input
 			className={"input"}
