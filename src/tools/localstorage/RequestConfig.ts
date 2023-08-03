@@ -1,12 +1,12 @@
-import { GeneralT } from "../../types/general";
+import { CommonT } from "../../types/common";
 
 interface RequestConfigItemI {
 	url: string;
 	name: string;
 	time: string;
 	date: string;
-	params: GeneralT.DynamicObjectI;
-	method: GeneralT.MainRequestMethods;
+	params: Object;
+	method: CommonT.MainRequestMethods;
 }
 interface RequestConfigItemConstructorI extends Omit<RequestConfigItemI, "time" | "date"> {}
 
@@ -15,8 +15,8 @@ export class RequestConfig {
 	private name: string;
 	private time: string;
 	private date: string;
-	private method: GeneralT.MainRequestMethods;
-	private params: GeneralT.DynamicObjectI;
+	private method: CommonT.MainRequestMethods;
+	private params: Object;
 	private unformatted_date: Date;
 
 	constructor({ url, name, method, params }: RequestConfigItemConstructorI) {

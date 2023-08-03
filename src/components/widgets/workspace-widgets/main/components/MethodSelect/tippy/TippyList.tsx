@@ -1,31 +1,39 @@
+import { useAppDispatch, useAppSelector } from "../../../../../../../hooks/redux/redux";
+import requestConfigSlice from "../../../../../../../redux/reducers/requestConfigSlice";
+
 import { IconCheck } from "@tabler/icons-react";
 import Divider from "../../../../../../UI/Divider/Divider";
 
-import type { ElementsT } from "../../../../../../../types/elements";
-
 import "./TippyList.scss";
+import { CommonT } from "../../../../../../../types/common";
 
-function TippyList({ methodsArr, selectedMethod, selectMethod }: ElementsT.TippyListI) {
-	const list: JSX.Element[] = methodsArr.map((element: any, index: number) => (
-		<div
-			className={`tippy_list_element ${
-				selectedMethod === element ? "selected" : ""
-			} ${element.toLowerCase()}`}
-			key={index}
-			onClick={() => {
-				selectMethod(element);
-			}}
-		>
-			{selectedMethod === element ? (
-				<IconCheck
-					size={15}
-					stroke={2.5}
-					style={{ marginRight: 8 }}
-				/>
-			) : null}
-			{element}
-		</div>
-	));
+function TippyList() {
+	const dispatch = useAppDispatch();
+	const { updateConfig } = requestConfigSlice.actions;
+
+	const methods: Array<CommonT.MainRequestMethods> = ["GET", "POST", "PUT", "PATCH", "DELETE"];
+	const { method } = useAppSelector((state) => state.requestConfigReducer);
+
+	const list: Array<JSX.Element> = methods.map(
+		(element: CommonT.MainRequestMethods, index: number) => (
+			<div
+				className={`tippy_list_element ${
+					method === element ? "selected" : ""
+				} ${element.toLowerCase()}`}
+				key={index}
+				onClick={() => dispatch(updateConfig(element))}
+			>
+				{method === element ? (
+					<IconCheck
+						size={15}
+						stroke={2.5}
+						style={{ marginRight: 8 }}
+					/>
+				) : null}
+				{element}
+			</div>
+		)
+	);
 
 	return (
 		<>

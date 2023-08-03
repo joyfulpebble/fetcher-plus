@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
-import type { GeneralT } from "./general";
+import type { CommonT } from "./common";
+import { EmptyObject } from "type-fest";
 
 export namespace APIT {
-	export interface GetConfigI {
-		url: string;
-		request_name: string;
-		params: GeneralT.DynamicObjectI;
+	export interface RequestConfigI {
+		url: string | "";
+		params: Object | EmptyObject;
+		method: CommonT.MainRequestMethods;
 	}
 
 	export interface InterceptorI extends AxiosRequestConfig {

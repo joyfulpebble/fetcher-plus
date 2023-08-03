@@ -1,9 +1,12 @@
-.form_wrapper {
+.wrapper {
 	padding: var(--padding-l15-r15);
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	flex-grow: 1;
+}
+.form_wrapper {
+	width: 100%;
 }
 
 .request_config_wrapper {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useAppSelector } from "../../../../../../hooks/redux/redux";
 
 import { IconChevronDown } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
@@ -7,21 +7,14 @@ import TippyList from "./tippy/TippyList";
 import "./MethodSelect.scss";
 
 function MethodSelect() {
-	const methods_array = ["GET", "POST", "PUT", "PATCH", "DELETE"];
-	const [selectedMethod, setSelectedMethod] = useState<string>(methods_array[0]);
+	const { method } = useAppSelector((state) => state.requestConfigReducer);
 
 	return (
 		<>
 			<Tippy
 				className="tippy_method_select_wrapper"
 				placement="bottom"
-				content={
-					<TippyList
-						methodsArr={methods_array}
-						selectedMethod={selectedMethod}
-						selectMethod={setSelectedMethod}
-					/>
-				}
+				content={<TippyList />}
 				interactive={true}
 				hideOnClick={true}
 				animation="shift-away"
@@ -34,7 +27,7 @@ function MethodSelect() {
 					id="tippy-select-request-method"
 					className="method_select_wrapper"
 				>
-					{selectedMethod}
+					{method}
 					<IconChevronDown
 						size={15}
 						stroke={2}

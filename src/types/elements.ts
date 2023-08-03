@@ -1,4 +1,5 @@
-import type { HTMLAttributes, Dispatch } from "react";
+import type { HTMLAttributes } from "react";
+
 export namespace ElementsT {
 	export interface BuggyButtonState {
 		releaseBugs: boolean;
@@ -31,25 +32,11 @@ export namespace ElementsT {
 		spanText: string | number;
 	}
 	// !
-	export interface ParamsListProps {
-		displayedParameters: [string, string | number][];
-		setDisplayedParameters: Dispatch<React.SetStateAction<[string, string | number][]>>;
-		parameters: object;
-		setParameters: React.Dispatch<React.SetStateAction<object>>;
-	}
-	// !
 	export interface ListPropsI {
 		array: Array<string | number | Array<string | number>>;
 		// eslint-disable-next-line no-unused-vars
 		deleteFunction: (index: number) => void;
 	}
-
-	export interface TippyListI {
-		methodsArr: Array<string>;
-		selectedMethod: string;
-		selectMethod: React.Dispatch<React.SetStateAction<string>>;
-	}
-
 	// !
 	export type OnlineStatusProviderProps = {
 		children: React.ReactNode;
