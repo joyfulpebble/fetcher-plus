@@ -5,12 +5,11 @@ import Tippy from "@tippyjs/react";
 import TippyList from "./tippy/TippyList";
 
 import "./MethodSelect.scss";
-import { CommonT } from "../../../../../../types/common";
+import "./tippy/TippyList.scss";
 
 function MethodSelect() {
 	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
-
-	const methods: Array<CommonT.MainRequestMethods> = ["GET", "POST", "PUT", "PATCH", "DELETE"];
+	const methods = useAppSelector((state) => state.requestMethodsListReducer);
 
 	return (
 		<>
@@ -26,11 +25,13 @@ function MethodSelect() {
 				offset={[5, 5]}
 				maxWidth={120}
 			>
-				<div
-					id="tippy-select-request-method"
-					className="method_select_wrapper"
-				>
-					{requestMethod}
+				<div className="method_select_wrapper">
+					<div
+						id="tippy-select-request-method"
+						className={`${requestMethod.toLowerCase()}`}
+					>
+						{requestMethod}
+					</div>
 					<IconChevronDown
 						size={15}
 						stroke={2}

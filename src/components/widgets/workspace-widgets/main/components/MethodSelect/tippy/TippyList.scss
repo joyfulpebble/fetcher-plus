@@ -9,22 +9,6 @@
 	border-radius: var(--border-radius-default);
 	margin-bottom: var(--margin-b3);
 
-	&.get {
-		color: var(--font-color-yellow);
-	}
-	&.post {
-		color: var(--font-color-purple);
-	}
-	&.put {
-		color: var(--font-color-orange);
-	}
-	&.delete {
-		color: var(--font-color-red);
-	}
-	&.patch {
-		color: var(--font-color-blue);
-	}
-
 	&.selected {
 		background-color: var(--border-color-default);
 	}
@@ -34,3 +18,18 @@
 	}
 }
 
+.get {
+	color: var(--font-color-green);
+}
+.post {
+	color: var(--font-color-yellow);
+}
+.put {
+	color: var(--font-color-orange);
+}
+.delete {
+	color: var(--font-color-red);
+}
+.patch {
+	color: var(--font-color-purple);
+}

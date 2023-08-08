@@ -3,6 +3,7 @@ import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } fro
 import storage from "redux-persist/lib/storage";
 
 import requestConfigSlice from "./reducers/requestConfigSlice";
+import requestMethodsListSlice from "./reducers/requestMethodsListSlice";
 
 const persistConfig = {
 	key: "root",
@@ -10,7 +11,8 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-	requestConfigReducer: requestConfigSlice.reducer
+	requestConfigReducer: requestConfigSlice.reducer,
+	requestMethodsListReducer: requestMethodsListSlice.reducer
 });
 const persistReduser = persistReducer(persistConfig, rootReducer);
 
