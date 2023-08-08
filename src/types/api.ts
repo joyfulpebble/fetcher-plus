@@ -5,9 +5,9 @@ import { EmptyObject } from "type-fest";
 
 export namespace APIT {
 	export interface RequestConfigI {
-		url: string | "";
-		params: Object | EmptyObject;
-		method: CommonT.MainRequestMethods;
+		requestUrl: string | undefined;
+		requestParams: Object | EmptyObject;
+		requestMethod: CommonT.MainRequestMethods;
 	}
 
 	export interface InterceptorI extends AxiosRequestConfig {

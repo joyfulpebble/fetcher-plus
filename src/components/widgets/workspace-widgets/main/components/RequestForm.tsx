@@ -8,13 +8,15 @@ import RequestInput from "./RequestInput/RequestInput";
 import "./RequestForm.scss";
 
 import type { APIT } from "../../../../../types/api";
+import { useRef } from "react";
 
 function RequestForm() {
-	const { method } = useAppSelector((state) => state.requestConfigReducer);
-
+	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
 	const { values, saveFuildValue } = useForm<APIT.RequestConfigI>({
-		initialValues: { method: "GET", params: {}, url: "" }
+		initialValues: { requestMethod: "GET", requestParams: {}, requestUrl: "" }
 	});
+
+	const requestUrl = useRef<HTMLInputElement>(null);
 
 	return (
 		<>
@@ -22,7 +24,12 @@ function RequestForm() {
 				<form className="form_wrapper">
 					<div className={"request_config_wrapper"}>
 						<MethodSelect />
-						<RequestInput />
+						<RequestInput
+							inputRef={requestUrl}
+							onChange={() => {
+								saveFuildValue("requestUrl", requestUrl.current?.value);
+							}}
+						/>
 					</div>
 				</form>
 				<Button
@@ -30,10 +37,9 @@ function RequestForm() {
 					buttonStyle="primary"
 					disabled={false}
 					onClick={() => {
-						saveFuildValue("method", method);
-						console.log(
-							"@useForm data: " + values.current.method + "\n" + "@redux data: " + method
-						);
+						saveFuildValue("requestMethod", requestMethod);
+
+						console.table([values.current]);
 					}}
 				/>
 			</div>

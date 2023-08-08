@@ -4,9 +4,9 @@ import type { APIT } from "../../types/api";
 import type { CommonT } from "../../types/common";
 
 const initialState: APIT.RequestConfigI = {
-	url: "",
-	method: "GET",
-	params: {}
+	requestUrl: "",
+	requestMethod: "GET",
+	requestParams: {}
 };
 
 export const requestConfigSlice = createSlice({
@@ -19,7 +19,7 @@ export const requestConfigSlice = createSlice({
 		},
 
 		updateConfig(state, action: PayloadAction<CommonT.MainRequestMethods>) {
-			state.method = action.payload;
+			state.requestMethod = action.payload;
 		}
 	}
 });

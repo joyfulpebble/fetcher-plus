@@ -5,25 +5,28 @@ import { IconCheck } from "@tabler/icons-react";
 import Divider from "../../../../../../UI/Divider/Divider";
 
 import "./TippyList.scss";
-import { CommonT } from "../../../../../../../types/common";
+import type { CommonT } from "../../../../../../../types/common";
 
-function TippyList() {
+interface TippyListPropsI {
+	methods: Array<CommonT.MainRequestMethods>;
+}
+
+function TippyList({ methods }: TippyListPropsI) {
 	const dispatch = useAppDispatch();
 	const { updateConfig } = requestConfigSlice.actions;
 
-	const methods: Array<CommonT.MainRequestMethods> = ["GET", "POST", "PUT", "PATCH", "DELETE"];
-	const { method } = useAppSelector((state) => state.requestConfigReducer);
+	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
 
 	const list: Array<JSX.Element> = methods.map(
 		(element: CommonT.MainRequestMethods, index: number) => (
 			<div
 				className={`tippy_list_element ${
-					method === element ? "selected" : ""
+					requestMethod === element ? "selected" : ""
 				} ${element.toLowerCase()}`}
 				key={index}
 				onClick={() => dispatch(updateConfig(element))}
 			>
-				{method === element ? (
+				{requestMethod === element ? (
 					<IconCheck
 						size={15}
 						stroke={2.5}
