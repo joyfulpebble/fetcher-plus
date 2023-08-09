@@ -6,20 +6,15 @@ export namespace ElementsT {
 	}
 
 	type ButtonStylesT = "primary" | "secondary" | "danger";
-	export interface ButtonPropsI {
+	export interface ButtonPropsI extends React.HTMLProps<HTMLButtonElement> {
 		content: string;
-		disabled: boolean;
+		disabled?: boolean;
 		buttonStyle: ButtonStylesT;
 		// eslint-disable-next-line no-unused-vars
 		onClick?: (e: React.MouseEvent) => void;
 	}
-	export interface RedirectButtonPropsI {
-		content: string;
-		disabled?: boolean;
+	export interface RedirectButtonPropsI extends ButtonPropsI {
 		redirectPath: string;
-		buttonStyle: ButtonStylesT;
-		// eslint-disable-next-line no-unused-vars
-		onClick?: (e: React.MouseEvent) => void;
 	}
 	// !
 	export interface InputPropsI {

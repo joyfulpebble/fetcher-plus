@@ -9,13 +9,12 @@
 	color: var(--font-color-default);
 	text-decoration: none;
 	font-family: "Inter";
-	font-weight: 400;
+	font-weight: 500;
 	font-size: var(--font-size-paragraph);
 }
 
 .redirect {
 	text-decoration: none;
-	font-weight: 500;
 	color: var(--font-color-dark);
 
 	&.disabled {
@@ -52,6 +51,7 @@
 
 .secondary {
 	background-color: var(--color-secondary);
+	color: var(--font-color-dark);
 
 	&:hover {
 		background: var(--color-secondary-hover);
