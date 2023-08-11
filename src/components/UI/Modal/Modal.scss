@@ -15,7 +15,6 @@
 .modal_header {
 	position: sticky;
 	top: 0;
-	height: 50px;
 	padding: 16px;
 	display: flex;
 	flex-grow: 1;
@@ -35,19 +34,35 @@
 }
 
 .modal_body {
-	padding: 16px;
+	padding: 0 16px;
+	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
 	flex-grow: 1;
+
+	overflow-y: scroll;
+}
+::-webkit-scrollbar {
+	width: 5px;
 }
 
-.modal_content_element {
-	margin-bottom: 16px;
+::-webkit-scrollbar-track {
+	background-color: 0;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 4px;
+	background-color: hsla(0, 0%, 8%, 0.8);
+}
+
+.modal_body_element {
+	margin: 8px 0;
 }
 
 .modal_controls {
-	height: 50px;
-	padding: 16px;
-	padding-top: 0;
+	padding: 12px;
+	border-top: 1px solid #ffffff14;
 	display: flex;
 	align-items: flex-end;
 	justify-content: flex-end;

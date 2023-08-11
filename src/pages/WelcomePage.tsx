@@ -1,7 +1,8 @@
 import Statusbar from "../components/widgets/Statusbar/Statusbar";
 import LinkButton from "../components/UI/Buttons/RedirectButton";
-import Modal from "../components/Modal/Modal";
+import Modal from "../components/UI/Modal/Modal";
 import Input from "../components/UI/Input/Input";
+import Divider from "../components/UI/Divider/Divider";
 
 function WelcomePage(): JSX.Element {
 	return (
@@ -21,6 +22,46 @@ function WelcomePage(): JSX.Element {
 					buttonStyle="secondary"
 				/>
 				<Modal>
+					<div>
+						<span>Some label</span>
+						<Input />
+					</div>
+					<div>
+						<span>Some label</span>
+						<Input />
+					</div>
+					<div>
+						<span>Some label</span>
+						<Input />
+					</div>
+					<div>
+						<span>Some label</span>
+						<Input />
+					</div>
+					<div>
+						<span>Some label</span>
+						<Input />
+					</div>
+					<div>
+						<span>Some label</span>
+						<Input />
+					</div>
+					<div>
+						<span>Some label</span>
+						<Input />
+					</div>
+					<div>
+						<span>Some label</span>
+						<Input />
+					</div>
+					<div>
+						<span>Some label</span>
+						<Input />
+					</div>
+					<div>
+						<span>Some label</span>
+						<Input />
+					</div>
 					<div>
 						<span>Some label</span>
 						<Input />

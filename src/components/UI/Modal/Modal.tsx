@@ -1,5 +1,5 @@
 import { IconX } from "@tabler/icons-react";
-import Button from "../UI/Buttons/Button";
+import Button from "../Buttons/Button";
 
 import "./Modal.scss";
 
@@ -23,16 +23,14 @@ function Modal({ children }: ModalPropsI) {
 					/>
 				</section>
 				<section className="modal_body">
-					<section className="modal_content">
-						{child.map((node: JSX.Element, index: number) => (
-							<div
-								key={index}
-								className="modal_content_element"
-							>
-								{node}
-							</div>
-						))}
-					</section>
+					{child.map((node: JSX.Element, index: number) => (
+						<div
+							key={index}
+							className="modal_body_element"
+						>
+							{node}
+						</div>
+					))}
 				</section>
 				<section className="modal_controls">
 					<Button
