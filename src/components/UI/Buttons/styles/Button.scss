@@ -24,41 +24,41 @@
 }
 
 .primary {
-	background-color: var(--color-default);
+	background-color: var(--btn-color-default);
 
 	&:hover {
-		background: var(--color-default-hover);
+		background: var(--btn-color-default-hover);
 		transition: background-color 0.1s linear;
 	}
 	&:disabled {
 		cursor: no-drop;
-		background-color: var(--color-default-disabled);
+		background-color: var(--btn-color-default-disabled);
 	}
 }
 
 .danger {
-	background-color: var(--color-danger);
+	background-color: var(--btn-color-danger);
 
 	&:hover {
-		background: var(--color-danger-hover);
+		background: var(--btn-color-danger-hover);
 		transition: background-color 0.1s linear;
 	}
 	&:disabled {
 		cursor: no-drop;
-		background-color: var(--color-danger-disabled);
+		background-color: var(--btn-color-danger-disabled);
 	}
 }
 
 .secondary {
-	background-color: var(--color-secondary);
+	background-color: var(--btn-color-secondary);
 	color: var(--font-color-dark);
 
 	&:hover {
-		background: var(--color-secondary-hover);
+		background: var(--btn-color-secondary-hover);
 		transition: background-color 0.1s linear;
 	}
 	&:disabled {
 		cursor: no-drop;
-		background-color: var(--color-secondary-disabled);
+		background-color: var(--btn-color-secondary-disabled);
 	}
 }

@@ -2,9 +2,11 @@ import Statusbar from "../components/widgets/Statusbar/Statusbar";
 import LinkButton from "../components/UI/Buttons/RedirectButton";
 import Modal from "../components/UI/Modal/Modal";
 import Input from "../components/UI/Input/Input";
-import Divider from "../components/UI/Divider/Divider";
+import { useState } from "react";
+import Button from "../components/UI/Buttons/Button";
 
 function WelcomePage(): JSX.Element {
+	const [showExampleModal, setShowExampleModal] = useState(false);
 	return (
 		<div
 			style={{
@@ -21,47 +23,25 @@ function WelcomePage(): JSX.Element {
 					redirectPath={"/workspace"}
 					buttonStyle="secondary"
 				/>
-				<Modal>
-					<div>
-						<span>Some label</span>
-						<Input />
-					</div>
-					<div>
-						<span>Some label</span>
-						<Input />
-					</div>
-					<div>
-						<span>Some label</span>
-						<Input />
-					</div>
-					<div>
-						<span>Some label</span>
-						<Input />
-					</div>
-					<div>
-						<span>Some label</span>
-						<Input />
-					</div>
-					<div>
-						<span>Some label</span>
-						<Input />
-					</div>
-					<div>
-						<span>Some label</span>
-						<Input />
-					</div>
-					<div>
-						<span>Some label</span>
-						<Input />
-					</div>
-					<div>
-						<span>Some label</span>
-						<Input />
-					</div>
-					<div>
-						<span>Some label</span>
-						<Input />
-					</div>
+				<Button
+					buttonStyle="danger"
+					content="Open modal"
+					onClick={() => {
+						setShowExampleModal(!showExampleModal);
+					}}
+				/>
+				<Modal
+					showModal={showExampleModal}
+					onClose={() => {
+						setShowExampleModal(!showExampleModal);
+					}}
+					onCancel={() => {
+						console.log("Modal canseled");
+					}}
+					onSubmit={() => {
+						console.log("Modal Submited");
+					}}
+				>
 					<div>
 						<span>Some label</span>
 						<Input />

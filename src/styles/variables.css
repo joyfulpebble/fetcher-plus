@@ -1,43 +1,52 @@
 :root {
+	--theme-dark-bg-lvl-0: #151515;
 	--theme-dark-bg-lvl-1: #1e1e1e;
+	--theme-dark-bg-lvl-2: #272727;
+	--theme-dark-bg-lvl-3: #333333;
 
-	--color-none: #ffffff00;
-	--color-default: #614fd1;
-	--color-default-hover: #604fd1cc;
-	--color-default-disabled: #6b5ccc99;
-	--color-danger: #f07369;
-	--color-danger-hover: #f07269cc;
-	--color-danger-disabled: #f0726999;
-	--color-secondary: #ffffff;
-	--color-secondary-hover: #ffffffcc;
-	--color-secondary-disabled: #ffffff99;
-
-	--focus-border: var(--color-default);
-	--separator-border: var(--border-color-default);
-
-	--height-base-element: 34px;
-
-	--padding-t8-l16: 8px 16px;
-	--padding-t5-l10: 5px 10px;
-	--padding-l15-r15: 0 15px;
-
-	--margin-r8: 8px;
-	--margin-b3: 3px;
-
-	--border-size-default: 1px;
-	--border-radius-default: 4px;
-	--border-color-default: #ffffff14;
+	--btn-color-default: #614fd1;
+	--btn-color-default-hover: #604fd1cc;
+	--btn-color-default-disabled: #6b5ccc99;
+	--btn-color-danger: #f07369;
+	--btn-color-danger-hover: #f07269cc;
+	--btn-color-danger-disabled: #f0726999;
+	--btn-color-secondary: #ffffff;
+	--btn-color-secondary-hover: #ffffffcc;
+	--btn-color-secondary-disabled: #ffffff99;
 
 	--font-color-light: white;
-	--font-color-red: #f07369;
+	--font-color-dark: black;
+	--font-color-red: #e55d52;
 	--font-color-green: #81b34d;
 	--font-color-blue: #4f67d1;
 	--font-color-purple: #7160dd;
 	--font-color-yellow: #eed37c;
 	--font-color-orange: #f0aa69;
-	--font-color-dark: black;
+
 	--font-size-paragraph: 13px;
 	--font-size-large-paragraph: 15px;
 	--font-line-height: 20px;
 	--font-letter-spacing-1: 1px;
+
+	--border-color-default: #ffffff14;
+
+	--border-size-default: 1px;
+	--border-radius-default: 4px;
+
+	--height-base-element: 34px;
+
+	--padding-t8-l16: 8px 16px;
+	--padding-t5-l10: 5px 10px;
+	--padding-lr16: 0 16px;
+	--padding-tb8: 8px 0;
+	--padding-16: 16px;
+	--padding-12: 12px;
+	--padding-8: 8px;
+
+	--margin-r8: 8px;
+	--margin-b3: 3px;
+
+	/* # libraries #  */
+	--focus-border: var(--color-default);
+	--separator-border: var(--border-color-default);
 }
