@@ -31,16 +31,9 @@ function WelcomePage(): JSX.Element {
 					}}
 				/>
 				<Modal
-					showModal={showExampleModal}
-					onClose={() => {
-						setShowExampleModal(!showExampleModal);
-					}}
-					onCancel={() => {
-						console.log("Modal canseled");
-					}}
-					onSubmit={() => {
-						console.log("Modal Submited");
-					}}
+					title="Title"
+					visibility={showExampleModal}
+					setVisibility={setShowExampleModal}
 				>
 					<div>
 						<span>Some label</span>
