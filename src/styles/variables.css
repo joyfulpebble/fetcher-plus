@@ -47,6 +47,6 @@
 	--margin-b3: 3px;
 
 	/* # libraries #  */
-	--focus-border: var(--color-default);
+	--focus-border: var(--btn-color-default);
 	--separator-border: var(--border-color-default);
 }

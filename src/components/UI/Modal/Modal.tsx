@@ -3,7 +3,8 @@ import Button from "../Buttons/Button";
 import { AnimatePresence, motion } from "framer-motion";
 
 import "./Modal.scss";
-import type { Dispatch, SetStateAction } from "react";
+import { useRef, type Dispatch, type SetStateAction } from "react";
+import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
 interface ModalPropsI {
 	title: string;
@@ -24,7 +25,11 @@ function Modal({
 	onSubmit,
 	onClose
 }: ModalPropsI) {
-	const child: Array<JSX.Element> = Array.isArray(children) ? [...children] : [children];
+	const testref = useRef(null);
+
+	useOutsideClick(testref, () => {
+		setVisibility(false);
+	});
 
 	return (
 		<>
@@ -42,6 +47,7 @@ function Modal({
 						className="modal_layer"
 					>
 						<motion.div
+							ref={testref}
 							key={"modal_wrapper"}
 							animate={{ scale: [0.7, 1.05, 1] }}
 							transition={{
@@ -63,16 +69,7 @@ function Modal({
 									}}
 								/>
 							</section>
-							<section className="modal_body">
-								{child.map((node: JSX.Element, index: number) => (
-									<div
-										key={index}
-										className="modal_body_element"
-									>
-										{node}
-									</div>
-								))}
-							</section>
+							<section className="modal_body">{children}</section>
 							<section className="modal_footer">
 								<div className="modal_controls">
 									<Button
