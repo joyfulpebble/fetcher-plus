@@ -1,10 +1,12 @@
 .tippy_method_select_wrapper {
-	width: 120px;
+	width: fit-content;
+	max-height: 220px;
+	overflow-y: scroll;
 	user-select: none;
 }
 .method_select_wrapper {
 	user-select: none;
-	width: 140px;
+	width: 160px;
 	height: var(--height-base-element);
 	padding: var(--padding-t5-l10);
 	font-weight: 400;
@@ -19,7 +21,7 @@
 	border-top-color: var(--border-color-default);
 	border-bottom-color: var(--border-color-default);
 	border-left-color: var(--border-color-default);
-	border-right-color: var(--color-none);
+	border-right-color: #0000;
 	border-top-left-radius: var(--border-radius-default);
 	border-bottom-left-radius: var(--border-radius-default);
 }

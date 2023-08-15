@@ -1,12 +1,7 @@
 import Statusbar from "../components/widgets/Statusbar/Statusbar";
 import LinkButton from "../components/UI/Buttons/RedirectButton";
-import Modal from "../components/UI/Modal/Modal";
-import Input from "../components/UI/Input/Input";
-import { useState } from "react";
-import Button from "../components/UI/Buttons/Button";
 
 function WelcomePage(): JSX.Element {
-	const [showExampleModal, setShowExampleModal] = useState(false);
 	return (
 		<div
 			style={{
@@ -23,23 +18,6 @@ function WelcomePage(): JSX.Element {
 					redirectPath={"/workspace"}
 					buttonStyle="secondary"
 				/>
-				<Button
-					buttonStyle="danger"
-					content="Open modal"
-					onClick={() => {
-						setShowExampleModal(!showExampleModal);
-					}}
-				/>
-				<Modal
-					title="Title"
-					visibility={showExampleModal}
-					setVisibility={setShowExampleModal}
-				>
-					<div>
-						<span>Some label</span>
-						<Input />
-					</div>
-				</Modal>
 			</div>
 			<Statusbar />
 		</div>
