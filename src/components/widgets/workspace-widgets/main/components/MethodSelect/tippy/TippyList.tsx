@@ -10,9 +10,17 @@ import "./TippyList.scss";
 import type { CommonT } from "../../../../../../../types/common";
 import customRequestMethodsListSlice from "../../../../../../../redux/reducers/customRequestMethodsListSlice";
 import Modal from "../../../../../../UI/Modal/Modal";
-import Input from "../../../../../../UI/Input/Input";
 import { useForm } from "../../../../../../../hooks/useForm";
-import RequestInput from "../../RequestInput/RequestInput";
+import Input from "../../../../../../UI/Input/Input";
+
+/**
+ * TODO:
+ * - Custom Input
+ * - Validation adding custom requests
+ * - Deleting custom requests
+ * - Decompose element logic in external hook
+ * - Fix fonts
+ */
 
 interface TippyListPropsI {
 	defaultMethods: Array<CommonT.MainRequestMethods>;
@@ -20,23 +28,20 @@ interface TippyListPropsI {
 }
 
 interface CustomMethodNameI {
-	requestName: string;
+	requestName: string | undefined;
 }
 
 function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
-	const dispatch = useAppDispatch();
+	const [customMethodModalView, setCustomMethodModalView] = useState(false);
+	const customMethodNameRef = useRef<HTMLInputElement>(null);
 	const { values, saveFuildValue } = useForm<CustomMethodNameI>({
-		initialValues: { requestName: "" }
+		initialValues: { requestName: undefined }
 	});
 
-	const customMethodNameRef = useRef<HTMLInputElement>(null);
-
+	const dispatch = useAppDispatch();
+	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
 	const { addCustomMethod } = customRequestMethodsListSlice.actions;
 	const { updateConfig } = requestConfigSlice.actions;
-
-	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
-
-	const [customMethodModalView, setCustomMethodModalView] = useState(false);
 
 	const defaultRequestMethodsList: Array<JSX.Element> = defaultMethods.map(
 		(element: CommonT.MainRequestMethods, index: number) => (
@@ -99,21 +104,20 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 					Add custom
 				</div>
 				<Modal
-					title="Custom requset name"
+					title="Custom request"
 					visibility={customMethodModalView}
 					setVisibility={setCustomMethodModalView}
 					onSubmit={() => {
 						saveFuildValue("requestName", customMethodNameRef.current?.value!);
-						console.log(values.current.requestName);
-
-						dispatch(addCustomMethod(values.current.requestName));
-						console.log(customMethods);
+						dispatch(addCustomMethod(values.current.requestName!));
 					}}
 				>
-					<div>
-						label
-						<RequestInput inputRef={customMethodNameRef} />
-					</div>
+					<Input
+						label="Enter request name: "
+						placeholder="Some text"
+						error={false}
+						inputRef={customMethodNameRef}
+					/>
 				</Modal>
 				{customMethods ? (
 					<>

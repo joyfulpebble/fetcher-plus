@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import type { ElementsT } from "../.././../types/elements";
 
-import { useClassNames } from "../../../hooks/useClassNames";
+import { useClassnames } from "../../../hooks/useClassnames";
 import "./styles/Button.scss";
 
 function RedirectButton({
@@ -11,8 +11,7 @@ function RedirectButton({
 	disabled,
 	buttonStyle
 }: ElementsT.RedirectButtonPropsI): JSX.Element {
-	const classnames = useClassNames();
-	const button_class: string = classnames("button", {
+	const button_class: string = useClassnames("button", {
 		danger: buttonStyle === "danger",
 		primary: buttonStyle === "primary",
 		secondary: buttonStyle === "secondary"

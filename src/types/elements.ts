@@ -16,10 +16,6 @@ export namespace ElementsT {
 	export interface RedirectButtonPropsI extends ButtonPropsI {
 		redirectPath: string;
 	}
-	// !
-	export interface InputPropsI {
-		ref?: React.LegacyRef<HTMLInputElement> | undefined;
-	}
 
 	export interface SwitchProps extends HTMLAttributes<HTMLButtonElement> {
 		needParameters: boolean;
