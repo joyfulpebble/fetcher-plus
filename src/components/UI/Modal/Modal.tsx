@@ -14,26 +14,17 @@ import { useOutsideClick } from "../../../hooks/useOutsideClick";
 interface ModalPropsI {
 	title: string;
 	visibility: boolean;
-	setVisibility: Dispatch<SetStateAction<boolean>>;
-	onClose?: () => void;
-	onSubmit?: () => void;
-	onCancel?: () => void;
+	onClose: () => void;
+	onSubmit: () => boolean;
+	onCancel: () => boolean;
 	children: JSX.Element | JSX.Element[];
 }
 
-function Modal({
-	title,
-	visibility,
-	children,
-	setVisibility,
-	onCancel,
-	onSubmit,
-	onClose
-}: ModalPropsI) {
+function Modal({ title, visibility, children, onCancel, onSubmit, onClose }: ModalPropsI) {
 	const testref = useRef(null);
 
 	useOutsideClick(testref, () => {
-		setVisibility(false);
+		onClose();
 	});
 
 	return (
@@ -70,8 +61,7 @@ function Modal({
 										size={20}
 										stroke={2}
 										onClick={() => {
-											if (onClose) onClose();
-											setVisibility(false);
+											onClose();
 										}}
 									/>
 								</section>
@@ -83,15 +73,14 @@ function Modal({
 											content="Cancel"
 											onClick={() => {
 												if (onCancel) onCancel();
-												setVisibility(false);
+												onClose();
 											}}
 										/>
 										<Button
 											buttonStyle="primary"
 											content="Submit"
 											onClick={() => {
-												if (onSubmit) onSubmit();
-												setVisibility(false);
+												if (onSubmit()) onClose();
 											}}
 										/>
 									</div>

@@ -22,27 +22,9 @@ img {
 	display: block;
 }
 
-input::selection,
-button::selection,
-textarea::selection,
-select::selection,
-div::selection {
-	font: inherit;
+*::selection {
 	color: var(--font-color-light);
-	background: var(--color-default);
-}
-
-h1::selection,
-h2::selection,
-h3::selection,
-h4::selection,
-p::selection,
-span::selection,
-ul[class]::selection,
-ol[class]::selection,
-li::selection {
-	color: var(--font-color-light);
-	background: var(--color-default);
+	background: var(--btn-color-default);
 }
 
 body,

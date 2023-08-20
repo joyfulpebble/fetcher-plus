@@ -2,16 +2,8 @@
 	font-display: swap;
 	font-family: "Inter";
 	font-style: normal;
-	font-weight: 200;
-	src: url("../../assets/fonts/Inter/inter-v12-latin-200.woff2") format("woff2");
-}
-
-@font-face {
-	font-display: swap;
-	font-family: "Inter";
-	font-style: normal;
 	font-weight: 300;
-	src: url("../../assets/fonts/Inter/inter-v12-latin-300.woff2") format("woff2");
+	src: url("../../assets/fonts/Inter/inter-v12-cyrillic_latin-300.woff2") format("woff2");
 }
 
 @font-face {
@@ -19,7 +11,7 @@
 	font-family: "Inter";
 	font-style: normal;
 	font-weight: 400;
-	src: url("../../assets/fonts/Inter/inter-v12-latin-regular.woff2") format("woff2");
+	src: url("../../assets/fonts/Inter/inter-v12-cyrillic_latin-regular.woff2") format("woff2");
 }
 
 @font-face {
@@ -27,7 +19,7 @@
 	font-family: "Inter";
 	font-style: normal;
 	font-weight: 500;
-	src: url("../../assets/fonts/Inter/inter-v12-latin-500.woff2") format("woff2");
+	src: url("../../assets/fonts/Inter/inter-v12-cyrillic_latin-500.woff2") format("woff2");
 }
 
 @font-face {
@@ -35,7 +27,7 @@
 	font-family: "Inter";
 	font-style: normal;
 	font-weight: 600;
-	src: url("../../assets/fonts/Inter/inter-v12-latin-600.woff2") format("woff2");
+	src: url("../../assets/fonts/Inter/inter-v12-cyrillic_latin-600.woff2") format("woff2");
 }
 
 @font-face {
@@ -43,7 +35,7 @@
 	font-family: "Inter";
 	font-style: normal;
 	font-weight: 700;
-	src: url("../../assets/fonts/Inter/inter-v12-latin-700.woff2") format("woff2");
+	src: url("../../assets/fonts/Inter/inter-v12-cyrillic_latin-700.woff2") format("woff2");
 }
 
 @font-face {
@@ -51,7 +43,7 @@
 	font-family: "Inter";
 	font-style: normal;
 	font-weight: 800;
-	src: url("../../assets/fonts/Inter/inter-v12-latin-800.woff2") format("woff2");
+	src: url("../../assets/fonts/Inter/inter-v12-cyrillic_latin-800.woff2") format("woff2");
 }
 
 @font-face {
@@ -59,5 +51,5 @@
 	font-family: "Inter";
 	font-style: normal;
 	font-weight: 900;
-	src: url("../../assets/fonts/Inter/inter-v12-latin-900.woff2") format("woff2");
+	src: url("../../assets/fonts/Inter/inter-v12-cyrillic_latin-900.woff2") format("woff2");
 }

@@ -10,16 +10,16 @@ import "./TippyList.scss";
 import type { CommonT } from "../../../../../../../types/common";
 import customRequestMethodsListSlice from "../../../../../../../redux/reducers/customRequestMethodsListSlice";
 import Modal from "../../../../../../UI/Modal/Modal";
-import { useForm } from "../../../../../../../hooks/useForm";
 import Input from "../../../../../../UI/Input/Input";
 
 /**
  * TODO:
- * - Custom Input
- * - Validation adding custom requests
+ * + Custom Input
+ * + Validation adding custom requests
+ * * - Check new request on repeating, length
  * - Deleting custom requests
  * - Decompose element logic in external hook
- * - Fix fonts
+ * + Fix fonts
  */
 
 interface TippyListPropsI {
@@ -27,16 +27,11 @@ interface TippyListPropsI {
 	customMethods: Array<string | undefined>;
 }
 
-interface CustomMethodNameI {
-	requestName: string | undefined;
-}
-
 function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 	const [customMethodModalView, setCustomMethodModalView] = useState(false);
+	const [inputError, setInputError] = useState({ is: false, text: "" });
+
 	const customMethodNameRef = useRef<HTMLInputElement>(null);
-	const { values, saveFuildValue } = useForm<CustomMethodNameI>({
-		initialValues: { requestName: undefined }
-	});
 
 	const dispatch = useAppDispatch();
 	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
@@ -106,25 +101,43 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 				<Modal
 					title="Custom request"
 					visibility={customMethodModalView}
-					setVisibility={setCustomMethodModalView}
 					onSubmit={() => {
-						saveFuildValue("requestName", customMethodNameRef.current?.value!);
-						dispatch(addCustomMethod(values.current.requestName!));
+						if (!customMethodNameRef.current?.value) {
+							setInputError({ is: true, text: "This field is required" });
+
+							return false;
+						} else {
+							setInputError({ is: false, text: "" });
+							dispatch(addCustomMethod(customMethodNameRef.current?.value));
+
+							return true;
+						}
+					}}
+					onCancel={() => true}
+					onClose={() => {
+						setInputError({ is: false, text: "" });
+						setCustomMethodModalView(false);
 					}}
 				>
 					<Input
+						name="requestName"
 						label="Enter request name: "
 						placeholder="Some text"
-						error={false}
-						inputRef={customMethodNameRef}
+						error={inputError}
+						innerRef={customMethodNameRef}
+						onChange={() => {
+							if (!customMethodNameRef.current?.value)
+								setInputError({ is: true, text: "This field is required" });
+							else setInputError({ is: false, text: "" });
+						}}
 					/>
 				</Modal>
-				{customMethods ? (
+				{customMethods[0] && (
 					<>
 						<Divider />
 						{customRequestMethodsList}
 					</>
-				) : null}
+				)}
 			</div>
 		</>
 	);

@@ -1,47 +1,47 @@
+import { RefObject } from "react";
 import { useClassnames } from "../../../hooks/useClassnames";
 import "./Input.scss";
 
 interface InputPropsI extends React.HTMLProps<HTMLInputElement> {
+	innerRef?: RefObject<HTMLInputElement>;
 	placeholder: string;
 	label: string;
-	inputRef: React.RefObject<HTMLInputElement>;
-	error: boolean;
+	error: { is: boolean; text: string };
 	disabled?: boolean;
 	// eslint-disable-next-line no-unused-vars
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function Input({
-	inputRef,
+	innerRef,
 	placeholder,
 	disabled = false,
-	error = false,
+	error,
 	label,
 	onChange,
 	...props
 }: InputPropsI): JSX.Element {
 	const inputClasses = useClassnames("input", {
-		error: error
+		error: error.is
 	});
 
 	return (
-		<div>
-			<div
-				className="input_label"
-				onClick={() => inputRef.current!.focus()}
-			>
-				{label}
+		<>
+			<div>
+				<div className="input_label">{label}</div>
+				<input
+					{...props}
+					ref={innerRef}
+					disabled={disabled}
+					className={inputClasses}
+					placeholder={placeholder}
+					onChange={(event) => {
+						if (!!onChange) return onChange(event);
+					}}
+				/>
 			</div>
-			<input
-				disabled={disabled}
-				className={inputClasses}
-				ref={inputRef}
-				placeholder={placeholder}
-				onChange={(event) => {
-					if (!!onChange) return onChange(event);
-				}}
-			/>
-		</div>
+			{error.is && <div className="error_text">{error.text}</div>}
+		</>
 	);
 }
 
