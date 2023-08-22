@@ -8,8 +8,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	z-index: 999;
 }
 .modal_wrapper {
+	z-index: 1000;
 	min-width: 450px;
 	max-width: 450px;
 	min-height: 200px;
@@ -70,10 +72,15 @@
 	flex-direction: row;
 	justify-content: space-between;
 }
-.modal_close:hover {
+.modal_close {
 	cursor: pointer;
+	color: var(--font-color-white);
 	transition: color 0.1s linear;
-	color: var(--font-color-red);
+
+	&:hover {
+		color: var(--font-color-red);
+		transition: color 0.1s linear;
+	}
 }
 .modal_wrapper ::-webkit-scrollbar {
 	width: 5px;

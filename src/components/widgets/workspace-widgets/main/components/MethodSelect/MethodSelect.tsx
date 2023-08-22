@@ -42,6 +42,7 @@ function MethodSelect() {
 						{requestMethod}
 					</div>
 					<IconChevronDown
+						style={{ marginLeft: 5 }}
 						size={15}
 						stroke={2}
 					/>

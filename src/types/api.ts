@@ -7,7 +7,7 @@ export namespace APIT {
 	export interface RequestConfigI {
 		requestUrl: string | undefined;
 		requestParams: Object | EmptyObject;
-		requestMethod: CommonT.MainRequestMethods;
+		requestMethod: CommonT.MainRequestMethods | string;
 	}
 
 	export interface InterceptorI extends AxiosRequestConfig {

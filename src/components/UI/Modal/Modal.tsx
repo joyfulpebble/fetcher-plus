@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 import { IconX } from "@tabler/icons-react";
@@ -8,7 +8,6 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import "./Modal.scss";
 // eslint-disable-next-line no-duplicate-imports
-import type { Dispatch, SetStateAction } from "react";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
 interface ModalPropsI {
@@ -25,6 +24,22 @@ function Modal({ title, visibility, children, onCancel, onSubmit, onClose }: Mod
 
 	useOutsideClick(testref, () => {
 		onClose();
+	});
+
+	useEffect(() => {
+		const keyDownHandler = (event: KeyboardEvent) => {
+			if (event.key === "Enter") {
+				event.preventDefault();
+
+				if (onSubmit()) onClose();
+			}
+		};
+
+		document.addEventListener("keydown", keyDownHandler);
+
+		return () => {
+			document.removeEventListener("keydown", keyDownHandler);
+		};
 	});
 
 	return (

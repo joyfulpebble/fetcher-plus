@@ -18,6 +18,23 @@
 	}
 }
 
+.tippy_list_delete {
+	color: var(--font-color-white);
+	transition: color ease 0.1s;
+
+	&:hover {
+		color: var(--font-color-red);
+		transition: color ease 0.1s;
+	}
+}
+
+.tippy_list_request_name {
+	width: 75px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .get {
 	color: var(--font-color-green);
 }

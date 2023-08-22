@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../../../../hooks/redux/redux";
 import requestConfigSlice from "../../../../../../../redux/reducers/requestConfigSlice";
 
-import { IconCheck, IconPlus } from "@tabler/icons-react";
+import { IconCheck, IconPlus, IconTrash } from "@tabler/icons-react";
 import Divider from "../../../../../../UI/Divider/Divider";
 
 import "./TippyList.scss";
@@ -12,20 +12,23 @@ import customRequestMethodsListSlice from "../../../../../../../redux/reducers/c
 import Modal from "../../../../../../UI/Modal/Modal";
 import Input from "../../../../../../UI/Input/Input";
 
-/**
- * TODO:
- * + Custom Input
- * + Validation adding custom requests
- * * - Check new request on repeating, length
- * - Deleting custom requests
- * - Decompose element logic in external hook
- * + Fix fonts
- */
-
 interface TippyListPropsI {
 	defaultMethods: Array<CommonT.MainRequestMethods>;
 	customMethods: Array<string | undefined>;
 }
+
+/**
+ * TODO:
+ * + Custom Input
+ * + Validation adding custom requests
+ * * + Check new request on repeating, length
+ * + Deleting custom requests
+ * + Fix fonts
+ * * - Decompose new method validation into a separate function
+ * - Animate request list items
+ * - Decompose element logic in external hook
+ * - Change the value of the request method in the main form to default when deleting the selected method
+ */
 
 function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 	const [customMethodModalView, setCustomMethodModalView] = useState(false);
@@ -35,7 +38,7 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 
 	const dispatch = useAppDispatch();
 	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
-	const { addCustomMethod } = customRequestMethodsListSlice.actions;
+	const { addCustomMethod, deleteCustomMethod } = customRequestMethodsListSlice.actions;
 	const { updateConfig } = requestConfigSlice.actions;
 
 	const defaultRequestMethodsList: Array<JSX.Element> = defaultMethods.map(
@@ -51,7 +54,7 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 					<IconCheck
 						size={15}
 						stroke={2}
-						style={{ marginRight: 8 }}
+						style={{ marginRight: 5 }}
 					/>
 				) : null}
 				{element}
@@ -60,24 +63,39 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 	);
 
 	const customRequestMethodsList: Array<JSX.Element> | null = customMethods
-		? customMethods.map((element: CommonT.MainRequestMethods, index: number) => (
-				<div
-					className={`tippy_list_element ${
-						requestMethod === element ? "selected" : ""
-					} ${element.toLowerCase()}`}
-					key={index}
-					onClick={() => dispatch(updateConfig(element))}
-				>
-					{requestMethod === element ? (
-						<IconCheck
+		? customMethods.map((element: CommonT.MainRequestMethods | string, index: number) => {
+				element = element.toUpperCase();
+
+				return (
+					<div
+						className={`tippy_list_element ${
+							requestMethod === element ? "selected" : ""
+						} ${element.toLowerCase()}`}
+						key={index}
+						onClick={() => dispatch(updateConfig(element))}
+						style={{ display: "flex", justifyContent: "space-between" }}
+					>
+						<div style={{ display: "flex", alignItems: "center" }}>
+							{requestMethod === element ? (
+								<IconCheck
+									size={15}
+									stroke={2}
+									style={{ marginRight: 5 }}
+								/>
+							) : null}
+							<span className="tippy_list_request_name">{element}</span>
+						</div>
+						<IconTrash
+							className="tippy_list_delete"
 							size={15}
 							stroke={2}
-							style={{ marginRight: 8 }}
+							onClick={() => {
+								dispatch(deleteCustomMethod(element));
+							}}
 						/>
-					) : null}
-					{element}
-				</div>
-		  ))
+					</div>
+				);
+		  })
 		: null;
 
 	return (
@@ -94,7 +112,7 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 					<IconPlus
 						size={15}
 						stroke={2}
-						style={{ marginRight: 8 }}
+						style={{ marginRight: 5 }}
 					/>
 					Add custom
 				</div>
@@ -103,15 +121,23 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 					visibility={customMethodModalView}
 					onSubmit={() => {
 						if (!customMethodNameRef.current?.value) {
-							setInputError({ is: true, text: "This field is required" });
-
+							setInputError({ is: true, text: "This field is required." });
 							return false;
-						} else {
-							setInputError({ is: false, text: "" });
-							dispatch(addCustomMethod(customMethodNameRef.current?.value));
-
-							return true;
 						}
+						if (
+							customMethods.includes(customMethodNameRef.current?.value.toUpperCase()) ||
+							defaultMethods.find(
+								(validName) => validName === customMethodNameRef.current?.value.toUpperCase()
+							)
+						) {
+							setInputError({ is: true, text: "This method has already been added." });
+							return false;
+						}
+
+						setInputError({ is: false, text: "" });
+						dispatch(addCustomMethod(customMethodNameRef.current?.value));
+
+						return true;
 					}}
 					onCancel={() => true}
 					onClose={() => {
@@ -123,11 +149,20 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 						name="requestName"
 						label="Enter request name: "
 						placeholder="Some text"
+						maxLength={20}
 						error={inputError}
 						innerRef={customMethodNameRef}
 						onChange={() => {
 							if (!customMethodNameRef.current?.value)
 								setInputError({ is: true, text: "This field is required" });
+							else setInputError({ is: false, text: "" });
+							if (
+								customMethods.includes(customMethodNameRef.current?.value.toUpperCase()) ||
+								defaultMethods.find(
+									(validName) => validName === customMethodNameRef.current?.value.toUpperCase()
+								)
+							)
+								setInputError({ is: true, text: "This method has already been added." });
 							else setInputError({ is: false, text: "" });
 						}}
 					/>

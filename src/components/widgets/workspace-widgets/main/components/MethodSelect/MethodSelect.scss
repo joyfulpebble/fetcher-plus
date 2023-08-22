@@ -1,10 +1,14 @@
-.tippy_method_select_wrapper {
-	width: fit-content;
-	max-height: 220px;
-	overflow-y: scroll;
-	user-select: none;
-	padding-left: 5px;
+.tippy-content {
+	padding: 5px;
 }
+
+.tippy_method_select_wrapper {
+	width: 150px;
+	max-height: 220px;
+	overflow-y: auto;
+	user-select: none;
+}
+
 ::-webkit-scrollbar {
 	width: 5px;
 }
@@ -18,8 +22,8 @@
 }
 
 .method_select_wrapper {
+	max-width: 150px;
 	user-select: none;
-	width: 160px;
 	height: var(--height-base-element);
 	padding: var(--padding-t5-l10);
 	font-weight: 400;
@@ -37,4 +41,11 @@
 	border-right-color: #0000;
 	border-top-left-radius: var(--border-radius-default);
 	border-bottom-left-radius: var(--border-radius-default);
+}
+
+#tippy-select-request-method {
+	width: 100px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
