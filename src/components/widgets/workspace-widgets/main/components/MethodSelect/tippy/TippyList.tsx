@@ -24,10 +24,10 @@ interface TippyListPropsI {
  * * + Check new request on repeating, length
  * + Deleting custom requests
  * + Fix fonts
+ * + Change the value of the request method in the main form to default when deleting the selected method
  * * - Decompose new method validation into a separate function
  * - Animate request list items
  * - Decompose element logic in external hook
- * - Change the value of the request method in the main form to default when deleting the selected method
  */
 
 function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
@@ -68,14 +68,15 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 
 				return (
 					<div
-						className={`tippy_list_element ${
-							requestMethod === element ? "selected" : ""
-						} ${element.toLowerCase()}`}
 						key={index}
-						onClick={() => dispatch(updateConfig(element))}
+						className={`tippy_list_element ${requestMethod === element ? "selected" : ""}`}
 						style={{ display: "flex", justifyContent: "space-between" }}
 					>
-						<div style={{ display: "flex", alignItems: "center" }}>
+						<div
+							// className={` ${requestMethod === element ? "selected" : null}`}
+							style={{ display: "flex", alignItems: "center", width: "100%" }}
+							onClick={() => dispatch(updateConfig(element))}
+						>
 							{requestMethod === element ? (
 								<IconCheck
 									size={15}
@@ -91,6 +92,7 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 							stroke={2}
 							onClick={() => {
 								dispatch(deleteCustomMethod(element));
+								dispatch(updateConfig("GET"));
 							}}
 						/>
 					</div>
@@ -164,6 +166,9 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 							)
 								setInputError({ is: true, text: "This method has already been added." });
 							else setInputError({ is: false, text: "" });
+						}}
+						onKeyDown={(event) => {
+							if (event.code === "Space") event.preventDefault();
 						}}
 					/>
 				</Modal>
