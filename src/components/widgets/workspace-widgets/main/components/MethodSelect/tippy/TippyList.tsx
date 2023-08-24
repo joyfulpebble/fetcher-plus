@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { useAppDispatch, useAppSelector } from "../../../../../../../hooks/redux/redux";
 import requestConfigSlice from "../../../../../../../redux/reducers/requestConfigSlice";
@@ -26,8 +27,8 @@ interface TippyListPropsI {
  * + Fix fonts
  * + Change the value of the request method in the main form to default when deleting the selected method
  * * - Decompose new method validation into a separate function
- * - Animate request list items
  * - Decompose element logic in external hook
+ * + Animate request list items
  */
 
 function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
@@ -67,13 +68,17 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 				element = element.toUpperCase();
 
 				return (
-					<div
-						key={index}
+					<motion.div
+						exit={{ scaleY: 0.8, opacity: 0 }}
+						transition={{
+							duration: 0.15,
+							ease: "easeInOut"
+						}}
+						key={element}
 						className={`tippy_list_element ${requestMethod === element ? "selected" : ""}`}
 						style={{ display: "flex", justifyContent: "space-between" }}
 					>
 						<div
-							// className={` ${requestMethod === element ? "selected" : null}`}
 							style={{ display: "flex", alignItems: "center", width: "100%" }}
 							onClick={() => dispatch(updateConfig(element))}
 						>
@@ -95,7 +100,7 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 								dispatch(updateConfig("GET"));
 							}}
 						/>
-					</div>
+					</motion.div>
 				);
 		  })
 		: null;
@@ -172,12 +177,8 @@ function TippyList({ defaultMethods, customMethods }: TippyListPropsI) {
 						}}
 					/>
 				</Modal>
-				{customMethods[0] && (
-					<>
-						<Divider />
-						{customRequestMethodsList}
-					</>
-				)}
+				<Divider />
+				<AnimatePresence mode="sync">{customRequestMethodsList}</AnimatePresence>
 			</div>
 		</>
 	);
