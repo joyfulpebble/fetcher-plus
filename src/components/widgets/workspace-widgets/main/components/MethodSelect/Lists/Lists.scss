@@ -1,4 +1,4 @@
-.tippy_list_element {
+.list_element {
 	font-weight: 400;
 	display: flex;
 	align-items: center;
@@ -7,33 +7,27 @@
 	color: var(--font-color-light);
 	border-radius: var(--border-radius-default);
 	margin-bottom: var(--margin-b3);
-
 	&.selected {
 		background-color: var(--border-color-default);
 	}
-
 	&:hover {
 		background-color: var(--border-color-default);
 	}
 }
-
-.tippy_list_delete {
+.list_delete_button {
 	color: var(--font-color-white);
 	transition: color ease 0.1s;
-
 	&:hover {
 		color: var(--font-color-red);
 		transition: color ease 0.1s;
 	}
 }
-
-.tippy_list_request_name {
+.list_request_name {
 	width: 75px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-
 .get {
 	color: var(--font-color-green);
 }

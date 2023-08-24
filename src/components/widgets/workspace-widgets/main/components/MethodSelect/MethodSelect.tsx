@@ -1,31 +1,21 @@
 import { useAppSelector } from "../../../../../../hooks/redux/redux";
 
-import { defaultRequestMethods } from "../../../../../../tools/constants";
-
 import { IconChevronDown } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
-import TippyList from "./tippy/TippyList";
+import MethodsList from "./Lists/MethodsList";
 
 import "./MethodSelect.scss";
-import "./tippy/TippyList.scss";
+import "./Lists/Lists.scss";
 
 function MethodSelect() {
 	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
-	const customRequestMethods = useAppSelector((state) => state.customRequestMethodsListReducer);
 
 	return (
 		<>
 			<Tippy
 				className="tippy_method_select_wrapper"
 				placement="bottom"
-				content={
-					<>
-						<TippyList
-							defaultMethods={defaultRequestMethods}
-							customMethods={customRequestMethods}
-						/>
-					</>
-				}
+				content={<MethodsList />}
 				interactive={true}
 				hideOnClick={true}
 				animation="shift-away"
