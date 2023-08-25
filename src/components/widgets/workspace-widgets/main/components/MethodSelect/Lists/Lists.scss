@@ -7,10 +7,13 @@
 	color: var(--font-color-light);
 	border-radius: var(--border-radius-default);
 	margin-bottom: var(--margin-b3);
+	transition: background-color ease 0.2s;
 	&.selected {
+		transition: background-color ease 0.2s;
 		background-color: var(--border-color-default);
 	}
 	&:hover {
+		transition: background-color ease 0.2s;
 		background-color: var(--border-color-default);
 	}
 }

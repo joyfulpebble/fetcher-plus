@@ -3,7 +3,6 @@
 	user-select: none;
 	display: flex;
 	flex-direction: row;
-
 	padding: 5px 10px;
 	border-bottom: solid 1px var(--border-color-default);
 	flex-grow: 1;
@@ -17,10 +16,10 @@
 	color: white;
 	font-size: 13px;
 	line-height: var(--font-line-height);
-	transition: color ease 0.1s;
+	transition: color ease 0.2s;
 	&:hover {
 		color: #614fd1;
-		transition: color ease 0.1s;
+		transition: color ease 0.2s;
 	}
 }
 .extra_option_underline {

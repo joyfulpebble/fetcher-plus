@@ -3,7 +3,7 @@
 }
 .tippy_method_select_wrapper {
 	width: 150px;
-	max-height: 300px;
+	max-height: 250px;
 	overflow-y: auto;
 	user-select: none;
 }
@@ -19,7 +19,7 @@
 	background-color: var(--theme-dark-bg-lvl-0);
 }
 .method_select_wrapper {
-	max-width: 150px;
+	width: 120px;
 	user-select: none;
 	height: var(--height-base-element);
 	padding: var(--padding-t5-l10);
@@ -40,7 +40,7 @@
 	border-bottom-left-radius: var(--border-radius-default);
 }
 #tippy-select-request-method {
-	width: 100px;
+	width: 80px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

@@ -1,5 +1,3 @@
-import { AnimatePresence, motion } from "framer-motion";
-
 import { IconCheck, IconTrash } from "@tabler/icons-react";
 
 import { useAppDispatch, useAppSelector } from "../../../../../../../hooks/redux/redux";
@@ -18,16 +16,10 @@ export const CustomMethodsList = () => {
 	const { updateConfig } = requestConfigSlice.actions;
 
 	const list = customMethods.map((element: string) => (
-		<motion.div
-			exit={{ scale: 0.8, opacity: 0 }}
-			transition={{
-				duration: 0.15,
-				ease: "easeOut"
-			}}
+		<div
 			key={element}
 			className={`list_element ${requestMethod === element ? "selected" : ""}`}
 			style={{ display: "flex", justifyContent: "space-between" }}
-			layout
 		>
 			<div
 				style={{ display: "flex", alignItems: "center", width: "100%" }}
@@ -35,13 +27,13 @@ export const CustomMethodsList = () => {
 					dispatch(updateConfig(element));
 				}}
 			>
-				{requestMethod === element ? (
+				{requestMethod === element && (
 					<IconCheck
 						size={15}
 						stroke={2}
 						style={{ marginRight: 5 }}
 					/>
-				) : null}
+				)}
 				<span className="list_request_name">{element}</span>
 			</div>
 			<IconTrash
@@ -53,8 +45,8 @@ export const CustomMethodsList = () => {
 					dispatch(updateConfig("GET"));
 				}}
 			/>
-		</motion.div>
+		</div>
 	));
 
-	return <AnimatePresence mode="popLayout">{list.map((element) => element)}</AnimatePresence>;
+	return <>{list.map((element) => element)}</>;
 };
