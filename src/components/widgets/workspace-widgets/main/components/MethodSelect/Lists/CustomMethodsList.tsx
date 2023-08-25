@@ -19,18 +19,21 @@ export const CustomMethodsList = () => {
 
 	const list = customMethods.map((element: string) => (
 		<motion.div
-			exit={{ scaleY: 0.5, opacity: 0 }}
+			exit={{ scale: 0.8, opacity: 0 }}
 			transition={{
 				duration: 0.15,
-				ease: "easeInOut"
+				ease: "easeOut"
 			}}
 			key={element}
 			className={`list_element ${requestMethod === element ? "selected" : ""}`}
 			style={{ display: "flex", justifyContent: "space-between" }}
+			layout
 		>
 			<div
 				style={{ display: "flex", alignItems: "center", width: "100%" }}
-				onClick={() => dispatch(updateConfig(element))}
+				onClick={() => {
+					dispatch(updateConfig(element));
+				}}
 			>
 				{requestMethod === element ? (
 					<IconCheck
@@ -53,5 +56,5 @@ export const CustomMethodsList = () => {
 		</motion.div>
 	));
 
-	return <AnimatePresence mode="sync">{list.map((element) => element)}</AnimatePresence>;
+	return <AnimatePresence mode="popLayout">{list.map((element) => element)}</AnimatePresence>;
 };
