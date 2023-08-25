@@ -9,6 +9,7 @@ import "./RequestForm.scss";
 
 import type { APIT } from "../../../../../types/api";
 import { useRef } from "react";
+import { RequestExtraOptions } from "./RequestExtraOptions/RequestExtraOptions";
 
 function RequestForm(): JSX.Element {
 	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
@@ -20,26 +21,31 @@ function RequestForm(): JSX.Element {
 
 	return (
 		<>
-			<div className={"wrapper"}>
-				<div className={"request_config_main_data"}>
-					<MethodSelect />
-					<RequestInput
-						inputRef={requestUrl}
-						onChange={() => {
-							saveFuildValue("requestUrl", requestUrl.current?.value);
+			<div className={"request_form_wrapper"}>
+				<section className={"main_data_wrapper"}>
+					<div className={"request_main_data"}>
+						<MethodSelect />
+						<RequestInput
+							inputRef={requestUrl}
+							onChange={() => {
+								saveFuildValue("requestUrl", requestUrl.current?.value);
+							}}
+						/>
+					</div>
+					<Button
+						content="Send"
+						buttonStyle="primary"
+						disabled={false}
+						onClick={() => {
+							saveFuildValue("requestMethod", requestMethod);
+
+							console.table([values.current]);
 						}}
 					/>
-				</div>
-				<Button
-					content="Send"
-					buttonStyle="primary"
-					disabled={false}
-					onClick={() => {
-						saveFuildValue("requestMethod", requestMethod);
-
-						console.table([values.current]);
-					}}
-				/>
+				</section>
+				<section className={"extra_options_wrapper"}>
+					<RequestExtraOptions />
+				</section>
 			</div>
 		</>
 	);

@@ -8,7 +8,7 @@ function WorkspaceMain() {
 	setSashSize(4);
 	return (
 		<>
-			<Allotment defaultSizes={[300, 800, 700]}>
+			<Allotment defaultSizes={[300, 650, 700]}>
 				<Allotment.Pane
 					minSize={300}
 					maxSize={400}
