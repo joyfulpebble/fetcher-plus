@@ -14,18 +14,6 @@ import Input from "../../../../../../UI/Input/Input";
 
 import "./Lists.scss";
 
-/**
- * TODO:
- * + Custom Input
- * + Validation adding custom requests
- * * + Check new request on repeating, length
- * + Deleting custom requests
- * + Fix fonts
- * + Change the value of the request method in the main form to default when deleting the selected method
- * * - Decompose new method validation into a separate function
- * + Animate request list items
- */
-
 function MethodsList() {
 	const dispatch = useAppDispatch();
 	const customMethods = useAppSelector((state) => state.customRequestMethodsListReducer);

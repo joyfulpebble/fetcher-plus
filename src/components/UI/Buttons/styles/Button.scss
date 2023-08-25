@@ -12,20 +12,16 @@
 	font-weight: 500;
 	font-size: var(--font-size-paragraph);
 }
-
 .redirect {
 	text-decoration: none;
 	color: var(--font-color-dark);
-
 	&.disabled {
 		cursor: no-drop;
 		pointer-events: none;
 	}
 }
-
 .primary {
 	background-color: var(--btn-color-default);
-
 	&:hover {
 		background: var(--btn-color-default-hover);
 		transition: background-color 0.1s linear;
@@ -35,10 +31,8 @@
 		background-color: var(--btn-color-default-disabled);
 	}
 }
-
 .danger {
 	background-color: var(--btn-color-danger);
-
 	&:hover {
 		background: var(--btn-color-danger-hover);
 		transition: background-color 0.1s linear;
@@ -48,11 +42,9 @@
 		background-color: var(--btn-color-danger-disabled);
 	}
 }
-
 .secondary {
 	background-color: var(--btn-color-secondary);
 	color: var(--font-color-dark);
-
 	&:hover {
 		background: var(--btn-color-secondary-hover);
 		transition: background-color 0.1s linear;

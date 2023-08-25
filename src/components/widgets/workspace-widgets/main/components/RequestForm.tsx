@@ -10,7 +10,7 @@ import "./RequestForm.scss";
 import type { APIT } from "../../../../../types/api";
 import { useRef } from "react";
 
-function RequestForm() {
+function RequestForm(): JSX.Element {
 	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
 	const { values, saveFuildValue } = useForm<APIT.RequestConfigI>({
 		initialValues: { requestMethod: "GET", requestParams: {}, requestUrl: "" }
@@ -21,17 +21,15 @@ function RequestForm() {
 	return (
 		<>
 			<div className={"wrapper"}>
-				<form className="form_wrapper">
-					<div className={"request_config_wrapper"}>
-						<MethodSelect />
-						<RequestInput
-							inputRef={requestUrl}
-							onChange={() => {
-								saveFuildValue("requestUrl", requestUrl.current?.value);
-							}}
-						/>
-					</div>
-				</form>
+				<div className={"request_config_main_data"}>
+					<MethodSelect />
+					<RequestInput
+						inputRef={requestUrl}
+						onChange={() => {
+							saveFuildValue("requestUrl", requestUrl.current?.value);
+						}}
+					/>
+				</div>
 				<Button
 					content="Send"
 					buttonStyle="primary"
