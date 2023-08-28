@@ -9,7 +9,7 @@ import "./RequestForm.scss";
 
 import type { APIT } from "../../../../../types/api";
 import { useRef } from "react";
-import { RequestExtraOptions } from "./RequestExtraOptions/RequestExtraOptions";
+import { ExtraOptions } from "./RequestExtraOptions/ExtraOptions";
 
 function RequestForm(): JSX.Element {
 	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
@@ -44,7 +44,7 @@ function RequestForm(): JSX.Element {
 					/>
 				</section>
 				<section className={"extra_options_wrapper"}>
-					<RequestExtraOptions />
+					<ExtraOptions />
 				</section>
 			</div>
 		</>

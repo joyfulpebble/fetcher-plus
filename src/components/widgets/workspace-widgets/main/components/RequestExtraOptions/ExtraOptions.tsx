@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-import "./RequestExtraOptions.scss";
+import "./ExtraOptions.scss";
+import { Params } from "./ExtraOptionElements/ExtraParams/Params";
 
-export const RequestExtraOptions = () => {
+export const ExtraOptions = () => {
 	const [selectedTab, setSelectedTab] = useState<number>(0);
 
-	const tabs = ["Parameters", "Body", "Headers", "Authorization"];
+	const optionsTabs = ["Parameters", "Body", "Headers", "Authorization"];
+	const optionElements = [<Params key={0} />];
 
 	return (
 		<>
 			<section className="request_extra_options_header">
-				{tabs.map((tab, index) => (
+				{optionsTabs.map((tab, index) => (
 					<div
 						key={index}
 						className={`extra_options_element ${tab.toLowerCase()} `}
@@ -30,7 +32,7 @@ export const RequestExtraOptions = () => {
 				))}
 			</section>
 			<section className="request_extra_options_body">
-				<span className="extra_option_name">{tabs[selectedTab]}</span>
+				<span className="extra_option_body">{optionElements[selectedTab]}</span>
 			</section>
 		</>
 	);

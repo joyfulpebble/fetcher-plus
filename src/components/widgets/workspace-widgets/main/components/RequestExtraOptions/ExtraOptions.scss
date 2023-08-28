@@ -3,7 +3,7 @@
 	user-select: none;
 	display: flex;
 	flex-direction: row;
-	padding: 5px 10px;
+	padding: 8px 16px;
 	border-bottom: solid 1px var(--border-color-default);
 	flex-grow: 1;
 }
@@ -24,18 +24,15 @@
 }
 .extra_option_underline {
 	position: absolute;
-	bottom: -1px;
+	bottom: -2px;
 	left: 0;
 	right: 0;
 	height: 2px;
 	background: #614fd1;
 }
 .request_extra_options_body {
-	padding: 5px 10px;
 	height: 100%;
 	max-height: 800px;
-}
-.extra_option_name {
 	font-family: "Inter";
 	font-weight: 400;
 	font-size: var(--font-size-paragraph);
