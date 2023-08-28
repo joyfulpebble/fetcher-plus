@@ -2,6 +2,9 @@ import { useState, useRef } from "react";
 
 import { defaultRequestMethods as defaultMethods } from "../../../../../../../tools/constants";
 
+import { isRequired } from "../../../../../../../tools/validation/isRequired";
+import { isIncluded } from "../../../../../../../tools/validation/isIncluded";
+
 import { useAppDispatch, useAppSelector } from "../../../../../../../hooks/redux/redux";
 import customRequestMethodsListSlice from "../../../../../../../redux/reducers/customRequestMethodsListSlice";
 
@@ -20,7 +23,7 @@ function MethodsList() {
 	const { addCustomMethod } = customRequestMethodsListSlice.actions;
 
 	const [customMethodModalView, setCustomMethodModalView] = useState(false);
-	const [inputError, setInputError] = useState({ is: false, text: "" });
+	const [inputError, setInputError] = useState<string | null>(null);
 
 	const customMethodNameRef = useRef<HTMLInputElement>(null);
 
@@ -46,28 +49,24 @@ function MethodsList() {
 					title="Custom request"
 					visibility={customMethodModalView}
 					onSubmit={() => {
-						if (!customMethodNameRef.current?.value) {
-							setInputError({ is: true, text: "This field is required." });
-							return false;
-						}
+						if (isRequired(customMethodNameRef.current?.value, setInputError)) return false;
 						if (
-							customMethods.includes(customMethodNameRef.current?.value.toUpperCase()) ||
-							defaultMethods.find(
-								(validName) => validName === customMethodNameRef.current?.value.toUpperCase()
+							isIncluded(
+								customMethodNameRef.current?.value.toUpperCase(),
+								[customMethods, defaultMethods],
+								setInputError
 							)
-						) {
-							setInputError({ is: true, text: "This method has already been added." });
+						)
 							return false;
-						}
 
-						setInputError({ is: false, text: "" });
-						dispatch(addCustomMethod(customMethodNameRef.current?.value.toUpperCase()));
+						setInputError(null);
+						dispatch(addCustomMethod(customMethodNameRef.current?.value.toUpperCase() || ""));
 
 						return true;
 					}}
 					onCancel={() => true}
 					onClose={() => {
-						setInputError({ is: false, text: "" });
+						setInputError(null);
 						setCustomMethodModalView(false);
 					}}
 				>
@@ -79,17 +78,12 @@ function MethodsList() {
 						error={inputError}
 						innerRef={customMethodNameRef}
 						onChange={() => {
-							if (!customMethodNameRef.current?.value)
-								setInputError({ is: true, text: "This field is required" });
-							else setInputError({ is: false, text: "" });
-							if (
-								customMethods.includes(customMethodNameRef.current?.value.toUpperCase()) ||
-								defaultMethods.find(
-									(validName) => validName === customMethodNameRef.current?.value.toUpperCase()
-								)
-							)
-								setInputError({ is: true, text: "This method has already been added." });
-							else setInputError({ is: false, text: "" });
+							isRequired(customMethodNameRef.current?.value, setInputError);
+							isIncluded(
+								customMethodNameRef.current?.value.toUpperCase(),
+								[customMethods, defaultMethods],
+								setInputError
+							);
 						}}
 						onKeyDown={(event) => {
 							if (event.code === "Space") event.preventDefault();

@@ -6,7 +6,7 @@ interface InputPropsI extends React.HTMLProps<HTMLInputElement> {
 	innerRef?: RefObject<HTMLInputElement>;
 	placeholder: string;
 	label: string;
-	error: { is: boolean; text: string };
+	error: string | null;
 	disabled?: boolean;
 	// eslint-disable-next-line no-unused-vars
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -22,7 +22,7 @@ function Input({
 	...props
 }: InputPropsI): JSX.Element {
 	const inputClasses = useClassnames("input", {
-		error: error.is
+		error: !!error
 	});
 
 	return (
@@ -40,7 +40,7 @@ function Input({
 					}}
 				/>
 			</div>
-			{error.is && <div className="error_text">{error.text}</div>}
+			{!!error && <div className="error_text">{error}</div>}
 		</>
 	);
 }
