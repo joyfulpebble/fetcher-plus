@@ -13,7 +13,7 @@ export const CustomMethodsList = () => {
 	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
 
 	const { deleteCustomMethod } = customRequestMethodsListSlice.actions;
-	const { updateConfig } = requestConfigSlice.actions;
+	const { updateMethod } = requestConfigSlice.actions;
 
 	const list = customMethods.map((element: string) => (
 		<div
@@ -24,7 +24,7 @@ export const CustomMethodsList = () => {
 			<div
 				style={{ display: "flex", alignItems: "center", width: "100%" }}
 				onClick={() => {
-					dispatch(updateConfig(element));
+					dispatch(updateMethod(element));
 				}}
 			>
 				{requestMethod === element && (
@@ -42,7 +42,7 @@ export const CustomMethodsList = () => {
 				stroke={2}
 				onClick={() => {
 					dispatch(deleteCustomMethod(element));
-					dispatch(updateConfig("GET"));
+					dispatch(updateMethod("GET"));
 				}}
 			/>
 		</div>

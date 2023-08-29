@@ -1,16 +1,13 @@
 /* eslint-disable no-unused-vars */
-type ErrorSetterType = React.Dispatch<React.SetStateAction<string | null>>;
+import type { CommonT } from "../../types/common";
+
 type IsRequiredI = (
 	value: unknown,
-	errorSetter?: ErrorSetterType,
+	errorSetter?: CommonT.ValidationErrorSetterType,
 	message?: string
 ) => string | null;
 
-export const isRequired: IsRequiredI = (
-	value: unknown,
-	errorSetter?: ErrorSetterType,
-	message?: string
-) => {
+export const isRequired: IsRequiredI = (value, errorSetter?, message?) => {
 	message = "This field is required";
 	if (!value) {
 		!!errorSetter && errorSetter(message);

@@ -1,8 +1,9 @@
-type ErrorSetterType = React.Dispatch<React.SetStateAction<string | null>>;
+import type { CommonT } from "../../types/common";
+
 type IncludeType = (
 	value: unknown,
 	verifiableArrays: Array<unknown[]>,
-	errorSetter?: ErrorSetterType
+	errorSetter?: CommonT.ValidationErrorSetterType
 ) => string | null;
 
 export const isIncluded: IncludeType = (value, verifiableArrays, errorSetter?) => {

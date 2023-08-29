@@ -18,12 +18,8 @@ export const requestConfigSlice = createSlice({
 			state = initialState;
 		},
 
-		updateConfig(state, action: PayloadAction<CommonT.MainRequestMethods | string>) {
-			state.requestMethod = action.payload;
-		},
-
 		updateParams(state, action: PayloadAction<Object>) {
-			state.requestParams = action.payload;
+			state.requestParams = Object.assign(state.requestParams, action.payload);
 		},
 
 		updateMethod(state, action: PayloadAction<CommonT.MainRequestMethods | string>) {

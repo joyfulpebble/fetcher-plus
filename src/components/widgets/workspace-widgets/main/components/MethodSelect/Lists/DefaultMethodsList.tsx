@@ -11,7 +11,7 @@ import type { CommonT } from "../../../../../../../types/common";
 export const DefaultMethodsList = () => {
 	const dispatch = useAppDispatch();
 	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
-	const { updateConfig } = requestConfigSlice.actions;
+	const { updateMethod } = requestConfigSlice.actions;
 
 	const list = defaultRequestMethods.map((element: CommonT.MainRequestMethods, index: number) => (
 		<div
@@ -19,7 +19,7 @@ export const DefaultMethodsList = () => {
 				requestMethod === element ? "selected" : ""
 			} ${element.toLowerCase()}`}
 			key={index}
-			onClick={() => dispatch(updateConfig(element))}
+			onClick={() => dispatch(updateMethod(element))}
 		>
 			{requestMethod === element ? (
 				<IconCheck

@@ -1,5 +1,5 @@
 interface ClassnamesObj {
-	[k: string]: boolean;
+	[key: string]: boolean;
 }
 
 type ClassnamesParams = Array<ClassnamesObj | string>;

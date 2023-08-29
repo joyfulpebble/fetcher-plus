@@ -9,10 +9,10 @@ import "./RequestForm.scss";
 
 import type { APIT } from "../../../../../types/api";
 import { useRef } from "react";
-import { ExtraOptions } from "./RequestExtraOptions/ExtraOptions";
+import { AdditionalOptions } from "./RequestAdditionalOptions/AdditionalOptions";
 
 function RequestForm(): JSX.Element {
-	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
+	const { requestMethod, requestParams } = useAppSelector((state) => state.requestConfigReducer);
 	const { values, saveFuildValue } = useForm<APIT.RequestConfigI>({
 		initialValues: { requestMethod: "GET", requestParams: {}, requestUrl: "" }
 	});
@@ -38,13 +38,14 @@ function RequestForm(): JSX.Element {
 						disabled={false}
 						onClick={() => {
 							saveFuildValue("requestMethod", requestMethod);
+							saveFuildValue("requestParams", requestParams);
 
 							console.table([values.current]);
 						}}
 					/>
 				</section>
 				<section className={"extra_options_wrapper"}>
-					<ExtraOptions />
+					<AdditionalOptions />
 				</section>
 			</div>
 		</>

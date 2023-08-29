@@ -1,4 +1,4 @@
-.request_extra_options_header {
+.request_additional_options_header {
 	min-width: 410px;
 	user-select: none;
 	display: flex;
@@ -7,7 +7,7 @@
 	border-bottom: solid 1px var(--border-color-default);
 	flex-grow: 1;
 }
-.extra_options_element {
+.additional_options_element {
 	position: relative;
 	cursor: pointer;
 	margin-right: 10px;
@@ -22,7 +22,7 @@
 		transition: color ease 0.2s;
 	}
 }
-.extra_option_underline {
+.additional_option_underline {
 	position: absolute;
 	bottom: -2px;
 	left: 0;
@@ -30,7 +30,7 @@
 	height: 2px;
 	background: #614fd1;
 }
-.request_extra_options_body {
+.request_additional_options_body {
 	height: 100%;
 	max-height: 800px;
 	font-family: "Inter";
