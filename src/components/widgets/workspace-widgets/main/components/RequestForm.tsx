@@ -44,7 +44,7 @@ function RequestForm(): JSX.Element {
 						}}
 					/>
 				</section>
-				<section className={"extra_options_wrapper"}>
+				<section className={"additional_options_wrapper"}>
 					<AdditionalOptions />
 				</section>
 			</div>

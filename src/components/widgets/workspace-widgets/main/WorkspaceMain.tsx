@@ -15,7 +15,7 @@ function WorkspaceMain() {
 				>
 					<div>Collections</div>
 				</Allotment.Pane>
-				<Allotment.Pane minSize={0}>
+				<Allotment.Pane minSize={410}>
 					<RequestForm></RequestForm>
 				</Allotment.Pane>
 				<Allotment.Pane minSize={390}>

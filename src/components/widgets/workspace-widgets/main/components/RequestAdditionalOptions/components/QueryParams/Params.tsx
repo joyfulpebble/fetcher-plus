@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 
 import { useAppDispatch } from "../../../../../../../../hooks/redux/redux";
-import requestConfigSlice from "../../../../../../../../redux/reducers/requestConfigSlice";
+// import requestConfigSlice from "../../../../../../../../redux/reducers/requestConfigSlice";
 
 import { ParamsList } from "./ParamsList";
 import Modal from "../../../../../../../UI/Modal/Modal";
@@ -9,10 +9,11 @@ import Input from "../../../../../../../UI/Input/Input";
 import { IconTrash, IconPlus } from "@tabler/icons-react";
 
 import "./QueryParams.scss";
+import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
 
 export const Params = () => {
 	const dispatch = useAppDispatch();
-	const { updateParams } = requestConfigSlice.actions;
+	const { addParameter, deleteAllParams } = requestQueryParamsSlice.actions;
 
 	const [newParameterModalView, setNewParameterModalView] = useState(false);
 	const parameterNameRef = useRef<HTMLInputElement>(null);
@@ -23,21 +24,24 @@ export const Params = () => {
 			<section className="query_params_header_wrapper">
 				<span className="additional_option_name">Query Parameters</span>
 				<div className="additional_option_controls">
-					<IconPlus
-						className="add_new_param"
-						style={{ cursor: "pointer", marginRight: 5 }}
-						size={16}
-						stroke={2}
-						onClick={() => {
-							setNewParameterModalView(true);
-						}}
-					/>
-					<IconTrash
-						className="delete_all_params"
-						style={{ cursor: "pointer", marginLeft: 5 }}
-						size={16}
-						stroke={2}
-					/>
+					<div className="add_new_param">
+						<IconPlus
+							size={16}
+							stroke={2}
+							onClick={() => {
+								setNewParameterModalView(true);
+							}}
+						/>
+					</div>
+					<div className="delete_all_params">
+						<IconTrash
+							size={16}
+							stroke={2}
+							onClick={() => {
+								dispatch(deleteAllParams());
+							}}
+						/>
+					</div>
 				</div>
 			</section>
 			<Modal
@@ -51,7 +55,7 @@ export const Params = () => {
 						[query_parameter_key]: query_parameter_value
 					};
 
-					dispatch(updateParams(query_parameter));
+					dispatch(addParameter(query_parameter));
 
 					return true;
 				}}

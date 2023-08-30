@@ -3,8 +3,7 @@
 	user-select: none;
 	display: flex;
 	flex-direction: row;
-	padding: 8px 16px;
-	border-bottom: solid 1px var(--border-color-default);
+	padding-bottom: 8px;
 	flex-grow: 1;
 }
 .additional_options_element {
@@ -18,7 +17,7 @@
 	line-height: var(--font-line-height);
 	transition: color ease 0.2s;
 	&:hover {
-		color: #614fd1;
+		color: var(--btn-color-default);
 		transition: color ease 0.2s;
 	}
 }
@@ -28,7 +27,7 @@
 	left: 0;
 	right: 0;
 	height: 2px;
-	background: #614fd1;
+	background: var(--btn-color-default);
 }
 .request_additional_options_body {
 	height: 100%;

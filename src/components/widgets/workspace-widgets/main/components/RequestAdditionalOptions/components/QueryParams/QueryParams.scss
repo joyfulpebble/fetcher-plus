@@ -3,7 +3,7 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	border-bottom: solid 1px var(--border-color-default);
+	border: solid 1px var(--border-color-default);
 	padding: 5px;
 }
 .additional_options_body {
@@ -20,36 +20,69 @@
 	flex-direction: row;
 
 	.delete_all_params {
-		transition: color 0.1s linear;
-		color: var(--font-color-white);
+		padding: 3px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
 
 		&:hover {
-			transition: color 0.1s linear;
-			color: var(--font-color-red);
+			background-color: var(--border-color-default);
+			border-radius: var(--border-radius-default);
+			transition: background-color ease 0.2s;
 		}
 	}
 	.add_new_param {
-		transition: color 0.1s linear;
-		color: var(--font-color-white);
+		padding: 3px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
 
 		&:hover {
-			transition: color 0.1s linear;
-			color: #0aff3b;
+			background-color: var(--border-color-default);
+			border-radius: var(--border-radius-default);
+			transition: background-color ease 0.2s;
 		}
 	}
 }
 
 .query_params_item {
-	height: 28px;
-	flex-grow: 1;
 	display: flex;
 	flex-direction: row;
 
-	.params_dragger {
-		cursor: grab;
+	.param_control {
+		padding: 5px;
 		display: flex;
 		align-items: center;
 		border-bottom: solid 1px var(--border-color-default);
+		border-left: solid 1px var(--border-color-default);
+
+		.param_select {
+			padding: 3px;
+			display: flex;
+			align-items: center;
+			&:hover {
+				background-color: var(--border-color-default);
+				border-radius: var(--border-radius-default);
+				transition: background-color ease 0.2s;
+			}
+		}
+	}
+
+	&:hover .param_dragger {
+		opacity: 1;
+		cursor: grab;
+		display: flex;
+		align-items: center;
+		transition: opacity ease 0.1s;
+	}
+
+	.param_dragger {
+		opacity: 0;
+		display: flex;
+		align-items: center;
+		transition: opacity ease 0.1s;
 	}
 
 	.psrams_key_val {
@@ -58,6 +91,7 @@
 		flex-direction: row;
 
 		.params_key {
+			padding: 5px;
 			width: 100%;
 			display: flex;
 			align-items: center;
@@ -66,19 +100,38 @@
 			border-right: none;
 		}
 		.params_val {
+			padding: 5px;
 			width: 100%;
 			display: flex;
 			align-items: center;
+			justify-content: space-between;
 			border: solid 1px var(--border-color-default);
 			border-top: none;
 		}
 	}
 
-	.params_controls {
-		padding: 5px;
+	&:hover .param_delete {
+		opacity: 1;
+		padding: 3px;
+		display: flex;
 		align-items: center;
-		border-bottom: solid 1px var(--border-color-default);
-		border-top: none;
-		border-right: none;
+		justify-content: center;
+		transition: opacity ease 0.1s;
+
+		&:hover {
+			cursor: pointer;
+			background-color: var(--border-color-default);
+			border-radius: var(--border-radius-default);
+			transition: background-color ease 0.2s;
+		}
+	}
+
+	.param_delete {
+		opacity: 0;
+		padding: 3px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: opacity ease 0.1s;
 	}
 }
