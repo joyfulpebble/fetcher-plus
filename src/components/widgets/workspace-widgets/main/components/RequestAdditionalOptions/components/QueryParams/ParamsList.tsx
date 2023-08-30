@@ -1,8 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
 
 import "./QueryParams.scss";
-import { Matrix } from "../../../../../../../../tools/common/Matrix";
-import { IconTrash, IconGripVertical, IconCheckbox } from "@tabler/icons-react";
+import { IconTrash, IconGripVertical, IconCheckbox, IconSquare } from "@tabler/icons-react";
 import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
 
 /** TODO:
@@ -16,9 +15,9 @@ import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requ
  * * - Добавить новый вид инпута
  * + Реализовать добавление новых юнитов в список параметров
  * * + Создать новый стор в редаксе для еще не подтвержденных параметров
- * - Реализовать удаление юнитов из списка
- * * - Удаление всех параметров в один клик
- * - Реализовать выбор только нужных для запроса параметров
+ * + Реализовать удаление юнитов из списка
+ * * + Удаление всех параметров в один клик
+ * + Реализовать выбор только нужных для запроса параметров
  * + Переписать хранение параметров на массивы (нужно чтобы одновременно могли существовать параметры с одинаковыми именами)
  * ***
  * - Реализовать драг-дроп юнитов в списке
@@ -29,7 +28,8 @@ import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requ
 
 export const ParamsList = () => {
 	const dispatch = useAppDispatch();
-	const { deleteParameter } = requestQueryParamsSlice.actions;
+	const { setNotUsedParameter, deleteParameter, unsetNotUsedParameter } =
+		requestQueryParamsSlice.actions;
 	const requestQueryParams = useAppSelector((state) => state.requestQueryParameters);
 
 	const list = requestQueryParams.map((parameter, index) => (
@@ -42,14 +42,27 @@ export const ParamsList = () => {
 					<IconGripVertical size={16} />
 				</div>
 				<div className="param_select">
-					<IconCheckbox size={16} />
+					{parameter.isUsed ? (
+						<IconCheckbox
+							size={16}
+							onClick={() => {
+								dispatch(setNotUsedParameter(index));
+							}}
+						/>
+					) : (
+						<IconSquare
+							size={16}
+							onClick={() => {
+								dispatch(unsetNotUsedParameter(index));
+							}}
+						/>
+					)}
 				</div>
 			</section>
 			<section className="psrams_key_val">
-				<div className="params_key">{parameter[0]}</div>
+				<div className="params_key">{parameter.parameterKey}</div>
 				<div className="params_val">
-					{parameter[1]}
-
+					{parameter.ParameterValue}
 					<div className="param_delete">
 						<IconTrash
 							size={16}

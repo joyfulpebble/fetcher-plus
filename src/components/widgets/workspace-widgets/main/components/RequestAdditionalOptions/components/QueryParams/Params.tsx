@@ -10,6 +10,12 @@ import { IconTrash, IconPlus } from "@tabler/icons-react";
 import "./QueryParams.scss";
 import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
 
+type QueryParameter = {
+	isUsed: boolean;
+	parameterKey: string;
+	ParameterValue: string;
+};
+
 export const Params = () => {
 	const dispatch = useAppDispatch();
 	const { addParameter, deleteAllParams } = requestQueryParamsSlice.actions;
@@ -50,7 +56,11 @@ export const Params = () => {
 				onSubmit={() => {
 					const query_parameter_key = parameterNameRef.current?.value!;
 					const query_parameter_value = parameterValueRef.current?.value!;
-					const query_parameter: [string, string] = [query_parameter_key, query_parameter_value];
+					const query_parameter: QueryParameter = {
+						isUsed: true,
+						parameterKey: query_parameter_key,
+						ParameterValue: query_parameter_value
+					};
 
 					dispatch(addParameter(query_parameter));
 
