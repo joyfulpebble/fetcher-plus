@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 
 import { useAppDispatch } from "../../../../../../../../hooks/redux/redux";
-// import requestConfigSlice from "../../../../../../../../redux/reducers/requestConfigSlice";
 
 import { ParamsList } from "./ParamsList";
 import Modal from "../../../../../../../UI/Modal/Modal";
@@ -51,9 +50,7 @@ export const Params = () => {
 				onSubmit={() => {
 					const query_parameter_key = parameterNameRef.current?.value!;
 					const query_parameter_value = parameterValueRef.current?.value!;
-					const query_parameter = {
-						[query_parameter_key]: query_parameter_value
-					};
+					const query_parameter: [string, string] = [query_parameter_key, query_parameter_value];
 
 					dispatch(addParameter(query_parameter));
 

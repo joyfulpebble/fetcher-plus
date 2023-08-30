@@ -1,10 +1,9 @@
-import { useState } from "react";
-
-import { useAppSelector } from "../../../../../../../../hooks/redux/redux";
+import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
 
 import "./QueryParams.scss";
 import { Matrix } from "../../../../../../../../tools/common/Matrix";
 import { IconTrash, IconGripVertical, IconCheckbox } from "@tabler/icons-react";
+import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
 
 /** TODO:
  * ***
@@ -20,7 +19,7 @@ import { IconTrash, IconGripVertical, IconCheckbox } from "@tabler/icons-react";
  * - Реализовать удаление юнитов из списка
  * * - Удаление всех параметров в один клик
  * - Реализовать выбор только нужных для запроса параметров
- * - Переписать хранение параметров на массивы (нужно чтобы одновременно могли существовать параметры с одинаковыми именами)
+ * + Переписать хранение параметров на массивы (нужно чтобы одновременно могли существовать параметры с одинаковыми именами)
  * ***
  * - Реализовать драг-дроп юнитов в списке
  * ***
@@ -29,11 +28,11 @@ import { IconTrash, IconGripVertical, IconCheckbox } from "@tabler/icons-react";
  */
 
 export const ParamsList = () => {
+	const dispatch = useAppDispatch();
+	const { deleteParameter } = requestQueryParamsSlice.actions;
 	const requestQueryParams = useAppSelector((state) => state.requestQueryParameters);
 
-	const paramsMatrix = new Matrix().ofArrays(requestQueryParams);
-
-	const list = paramsMatrix.map((parameter, index) => (
+	const list = requestQueryParams.map((parameter, index) => (
 		<section
 			key={index}
 			className="query_params_item"
@@ -52,7 +51,12 @@ export const ParamsList = () => {
 					{parameter[1]}
 
 					<div className="param_delete">
-						<IconTrash size={16} />
+						<IconTrash
+							size={16}
+							onClick={() => {
+								dispatch(deleteParameter(index));
+							}}
+						/>
 					</div>
 				</div>
 			</section>
