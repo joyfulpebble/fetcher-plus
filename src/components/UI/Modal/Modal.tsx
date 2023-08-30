@@ -20,9 +20,9 @@ interface ModalPropsI {
 }
 
 function Modal({ title, visibility, children, onCancel, onSubmit, onClose }: ModalPropsI) {
-	const testref = useRef(null);
+	const modalLayerRef = useRef(null);
 
-	useOutsideClick(testref, () => {
+	useOutsideClick(modalLayerRef, () => {
 		onClose();
 	});
 
@@ -31,7 +31,10 @@ function Modal({ title, visibility, children, onCancel, onSubmit, onClose }: Mod
 			if (event.key === "Enter") {
 				event.preventDefault();
 
-				if (onSubmit()) onClose();
+				if (visibility) {
+					onSubmit();
+					onClose();
+				}
 			}
 		};
 
@@ -59,7 +62,7 @@ function Modal({ title, visibility, children, onCancel, onSubmit, onClose }: Mod
 							className="modal_layer"
 						>
 							<motion.div
-								ref={testref}
+								ref={modalLayerRef}
 								key={"modal_wrapper"}
 								animate={{ scale: [0.7, 1.05, 1] }}
 								transition={{

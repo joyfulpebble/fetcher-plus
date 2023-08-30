@@ -7,6 +7,10 @@ import MethodsList from "./Lists/MethodsList";
 import "./MethodSelect.scss";
 import "./Lists/Lists.scss";
 
+/** TODO:
+ * - Сделать отельный redux store для выбранного метода
+ */
+
 function MethodSelect() {
 	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
 

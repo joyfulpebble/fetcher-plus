@@ -82,6 +82,7 @@
 		width: 100%;
 		display: flex;
 		flex-direction: row;
+		user-select: none;
 
 		.params_key {
 			padding: 5px;
@@ -104,12 +105,11 @@
 	}
 
 	&:hover .param_delete {
-		opacity: 1;
 		padding: 3px;
+		margin-left: 3px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		transition: opacity ease 0.1s;
 
 		&:hover {
 			cursor: pointer;
@@ -120,11 +120,6 @@
 	}
 
 	.param_delete {
-		opacity: 0;
-		padding: 3px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		transition: opacity ease 0.1s;
+		display: none;
 	}
 }

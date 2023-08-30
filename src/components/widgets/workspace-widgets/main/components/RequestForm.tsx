@@ -12,6 +12,7 @@ import { useRef } from "react";
 import { AdditionalOptions } from "./RequestAdditionalOptions/AdditionalOptions";
 
 function RequestForm(): JSX.Element {
+	const quieryParams = useAppSelector((state) => state.requestQueryParameters);
 	const { requestMethod, requestParams } = useAppSelector((state) => state.requestConfigReducer);
 	const { values, saveFuildValue } = useForm<APIT.RequestConfigI>({
 		initialValues: { requestMethod: "GET", requestParams: {}, requestUrl: "" }
@@ -40,7 +41,7 @@ function RequestForm(): JSX.Element {
 							saveFuildValue("requestMethod", requestMethod);
 							saveFuildValue("requestParams", requestParams);
 
-							console.table([values.current]);
+							console.table(quieryParams);
 						}}
 					/>
 				</section>

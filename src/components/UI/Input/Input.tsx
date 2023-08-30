@@ -5,9 +5,10 @@ import "./Input.scss";
 interface InputPropsI extends React.HTMLProps<HTMLInputElement> {
 	innerRef?: RefObject<HTMLInputElement>;
 	placeholder: string;
-	label: string;
-	error: string | null;
+	error?: string | null;
+	label?: string;
 	disabled?: boolean;
+	inputStyle?: "invisible" | "default";
 	// eslint-disable-next-line no-unused-vars
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -19,16 +20,28 @@ function Input({
 	error,
 	label,
 	onChange,
+	inputStyle = "default",
 	...props
 }: InputPropsI): JSX.Element {
-	const inputClasses = useClassnames("input", {
-		error: !!error
+	const inputClasses = useClassnames({
+		error: !!error,
+		invisible: inputStyle === "invisible",
+		default: inputStyle === "default"
 	});
 
 	return (
 		<>
-			<div>
-				<div className="input_label">{label}</div>
+			<div style={{ width: "100%" }}>
+				{label && (
+					<div
+						className="input_label"
+						onClick={() => {
+							innerRef?.current?.focus();
+						}}
+					>
+						{label}
+					</div>
+				)}
 				<input
 					{...props}
 					ref={innerRef}
@@ -40,7 +53,7 @@ function Input({
 					}}
 				/>
 			</div>
-			{!!error && <div className="error_text">{error}</div>}
+			{!!error && <div className="input_error_text">{error}</div>}
 		</>
 	);
 }

@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/re
 import "./QueryParams.scss";
 import { IconTrash, IconGripVertical, IconCheckbox, IconSquare } from "@tabler/icons-react";
 import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
+import Input from "../../../../../../../UI/Input/Input";
 
 /** TODO:
  * ***
@@ -11,8 +12,8 @@ import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requ
  * * + Сделать ровные отступы
  * * + Минимальный размер меню с доп. параметра для запроса
  * ***
- * - Добавить возможность менять имя и значение параметров
- * * - Добавить новый вид инпута
+ * + Добавить возможность менять имя и значение параметров
+ * * + Добавить новый вид инпута
  * + Реализовать добавление новых юнитов в список параметров
  * * + Создать новый стор в редаксе для еще не подтвержденных параметров
  * + Реализовать удаление юнитов из списка
@@ -28,8 +29,13 @@ import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requ
 
 export const ParamsList = () => {
 	const dispatch = useAppDispatch();
-	const { setNotUsedParameter, deleteParameter, unsetNotUsedParameter } =
-		requestQueryParamsSlice.actions;
+	const {
+		deleteParameter,
+		setNotUsedParameter,
+		unsetNotUsedParameter,
+		updateParameterKey,
+		updateParameterValue
+	} = requestQueryParamsSlice.actions;
 	const requestQueryParams = useAppSelector((state) => state.requestQueryParameters);
 
 	const list = requestQueryParams.map((parameter, index) => (
@@ -60,9 +66,27 @@ export const ParamsList = () => {
 				</div>
 			</section>
 			<section className="psrams_key_val">
-				<div className="params_key">{parameter.parameterKey}</div>
+				<div className="params_key">
+					<Input
+						name={`parameter_key=${parameter.parameterKey}`}
+						placeholder="Parameter key"
+						inputStyle="invisible"
+						onChange={(e) => {
+							dispatch(updateParameterKey({ parameterIndex: index, newValue: e.target.value }));
+						}}
+						defaultValue={parameter.parameterKey}
+					/>
+				</div>
 				<div className="params_val">
-					{parameter.ParameterValue}
+					<Input
+						name={`parameter_value=${parameter.parameterValue}`}
+						placeholder="Parameter value"
+						inputStyle="invisible"
+						onChange={(e) => {
+							dispatch(updateParameterValue({ parameterIndex: index, newValue: e.target.value }));
+						}}
+						defaultValue={parameter.parameterValue}
+					/>
 					<div className="param_delete">
 						<IconTrash
 							size={16}
