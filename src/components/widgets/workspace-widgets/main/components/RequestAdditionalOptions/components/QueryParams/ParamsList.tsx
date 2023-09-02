@@ -1,9 +1,16 @@
 import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
 
 import "./QueryParams.scss";
-import { IconTrash, IconGripVertical, IconCheckbox, IconSquare } from "@tabler/icons-react";
+import {
+	IconTrash,
+	IconGripVertical,
+	IconCheckbox,
+	IconSquare,
+	IconSquareRoundedArrowDown
+} from "@tabler/icons-react";
 import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
 import Input from "../../../../../../../UI/Input/Input";
+import Tippy from "@tippyjs/react";
 
 /** TODO:
  * ***

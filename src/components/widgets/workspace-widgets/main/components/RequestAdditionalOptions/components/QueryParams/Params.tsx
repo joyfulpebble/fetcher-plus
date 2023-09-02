@@ -11,6 +11,7 @@ import { IconTrash, IconPlus } from "@tabler/icons-react";
 import { v1 as uuidv1 } from "uuid";
 
 import "./QueryParams.scss";
+import Tippy from "@tippyjs/react";
 
 export const Params = () => {
 	const dispatch = useAppDispatch();
@@ -74,22 +75,43 @@ export const Params = () => {
 				<span className="additional_option_name">Query Parameters</span>
 				<div className="additional_option_controls">
 					<div className="add_new_param">
-						<IconPlus
-							size={16}
-							stroke={2}
-							onClick={() => {
-								setNewParameterModalView(true);
-							}}
-						/>
+						<Tippy
+							className="tippy_parameter"
+							placement="top"
+							content={"Add new"}
+							animation="shift-away"
+							arrow={true}
+							trigger="mouseenter"
+							zIndex={0}
+						>
+							<IconPlus
+								size={16}
+								stroke={2}
+								onClick={() => {
+									setNewParameterModalView(true);
+								}}
+							/>
+						</Tippy>
 					</div>
 					<div className="delete_all_params">
-						<IconTrash
-							size={16}
-							stroke={2}
-							onClick={() => {
-								dispatch(deleteAllParams());
-							}}
-						/>
+						<Tippy
+							className="tippy_parameter"
+							placement="top"
+							content={"Clear all"}
+							animation="shift-away"
+							arrow={true}
+							trigger="mouseenter"
+							zIndex={0}
+							offset={[-15, 10]}
+						>
+							<IconTrash
+								size={16}
+								stroke={2}
+								onClick={() => {
+									dispatch(deleteAllParams());
+								}}
+							/>
+						</Tippy>
 					</div>
 				</div>
 			</section>

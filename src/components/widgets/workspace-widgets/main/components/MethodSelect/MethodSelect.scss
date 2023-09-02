@@ -1,8 +1,9 @@
-.tippy-content {
-	padding: 5px 10px;
-	padding-right: 5px;
-}
 .tippy_method_select_wrapper {
+	.tippy-content {
+		padding: 5px 10px;
+		padding-right: 0px;
+	}
+
 	border: 1px solid var(--border-color-default);
 	background-color: #272727;
 	width: 147px;

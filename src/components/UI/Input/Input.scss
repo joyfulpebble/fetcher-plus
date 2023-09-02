@@ -64,6 +64,11 @@
 	letter-spacing: var(--font-letter-spacing-1);
 	transition: border ease 0.3s;
 
+	&:not(.error, :focus, :disabled):hover {
+		border: 1px solid var(--border-color-default);
+		transition: border ease 0.15s;
+	}
+
 	&:focus {
 		border: 1px solid var(--btn-color-default);
 		transition: border ease 0.3s;

@@ -25,7 +25,7 @@ function MethodSelect() {
 				animation="shift-away"
 				trigger="click"
 				arrow={false}
-				offset={[5, 5]}
+				offset={[13, 5]}
 				maxWidth={160}
 				zIndex={10}
 			>

@@ -47,6 +47,21 @@
 	height: 100%;
 }
 
+.tippy_parameter {
+	.tippy-arrow::before {
+		color: var(--theme-dark-bg-lvl-2);
+	}
+	.tippy-content {
+		font-weight: 200;
+		font-size: var(--font-size-paragraph);
+		line-height: var(--font-line-height);
+	}
+	border: 1px solid var(--border-color-default);
+	background-color: var(--theme-dark-bg-lvl-2);
+	border-radius: var(--border-radius-default);
+	user-select: none;
+}
+
 .query_params_item {
 	display: flex;
 	flex-direction: row;
@@ -70,6 +85,7 @@
 			padding: 3px;
 			display: flex;
 			align-items: center;
+
 			&:hover {
 				background-color: var(--border-color-default);
 				border-radius: var(--border-radius-default);
