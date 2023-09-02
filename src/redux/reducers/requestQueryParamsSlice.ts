@@ -1,40 +1,53 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+type QueryParameterID = string;
 type QueryParameter = {
+	_id: QueryParameterID;
 	isUsed: boolean;
-	parameterKey: string;
-	parameterValue: string;
+	key: string;
+	value: string;
 };
-type QueryParamsState = Array<QueryParameter>;
-type QueryParamUpdateObject = {
-	parameterIndex: number;
-	newValue: string;
+type QueryParameterStateUpdate = QueryParameterID;
+type QueryParameterValuesUpdateObject = {
+	parameterID: QueryParameterID;
+	updateType: "key" | "value" | "both";
+	value:
+		| string
+		| {
+				param_key: string;
+				param_value: string;
+		  };
 };
+type QueryParamsStore = Array<QueryParameter>;
 
-const initialState: QueryParamsState = [];
+const initialState: QueryParamsStore = [];
 
 export const requestQueryParamsSlice = createSlice({
 	name: "requestQueryParamsSlice",
 	initialState,
 	reducers: {
 		deleteAllParams: () => [],
-		addParameter: (state, action: PayloadAction<QueryParameter>) => {
-			state = [...state, action.payload];
+		addParameter: (state, action: PayloadAction<QueryParameter>) => [...state, action.payload],
+		deleteParameter: (state, action: PayloadAction<QueryParameterID>) =>
+			[...state].filter((parameter: QueryParameter) => parameter._id !== action.payload),
+		updateParameterState: (state, action: PayloadAction<QueryParameterStateUpdate>) => {
+			[...state].map((parameter): void => {
+				if (parameter._id === action.payload) parameter.isUsed = !parameter.isUsed;
+			});
 		},
-		deleteParameter: (state, action: PayloadAction<number>) => {
-			[...state].filter((elem, index) => index !== action.payload);
-		},
-		setNotUsedParameter: (state, action: PayloadAction<number>) => {
-			[...state][action.payload].isUsed = false;
-		},
-		unsetNotUsedParameter: (state, action: PayloadAction<number>) => {
-			[...state][action.payload].isUsed = true;
-		},
-		updateParameterKey: (state, action: PayloadAction<QueryParamUpdateObject>) => {
-			[...state][action.payload.parameterIndex].parameterKey = action.payload.newValue;
-		},
-		updateParameterValue: (state, action: PayloadAction<QueryParamUpdateObject>) => {
-			[...state][action.payload.parameterIndex].parameterValue = action.payload.newValue;
+		updateParameter: (state, action: PayloadAction<QueryParameterValuesUpdateObject>) => {
+			[...state].map((parameter): void => {
+				if (parameter._id === action.payload.parameterID) {
+					if (typeof action.payload.value !== "object") {
+						if (action.payload.updateType === "key") parameter.key = action.payload.value;
+						if (action.payload.updateType === "value") parameter.value = action.payload.value;
+					}
+					if (typeof action.payload.value === "object") {
+						parameter.key = action.payload.value.param_key;
+						parameter.value = action.payload.value.param_value;
+					}
+				}
+			});
 		}
 	}
 });

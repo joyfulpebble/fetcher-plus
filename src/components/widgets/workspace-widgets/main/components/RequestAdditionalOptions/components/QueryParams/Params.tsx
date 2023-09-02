@@ -1,14 +1,16 @@
 import { useState, useRef } from "react";
 
 import { useAppDispatch } from "../../../../../../../../hooks/redux/redux";
+import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
 
 import { ParamsList } from "./ParamsList";
 import Modal from "../../../../../../../UI/Modal/Modal";
 import Input from "../../../../../../../UI/Input/Input";
 import { IconTrash, IconPlus } from "@tabler/icons-react";
 
+import { v1 as uuidv1 } from "uuid";
+
 import "./QueryParams.scss";
-import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
 
 export const Params = () => {
 	const dispatch = useAppDispatch();
@@ -25,14 +27,12 @@ export const Params = () => {
 				visibility={newParameterModalView}
 				onCancel={() => true}
 				onSubmit={() => {
-					const query_parameter_key = parameterNameRef.current?.value!;
-					const query_parameter_value = parameterValueRef.current?.value!;
-
 					dispatch(
 						addParameter({
+							_id: uuidv1(),
 							isUsed: true,
-							parameterKey: query_parameter_key,
-							parameterValue: query_parameter_value
+							key: String(parameterNameRef.current?.value),
+							value: String(parameterValueRef.current?.value)
 						})
 					);
 

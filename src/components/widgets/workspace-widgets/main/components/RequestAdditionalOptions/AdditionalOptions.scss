@@ -30,6 +30,7 @@
 	background: var(--btn-color-default);
 }
 .request_additional_options_body {
+	overflow-y: auto;
 	height: 100%;
 	max-height: 800px;
 	font-family: "Inter";
