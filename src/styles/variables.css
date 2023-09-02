@@ -46,6 +46,10 @@
 	--margin-r8: 8px;
 	--margin-b3: 3px;
 
+	--z-index-modal: 1000;
+	--z-index-modal-layer: 999;
+	--z-index-tippy: 10;
+
 	/* # libraries #  */
 	--focus-border: var(--btn-color-default);
 	--separator-border: var(--border-color-default);

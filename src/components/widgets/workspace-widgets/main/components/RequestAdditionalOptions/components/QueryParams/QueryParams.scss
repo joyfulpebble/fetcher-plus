@@ -5,12 +5,7 @@
 	align-items: center;
 	border: solid 1px var(--border-color-default);
 	padding: 5px;
-}
-.additional_options_body {
-}
-.additional_options_headers {
-}
-.additional_options_auth {
+	margin-right: 10px;
 }
 .additional_option_name {
 	user-select: none;
@@ -45,6 +40,11 @@
 			transition: background-color ease 0.2s;
 		}
 	}
+}
+
+.query_params_body_wrapper {
+	overflow-y: scroll;
+	height: 100%;
 }
 
 .query_params_item {

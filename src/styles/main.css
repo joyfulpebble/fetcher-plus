@@ -61,15 +61,19 @@ body {
 	text-rendering: optimizeSpeed;
 }
 
-::-webkit-scrollbar {
-	width: 5px;
+*::-webkit-scrollbar {
+	width: 10px;
 	height: 5px;
 }
-::-webkit-scrollbar-track {
-	background-color: #0000;
+*::-webkit-scrollbar-track {
+	padding: 1px;
+	background-color: #00000000;
+	/* background-color: var(--theme-dark-bg-lvl-3); */
 	border-radius: var(--border-radius-default);
 }
-::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
+	border: 2px solid #00000000;
 	border-radius: var(--border-radius-default);
-	background-color: var(--theme-dark-bg-lvl-0);
+	background-color: #0f0f0f;
+	background-clip: padding-box;
 }

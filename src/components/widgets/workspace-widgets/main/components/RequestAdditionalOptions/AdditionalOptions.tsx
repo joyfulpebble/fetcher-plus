@@ -31,9 +31,7 @@ export const AdditionalOptions = () => {
 					</div>
 				))}
 			</section>
-			<section className="request_additional_options_body">
-				<span className="additional_option_body">{optionElements[selectedTab]}</span>
-			</section>
+			<section className="request_additional_options_body">{optionElements[selectedTab]}</section>
 		</>
 	);
 };

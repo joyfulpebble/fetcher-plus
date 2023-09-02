@@ -8,10 +8,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 999;
+	z-index: var(--z-index-modal-layer);
 }
 .modal_wrapper {
-	z-index: 1000;
+	z-index: var(--z-index-modal);
 	min-width: 450px;
 	max-width: 450px;
 	min-height: 200px;

@@ -27,6 +27,7 @@ function MethodSelect() {
 				arrow={false}
 				offset={[5, 5]}
 				maxWidth={160}
+				zIndex={10}
 			>
 				<div className="method_select_wrapper">
 					<div
