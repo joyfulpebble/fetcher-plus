@@ -1,9 +1,23 @@
-import { Reorder } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
 import { ParamsListItem } from "./ParamsListItem";
 import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
 import { useEffect, useState } from "react";
 import "./QueryParams.scss";
+import {
+	DndContext,
+	DragCancelEvent,
+	KeyboardSensor,
+	PointerSensor,
+	useSensor,
+	useSensors,
+	closestCenter
+} from "@dnd-kit/core";
+import {
+	SortableContext,
+	arrayMove,
+	sortableKeyboardCoordinates,
+	verticalListSortingStrategy
+} from "@dnd-kit/sortable";
 
 /** TODO:
  * ***
@@ -33,29 +47,49 @@ export const ParamsList = () => {
 	const { updateParamsOrder } = requestQueryParamsSlice.actions;
 	const requestQueryParams = useAppSelector((state) => state.requestQueryParameters);
 
-	const [first, setfirst] = useState(requestQueryParams);
+	const [items, setItems] = useState(requestQueryParams);
 
 	useEffect(() => {
-		dispatch(updateParamsOrder(first));
-	}, [first]);
+		dispatch(updateParamsOrder(items));
+	}, [items]);
+
+	const sensors = useSensors(
+		useSensor(PointerSensor),
+		useSensor(KeyboardSensor, {
+			coordinateGetter: sortableKeyboardCoordinates
+		})
+	);
+
+	function handleDragEnd(event: DragCancelEvent) {
+		const { active, over } = event;
+		if (active?.id !== over?.id) {
+			setItems((prev) => {
+				const activeIndex = prev.findIndex((item) => item._id === active?.id);
+				const overIndex = prev.findIndex((item) => item._id === over?.id);
+				return arrayMove(prev, activeIndex, overIndex);
+			});
+		}
+	}
 
 	return (
 		<>
-			<Reorder.Group
-				as="div"
-				axis="y"
-				onReorder={setfirst}
-				values={first}
-				layoutScroll={true}
-				className="query_params_body_wrapper"
+			<DndContext
+				sensors={sensors}
+				collisionDetection={closestCenter}
+				onDragEnd={handleDragEnd}
 			>
-				{first.map((parameter) => (
-					<ParamsListItem
-						key={parameter._id}
-						parameter={parameter}
-					/>
-				))}
-			</Reorder.Group>
+				<SortableContext
+					items={items.map((param) => param._id)}
+					strategy={verticalListSortingStrategy}
+				>
+					{items.map((parameter) => (
+						<ParamsListItem
+							key={parameter._id}
+							parameter={parameter}
+						/>
+					))}
+				</SortableContext>
+			</DndContext>
 		</>
 	);
 };
