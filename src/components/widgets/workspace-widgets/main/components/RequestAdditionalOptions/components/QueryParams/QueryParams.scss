@@ -45,6 +45,7 @@
 .query_params_body_wrapper {
 	overflow-y: scroll;
 	height: 100%;
+	user-select: none;
 }
 
 .tippy_parameter {

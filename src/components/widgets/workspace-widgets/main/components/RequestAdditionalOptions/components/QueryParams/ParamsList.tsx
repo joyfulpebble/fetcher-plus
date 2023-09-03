@@ -1,21 +1,14 @@
+import { Reorder } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
-
-import "./QueryParams.scss";
-import {
-	IconTrash,
-	IconGripVertical,
-	IconCheckbox,
-	IconSquare,
-	IconSquareRoundedArrowDown
-} from "@tabler/icons-react";
+import { ParamsListItem } from "./ParamsListItem";
 import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
-import Input from "../../../../../../../UI/Input/Input";
-import Tippy from "@tippyjs/react";
+import { useEffect, useState } from "react";
+import "./QueryParams.scss";
 
 /** TODO:
  * ***
  * ✓ Реализовать нормальные стили для юнитов списка параметров
- * * - Подсказки к кнопкам управления
+ * * ✓ Подсказки к кнопкам управления
  * * ✓ Сделать ровные отступы
  * * ✓ Минимальный размер меню с доп. параметра для запроса
  * ***
@@ -31,89 +24,38 @@ import Tippy from "@tippyjs/react";
  * ***
  * - Реализовать драг-дроп юнитов в списке
  * ***
- * - Вынести юниты списка параметров в отдельный компонент
+ * ✓ Вынести юниты списка параметров в отдельный компонент
  * - Подшлефовать логику
  */
 
 export const ParamsList = () => {
 	const dispatch = useAppDispatch();
-	const { deleteParameter, updateParameterState, updateParameter } =
-		requestQueryParamsSlice.actions;
+	const { updateParamsOrder } = requestQueryParamsSlice.actions;
 	const requestQueryParams = useAppSelector((state) => state.requestQueryParameters);
 
-	const list = requestQueryParams.map((parameter) => (
-		<section
-			key={parameter._id}
-			className="query_params_item"
-		>
-			<section className="param_control">
-				<div className="param_dragger">
-					<IconGripVertical size={16} />
-				</div>
-				<div className="param_select">
-					{parameter.isUsed ? (
-						<IconCheckbox
-							size={16}
-							onClick={() => {
-								dispatch(updateParameterState(parameter._id));
-							}}
-						/>
-					) : (
-						<IconSquare
-							size={16}
-							onClick={() => {
-								dispatch(updateParameterState(parameter._id));
-							}}
-						/>
-					)}
-				</div>
-			</section>
-			<section className="psrams_key_val">
-				<div className="params_key">
-					<Input
-						name={`parameter_key=${parameter.key}`}
-						placeholder="Parameter key"
-						inputStyle="invisible"
-						onChange={(e) => {
-							dispatch(
-								updateParameter({
-									parameterID: parameter._id,
-									updateType: "key",
-									value: e.target.value
-								})
-							);
-						}}
-						defaultValue={parameter.key}
-					/>
-				</div>
-				<div className="params_val">
-					<Input
-						name={`parameter_value=${parameter.value}`}
-						placeholder="Parameter value"
-						inputStyle="invisible"
-						onChange={(e) => {
-							dispatch(
-								updateParameter({
-									parameterID: parameter._id,
-									updateType: "value",
-									value: e.target.value
-								})
-							);
-						}}
-						defaultValue={parameter.value}
-					/>
-					<div className="param_delete">
-						<IconTrash
-							size={16}
-							onClick={() => {
-								dispatch(deleteParameter(parameter._id));
-							}}
-						/>
-					</div>
-				</div>
-			</section>
-		</section>
-	));
+	const [first, setfirst] = useState(requestQueryParams);
 
-	return <>{list}</>;
+	useEffect(() => {
+		dispatch(updateParamsOrder(first));
+	}, [first]);
+
+	return (
+		<>
+			<Reorder.Group
+				as="div"
+				axis="y"
+				onReorder={setfirst}
+				values={first}
+				layoutScroll={true}
+				className="query_params_body_wrapper"
+			>
+				{first.map((parameter) => (
+					<ParamsListItem
+						key={parameter._id}
+						parameter={parameter}
+					/>
+				))}
+			</Reorder.Group>
+		</>
+	);
 };

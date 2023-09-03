@@ -115,9 +115,9 @@ export const Params = () => {
 					</div>
 				</div>
 			</section>
-			<section className="query_params_body_wrapper">
-				<ParamsList />
-			</section>
+			{/* <section className="query_params_body_wrapper"> */}
+			<ParamsList />
+			{/* </section> */}
 		</>
 	);
 };

@@ -63,20 +63,24 @@
 	line-height: var(--font-line-height);
 	letter-spacing: var(--font-letter-spacing-1);
 	transition: border ease 0.3s;
+	user-select: none;
 
 	&:not(.error, :focus, :disabled):hover {
 		border: 1px solid var(--border-color-default);
 		transition: border ease 0.15s;
+		// user-select: text;
 	}
 
 	&:focus {
 		border: 1px solid var(--btn-color-default);
 		transition: border ease 0.3s;
+		user-select: text;
 	}
 
 	&.error {
 		color: var(--btn-color-danger);
 		transition: color ease 0.1s;
+		user-select: text;
 	}
 }
 

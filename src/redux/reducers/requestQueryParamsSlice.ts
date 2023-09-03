@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type QueryParameterID = string;
-type QueryParameter = {
+export type QueryParameter = {
 	_id: QueryParameterID;
 	isUsed: boolean;
 	key: string;
@@ -27,6 +27,7 @@ export const requestQueryParamsSlice = createSlice({
 	initialState,
 	reducers: {
 		deleteAllParams: () => [],
+		updateParamsOrder: (state, action: PayloadAction<QueryParamsStore>) => (state = action.payload),
 		addParameter: (state, action: PayloadAction<QueryParameter>) => [...state, action.payload],
 		deleteParameter: (state, action: PayloadAction<QueryParameterID>) =>
 			[...state].filter((parameter: QueryParameter) => parameter._id !== action.payload),
