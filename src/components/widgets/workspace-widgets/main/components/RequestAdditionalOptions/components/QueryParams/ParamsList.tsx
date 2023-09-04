@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
-import { ParamsListItem } from "./ParamsListItem";
-import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
 import { useEffect, useState } from "react";
-import "./QueryParams.scss";
+
+import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
+import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
+
 import {
 	DndContext,
 	DragCancelEvent,
@@ -18,6 +18,11 @@ import {
 	sortableKeyboardCoordinates,
 	verticalListSortingStrategy
 } from "@dnd-kit/sortable";
+import { restrictToFirstScrollableAncestor, restrictToVerticalAxis } from "@dnd-kit/modifiers";
+
+import { ParamsListItem } from "./ParamsListItem";
+
+import "./QueryParams.scss";
 
 /** TODO:
  * ***
@@ -36,10 +41,10 @@ import {
  * ✓ Реализовать выбор только нужных для запроса параметров
  * ✓ Переписать хранение параметров на массивы (нужно чтобы одновременно могли существовать параметры с одинаковыми именами)
  * ***
- * - Реализовать драг-дроп юнитов в списке
+ * ✓ Реализовать драг-дроп юнитов в списке
  * ***
  * ✓ Вынести юниты списка параметров в отдельный компонент
- * - Подшлефовать логику
+ * ✓ Подшлефовать логику
  */
 
 export const ParamsList = () => {
@@ -47,13 +52,8 @@ export const ParamsList = () => {
 	const { updateParamsOrder } = requestQueryParamsSlice.actions;
 	const requestQueryParams = useAppSelector((state) => state.requestQueryParameters);
 
-	const [items, setItems] = useState(requestQueryParams);
-
-	useEffect(() => {
-		dispatch(updateParamsOrder(items));
-	}, [items]);
-
-	const sensors = useSensors(
+	const [dragbleParams, setDragbleParams] = useState(requestQueryParams);
+	const dragSensors = useSensors(
 		useSensor(PointerSensor),
 		useSensor(KeyboardSensor, {
 			coordinateGetter: sortableKeyboardCoordinates
@@ -63,26 +63,35 @@ export const ParamsList = () => {
 	function handleDragEnd(event: DragCancelEvent) {
 		const { active, over } = event;
 		if (active?.id !== over?.id) {
-			setItems((prev) => {
-				const activeIndex = prev.findIndex((item) => item._id === active?.id);
+			setDragbleParams((prev) => {
+				const activeIndex = prev.findIndex((item) => item._id === active.id);
 				const overIndex = prev.findIndex((item) => item._id === over?.id);
 				return arrayMove(prev, activeIndex, overIndex);
 			});
 		}
 	}
 
+	useEffect(() => {
+		dispatch(updateParamsOrder(dragbleParams));
+	}, [dragbleParams]);
+
+	useEffect(() => {
+		setDragbleParams(requestQueryParams);
+	}, [requestQueryParams]);
+
 	return (
 		<>
 			<DndContext
-				sensors={sensors}
+				sensors={dragSensors}
 				collisionDetection={closestCenter}
 				onDragEnd={handleDragEnd}
+				modifiers={[restrictToVerticalAxis, restrictToFirstScrollableAncestor]}
 			>
 				<SortableContext
-					items={items.map((param) => param._id)}
+					items={dragbleParams.map((param) => param._id)}
 					strategy={verticalListSortingStrategy}
 				>
-					{items.map((parameter) => (
+					{dragbleParams.map((parameter) => (
 						<ParamsListItem
 							key={parameter._id}
 							parameter={parameter}

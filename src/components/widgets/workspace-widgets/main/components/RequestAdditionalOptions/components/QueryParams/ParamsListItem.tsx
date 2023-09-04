@@ -1,6 +1,6 @@
-import "./QueryParams.scss";
-import { IconTrash, IconGripVertical, IconCheckbox, IconSquare } from "@tabler/icons-react";
 import Input from "../../../../../../../UI/Input/Input";
+import { IconTrash, IconGripVertical, IconCheckbox, IconSquare } from "@tabler/icons-react";
+
 import { useAppDispatch } from "../../../../../../../../hooks/redux/redux";
 import requestQueryParamsSlice, {
 	type QueryParameter
@@ -8,6 +8,8 @@ import requestQueryParamsSlice, {
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+
+import "./QueryParams.scss";
 
 interface ParamsListItem {
 	parameter: QueryParameter;
@@ -17,21 +19,19 @@ export const ParamsListItem = ({ parameter }: ParamsListItem) => {
 	const dispatch = useAppDispatch();
 	const { deleteParameter, updateParameterState, updateParameter } =
 		requestQueryParamsSlice.actions;
-	/** */
 
 	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
 		id: parameter._id
 	});
-	const style = {
+	const styleOnDrag = {
 		transform: CSS.Transform.toString(transform),
 		transition
 	};
 
-	/** */
 	return (
 		<section
 			ref={setNodeRef}
-			style={style}
+			style={styleOnDrag}
 			className="query_params_item"
 		>
 			<section className="param_control">
