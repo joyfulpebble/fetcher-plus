@@ -41,6 +41,8 @@ function RequestForm(): JSX.Element {
 							saveFuildValue("requestMethod", requestMethod);
 							saveFuildValue("requestParams", requestParams);
 
+							console.log(requestMethod);
+							console.log(values.current.requestUrl);
 							console.table(quieryParams);
 						}}
 					/>

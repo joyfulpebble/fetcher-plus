@@ -1,21 +1,28 @@
 import { useState, useRef } from "react";
 
-import { useAppDispatch } from "../../../../../../../../hooks/redux/redux";
+import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
 import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
 
 import { ParamsList } from "./ParamsList";
+import { ParamsEmptyList } from "./ParamsEmptyList";
 import Modal from "../../../../../../../UI/Modal/Modal";
 import Input from "../../../../../../../UI/Input/Input";
 import { IconTrash, IconPlus } from "@tabler/icons-react";
+import Tippy from "@tippyjs/react";
 
 import { v1 as uuidv1 } from "uuid";
 
 import "./QueryParams.scss";
-import Tippy from "@tippyjs/react";
+
+/**TODO:
+ * - Поменять названия классов для параметров на нормальные
+ * - Декомпозиция файла стилей
+ */
 
 export const Params = () => {
 	const dispatch = useAppDispatch();
 	const { addParameter, deleteAllParams } = requestQueryParamsSlice.actions;
+	const queryParams = useAppSelector((state) => state.requestQueryParameters);
 
 	const [newParameterModalView, setNewParameterModalView] = useState(false);
 	const parameterNameRef = useRef<HTMLInputElement>(null);
@@ -115,8 +122,16 @@ export const Params = () => {
 					</div>
 				</div>
 			</section>
-			<section className="query_params_body_wrapper">
-				<ParamsList />
+			<section
+				className={`${
+					queryParams.length ? "query_params_body_wrapper" : "query_params_body_wrapper_empty"
+				}`}
+			>
+				{queryParams.length ? (
+					<ParamsList />
+				) : (
+					<ParamsEmptyList openModalFunc={setNewParameterModalView} />
+				)}
 			</section>
 		</>
 	);

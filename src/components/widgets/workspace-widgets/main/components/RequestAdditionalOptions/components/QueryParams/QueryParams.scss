@@ -43,10 +43,30 @@
 }
 
 .query_params_body_wrapper {
-	overflow-y: scroll;
-	overflow-x: hidden;
 	height: 100%;
 	user-select: none;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.query_params_body_wrapper_empty {
+	user-select: none;
+	height: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.query_params_body_empty {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		.params_empty_text {
+			opacity: 0.5;
+			margin-bottom: 8px;
+		}
+	}
 }
 
 .tippy_parameter {

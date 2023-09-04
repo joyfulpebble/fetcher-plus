@@ -8,7 +8,7 @@ export const AdditionalOptions = () => {
 	const [selectedTab, setSelectedTab] = useState<number>(0);
 
 	const optionsTabs = ["Parameters", "Body", "Headers", "Authorization"];
-	const optionElements = [<Params key={0} />];
+	const optionElements = [<Params key={"params_tab"} />];
 
 	return (
 		<>
