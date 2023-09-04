@@ -3,7 +3,7 @@
 	user-select: none;
 	height: var(--height-base-element);
 	padding: var(--padding-t8-l16);
-	border: none;
+	border: 1px solid var(--border-color-none);
 	outline: none;
 	border-radius: var(--border-radius-default);
 	color: var(--font-color-default);
@@ -12,6 +12,9 @@
 	font-weight: 500;
 	font-size: var(--font-size-paragraph);
 }
+
+/* Optional classes */
+
 .redirect {
 	text-decoration: none;
 	color: var(--font-color-dark);
@@ -20,7 +23,10 @@
 		pointer-events: none;
 	}
 }
-.primary {
+
+/* Button styles */
+
+.btn_primary {
 	background-color: var(--btn-color-default);
 	&:hover {
 		background: var(--btn-color-default-hover);
@@ -31,7 +37,7 @@
 		background-color: var(--btn-color-default-disabled);
 	}
 }
-.danger {
+.btn_danger {
 	background-color: var(--btn-color-danger);
 	&:hover {
 		background: var(--btn-color-danger-hover);
@@ -42,7 +48,7 @@
 		background-color: var(--btn-color-danger-disabled);
 	}
 }
-.secondary {
+.btn_secondary {
 	background-color: var(--btn-color-secondary);
 	color: var(--font-color-dark);
 	&:hover {
@@ -52,5 +58,20 @@
 	&:disabled {
 		cursor: no-drop;
 		background-color: var(--btn-color-secondary-disabled);
+	}
+}
+.btn_invisible {
+	color: var(--font-color-light);
+	border-color: var(--border-color-none);
+	background-color: var(--btn-color-invisible);
+	&:hover {
+		transition: all 0.1s linear;
+		border-color: var(--border-color-default);
+		background-color: var(--btn-color-invisible-hover);
+	}
+	&:disabled {
+		cursor: no-drop;
+		border-color: var(--border-color-none);
+		background-color: var(--btn-color-invisible-disabled);
 	}
 }

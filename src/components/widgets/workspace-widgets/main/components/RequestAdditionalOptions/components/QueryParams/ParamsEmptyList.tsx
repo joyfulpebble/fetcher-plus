@@ -8,7 +8,7 @@ export const ParamsEmptyList = ({ openModalFunc }: ParamsEmptyListProps) => (
 	<div className="query_params_body_empty">
 		<div className="params_empty_text">This request does not have query parameters</div>
 		<Button
-			buttonStyle="primary"
+			buttonStyle="invisible"
 			content="Add new"
 			onClick={() => {
 				openModalFunc(true);

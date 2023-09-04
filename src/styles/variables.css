@@ -13,6 +13,9 @@
 	--btn-color-secondary: #ffffff;
 	--btn-color-secondary-hover: #ffffffcc;
 	--btn-color-secondary-disabled: #ffffff99;
+	--btn-color-invisible: var(--theme-dark-bg-lvl-2);
+	--btn-color-invisible-hover: var(--theme-dark-bg-lvl-1);
+	--btn-color-invisible-disabled: var(--btn-color-invisible);
 
 	--font-color-light: white;
 	--font-color-dark: black;
@@ -29,6 +32,7 @@
 	--font-letter-spacing-1: 1px;
 
 	--border-color-default: #ffffff14;
+	--border-color-none: #ffffff00;
 
 	--border-size-default: 1px;
 	--border-radius-default: 4px;

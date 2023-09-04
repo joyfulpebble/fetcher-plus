@@ -5,7 +5,7 @@ export namespace ElementsT {
 		releaseBugs: boolean;
 	}
 
-	type ButtonStylesT = "primary" | "secondary" | "danger";
+	type ButtonStylesT = "primary" | "secondary" | "danger" | "invisible";
 	export interface ButtonPropsI extends React.HTMLProps<HTMLButtonElement> {
 		content: string;
 		disabled?: boolean;

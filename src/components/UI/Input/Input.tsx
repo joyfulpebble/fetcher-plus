@@ -13,6 +13,11 @@ interface InputPropsI extends React.HTMLProps<HTMLInputElement> {
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+/** TODO:
+ * - Вынести интерфейс в типы
+ * - Добавить к классам инпута приставки [itput_]
+ */
+
 function Input({
 	innerRef,
 	placeholder,
