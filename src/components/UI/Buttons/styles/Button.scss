@@ -1,4 +1,7 @@
 .button {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	cursor: pointer;
 	user-select: none;
 	height: var(--height-base-element);
@@ -13,7 +16,10 @@
 	font-size: var(--font-size-paragraph);
 }
 
-/* Optional classes */
+.btn_icon {
+	display: flex;
+	margin-right: 2px;
+}
 
 .redirect {
 	text-decoration: none;
@@ -61,7 +67,7 @@
 	}
 }
 .btn_invisible {
-	color: var(--font-color-light);
+	color: var(--font-color-invisible);
 	border-color: var(--border-color-none);
 	background-color: var(--btn-color-invisible);
 	&:hover {

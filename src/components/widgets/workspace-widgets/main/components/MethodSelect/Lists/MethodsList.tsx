@@ -16,11 +16,13 @@ import Modal from "../../../../../../UI/Modal/Modal";
 import Input from "../../../../../../UI/Input/Input";
 
 import "./Lists.scss";
+import requestConfigSlice from "../../../../../../../redux/reducers/requestConfigSlice";
 
 function MethodsList() {
 	const dispatch = useAppDispatch();
 	const customMethods = useAppSelector((state) => state.customRequestMethodsListReducer);
 	const { addCustomMethod } = customRequestMethodsListSlice.actions;
+	const { updateMethod } = requestConfigSlice.actions;
 
 	const [customMethodModalView, setCustomMethodModalView] = useState(false);
 	const [inputError, setInputError] = useState<string | null>(null);
@@ -29,6 +31,52 @@ function MethodsList() {
 
 	return (
 		<>
+			<Modal
+				title="Custom request"
+				visibility={customMethodModalView}
+				onSubmit={() => {
+					if (isRequired(customMethodNameRef.current?.value, setInputError)) return false;
+					if (
+						isIncluded(
+							customMethodNameRef.current?.value.toUpperCase(),
+							[customMethods, defaultMethods],
+							setInputError
+						)
+					)
+						return false;
+
+					setInputError(null);
+					dispatch(addCustomMethod(customMethodNameRef.current?.value.toUpperCase()!));
+					dispatch(updateMethod(customMethodNameRef.current?.value.toUpperCase()!));
+
+					return true;
+				}}
+				onCancel={() => true}
+				onClose={() => {
+					setInputError(null);
+					setCustomMethodModalView(false);
+				}}
+			>
+				<Input
+					name="requestName"
+					label="Enter request name: "
+					placeholder="Some text"
+					maxLength={20}
+					error={inputError}
+					innerRef={customMethodNameRef}
+					onChange={() => {
+						isRequired(customMethodNameRef.current?.value, setInputError);
+						isIncluded(
+							customMethodNameRef.current?.value.toUpperCase(),
+							[customMethods, defaultMethods],
+							setInputError
+						);
+					}}
+					onKeyDown={(event) => {
+						if (event.code === "Space") event.preventDefault();
+					}}
+				/>
+			</Modal>
 			<div>
 				<DefaultMethodsList />
 				<Divider />
@@ -45,53 +93,12 @@ function MethodsList() {
 					/>
 					Add custom
 				</div>
-				<Modal
-					title="Custom request"
-					visibility={customMethodModalView}
-					onSubmit={() => {
-						if (isRequired(customMethodNameRef.current?.value, setInputError)) return false;
-						if (
-							isIncluded(
-								customMethodNameRef.current?.value.toUpperCase(),
-								[customMethods, defaultMethods],
-								setInputError
-							)
-						)
-							return false;
-
-						setInputError(null);
-						dispatch(addCustomMethod(customMethodNameRef.current?.value.toUpperCase() || ""));
-
-						return true;
-					}}
-					onCancel={() => true}
-					onClose={() => {
-						setInputError(null);
-						setCustomMethodModalView(false);
-					}}
-				>
-					<Input
-						name="requestName"
-						label="Enter request name: "
-						placeholder="Some text"
-						maxLength={20}
-						error={inputError}
-						innerRef={customMethodNameRef}
-						onChange={() => {
-							isRequired(customMethodNameRef.current?.value, setInputError);
-							isIncluded(
-								customMethodNameRef.current?.value.toUpperCase(),
-								[customMethods, defaultMethods],
-								setInputError
-							);
-						}}
-						onKeyDown={(event) => {
-							if (event.code === "Space") event.preventDefault();
-						}}
-					/>
-				</Modal>
-				<Divider />
-				<CustomMethodsList />
+				{customMethods.length ? (
+					<>
+						<Divider />
+						<CustomMethodsList />
+					</>
+				) : null}
 			</div>
 		</>
 	);

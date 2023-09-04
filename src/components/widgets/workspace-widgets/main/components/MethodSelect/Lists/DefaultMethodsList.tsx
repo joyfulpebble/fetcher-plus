@@ -21,13 +21,6 @@ export const DefaultMethodsList = () => {
 			key={index}
 			onClick={() => dispatch(updateMethod(element))}
 		>
-			{requestMethod === element ? (
-				<IconCheck
-					size={15}
-					stroke={2}
-					style={{ marginRight: 5 }}
-				/>
-			) : null}
 			{element}
 		</div>
 	));

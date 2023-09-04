@@ -1,3 +1,4 @@
+import { IconPlus } from "@tabler/icons-react";
 import Button from "../../../../../../../UI/Buttons/Button";
 
 interface ParamsEmptyListProps {
@@ -6,8 +7,14 @@ interface ParamsEmptyListProps {
 
 export const ParamsEmptyList = ({ openModalFunc }: ParamsEmptyListProps) => (
 	<div className="query_params_body_empty">
-		<div className="params_empty_text">This request does not have query parameters</div>
+		<div className="params_empty_text">This request does not have query parameters...</div>
 		<Button
+			icon={
+				<IconPlus
+					size={12}
+					stroke={4}
+				/>
+			}
 			buttonStyle="invisible"
 			content="Add new"
 			onClick={() => {

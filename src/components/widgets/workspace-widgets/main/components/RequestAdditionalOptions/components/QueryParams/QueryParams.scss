@@ -63,7 +63,8 @@
 		justify-content: center;
 
 		.params_empty_text {
-			opacity: 0.5;
+			letter-spacing: 0.5px;
+			color: var(--font-color-invisible);
 			margin-bottom: 8px;
 		}
 	}

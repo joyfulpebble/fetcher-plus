@@ -18,6 +18,7 @@
 	--btn-color-invisible-disabled: var(--btn-color-invisible);
 
 	--font-color-light: white;
+	--font-color-invisible: #ffffff80;
 	--font-color-dark: black;
 	--font-color-red: #e55d52;
 	--font-color-green: #81b34d;

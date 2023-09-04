@@ -5,9 +5,9 @@
 	}
 
 	border: 1px solid var(--border-color-default);
-	background-color: #272727;
-	width: 147px;
-	max-height: 250px;
+	background-color: var(--theme-dark-bg-lvl-2);
+	width: 150px;
+	max-height: 255px;
 	overflow-y: scroll;
 	user-select: none;
 }

@@ -27,19 +27,11 @@ export const CustomMethodsList = () => {
 					dispatch(updateMethod(element));
 				}}
 			>
-				{requestMethod === element && (
-					<IconCheck
-						size={15}
-						stroke={2}
-						style={{ marginRight: 5 }}
-					/>
-				)}
 				<span className="list_request_name">{element}</span>
 			</div>
 			<IconTrash
 				className="list_delete_button"
-				size={15}
-				stroke={2}
+				size={16}
 				onClick={() => {
 					dispatch(deleteCustomMethod(element));
 					dispatch(updateMethod("GET"));

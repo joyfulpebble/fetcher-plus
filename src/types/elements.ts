@@ -7,7 +7,8 @@ export namespace ElementsT {
 
 	type ButtonStylesT = "primary" | "secondary" | "danger" | "invisible";
 	export interface ButtonPropsI extends React.HTMLProps<HTMLButtonElement> {
-		content: string;
+		content?: string;
+		icon?: JSX.Element;
 		disabled?: boolean;
 		buttonStyle: ButtonStylesT;
 		// eslint-disable-next-line no-unused-vars
