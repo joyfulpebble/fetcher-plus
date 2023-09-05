@@ -16,7 +16,7 @@ export const AdditionalOptions = () => {
 				{optionsTabs.map((tab, index) => (
 					<div
 						key={index}
-						className={`additional_options_element`}
+						className={`request_additional_options_element`}
 						onClick={() => {
 							setSelectedTab(index);
 						}}
@@ -24,7 +24,7 @@ export const AdditionalOptions = () => {
 						{tab}
 						{index === selectedTab && (
 							<motion.div
-								className="additional_option_underline"
+								className="request_additional_option_underline"
 								layoutId="underline"
 							/>
 						)}

@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import requestConfigSlice from "./reducers/requestConfigSlice";
 import customRequestMethodsListSlice from "./reducers/customRequestMethodsListSlice";
 import requestQueryParamsSlice from "./reducers/requestQueryParamsSlice";
+import requestSelectedMethodSlice from "./reducers/requestSelectedMethodSlice";
 
 const persistConfig = {
 	key: "root",
@@ -14,6 +15,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
 	requestConfigReducer: requestConfigSlice.reducer,
 	requestQueryParameters: requestQueryParamsSlice.reducer,
+	requestSelctedMethod: requestSelectedMethodSlice.reducer,
 	customRequestMethodsListReducer: customRequestMethodsListSlice.reducer
 });
 const persistReduser = persistReducer(persistConfig, rootReducer);

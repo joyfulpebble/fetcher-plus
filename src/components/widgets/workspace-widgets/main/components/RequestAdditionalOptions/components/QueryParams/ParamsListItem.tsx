@@ -9,7 +9,7 @@ import requestQueryParamsSlice, {
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-import "./QueryParams.scss";
+import "./styles/ParamsListItem.scss";
 
 interface ParamsListItem {
 	parameter: QueryParameter;

@@ -1,8 +1,8 @@
-import { IconCheck, IconTrash } from "@tabler/icons-react";
+import { IconTrash } from "@tabler/icons-react";
 
 import { useAppDispatch, useAppSelector } from "../../../../../../../hooks/redux/redux";
-import requestConfigSlice from "../../../../../../../redux/reducers/requestConfigSlice";
 import customRequestMethodsListSlice from "../../../../../../../redux/reducers/customRequestMethodsListSlice";
+import requestSelectedMethodSlice from "../../../../../../../redux/reducers/requestSelectedMethodSlice";
 
 import "./Lists.scss";
 
@@ -10,10 +10,10 @@ export const CustomMethodsList = () => {
 	const dispatch = useAppDispatch();
 
 	const customMethods = useAppSelector((state) => state.customRequestMethodsListReducer);
-	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
+	const requestMethod = useAppSelector((state) => state.requestSelctedMethod);
 
 	const { deleteCustomMethod } = customRequestMethodsListSlice.actions;
-	const { updateMethod } = requestConfigSlice.actions;
+	const { updateRequestMethod } = requestSelectedMethodSlice.actions;
 
 	const list = customMethods.map((element: string) => (
 		<div
@@ -24,7 +24,7 @@ export const CustomMethodsList = () => {
 			<div
 				style={{ display: "flex", alignItems: "center", width: "100%" }}
 				onClick={() => {
-					dispatch(updateMethod(element));
+					dispatch(updateRequestMethod(element));
 				}}
 			>
 				<span className="list_request_name">{element}</span>
@@ -34,7 +34,7 @@ export const CustomMethodsList = () => {
 				size={16}
 				onClick={() => {
 					dispatch(deleteCustomMethod(element));
-					dispatch(updateMethod("GET"));
+					dispatch(updateRequestMethod("GET"));
 				}}
 			/>
 		</div>

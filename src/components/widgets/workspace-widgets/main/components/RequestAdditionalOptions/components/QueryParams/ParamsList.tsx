@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
 import requestQueryParamsSlice from "../../../../../../../../redux/reducers/requestQueryParamsSlice";
-
 import {
 	DndContext,
 	DragCancelEvent,
@@ -22,14 +21,13 @@ import { restrictToFirstScrollableAncestor, restrictToVerticalAxis } from "@dnd-
 
 import { ParamsListItem } from "./ParamsListItem";
 
-import "./QueryParams.scss";
-
 export const ParamsList = () => {
 	const dispatch = useAppDispatch();
 	const { updateParamsOrder } = requestQueryParamsSlice.actions;
 	const requestQueryParams = useAppSelector((state) => state.requestQueryParameters);
 
-	const [dragbleParams, setDragbleParams] = useState(requestQueryParams);
+	const [draggableParams, setDraggableParams] = useState(requestQueryParams);
+
 	const dragSensors = useSensors(
 		useSensor(PointerSensor),
 		useSensor(KeyboardSensor, {
@@ -40,7 +38,7 @@ export const ParamsList = () => {
 	function handleDragEnd(event: DragCancelEvent) {
 		const { active, over } = event;
 		if (active?.id !== over?.id) {
-			setDragbleParams((prev) => {
+			setDraggableParams((prev) => {
 				const activeIndex = prev.findIndex((item) => item._id === active.id);
 				const overIndex = prev.findIndex((item) => item._id === over?.id);
 				return arrayMove(prev, activeIndex, overIndex);
@@ -49,26 +47,26 @@ export const ParamsList = () => {
 	}
 
 	useEffect(() => {
-		dispatch(updateParamsOrder(dragbleParams));
-	}, [dragbleParams]);
+		dispatch(updateParamsOrder(draggableParams));
+	}, [draggableParams]);
 
 	useEffect(() => {
-		setDragbleParams(requestQueryParams);
+		setDraggableParams(requestQueryParams);
 	}, [requestQueryParams]);
 
 	return (
 		<>
 			<DndContext
 				sensors={dragSensors}
-				collisionDetection={closestCenter}
 				onDragEnd={handleDragEnd}
+				collisionDetection={closestCenter}
 				modifiers={[restrictToVerticalAxis, restrictToFirstScrollableAncestor]}
 			>
 				<SortableContext
-					items={dragbleParams.map((param) => param._id)}
+					items={draggableParams.map((param) => param._id)}
 					strategy={verticalListSortingStrategy}
 				>
-					{dragbleParams.map((parameter) => (
+					{draggableParams.map((parameter) => (
 						<ParamsListItem
 							key={parameter._id}
 							parameter={parameter}

@@ -1,17 +1,15 @@
-import { IconCheck } from "@tabler/icons-react";
-
 import { defaultRequestMethods } from "../../../../../../../tools/constants";
 
 import { useAppDispatch, useAppSelector } from "../../../../../../../hooks/redux/redux";
-import requestConfigSlice from "../../../../../../../redux/reducers/requestConfigSlice";
+import requestSelectedMethodSlice from "../../../../../../../redux/reducers/requestSelectedMethodSlice";
 
 import "./Lists.scss";
 import type { CommonT } from "../../../../../../../types/common";
 
 export const DefaultMethodsList = () => {
 	const dispatch = useAppDispatch();
-	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
-	const { updateMethod } = requestConfigSlice.actions;
+	const requestMethod = useAppSelector((state) => state.requestSelctedMethod);
+	const { updateRequestMethod } = requestSelectedMethodSlice.actions;
 
 	const list = defaultRequestMethods.map((element: CommonT.MainRequestMethods, index: number) => (
 		<div
@@ -19,7 +17,7 @@ export const DefaultMethodsList = () => {
 				requestMethod === element ? "selected" : ""
 			} ${element.toLowerCase()}`}
 			key={index}
-			onClick={() => dispatch(updateMethod(element))}
+			onClick={() => dispatch(updateRequestMethod(element))}
 		>
 			{element}
 		</div>

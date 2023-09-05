@@ -1,19 +1,21 @@
+import { useRef } from "react";
+
 import { useForm } from "../../../../../hooks/useForm";
 import { useAppSelector } from "../../../../../hooks/redux/redux";
+
+import { AdditionalOptions } from "./RequestAdditionalOptions/AdditionalOptions";
 
 import Button from "../../../../UI/Buttons/Button";
 import MethodSelect from "./MethodSelect/MethodSelect";
 import RequestInput from "./RequestInput/RequestInput";
 
 import "./RequestForm.scss";
-
 import type { APIT } from "../../../../../types/api";
-import { useRef } from "react";
-import { AdditionalOptions } from "./RequestAdditionalOptions/AdditionalOptions";
 
 function RequestForm(): JSX.Element {
 	const quieryParams = useAppSelector((state) => state.requestQueryParameters);
-	const { requestMethod, requestParams } = useAppSelector((state) => state.requestConfigReducer);
+	const { requestParams } = useAppSelector((state) => state.requestConfigReducer);
+	const requestMethod = useAppSelector((state) => state.requestSelctedMethod);
 	const { values, saveFuildValue } = useForm<APIT.RequestConfigI>({
 		initialValues: { requestMethod: "GET", requestParams: {}, requestUrl: "" }
 	});

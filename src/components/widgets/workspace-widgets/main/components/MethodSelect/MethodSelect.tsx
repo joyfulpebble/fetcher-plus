@@ -7,13 +7,8 @@ import MethodsList from "./Lists/MethodsList";
 import "./MethodSelect.scss";
 import "./Lists/Lists.scss";
 
-/** TODO:
- * - Сделать отельный redux store для выбранного метода
- * ✓ (баг - при выборе кастомного метода, иконка удаления скукоживается)
- */
-
 function MethodSelect() {
-	const { requestMethod } = useAppSelector((state) => state.requestConfigReducer);
+	const requestMethod = useAppSelector((state) => state.requestSelctedMethod);
 
 	return (
 		<>

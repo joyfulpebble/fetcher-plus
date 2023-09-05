@@ -12,12 +12,8 @@ import Tippy from "@tippyjs/react";
 
 import { v1 as uuidv1 } from "uuid";
 
-import "./QueryParams.scss";
-
-/**TODO:
- * - Поменять названия классов для параметров на нормальные
- * - Декомпозиция файла стилей
- */
+import "./styles/Params.scss";
+import "../../AdditionalOptions.scss";
 
 export const Params = () => {
 	const dispatch = useAppDispatch();
@@ -79,11 +75,11 @@ export const Params = () => {
 				</div>
 			</Modal>
 			<section className="query_params_header_wrapper">
-				<span className="additional_option_name">Query Parameters</span>
-				<div className="additional_option_controls">
+				<span className="request_additional_option_name">Query Parameters</span>
+				<div className="request_additional_option_controls">
 					<div className="add_new_param">
 						<Tippy
-							className="tippy_parameter"
+							className="tippy_query_parameter"
 							placement="top"
 							content={"Add new"}
 							animation="shift-away"
@@ -102,7 +98,7 @@ export const Params = () => {
 					</div>
 					<div className="delete_all_params">
 						<Tippy
-							className="tippy_parameter"
+							className="tippy_query_parameter"
 							placement="top"
 							content={"Clear all"}
 							animation="shift-away"
