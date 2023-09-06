@@ -56,24 +56,24 @@
 			border: solid 1px var(--border-color-default);
 			border-top: none;
 		}
-	}
 
-	&:hover .param_delete {
-		padding: 3px;
-		margin-left: 3px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		&:hover .param_delete {
+			padding: 3px;
+			margin-left: 3px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 
-		&:hover {
-			cursor: pointer;
-			background-color: var(--border-color-default);
-			border-radius: var(--border-radius-default);
-			transition: background-color ease 0.2s;
+			&:hover {
+				cursor: pointer;
+				background-color: var(--border-color-default);
+				border-radius: var(--border-radius-default);
+				transition: background-color ease 0.2s;
+			}
 		}
-	}
 
-	.param_delete {
-		display: none;
+		.param_delete {
+			display: none;
+		}
 	}
 }

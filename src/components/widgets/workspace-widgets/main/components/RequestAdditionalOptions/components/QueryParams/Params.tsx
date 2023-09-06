@@ -74,12 +74,12 @@ export const Params = () => {
 					</div>
 				</div>
 			</Modal>
-			<section className="query_params_header_wrapper">
+			<section className="request_additional_option_header_wrapper">
 				<span className="request_additional_option_name">Query Parameters</span>
 				<div className="request_additional_option_controls">
-					<div className="add_new_param">
+					<div className="add_new">
 						<Tippy
-							className="tippy_query_parameter"
+							className="base_tippy_wrapper"
 							placement="top"
 							content={"Add new"}
 							animation="shift-away"
@@ -96,9 +96,9 @@ export const Params = () => {
 							/>
 						</Tippy>
 					</div>
-					<div className="delete_all_params">
+					<div className="delete_all">
 						<Tippy
-							className="tippy_query_parameter"
+							className="base_tippy_wrapper"
 							placement="top"
 							content={"Clear all"}
 							animation="shift-away"

@@ -1,19 +1,21 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-import "./AdditionalOptions.scss";
 import { Params } from "./components/QueryParams/Params";
+import { Headers } from "./components/Headers/Headers";
+
+import "./AdditionalOptions.scss";
 
 export const AdditionalOptions = () => {
 	const [selectedTab, setSelectedTab] = useState<number>(0);
 
-	const optionsTabs = ["Parameters", "Body", "Headers", "Authorization"];
-	const optionElements = [<Params key={"params_tab"} />];
+	const optionsTabNames = ["Parameters", "Body", "Headers", "Authorization"];
+	const optionElements = [<Params key="params_tab" />, <></>, <Headers key="headers_tab" />, <></>];
 
 	return (
 		<>
-			<section className="request_additional_options_header">
-				{optionsTabs.map((tab, index) => (
+			<section className="request_additional_options_tabs">
+				{optionsTabNames.map((tab, index) => (
 					<div
 						key={index}
 						className={`request_additional_options_element`}
