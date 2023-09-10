@@ -68,7 +68,6 @@
 	&:not(.error, :focus, :disabled):hover {
 		border: 1px solid var(--border-color-default);
 		transition: border ease 0.15s;
-		// user-select: text;
 	}
 
 	&:focus {

@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
 import Modal from "../../../../../../../UI/Modal/Modal";
+import { Dropdown } from "../../../../../../../UI/Dropdown/Dropdown";
+import { useAppSelector } from "../../../../../../../../hooks/redux/redux";
 
 export const Headers = () => {
 	const [newHeaderModalView, setNewHeaderModalView] = useState(false);
+	const [selectedHeader, setSelectedHeader] = useState("");
+
+	useEffect(() => {
+		console.log(selectedHeader);
+	}, [selectedHeader]);
+
+	const queryParams = useAppSelector((state) => state.requestQueryParameters);
 
 	return (
 		<>
@@ -78,6 +87,14 @@ export const Headers = () => {
 				) : (
 					<ParamsEmptyList openModalFunc={setNewParameterModalView} />
 				)} */}
+				{selectedHeader}
+				<div style={{ width: 215, marginTop: 100 }}>
+					<Dropdown
+						data={queryParams.map((param) => param.value)}
+						selectedValue={selectedHeader}
+						setSelectedValue={setSelectedHeader}
+					/>
+				</div>
 			</section>
 		</>
 	);

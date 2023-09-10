@@ -7,7 +7,7 @@ import { Headers } from "./components/Headers/Headers";
 import "./AdditionalOptions.scss";
 
 export const AdditionalOptions = () => {
-	const [selectedTab, setSelectedTab] = useState<number>(0);
+	const [selectedTab, setSelectedTab] = useState<number>(2);
 
 	const optionsTabNames = ["Parameters", "Body", "Headers", "Authorization"];
 	const optionElements = [<Params key="params_tab" />, <></>, <Headers key="headers_tab" />, <></>];
