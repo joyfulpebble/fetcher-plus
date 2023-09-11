@@ -9,10 +9,10 @@ import "./Dropdown.scss";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
 interface DropdownProps {
+	placeholder?: string;
 	data: Array<React.ReactNode>;
 	selectedValue: string;
 	setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
-	placeholder?: string;
 }
 
 export const Dropdown = ({ data, placeholder, selectedValue, setSelectedValue }: DropdownProps) => {
@@ -22,19 +22,18 @@ export const Dropdown = ({ data, placeholder, selectedValue, setSelectedValue }:
 	const dropdownRef = useRef(null);
 	const dropdownInputRef = useRef<HTMLInputElement>(null);
 
-	const handleFilter = (event: string /*React.ChangeEvent<HTMLInputElement>*/) => {
-		const searchWord = event; //event.target.value;
+	const handleFilter = (searchWord: string): void => {
 		setSelectedValue(searchWord);
 
 		const filtered = data.filter((value) =>
 			String(value).toLowerCase().includes(searchWord.toLowerCase())
 		);
 
-		if (searchWord === "") {
-			setFilteredData(data);
-		} else {
-			setFilteredData(filtered);
-		}
+		if (!searchWord) setFilteredData(data);
+		else setFilteredData(filtered);
+
+		if (!!filtered.length) setListIsActive(true);
+		else setListIsActive(false);
 	};
 
 	useOutsideClick(dropdownRef, () => {
@@ -67,7 +66,8 @@ export const Dropdown = ({ data, placeholder, selectedValue, setSelectedValue }:
 					placeholder={placeholder}
 					value={selectedValue}
 					onFocus={() => {
-						setListIsActive(true);
+						if (!!filteredData.length) setListIsActive(true);
+						else setListIsActive(false);
 					}}
 					onChange={() => {
 						setSelectedValue(dropdownInputRef.current!.value);
@@ -78,7 +78,7 @@ export const Dropdown = ({ data, placeholder, selectedValue, setSelectedValue }:
 				{filteredData.map((element) => (
 					<div
 						key={uuidv1()}
-						className={`dropdown_list_item `}
+						className={`dropdown_list_item`}
 						onClick={() => {
 							setSelectedValue(String(element));
 							setListIsActive(false);

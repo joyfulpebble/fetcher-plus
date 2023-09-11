@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
@@ -9,10 +9,6 @@ import { useAppSelector } from "../../../../../../../../hooks/redux/redux";
 export const Headers = () => {
 	const [newHeaderModalView, setNewHeaderModalView] = useState(false);
 	const [selectedHeader, setSelectedHeader] = useState("");
-
-	useEffect(() => {
-		console.log(selectedHeader);
-	}, [selectedHeader]);
 
 	const queryParams = useAppSelector((state) => state.requestQueryParameters);
 
