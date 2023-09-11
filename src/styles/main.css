@@ -71,12 +71,10 @@ body {
 
 *::-webkit-scrollbar {
 	width: 10px;
-	height: 5px;
+	height: 10px;
 }
 *::-webkit-scrollbar-track {
-	padding: 1px;
 	background-color: #00000000;
-	/* background-color: var(--theme-dark-bg-lvl-3); */
 	border-radius: var(--border-radius-default);
 }
 *::-webkit-scrollbar-thumb {

@@ -21,14 +21,12 @@ export const Headers = () => {
 				onSubmit={() => true}
 				onClose={() => setNewHeaderModalView(false)}
 			>
-				<div
-					style={{
-						display: "flex",
-						flexDirection: "row",
-						justifyContent: "space-between"
-					}}
-				>
-					Text
+				<div style={{ height: 170 }}>
+					<Dropdown
+						data={queryParams.map((param) => param.value)}
+						selectedValue={selectedHeader}
+						setSelectedValue={setSelectedHeader}
+					/>
 				</div>
 			</Modal>
 			<section className="request_additional_option_header_wrapper">
@@ -84,13 +82,6 @@ export const Headers = () => {
 					<ParamsEmptyList openModalFunc={setNewParameterModalView} />
 				)} */}
 				{selectedHeader}
-				<div style={{ width: 215, marginTop: 100 }}>
-					<Dropdown
-						data={queryParams.map((param) => param.value)}
-						selectedValue={selectedHeader}
-						setSelectedValue={setSelectedHeader}
-					/>
-				</div>
 			</section>
 		</>
 	);

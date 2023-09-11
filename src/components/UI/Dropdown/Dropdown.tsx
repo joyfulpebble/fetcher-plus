@@ -75,18 +75,21 @@ export const Dropdown = ({ data, placeholder, selectedValue, setSelectedValue }:
 				></input>
 			</div>
 			<div className={list_classnames}>
-				{filteredData.map((element) => (
-					<div
-						key={uuidv1()}
-						className={`dropdown_list_item`}
-						onClick={() => {
-							setSelectedValue(String(element));
-							setListIsActive(false);
-						}}
-					>
-						{element}
-					</div>
-				))}
+				{filteredData.map(
+					(element) =>
+						!!element && (
+							<div
+								key={uuidv1()}
+								className={`dropdown_list_item`}
+								onClick={() => {
+									setSelectedValue(String(element));
+									setListIsActive(false);
+								}}
+							>
+								{element}
+							</div>
+						)
+				)}
 			</div>
 		</div>
 	);

@@ -1,7 +1,8 @@
 .dropdown_wrapper {
 	width: 100%;
-	height: fit-content;
+	height: 100%;
 	min-width: 215px;
+	max-height: 171px;
 
 	.dropdown_input_wrapper {
 		display: flex;
@@ -21,6 +22,9 @@
 	}
 
 	.dropdown_input {
+		font-weight: 400;
+		font-size: var(--font-size-paragraph);
+		line-height: var(--font-line-height);
 		width: 100%;
 		border: none;
 		outline: none;
@@ -43,12 +47,18 @@
 	}
 
 	.dropdown_list_wrapper {
+		user-select: none;
+		font-weight: 400;
+		font-size: var(--font-size-paragraph);
+		line-height: var(--font-line-height);
 		transition: all 0.5s ease-in-out;
 		background-color: var(--theme-dark-bg-lvl-3);
 		border: 1px solid var(--border-color-default);
 		border-top: none;
 		border-bottom-left-radius: var(--border-radius-default);
 		border-bottom-right-radius: var(--border-radius-default);
+		max-height: 137px;
+		overflow-y: auto;
 
 		.dropdown_list_item {
 			height: 34px;
