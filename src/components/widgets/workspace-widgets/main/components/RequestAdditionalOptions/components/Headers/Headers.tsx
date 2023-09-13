@@ -1,13 +1,14 @@
 import { useState } from "react";
 
+import { defaultRequestHeaders } from "../../../../../../../../tools/constants";
+
 import { IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
 import Modal from "../../../../../../../UI/Modal/Modal";
 import { Dropdown } from "../../../../../../../UI/Dropdown/Dropdown";
-import { useAppSelector } from "../../../../../../../../hooks/redux/redux";
 
 /** TODO:
- * - Список дефолтных заголовков
+ * ✓ Список дефолтных заголовков
  * - Стор для выбранных заголовков
  * - Стор для кастомных заголовков
  * * - Добавление
@@ -27,8 +28,6 @@ export const Headers = () => {
 	const [newHeaderModalView, setNewHeaderModalView] = useState(false);
 	const [selectedHeader, setSelectedHeader] = useState("");
 
-	const queryParams = useAppSelector((state) => state.requestQueryParameters);
-
 	return (
 		<>
 			<Modal
@@ -40,7 +39,7 @@ export const Headers = () => {
 			>
 				<div style={{ width: 300 }}>
 					<Dropdown
-						data={queryParams.map((param) => param.value)}
+						data={defaultRequestHeaders}
 						selectedValue={selectedHeader}
 						setSelectedValue={setSelectedHeader}
 					/>
