@@ -6,6 +6,23 @@ import Modal from "../../../../../../../UI/Modal/Modal";
 import { Dropdown } from "../../../../../../../UI/Dropdown/Dropdown";
 import { useAppSelector } from "../../../../../../../../hooks/redux/redux";
 
+/** TODO:
+ * - Список дефолтных заголовков
+ * - Стор для выбранных заголовков
+ * - Стор для кастомных заголовков
+ * * - Добавление
+ * * - Удаление (по выбору / все стразу)
+ * * - Выключение
+ * * - Перетаскивание
+ * * - Инлайн изменение значения и ключа (с подсказками для ключейзаголовков)
+ * - Скролл списка заголовков
+ ***
+ * ✓ Пофиксить селект (открывается при открытии модалки (так быть не должно))
+ * - Реализовать поиск в селекте
+ ***
+ * - Пофиксить отступы в меню выбора метода
+ */
+
 export const Headers = () => {
 	const [newHeaderModalView, setNewHeaderModalView] = useState(false);
 	const [selectedHeader, setSelectedHeader] = useState("");
@@ -15,13 +32,13 @@ export const Headers = () => {
 	return (
 		<>
 			<Modal
-				title="New header"
+				title="Select header"
 				visibility={newHeaderModalView}
 				onCancel={() => true}
 				onSubmit={() => true}
 				onClose={() => setNewHeaderModalView(false)}
 			>
-				<div style={{ height: 170 }}>
+				<div style={{ width: 300 }}>
 					<Dropdown
 						data={queryParams.map((param) => param.value)}
 						selectedValue={selectedHeader}
@@ -71,18 +88,7 @@ export const Headers = () => {
 					</div>
 				</div>
 			</section>
-			<section
-			// className={`${
-			// 	queryParams.length ? "query_params_body_wrapper" : "query_params_body_wrapper_empty"
-			// }`}
-			>
-				{/* {queryParams.length ? (
-					<ParamsList />
-				) : (
-					<ParamsEmptyList openModalFunc={setNewParameterModalView} />
-				)} */}
-				{selectedHeader}
-			</section>
+			<section>{selectedHeader}</section>
 		</>
 	);
 };

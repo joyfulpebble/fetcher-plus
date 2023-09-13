@@ -34,7 +34,7 @@
 	justify-content: space-between;
 }
 .modal_body {
-	overflow-y: scroll;
+	overflow-y: auto;
 	padding: var(--padding-16);
 }
 .modal_footer {

@@ -1,9 +1,12 @@
 .dropdown_wrapper {
-	width: 100%;
+	width: inherit;
 	height: 100%;
 	min-width: 215px;
 	max-height: 171px;
 
+	.search_disabled {
+		cursor: pointer;
+	}
 	.dropdown_input_wrapper {
 		display: flex;
 		flex-direction: row;
@@ -12,29 +15,35 @@
 		background-color: var(--theme-dark-bg-lvl-3);
 		border: 1px solid var(--border-color-default);
 		border-radius: var(--border-radius-default);
-	}
 
-	.dropdown_search_icon {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin-right: 5px;
-	}
+		.dropdown_input {
+			font-weight: 400;
+			font-size: var(--font-size-paragraph);
+			line-height: var(--font-line-height);
+			width: 100%;
+			border: none;
+			outline: none;
+			font-weight: 400;
+			font-family: "Inter";
+			line-height: var(--font-line-height);
+			font-size: var(--font-size-paragraph);
+			letter-spacing: var(--font-letter-spacing-1);
+			color: var(--font-color-white);
+			background-color: var(--theme-dark-bg-lvl-3);
+		}
 
-	.dropdown_input {
-		font-weight: 400;
-		font-size: var(--font-size-paragraph);
-		line-height: var(--font-line-height);
-		width: 100%;
-		border: none;
-		outline: none;
-		font-weight: 400;
-		font-family: "Inter";
-		line-height: var(--font-line-height);
-		font-size: var(--font-size-paragraph);
-		letter-spacing: var(--font-letter-spacing-1);
-		color: var(--font-color-white);
-		background-color: var(--theme-dark-bg-lvl-3);
+		.search_icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 5px;
+		}
+
+		.chevron_icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 	}
 
 	.dropdown_list_active {
@@ -47,6 +56,11 @@
 	}
 
 	.dropdown_list_wrapper {
+		position: absolute;
+		width: inherit;
+		min-width: 215px;
+		max-height: 137px;
+		overflow-y: auto;
 		user-select: none;
 		font-weight: 400;
 		font-size: var(--font-size-paragraph);
@@ -57,8 +71,6 @@
 		border-top: none;
 		border-bottom-left-radius: var(--border-radius-default);
 		border-bottom-right-radius: var(--border-radius-default);
-		max-height: 137px;
-		overflow-y: auto;
 
 		.dropdown_list_item {
 			height: 34px;
@@ -66,6 +78,7 @@
 			display: flex;
 			align-items: center;
 			color: #cfcfcf;
+			cursor: pointer;
 
 			&:hover {
 				background-color: var(--border-color-default);

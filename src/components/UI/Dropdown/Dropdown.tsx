@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useClassnames } from "../../../hooks/useClassnames";
 
-import { IconSearch } from "@tabler/icons-react";
+import { IconChevronDown, IconChevronUp, IconSearch } from "@tabler/icons-react";
 
 import { v1 as uuidv1 } from "uuid";
 
@@ -10,45 +10,37 @@ import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
 interface DropdownProps {
 	placeholder?: string;
+	disableSearch?: boolean;
 	data: Array<React.ReactNode>;
 	selectedValue: string;
 	setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const Dropdown = ({ data, placeholder, selectedValue, setSelectedValue }: DropdownProps) => {
+export const Dropdown = ({
+	data,
+	placeholder,
+	disableSearch = true,
+	selectedValue,
+	setSelectedValue
+}: DropdownProps) => {
 	const [listIsActive, setListIsActive] = useState(false);
-	const [filteredData, setFilteredData] = useState<React.ReactNode[]>(data);
 
 	const dropdownRef = useRef(null);
 	const dropdownInputRef = useRef<HTMLInputElement>(null);
-
-	const handleFilter = (searchWord: string): void => {
-		setSelectedValue(searchWord);
-
-		const filtered = data.filter((value) =>
-			String(value).toLowerCase().includes(searchWord.toLowerCase())
-		);
-
-		if (!searchWord) setFilteredData(data);
-		else setFilteredData(filtered);
-
-		if (!!filtered.length) setListIsActive(true);
-		else setListIsActive(false);
-	};
 
 	useOutsideClick(dropdownRef, () => {
 		setListIsActive(false);
 	});
 
-	useEffect(() => {
-		handleFilter(dropdownInputRef.current!.value);
-	}, [selectedValue]);
-
-	const list_classnames = useClassnames("dropdown_list_wrapper", {
+	const list_wrapper_classnames = useClassnames("dropdown_list_wrapper", {
 		dropdown_list_disabled: !listIsActive
 	});
-	const dropdown_classnames = useClassnames("dropdown_input_wrapper", {
-		dropdown_list_active: listIsActive
+	const dropdown_input_wrapper_classnames = useClassnames("dropdown_input_wrapper", {
+		dropdown_list_active: listIsActive,
+		search_disabled: disableSearch
+	});
+	const dropdown_input_classnames = useClassnames("dropdown_input", {
+		search_disabled: disableSearch
 	});
 
 	return (
@@ -56,26 +48,33 @@ export const Dropdown = ({ data, placeholder, selectedValue, setSelectedValue }:
 			className="dropdown_wrapper"
 			ref={dropdownRef}
 		>
-			<div className={dropdown_classnames}>
-				<div className="dropdown_search_icon">
-					<IconSearch size={16} />
-				</div>
+			<div
+				className={dropdown_input_wrapper_classnames}
+				onClick={() => {
+					setListIsActive(!listIsActive);
+					dropdownInputRef.current?.focus();
+				}}
+			>
+				{!disableSearch && (
+					<div className="search_icon">
+						<IconSearch size={16} />
+					</div>
+				)}
 				<input
-					className="dropdown_input"
+					className={dropdown_input_classnames}
 					ref={dropdownInputRef}
 					placeholder={placeholder}
 					value={selectedValue}
-					onFocus={() => {
-						if (!!filteredData.length) setListIsActive(true);
-						else setListIsActive(false);
-					}}
-					onChange={() => {
-						setSelectedValue(dropdownInputRef.current!.value);
-					}}
+					readOnly={disableSearch}
 				></input>
+				{disableSearch && (
+					<div className="chevron_icon">
+						{listIsActive ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
+					</div>
+				)}
 			</div>
-			<div className={list_classnames}>
-				{filteredData.map(
+			<div className={list_wrapper_classnames}>
+				{data.map(
 					(element) =>
 						!!element && (
 							<div
