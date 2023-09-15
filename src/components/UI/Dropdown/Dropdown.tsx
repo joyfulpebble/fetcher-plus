@@ -10,6 +10,7 @@ import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
 interface DropdownProps {
 	placeholder?: string;
+	title?: string;
 	disableSearch?: boolean;
 	data: Array<React.ReactNode>;
 	selectedValue: string;
@@ -19,6 +20,7 @@ interface DropdownProps {
 export const Dropdown = ({
 	data,
 	placeholder,
+	title,
 	disableSearch = true,
 	selectedValue,
 	setSelectedValue
@@ -48,6 +50,7 @@ export const Dropdown = ({
 			className="dropdown_wrapper"
 			ref={dropdownRef}
 		>
+			<span className="dropdown_title">{title}</span>
 			<div
 				className={dropdown_input_wrapper_classnames}
 				onClick={() => {

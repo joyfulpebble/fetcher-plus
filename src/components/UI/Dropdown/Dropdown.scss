@@ -1,12 +1,21 @@
 .dropdown_wrapper {
 	width: inherit;
 	height: 100%;
-	min-width: 215px;
+	min-width: 200px;
 	max-height: 171px;
 
 	.search_disabled {
 		cursor: pointer;
 	}
+
+	.dropdown_title {
+		margin-left: 1px;
+		font-family: "Inter";
+		font-weight: 400;
+		font-size: var(--font-size-paragraph);
+		line-height: var(--font-line-height);
+	}
+
 	.dropdown_input_wrapper {
 		display: flex;
 		flex-direction: row;
@@ -58,7 +67,7 @@
 	.dropdown_list_wrapper {
 		position: absolute;
 		width: inherit;
-		min-width: 215px;
+		min-width: 200px;
 		max-height: 137px;
 		overflow-y: auto;
 		user-select: none;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import { useAppDispatch } from "../../../../../../../../hooks/redux/redux";
 import requestHeadersSlice from "../../../../../../../../redux/reducers/requestHeadersSlice";
@@ -13,8 +13,11 @@ import { Dropdown } from "../../../../../../../UI/Dropdown/Dropdown";
 
 import { v1 as uuidv1 } from "uuid";
 import "./styles/Headers.scss";
+import Input from "../../../../../../../UI/Input/Input";
+import Divider from "../../../../../../../UI/Divider/Divider";
 
 /** TODO:
+ * - Переименовать классы стилей
  * ✓ Список дефолтных заголовков
  * ✓ Стор для кастомных заголовков
  * * ✓ Добавление
@@ -36,6 +39,10 @@ export const Headers = () => {
 	const [newHeaderModalView, setNewHeaderModalView] = useState(false);
 	const [selectedHeader, setSelectedHeader] = useState("");
 
+	const defaultHeaderValueRef = useRef<HTMLInputElement>(null);
+	const customHeaderNameRef = useRef<HTMLInputElement>(null);
+	const customHeaderValueRef = useRef<HTMLInputElement>(null);
+
 	const dispatch = useAppDispatch();
 	const { addHeader, deleteAllHeaders } = requestHeadersSlice.actions;
 
@@ -50,8 +57,10 @@ export const Headers = () => {
 						addHeader({
 							_id: uuidv1(),
 							isUsed: true,
-							name: selectedHeader,
-							value: "value"
+							name: selectedHeader || String(customHeaderNameRef.current?.value),
+							value:
+								String(defaultHeaderValueRef.current?.value) ||
+								String(customHeaderValueRef.current?.value)
 						})
 					);
 
@@ -59,13 +68,59 @@ export const Headers = () => {
 				}}
 				onClose={() => setNewHeaderModalView(false)}
 			>
-				<div style={{ width: 300 }}>
-					<Dropdown
-						placeholder="Select header"
-						data={defaultRequestHeaders}
-						selectedValue={selectedHeader}
-						setSelectedValue={setSelectedHeader}
-					/>
+				<div
+					style={{
+						width: "100%",
+						display: "flex",
+						flexDirection: "row",
+						alignItems: "end",
+						justifyContent: "space-between"
+					}}
+				>
+					<div style={{ width: 200 }}>
+						<Dropdown
+							title="Select from the existing ones"
+							placeholder="Header"
+							data={defaultRequestHeaders}
+							selectedValue={selectedHeader}
+							setSelectedValue={setSelectedHeader}
+						/>
+					</div>
+					<div>
+						<Input
+							label="Enter header value"
+							placeholder="Header value"
+							innerRef={defaultHeaderValueRef}
+						/>
+					</div>
+				</div>
+				<Divider
+					marginTop={20}
+					marginBottom={20}
+				/>
+				<div
+					style={{
+						width: "100%",
+						display: "flex",
+						flexDirection: "row",
+						alignItems: "end",
+						justifyContent: "space-between"
+					}}
+				>
+					<div>
+						<Input
+							label="Enter header custom name"
+							placeholder="Header name"
+							innerRef={customHeaderNameRef}
+						/>
+					</div>
+					<div>
+						<Input
+							label="Enter header value"
+							placeholder="Header value"
+							innerRef={customHeaderValueRef}
+						/>
+					</div>
 				</div>
 			</Modal>
 			<section className="request_additional_option_header_wrapper">

@@ -13,9 +13,7 @@
 	min-width: 200px;
 	padding: var(--padding-8);
 	background-color: var(--theme-dark-bg-lvl-3);
-	border-width: var(--border-size-default);
-	border-style: solid;
-	border-color: rgb(255, 255, 255, 0);
+	border: 1px solid var(--border-color-default);
 	border-radius: var(--border-radius-default);
 	transition: border ease 0.2s;
 	outline: none;
@@ -25,11 +23,6 @@
 	font-size: var(--font-size-paragraph);
 	line-height: var(--font-line-height);
 	letter-spacing: var(--font-letter-spacing-1);
-
-	&:not(.error, :focus, :disabled):hover {
-		border: 1px solid var(--border-color-default);
-		transition: border ease 0.15s;
-	}
 
 	&:focus {
 		border: 1px solid var(--btn-color-default);
