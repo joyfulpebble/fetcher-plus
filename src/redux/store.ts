@@ -6,6 +6,7 @@ import requestConfigSlice from "./reducers/requestConfigSlice";
 import customRequestMethodsListSlice from "./reducers/customRequestMethodsListSlice";
 import requestQueryParamsSlice from "./reducers/requestQueryParamsSlice";
 import requestSelectedMethodSlice from "./reducers/requestSelectedMethodSlice";
+import requestHeadersSlice from "./reducers/requestHeadersSlice";
 
 const persistConfig = {
 	key: "root",
@@ -14,6 +15,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
 	requestConfigReducer: requestConfigSlice.reducer,
+	requestHeadersSlice: requestHeadersSlice.reducer,
 	requestQueryParameters: requestQueryParamsSlice.reducer,
 	requestSelctedMethod: requestSelectedMethodSlice.reducer,
 	customRequestMethodsListReducer: customRequestMethodsListSlice.reducer

@@ -1,11 +1,18 @@
 import { useState } from "react";
 
+import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
+import requestHeadersSlice from "../../../../../../../../redux/reducers/requestHeadersSlice";
+
 import { defaultRequestHeaders } from "../../../../../../../../tools/constants";
 
 import { IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
 import Modal from "../../../../../../../UI/Modal/Modal";
 import { Dropdown } from "../../../../../../../UI/Dropdown/Dropdown";
+
+import { v1 as uuidv1 } from "uuid";
+import "./styles/Headers.scss";
+import { HeadersListItem } from "./HeadersListItem";
 
 /** TODO:
  * ✓ Список дефолтных заголовков
@@ -28,13 +35,28 @@ export const Headers = () => {
 	const [newHeaderModalView, setNewHeaderModalView] = useState(false);
 	const [selectedHeader, setSelectedHeader] = useState("");
 
+	const dispatch = useAppDispatch();
+	const requestHeaders = useAppSelector((state) => state.requestHeadersSlice);
+	const { addHeader, deleteAllHeaders } = requestHeadersSlice.actions;
+
 	return (
 		<>
 			<Modal
 				title="Select header"
 				visibility={newHeaderModalView}
 				onCancel={() => true}
-				onSubmit={() => true}
+				onSubmit={() => {
+					dispatch(
+						addHeader({
+							_id: uuidv1(),
+							isUsed: true,
+							key: selectedHeader,
+							value: "value"
+						})
+					);
+
+					return true;
+				}}
 				onClose={() => setNewHeaderModalView(false)}
 			>
 				<div style={{ width: 300 }}>
@@ -81,13 +103,22 @@ export const Headers = () => {
 							<IconTrash
 								size={16}
 								stroke={2}
-								onClick={() => {}}
+								onClick={() => {
+									dispatch(deleteAllHeaders());
+								}}
 							/>
 						</Tippy>
 					</div>
 				</div>
 			</section>
-			<section>{selectedHeader}</section>
+			<section className="headers_body_wrapper">
+				{requestHeaders.map((header) => (
+					<HeadersListItem
+						key={header._id}
+						header={header}
+					/>
+				))}
+			</section>
 		</>
 	);
 };
