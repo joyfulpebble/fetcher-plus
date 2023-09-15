@@ -17,7 +17,8 @@ interface HeadersListItem {
 
 export const HeadersListItem = ({ header }: HeadersListItem) => {
 	const dispatch = useAppDispatch();
-	const { addHeader } = requestHeadersSlice.actions;
+	const { deleteHeader, updateHeaderState, updateHeaderName, updateHeaderValue } =
+		requestHeadersSlice.actions;
 
 	// const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
 	// 	id: parameter._id
@@ -47,14 +48,14 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 						<IconCheckbox
 							size={16}
 							onClick={() => {
-								// dispatch(updateParameterState(header._id));
+								dispatch(updateHeaderState(header._id));
 							}}
 						/>
 					) : (
 						<IconSquare
 							size={16}
 							onClick={() => {
-								// dispatch(updateParameterState(header._id));
+								dispatch(updateHeaderState(header._id));
 							}}
 						/>
 					)}
@@ -63,34 +64,32 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 			<section className="psrams_key_val">
 				<div className="params_key">
 					<Input
-						name={`parameter_key=${header.key}`}
-						placeholder="Parameter key"
+						name={`header_name=${header.name}`}
+						placeholder="Header name"
 						inputStyle="invisible"
 						onChange={(e) => {
-							// dispatch(
-							// 	updateParameter({
-							// 		parameterID: header._id,
-							// 		updateType: "key",
-							// 		value: e.target.value
-							// 	})
-							// );
+							dispatch(
+								updateHeaderName({
+									parameterID: header._id,
+									newName: e.target.value
+								})
+							);
 						}}
-						defaultValue={header.key}
+						defaultValue={header.name}
 					/>
 				</div>
 				<div className="params_val">
 					<Input
-						name={`parameter_value=${header.value}`}
-						placeholder="Parameter value"
+						name={`header_value=${header.value}`}
+						placeholder="Header value"
 						inputStyle="invisible"
 						onChange={(e) => {
-							// dispatch(
-							// 	updateParameter({
-							// 		parameterID: header._id,
-							// 		updateType: "value",
-							// 		value: e.target.value
-							// 	})
-							// );
+							dispatch(
+								updateHeaderValue({
+									parameterID: header._id,
+									newValue: e.target.value
+								})
+							);
 						}}
 						defaultValue={header.value}
 					/>
@@ -98,7 +97,7 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 						<IconTrash
 							size={16}
 							onClick={() => {
-								// dispatch(deleteParameter(header._id));
+								dispatch(deleteHeader(header._id));
 							}}
 						/>
 					</div>

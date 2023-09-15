@@ -14,8 +14,11 @@ import type { APIT } from "../../../../../types/api";
 
 function RequestForm(): JSX.Element {
 	const quieryParams = useAppSelector((state) => state.requestQueryParameters);
-	const { requestParams } = useAppSelector((state) => state.requestConfigReducer);
+	const requestHeaders = useAppSelector((state) => state.requestHeadersSlice);
 	const requestMethod = useAppSelector((state) => state.requestSelctedMethod);
+
+	const { requestParams } = useAppSelector((state) => state.requestConfigReducer);
+
 	const { values, saveFuildValue } = useForm<APIT.RequestConfigI>({
 		initialValues: { requestMethod: "GET", requestParams: {}, requestUrl: "" }
 	});
@@ -43,9 +46,12 @@ function RequestForm(): JSX.Element {
 							saveFuildValue("requestMethod", requestMethod);
 							saveFuildValue("requestParams", requestParams);
 
-							console.log(requestMethod);
-							console.log(values.current.requestUrl);
+							console.log(">selected request method: " + requestMethod);
+							console.log(">request url: " + values.current.requestUrl);
+							console.log(">request params: ");
 							console.table(quieryParams);
+							console.log(">request headers: ");
+							console.table(requestHeaders);
 						}}
 					/>
 				</section>
