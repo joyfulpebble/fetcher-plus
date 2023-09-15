@@ -6,8 +6,8 @@ import requestHeadersSlice, {
 	type Header
 } from "../../../../../../../../redux/reducers/requestHeadersSlice";
 
-// import { useSortable } from "@dnd-kit/sortable";
-// import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 import "../QueryParams/styles/ParamsListItem.scss";
 
@@ -20,18 +20,18 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 	const { deleteHeader, updateHeaderState, updateHeaderName, updateHeaderValue } =
 		requestHeadersSlice.actions;
 
-	// const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-	// 	id: parameter._id
-	// });
-	// const styleOnDrag = {
-	// 	transform: CSS.Transform.toString(transform),
-	// 	transition
-	// };
+	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+		id: header._id
+	});
+	const styleOnDrag = {
+		transform: CSS.Transform.toString(transform),
+		transition
+	};
 
 	return (
 		<section
-			// ref={setNodeRef}
-			// style={styleOnDrag}
+			ref={setNodeRef}
+			style={styleOnDrag}
 			className="query_params_item"
 		>
 			<section className="param_control">
@@ -39,8 +39,8 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 					<IconGripVertical
 						style={{ outline: "none" }}
 						size={16}
-						// {...attributes}
-						// {...listeners}
+						{...attributes}
+						{...listeners}
 					/>
 				</div>
 				<div className="param_select">

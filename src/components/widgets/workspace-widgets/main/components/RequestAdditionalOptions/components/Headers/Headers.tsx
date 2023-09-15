@@ -1,10 +1,11 @@
 import { useState } from "react";
 
-import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
+import { useAppDispatch } from "../../../../../../../../hooks/redux/redux";
 import requestHeadersSlice from "../../../../../../../../redux/reducers/requestHeadersSlice";
 
 import { defaultRequestHeaders } from "../../../../../../../../tools/constants";
 
+import { HeadersList } from "./HeadersList";
 import { IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
 import Modal from "../../../../../../../UI/Modal/Modal";
@@ -12,7 +13,6 @@ import { Dropdown } from "../../../../../../../UI/Dropdown/Dropdown";
 
 import { v1 as uuidv1 } from "uuid";
 import "./styles/Headers.scss";
-import { HeadersListItem } from "./HeadersListItem";
 
 /** TODO:
  * ✓ Список дефолтных заголовков
@@ -20,11 +20,13 @@ import { HeadersListItem } from "./HeadersListItem";
  * * ✓ Добавление
  * * ✓ Удаление (по выбору / все стразу)
  * * ✓ Выключение
- * * - Перетаскивание
- * * - Инлайн изменение значения и ключа (с подсказками для ключейзаголовков)
+ * * ✓ Перетаскивание
+ * * ✓ Инлайн изменение значения и ключа
+ * * * - Подсказки для имен заголовков
  * ✓ Скролл списка заголовков
  ***
  * ✓ Пофиксить селект (открывается при открытии модалки (так быть не должно))
+ * - Пофиксить селект (выбранное в предыдуший раз значение остается при новом открытии модалки)
  * - Реализовать поиск в селекте
  ***
  * - Пофиксить отступы в меню выбора метода
@@ -35,7 +37,6 @@ export const Headers = () => {
 	const [selectedHeader, setSelectedHeader] = useState("");
 
 	const dispatch = useAppDispatch();
-	const requestHeaders = useAppSelector((state) => state.requestHeadersSlice);
 	const { addHeader, deleteAllHeaders } = requestHeadersSlice.actions;
 
 	return (
@@ -60,6 +61,7 @@ export const Headers = () => {
 			>
 				<div style={{ width: 300 }}>
 					<Dropdown
+						placeholder="Select header"
 						data={defaultRequestHeaders}
 						selectedValue={selectedHeader}
 						setSelectedValue={setSelectedHeader}
@@ -111,12 +113,7 @@ export const Headers = () => {
 				</div>
 			</section>
 			<section className="headers_body_wrapper">
-				{requestHeaders.map((header) => (
-					<HeadersListItem
-						key={header._id}
-						header={header}
-					/>
-				))}
+				<HeadersList />
 			</section>
 		</>
 	);

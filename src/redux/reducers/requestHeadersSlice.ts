@@ -32,7 +32,7 @@ export const requestHeadersSlice = createSlice({
 	initialState,
 	reducers: {
 		deleteAllHeaders: () => [],
-		// updateHeadersOrder: (state, action: PayloadAction<HeadersStore>) => (state = action.payload)
+		updateHeadersOrder: (state, action: PayloadAction<HeadersStore>) => (state = action.payload),
 		addHeader: (state, action: PayloadAction<Header>) => [...state, action.payload],
 		deleteHeader: (state, action: PayloadAction<HeaderID>) =>
 			[...state].filter((header: Header) => header._id !== action.payload),
