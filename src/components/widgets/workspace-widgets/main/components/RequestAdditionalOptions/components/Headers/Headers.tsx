@@ -29,7 +29,8 @@ import Divider from "../../../../../../../UI/Divider/Divider";
  * ✓ Скролл списка заголовков
  ***
  * ✓ Пофиксить селект (открывается при открытии модалки (так быть не должно))
- * - Пофиксить селект (выбранное в предыдуший раз значение остается при новом открытии модалки)
+ * ✓ Пофиксить селект (выбранное в предыдуший раз значение остается при новом открытии модалки)
+ * - Пофиксить нижниу уголки селекта
  * - Реализовать поиск в селекте
  ***
  * - Пофиксить отступы в меню выбора метода
@@ -77,15 +78,15 @@ export const Headers = () => {
 						justifyContent: "space-between"
 					}}
 				>
-					<div style={{ width: 200 }}>
-						<Dropdown
-							title="Select from the existing ones"
-							placeholder="Header"
-							data={defaultRequestHeaders}
-							selectedValue={selectedHeader}
-							setSelectedValue={setSelectedHeader}
-						/>
-					</div>
+					<Dropdown
+						title="Select from the existing ones"
+						placeholder="Header"
+						data={defaultRequestHeaders}
+						selectedValue={selectedHeader}
+						setSelectedValue={setSelectedHeader}
+						disableSearch={false}
+						styles={{ width: 200, maxHeight: 98 }}
+					/>
 					<div>
 						<Input
 							label="Enter header value"
