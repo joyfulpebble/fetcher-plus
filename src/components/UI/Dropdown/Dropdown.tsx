@@ -33,7 +33,7 @@ export const Dropdown = ({
 	setSelectedValue
 }: DropdownProps) => {
 	const [listIsActive, setListIsActive] = useState(false);
-	const [filteredData, setFilteredData] = useState<Array<any> | null>(data);
+	const [filteredData, setFilteredData] = useState<Array<any>>(data);
 
 	const dropdownRef = useRef(null);
 	const dropdownInputRef = useRef<HTMLInputElement>(null);
@@ -45,10 +45,9 @@ export const Dropdown = ({
 
 		if (result.length === 0) {
 			setListIsActive(false);
-			setFilteredData(null);
 		} else {
-			setListIsActive(true);
 			setFilteredData(result);
+			setListIsActive(true);
 		}
 	};
 
@@ -58,32 +57,28 @@ export const Dropdown = ({
 		},
 		[]
 	);
+
 	useOutsideClick(dropdownRef, () => {
 		setListIsActive(false);
 	});
 
-	const list_wrapper_classnames = useClassnames("dropdown_list_wrapper", {
-		dropdown_list_disabled: !listIsActive
-	});
-	const dropdown_input_wrapper_classnames = useClassnames("dropdown_input_wrapper", {
-		search_disabled: disableSearch,
-		active: listIsActive
-	});
 	const dropdown_input_classnames = useClassnames("dropdown_input", {
 		search_disabled: disableSearch
+	});
+	const dropdown_wrapper_classnames = useClassnames("dropdown_wrapper", {
+		list_disabled: !listIsActive
 	});
 
 	return (
 		<div
-			className="dropdown_wrapper"
+			className={dropdown_wrapper_classnames}
 			ref={dropdownRef}
 			style={styles}
 		>
 			<span className="dropdown_title">{title}</span>
 			<div
-				className={dropdown_input_wrapper_classnames}
+				className="dropdown_input_wrapper"
 				onClick={() => {
-					setListIsActive(!listIsActive);
 					dropdownInputRef.current?.focus();
 				}}
 			>
@@ -98,14 +93,23 @@ export const Dropdown = ({
 					placeholder={placeholder}
 					value={selectedValue}
 					readOnly={disableSearch}
-					onClick={(event) => {
-						if (event.currentTarget.value === undefined) {
-							setListIsActive(false);
-						} else setListIsActive(true);
-					}}
 					onChange={(event) => {
 						setSelectedValue(event.target.value);
 						search(event.target.value);
+					}}
+					onFocus={(e) => {
+						if (!e.currentTarget.value) {
+							if (
+								filteredData.length === 0 /*
+								? !String(data).toLowerCase().includes(e.currentTarget.value.toLowerCase())
+								*/
+							) {
+								setListIsActive(false);
+							} else setListIsActive(true);
+						} else {
+							search(e.currentTarget.value);
+							setListIsActive(true);
+						}
 					}}
 				></input>
 				{disableSearch && (
@@ -116,7 +120,7 @@ export const Dropdown = ({
 			</div>
 			{filteredData && (
 				<div
-					className={list_wrapper_classnames}
+					className="dropdown_list_wrapper"
 					style={styles}
 				>
 					{filteredData.map(

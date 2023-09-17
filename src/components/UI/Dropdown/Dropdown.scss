@@ -41,10 +41,6 @@
 			color: var(--font-color-white);
 			background-color: var(--theme-dark-bg-lvl-3);
 		}
-		&:current {
-			border-bottom-left-radius: 0;
-			border-bottom-right-radius: 0;
-		}
 
 		.search_icon {
 			display: flex;
@@ -91,6 +87,17 @@
 		}
 		&:where(.dropdown_list_disabled) {
 			display: none;
+		}
+	}
+	&:where(.list_disabled) {
+		.dropdown_list_wrapper {
+			display: none;
+		}
+	}
+	&:not(.list_disabled) {
+		.dropdown_input_wrapper {
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
 		}
 	}
 }
