@@ -14,8 +14,6 @@ interface DropdownProps {
 	disableSearch?: boolean;
 	styles?: {
 		width?: string | number;
-		maxWidth?: string | number;
-		height?: string | number;
 		maxHeight?: string | number;
 	};
 	data: Array<React.ReactNode>;
@@ -39,9 +37,12 @@ export const Dropdown = ({
 	const dropdownInputRef = useRef<HTMLInputElement>(null);
 
 	const search = (searchedWord: string) => {
-		const result = data.filter((str) =>
-			String(str).toLowerCase().includes(searchedWord.toLowerCase())
-		);
+		// eslint-disable-next-line arrow-body-style
+		const result = data.filter((str) => {
+			return String(str).toLowerCase().includes(searchedWord.toLowerCase());
+		});
+
+		console.log("searching...");
 
 		if (result.length === 0) {
 			setListIsActive(false);
@@ -97,17 +98,13 @@ export const Dropdown = ({
 						setSelectedValue(event.target.value);
 						search(event.target.value);
 					}}
-					onFocus={(e) => {
+					onClick={(e) => {
 						if (!e.currentTarget.value) {
-							if (
-								filteredData.length === 0 /*
-								? !String(data).toLowerCase().includes(e.currentTarget.value.toLowerCase())
-								*/
-							) {
+							if (filteredData.length === 0) {
 								setListIsActive(false);
 							} else setListIsActive(true);
 						} else {
-							search(e.currentTarget.value);
+							search(selectedValue);
 							setListIsActive(true);
 						}
 					}}
@@ -131,6 +128,7 @@ export const Dropdown = ({
 									className={`dropdown_list_item`}
 									onClick={() => {
 										setSelectedValue(String(element));
+										search(selectedValue);
 										setListIsActive(false);
 									}}
 								>
