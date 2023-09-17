@@ -25,20 +25,21 @@ import Divider from "../../../../../../../UI/Divider/Divider";
  * * ✓ Выключение
  * * ✓ Перетаскивание
  * * ✓ Инлайн изменение значения и ключа
- * * * - Подсказки для имен заголовков
+ * * * - `invisible` стиль для селекта
+ * * * - Подсказки для имен заголовков (поиск)
  * ✓ Скролл списка заголовков
  ***
  * ✓ Пофиксить селект (открывается при открытии модалки (так быть не должно))
  * ✓ Пофиксить селект (выбранное в предыдуший раз значение остается при новом открытии модалки)
- * - Пофиксить нижниу уголки селекта
- * - Реализовать поиск в селекте
+ * ✓ Пофиксить нижниу уголки селекта
+ * ✓ Реализовать поиск в селекте
  ***
  * - Пофиксить отступы в меню выбора метода
  */
 
 export const Headers = () => {
 	const [newHeaderModalView, setNewHeaderModalView] = useState(false);
-	const [selectedHeader, setSelectedHeader] = useState("");
+	const [selectedHeader, setSelectedHeader] = useState<string>("");
 
 	const defaultHeaderValueRef = useRef<HTMLInputElement>(null);
 	const customHeaderNameRef = useRef<HTMLInputElement>(null);
