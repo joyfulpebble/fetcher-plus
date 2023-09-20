@@ -27,7 +27,7 @@ export const Params = () => {
 	return (
 		<>
 			<Modal
-				title="New query parameter"
+				title="Adding a new query parameter"
 				visibility={newParameterModalView}
 				onCancel={() => true}
 				onSubmit={() => {

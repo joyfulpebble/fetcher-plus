@@ -14,10 +14,9 @@ import { Dropdown } from "../../../../../../../UI/Dropdown/Dropdown";
 import { v1 as uuidv1 } from "uuid";
 import "./styles/Headers.scss";
 import Input from "../../../../../../../UI/Input/Input";
-import Divider from "../../../../../../../UI/Divider/Divider";
 
 /** TODO:
- * - Переименовать классы стилей
+ * ✓ Переименовать классы стилей
  * ✓ Список дефолтных заголовков
  * ✓ Стор для кастомных заголовков
  * * ✓ Добавление
@@ -26,7 +25,6 @@ import Divider from "../../../../../../../UI/Divider/Divider";
  * * ✓ Перетаскивание
  * * ✓ Инлайн изменение значения и ключа
  * * * - `invisible` стиль для селекта
- * * * - Подсказки для имен заголовков (поиск)
  * ✓ Скролл списка заголовков
  ***
  * ✓ Пофиксить селект (открывается при открытии модалки (так быть не должно))
@@ -34,16 +32,14 @@ import Divider from "../../../../../../../UI/Divider/Divider";
  * ✓ Пофиксить нижниу уголки селекта
  * ✓ Реализовать поиск в селекте
  ***
- * - Пофиксить отступы в меню выбора метода
+ * ✓ Пофиксить отступы в меню выбора метода
  */
 
 export const Headers = () => {
 	const [newHeaderModalView, setNewHeaderModalView] = useState(false);
 	const [selectedHeader, setSelectedHeader] = useState<string>("");
 
-	const defaultHeaderValueRef = useRef<HTMLInputElement>(null);
-	const customHeaderNameRef = useRef<HTMLInputElement>(null);
-	const customHeaderValueRef = useRef<HTMLInputElement>(null);
+	const newHeaderValueRef = useRef<HTMLInputElement>(null);
 
 	const dispatch = useAppDispatch();
 	const { addHeader, deleteAllHeaders } = requestHeadersSlice.actions;
@@ -51,7 +47,8 @@ export const Headers = () => {
 	return (
 		<>
 			<Modal
-				title="Select header"
+				title="Adding a new header"
+				subtitle="Choose from existing ones or enter your own."
 				visibility={newHeaderModalView}
 				onCancel={() => true}
 				onSubmit={() => {
@@ -59,10 +56,8 @@ export const Headers = () => {
 						addHeader({
 							_id: uuidv1(),
 							isUsed: true,
-							name: selectedHeader || String(customHeaderNameRef.current?.value),
-							value:
-								String(defaultHeaderValueRef.current?.value) ||
-								String(customHeaderValueRef.current?.value)
+							name: selectedHeader,
+							value: String(newHeaderValueRef.current?.value)
 						})
 					);
 
@@ -70,19 +65,11 @@ export const Headers = () => {
 				}}
 				onClose={() => setNewHeaderModalView(false)}
 			>
-				<div
-					style={{
-						width: "100%",
-						display: "flex",
-						flexDirection: "row",
-						alignItems: "end",
-						justifyContent: "space-between"
-					}}
-				>
+				<div className="header_adding_modal">
 					<div>
 						<Dropdown
-							title="Select from the existing ones"
-							placeholder="Header name"
+							title="Select or enter header name:"
+							placeholder="Header name..."
 							searchIcon={false}
 							data={defaultRequestHeaders}
 							selectedValue={selectedHeader}
@@ -93,9 +80,9 @@ export const Headers = () => {
 					</div>
 					<div>
 						<Input
-							label="Enter header value"
-							placeholder="Header value"
-							innerRef={defaultHeaderValueRef}
+							label="Enter header value:"
+							placeholder="Header value..."
+							innerRef={newHeaderValueRef}
 						/>
 					</div>
 				</div>

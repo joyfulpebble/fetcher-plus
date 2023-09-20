@@ -12,6 +12,7 @@ import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
 interface ModalPropsI {
 	title: string;
+	subtitle?: string;
 	visibility: boolean;
 	onClose: () => void;
 	onSubmit: () => boolean;
@@ -19,7 +20,15 @@ interface ModalPropsI {
 	children: JSX.Element | JSX.Element[];
 }
 
-function Modal({ title, visibility, children, onCancel, onSubmit, onClose }: ModalPropsI) {
+function Modal({
+	title,
+	subtitle,
+	visibility,
+	children,
+	onCancel,
+	onSubmit,
+	onClose
+}: ModalPropsI) {
 	const modalLayerRef = useRef(null);
 
 	useOutsideClick(modalLayerRef, () => {
@@ -73,7 +82,10 @@ function Modal({ title, visibility, children, onCancel, onSubmit, onClose }: Mod
 								className="modal_wrapper"
 							>
 								<section className="modal_header">
-									<div className="modal_title">{title}</div>
+									<div className="modal_titles_wrapper">
+										<div className="modal_title">{title}</div>
+										<div className="modal_subtitle">{subtitle}</div>
+									</div>
 									<IconX
 										className="modal_close"
 										size={20}

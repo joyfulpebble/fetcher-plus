@@ -9,7 +9,7 @@ import requestHeadersSlice, {
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-import "../QueryParams/styles/ParamsListItem.scss";
+import "./styles/HeadersListItem.scss";
 
 interface HeadersListItem {
 	header: Header;
@@ -32,10 +32,10 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 		<section
 			ref={setNodeRef}
 			style={styleOnDrag}
-			className="query_params_item"
+			className="header_item"
 		>
-			<section className="param_control">
-				<div className="param_dragger">
+			<section className="header_controls">
+				<div className="header_dragger">
 					<IconGripVertical
 						style={{ outline: "none" }}
 						size={16}
@@ -43,7 +43,7 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 						{...listeners}
 					/>
 				</div>
-				<div className="param_select">
+				<div className="header_select">
 					{header.isUsed ? (
 						<IconCheckbox
 							size={16}
@@ -61,8 +61,8 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 					)}
 				</div>
 			</section>
-			<section className="psrams_key_val">
-				<div className="params_key">
+			<section className="header_name_val">
+				<div className="header_name">
 					<Input
 						name={`header_name=${header.name}`}
 						placeholder="Header name"
@@ -78,7 +78,7 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 						defaultValue={header.name}
 					/>
 				</div>
-				<div className="params_val">
+				<div className="header_val">
 					<Input
 						name={`header_value=${header.value}`}
 						placeholder="Header value"
@@ -93,7 +93,7 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 						}}
 						defaultValue={header.value}
 					/>
-					<div className="param_delete">
+					<div className="header_delete">
 						<IconTrash
 							size={16}
 							onClick={() => {

@@ -32,7 +32,7 @@ function MethodsList() {
 	return (
 		<>
 			<Modal
-				title="Custom request"
+				title="Adding a custom request name"
 				visibility={customMethodModalView}
 				onSubmit={() => {
 					if (isRequired(customMethodNameRef.current?.value, setInputError)) return false;

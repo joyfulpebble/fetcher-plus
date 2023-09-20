@@ -29,7 +29,7 @@
 	padding: var(--padding-16);
 	background-color: var(--theme-dark-bg-lvl-3);
 	display: flex;
-	align-items: center;
+	align-items: top;
 	flex-direction: row;
 	justify-content: space-between;
 }
@@ -47,13 +47,22 @@
 	align-items: flex-end;
 	justify-content: flex-end;
 }
-.modal_title {
-	cursor: default;
-	width: fit-content;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
+.modal_titles_wrapper {
+	.modal_title {
+		cursor: default;
+		width: fit-content;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		font-weight: 500;
+	}
+	.modal_subtitle {
+		font-family: "Inter";
+		font-weight: 400;
+		font-size: 11px;
+		line-height: var(--font-line-height);
+	}
 }
 .modal_controls {
 	width: 160px;
