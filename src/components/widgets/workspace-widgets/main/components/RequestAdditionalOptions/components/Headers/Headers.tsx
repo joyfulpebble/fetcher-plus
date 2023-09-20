@@ -79,48 +79,23 @@ export const Headers = () => {
 						justifyContent: "space-between"
 					}}
 				>
-					<Dropdown
-						title="Select from the existing ones"
-						placeholder="Header"
-						data={defaultRequestHeaders}
-						selectedValue={selectedHeader}
-						setSelectedValue={setSelectedHeader}
-						disableSearch={false}
-						styles={{ width: 200, maxHeight: 98 }}
-					/>
+					<div>
+						<Dropdown
+							title="Select from the existing ones"
+							placeholder="Header name"
+							searchIcon={false}
+							data={defaultRequestHeaders}
+							selectedValue={selectedHeader}
+							setSelectedValue={setSelectedHeader}
+							disableSearch={false}
+							itemsInView={4}
+						/>
+					</div>
 					<div>
 						<Input
 							label="Enter header value"
 							placeholder="Header value"
 							innerRef={defaultHeaderValueRef}
-						/>
-					</div>
-				</div>
-				<Divider
-					marginTop={20}
-					marginBottom={20}
-				/>
-				<div
-					style={{
-						width: "100%",
-						display: "flex",
-						flexDirection: "row",
-						alignItems: "end",
-						justifyContent: "space-between"
-					}}
-				>
-					<div>
-						<Input
-							label="Enter header custom name"
-							placeholder="Header name"
-							innerRef={customHeaderNameRef}
-						/>
-					</div>
-					<div>
-						<Input
-							label="Enter header value"
-							placeholder="Header value"
-							innerRef={customHeaderValueRef}
 						/>
 					</div>
 				</div>

@@ -10,12 +10,11 @@ import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
 interface DropdownProps {
 	placeholder?: string;
+	searchIcon?: boolean;
 	title?: string;
 	disableSearch?: boolean;
-	styles?: {
-		width?: string | number;
-		maxHeight?: string | number;
-	};
+	itemsInView?: "auto" | number;
+	elementPosition?: "static" | "relative";
 	data: Array<React.ReactNode>;
 	selectedValue: string;
 	setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
@@ -24,8 +23,10 @@ interface DropdownProps {
 export const Dropdown = ({
 	data,
 	placeholder,
+	searchIcon = true,
+	itemsInView = "auto",
+	elementPosition = "static",
 	title,
-	styles,
 	disableSearch = true,
 	selectedValue,
 	setSelectedValue
@@ -33,8 +34,24 @@ export const Dropdown = ({
 	const [listIsActive, setListIsActive] = useState(false);
 	const [filteredData, setFilteredData] = useState<Array<any> | null>(data);
 
-	const dropdownRef = useRef(null);
+	const dropdownRef = useRef<HTMLDivElement>(null);
 	const dropdownInputRef = useRef<HTMLInputElement>(null);
+
+	const setListStyles = () => {
+		const styles = {
+			width: dropdownRef.current?.offsetWidth,
+			maxHeight: itemsInView === "auto" ? 193 : 32 * itemsInView
+		};
+
+		return styles;
+	};
+	const setWrapperStyles = () => {
+		const styles = {
+			position: elementPosition
+		};
+
+		return styles;
+	};
 
 	const search = (searchedWord: string) => {
 		// eslint-disable-next-line arrow-body-style
@@ -73,7 +90,7 @@ export const Dropdown = ({
 		<div
 			className={dropdown_wrapper_classnames}
 			ref={dropdownRef}
-			style={styles}
+			style={setWrapperStyles()}
 		>
 			<section
 				onClick={() => {
@@ -83,7 +100,7 @@ export const Dropdown = ({
 			>
 				<span className="dropdown_title">{title}</span>
 				<div className="dropdown_input_wrapper">
-					{!disableSearch && (
+					{!disableSearch && searchIcon && (
 						<div className="search_icon">
 							<IconSearch size={16} />
 						</div>
@@ -109,7 +126,7 @@ export const Dropdown = ({
 			{filteredData && (
 				<div
 					className="dropdown_list_wrapper"
-					style={styles}
+					style={setListStyles()}
 				>
 					{filteredData.map(
 						(element) =>
