@@ -15,6 +15,7 @@ interface DropdownProps {
 	disableSearch?: boolean;
 	itemsInView?: "auto" | number;
 	elementPosition?: "static" | "relative";
+	selectStyle?: "invisible" | "default";
 	data: Array<React.ReactNode>;
 	selectedValue: string;
 	setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
@@ -26,6 +27,7 @@ export const Dropdown = ({
 	searchIcon = true,
 	itemsInView = "auto",
 	elementPosition = "static",
+	selectStyle = "default",
 	title,
 	disableSearch = true,
 	selectedValue,
@@ -83,7 +85,8 @@ export const Dropdown = ({
 		search_disabled: disableSearch
 	});
 	const dropdown_wrapper_classnames = useClassnames("dropdown_wrapper", {
-		list_disabled: !listIsActive
+		list_disabled: !listIsActive,
+		select_invisible: selectStyle === "invisible"
 	});
 
 	return (
@@ -92,37 +95,46 @@ export const Dropdown = ({
 			ref={dropdownRef}
 			style={setWrapperStyles()}
 		>
-			<section
+			{title && (
+				<span
+					className="dropdown_title"
+					onClick={() => {
+						dropdownInputRef.current?.focus();
+						if (filteredData) setListIsActive(true);
+					}}
+				>
+					{title}
+				</span>
+			)}
+			<div
+				className="dropdown_input_wrapper"
 				onClick={() => {
 					dropdownInputRef.current?.focus();
 					if (filteredData) setListIsActive(true);
 				}}
 			>
-				<span className="dropdown_title">{title}</span>
-				<div className="dropdown_input_wrapper">
-					{!disableSearch && searchIcon && (
-						<div className="search_icon">
-							<IconSearch size={16} />
-						</div>
-					)}
-					<input
-						className={dropdown_input_classnames}
-						ref={dropdownInputRef}
-						placeholder={placeholder}
-						value={selectedValue}
-						readOnly={disableSearch}
-						onChange={(event) => {
-							setSelectedValue(event.target.value);
-							search(event.target.value);
-						}}
-					></input>
-					{disableSearch && (
-						<div className="chevron_icon">
-							{listIsActive ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
-						</div>
-					)}
-				</div>
-			</section>
+				{!disableSearch && searchIcon && (
+					<div className="search_icon">
+						<IconSearch size={16} />
+					</div>
+				)}
+				<input
+					className={dropdown_input_classnames}
+					ref={dropdownInputRef}
+					placeholder={placeholder}
+					value={selectedValue}
+					readOnly={disableSearch}
+					onChange={(event) => {
+						setSelectedValue(event.target.value);
+						search(event.target.value);
+					}}
+				></input>
+				{disableSearch && (
+					<div className="chevron_icon">
+						{listIsActive ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
+					</div>
+				)}
+			</div>
 			{filteredData && (
 				<div
 					className="dropdown_list_wrapper"

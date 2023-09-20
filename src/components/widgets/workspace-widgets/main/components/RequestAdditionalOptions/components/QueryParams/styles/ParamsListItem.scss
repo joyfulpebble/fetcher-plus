@@ -12,11 +12,10 @@
 		border-left: solid 1px var(--border-color-default);
 
 		.param_dragger {
-			opacity: 1;
 			cursor: ns-resize;
 			display: flex;
 			align-items: center;
-			transition: opacity ease 0.1s;
+			margin-right: 1px;
 		}
 
 		.param_select {

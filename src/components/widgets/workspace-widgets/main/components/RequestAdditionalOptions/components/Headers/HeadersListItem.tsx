@@ -1,5 +1,8 @@
+import { Dropdown } from "../../../../../../../UI/Dropdown/Dropdown";
 import Input from "../../../../../../../UI/Input/Input";
 import { IconTrash, IconGripVertical, IconCheckbox, IconSquare } from "@tabler/icons-react";
+
+import { defaultRequestHeaders } from "../../../../../../../../tools/constants";
 
 import { useAppDispatch } from "../../../../../../../../hooks/redux/redux";
 import requestHeadersSlice, {
@@ -10,12 +13,14 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 import "./styles/HeadersListItem.scss";
+import { useEffect, useState } from "react";
 
 interface HeadersListItem {
 	header: Header;
 }
 
 export const HeadersListItem = ({ header }: HeadersListItem) => {
+	const [selectedHeader, setSelectedHeader] = useState<string>(header.name);
 	const dispatch = useAppDispatch();
 	const { deleteHeader, updateHeaderState, updateHeaderName, updateHeaderValue } =
 		requestHeadersSlice.actions;
@@ -27,6 +32,16 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 		transform: CSS.Transform.toString(transform),
 		transition
 	};
+
+	/** FIXME:
+	 * - Убрать хук useEffect и вместо него добавить возможность прокидывать onVhange, onClick и тп функции в селект
+	 * - Добавить плавности появляющемуся списку select'а
+	 */
+
+	useEffect(() => {
+		dispatch(updateHeaderName({ parameterID: header._id, newName: selectedHeader }));
+		console.log("");
+	}, [selectedHeader]);
 
 	return (
 		<section
@@ -63,19 +78,14 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 			</section>
 			<section className="header_name_val">
 				<div className="header_name">
-					<Input
-						name={`header_name=${header.name}`}
+					<Dropdown
+						selectStyle="invisible"
 						placeholder="Header name"
-						inputStyle="invisible"
-						onChange={(e) => {
-							dispatch(
-								updateHeaderName({
-									parameterID: header._id,
-									newName: e.target.value
-								})
-							);
-						}}
-						defaultValue={header.name}
+						disableSearch={false}
+						searchIcon={false}
+						data={defaultRequestHeaders}
+						selectedValue={selectedHeader}
+						setSelectedValue={setSelectedHeader}
 					/>
 				</div>
 				<div className="header_val">
