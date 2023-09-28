@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-import { useAppDispatch } from "../../../../../../../../hooks/redux/redux";
+import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
 import requestHeadersSlice from "../../../../../../../../redux/reducers/requestHeadersSlice";
 
 import { defaultRequestHeaders } from "../../../../../../../../tools/constants";
@@ -14,26 +14,7 @@ import { Dropdown } from "../../../../../../../UI/Dropdown/Dropdown";
 import { v1 as uuidv1 } from "uuid";
 import "./styles/Headers.scss";
 import Input from "../../../../../../../UI/Input/Input";
-
-/** TODO:
- * ✓ Переименовать классы стилей
- * ✓ Список дефолтных заголовков
- * ✓ Стор для кастомных заголовков
- * * ✓ Добавление
- * * ✓ Удаление (по выбору / все стразу)
- * * ✓ Выключение
- * * ✓ Перетаскивание
- * * ✓ Инлайн изменение значения и ключа
- * * * ✓ `invisible` стиль для селекта
- * ✓ Скролл списка заголовков
- ***
- * ✓ Пофиксить селект (открывается при открытии модалки (так быть не должно))
- * ✓ Пофиксить селект (выбранное в предыдуший раз значение остается при новом открытии модалки)
- * ✓ Пофиксить нижниу уголки селекта
- * ✓ Реализовать поиск в селекте
- ***
- * ✓ Пофиксить отступы в меню выбора метода
- */
+import { HeadersEmptyList } from "./HeadersEmptyList";
 
 export const Headers = () => {
 	const [newHeaderModalView, setNewHeaderModalView] = useState(false);
@@ -43,6 +24,7 @@ export const Headers = () => {
 
 	const dispatch = useAppDispatch();
 	const { addHeader, deleteAllHeaders } = requestHeadersSlice.actions;
+	const headers = useAppSelector((state) => state.requestHeadersSlice);
 
 	useEffect(() => {
 		if (!newHeaderModalView) setSelectedHeader("");
@@ -137,8 +119,14 @@ export const Headers = () => {
 					</div>
 				</div>
 			</section>
-			<section className="headers_body_wrapper">
-				<HeadersList />
+			<section
+				className={`${headers.length ? "headers_body_wrapper" : "headers_body_wrapper_empty"}`}
+			>
+				{headers.length ? (
+					<HeadersList />
+				) : (
+					<HeadersEmptyList openModalFunc={setNewHeaderModalView} />
+				)}
 			</section>
 		</>
 	);

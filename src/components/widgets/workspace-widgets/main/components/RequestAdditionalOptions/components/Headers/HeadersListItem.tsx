@@ -33,11 +33,6 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 		transition
 	};
 
-	/** FIXME:
-	 * ✓ Убрать хук useEffect и вместо него добавить возможность прокидывать onVhange, onClick и тп функции в селект
-	 * - Добавить плавности появляющемуся списку select'а
-	 */
-
 	const onChange = useCallback((newValue: any) => {
 		dispatch(updateHeaderName({ parameterID: header._id, newName: newValue }));
 	}, []);
