@@ -13,14 +13,12 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 import "./styles/HeadersListItem.scss";
-import { useEffect, useState } from "react";
 
 interface HeadersListItem {
 	header: Header;
 }
 
 export const HeadersListItem = ({ header }: HeadersListItem) => {
-	const [selectedHeader, setSelectedHeader] = useState<string>(header.name);
 	const dispatch = useAppDispatch();
 	const { deleteHeader, updateHeaderState, updateHeaderName, updateHeaderValue } =
 		requestHeadersSlice.actions;
@@ -34,14 +32,9 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 	};
 
 	/** FIXME:
-	 * - Убрать хук useEffect и вместо него добавить возможность прокидывать onVhange, onClick и тп функции в селект
+	 * ✓ Убрать хук useEffect и вместо него добавить возможность прокидывать onVhange, onClick и тп функции в селект
 	 * - Добавить плавности появляющемуся списку select'а
 	 */
-
-	useEffect(() => {
-		dispatch(updateHeaderName({ parameterID: header._id, newName: selectedHeader }));
-		console.log("");
-	}, [selectedHeader]);
 
 	return (
 		<section
@@ -84,8 +77,10 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 						disableSearch={false}
 						searchIcon={false}
 						data={defaultRequestHeaders}
-						selectedValue={selectedHeader}
-						setSelectedValue={setSelectedHeader}
+						initValue={header.name}
+						onChange={(newValue) => {
+							dispatch(updateHeaderName({ parameterID: header._id, newName: newValue }));
+						}}
 					/>
 				</div>
 				<div className="header_val">

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { useAppDispatch } from "../../../../../../../../hooks/redux/redux";
 import requestHeadersSlice from "../../../../../../../../redux/reducers/requestHeadersSlice";
@@ -24,7 +24,7 @@ import Input from "../../../../../../../UI/Input/Input";
  * * ✓ Выключение
  * * ✓ Перетаскивание
  * * ✓ Инлайн изменение значения и ключа
- * * * - `invisible` стиль для селекта
+ * * * ✓ `invisible` стиль для селекта
  * ✓ Скролл списка заголовков
  ***
  * ✓ Пофиксить селект (открывается при открытии модалки (так быть не должно))
@@ -43,6 +43,10 @@ export const Headers = () => {
 
 	const dispatch = useAppDispatch();
 	const { addHeader, deleteAllHeaders } = requestHeadersSlice.actions;
+
+	useEffect(() => {
+		if (!newHeaderModalView) setSelectedHeader("");
+	}, [newHeaderModalView]);
 
 	return (
 		<>
@@ -72,8 +76,10 @@ export const Headers = () => {
 							placeholder="Header name..."
 							searchIcon={false}
 							data={defaultRequestHeaders}
-							selectedValue={selectedHeader}
-							setSelectedValue={setSelectedHeader}
+							initValue={selectedHeader}
+							onChange={(newValue) => {
+								setSelectedHeader(newValue);
+							}}
 							disableSearch={false}
 							itemsInView={4}
 						/>

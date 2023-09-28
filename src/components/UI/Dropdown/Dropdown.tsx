@@ -1,14 +1,15 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useClassnames } from "../../../hooks/useClassnames";
+import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
 import { IconChevronDown, IconChevronUp, IconSearch } from "@tabler/icons-react";
 
 import { v1 as uuidv1 } from "uuid";
 
 import "./Dropdown.scss";
-import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
 interface DropdownProps {
+	initValue?: string;
 	placeholder?: string;
 	searchIcon?: boolean;
 	title?: string;
@@ -17,8 +18,7 @@ interface DropdownProps {
 	elementPosition?: "static" | "relative";
 	selectStyle?: "invisible" | "default";
 	data: Array<React.ReactNode>;
-	selectedValue: string;
-	setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
+	onChange: (newValue: string) => void;
 }
 
 export const Dropdown = ({
@@ -30,9 +30,10 @@ export const Dropdown = ({
 	selectStyle = "default",
 	title,
 	disableSearch = true,
-	selectedValue,
-	setSelectedValue
+	onChange,
+	initValue
 }: DropdownProps) => {
+	const [value, setValue] = useState<string>(initValue || "");
 	const [listIsActive, setListIsActive] = useState(false);
 	const [filteredData, setFilteredData] = useState<Array<any> | null>(data);
 
@@ -69,13 +70,6 @@ export const Dropdown = ({
 			setListIsActive(false);
 		}
 	};
-
-	useEffect(
-		() => () => {
-			setSelectedValue("");
-		},
-		[]
-	);
 
 	useOutsideClick(dropdownRef, () => {
 		setListIsActive(false);
@@ -122,11 +116,15 @@ export const Dropdown = ({
 					className={dropdown_input_classnames}
 					ref={dropdownInputRef}
 					placeholder={placeholder}
-					value={selectedValue}
+					value={value}
 					readOnly={disableSearch}
 					onChange={(event) => {
-						setSelectedValue(event.target.value);
+						setValue(event.target.value);
 						search(event.target.value);
+						onChange(event.target.value);
+					}}
+					onFocus={(event) => {
+						if (data === filteredData) search(event.target.value);
 					}}
 				></input>
 				{disableSearch && (
@@ -147,8 +145,9 @@ export const Dropdown = ({
 									key={uuidv1()}
 									className={`dropdown_list_item`}
 									onClick={() => {
-										setSelectedValue(String(element));
 										search(element);
+										setValue(element);
+										onChange(element);
 										setListIsActive(false);
 									}}
 								>
