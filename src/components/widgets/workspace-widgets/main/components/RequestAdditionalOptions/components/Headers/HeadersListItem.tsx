@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import { Dropdown } from "../../../../../../../UI/Dropdown/Dropdown";
 import Input from "../../../../../../../UI/Input/Input";
 import { IconTrash, IconGripVertical, IconCheckbox, IconSquare } from "@tabler/icons-react";
@@ -35,6 +37,10 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 	 * ✓ Убрать хук useEffect и вместо него добавить возможность прокидывать onVhange, onClick и тп функции в селект
 	 * - Добавить плавности появляющемуся списку select'а
 	 */
+
+	const onChange = useCallback((newValue: any) => {
+		dispatch(updateHeaderName({ parameterID: header._id, newName: newValue }));
+	}, []);
 
 	return (
 		<section
@@ -78,9 +84,7 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 						searchIcon={false}
 						data={defaultRequestHeaders}
 						initValue={header.name}
-						onChange={(newValue) => {
-							dispatch(updateHeaderName({ parameterID: header._id, newName: newValue }));
-						}}
+						onChange={onChange}
 					/>
 				</div>
 				<div className="header_val">

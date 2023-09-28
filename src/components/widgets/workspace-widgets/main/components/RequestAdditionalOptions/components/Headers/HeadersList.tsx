@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
 import requestHeadersSlice from "../../../../../../../../redux/reducers/requestHeadersSlice";
@@ -21,7 +21,7 @@ import { restrictToFirstScrollableAncestor, restrictToVerticalAxis } from "@dnd-
 
 import { HeadersListItem } from "./HeadersListItem";
 
-export const HeadersList = () => {
+export const HeadersList = memo(function HeadersList() {
 	const dispatch = useAppDispatch();
 	const { updateHeadersOrder } = requestHeadersSlice.actions;
 	const requestHeaders = useAppSelector((state) => state.requestHeadersSlice);
@@ -76,4 +76,4 @@ export const HeadersList = () => {
 			</DndContext>
 		</>
 	);
-};
+});
