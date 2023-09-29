@@ -135,3 +135,12 @@ export const defaultRequestHeaders: Array<string> = [
 	"X-Robots-Tag",
 	"X-UA-Compatible"
 ];
+
+export const bodyContentTypes: Array<string> = [
+	"none",
+	"form-data",
+	"x-www-form-urlencoded",
+	"raw"
+];
+
+export const bodyRawTypes: Array<string> = ["text", "JSON", "XML", "HTML", "JavaScript"];

@@ -5,12 +5,18 @@ import { Params } from "./components/QueryParams/Params";
 import { Headers } from "./components/Headers/Headers";
 
 import "./AdditionalOptions.scss";
+import { Body } from "./components/Body/Body";
 
 export const AdditionalOptions = () => {
-	const [selectedTab, setSelectedTab] = useState<number>(2);
+	const [selectedTab, setSelectedTab] = useState<number>(1);
 
 	const optionsTabNames = ["Parameters", "Body", "Headers", "Authorization"];
-	const optionElements = [<Params key="params_tab" />, <></>, <Headers key="headers_tab" />, <></>];
+	const optionElements = [
+		<Params key="params_tab" />,
+		<Body key="body_tab" />,
+		<Headers key="headers_tab" />,
+		<></>
+	];
 
 	return (
 		<>
