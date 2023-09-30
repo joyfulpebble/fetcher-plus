@@ -16,13 +16,14 @@ import Modal from "../../../../../../UI/Modal/Modal";
 import Input from "../../../../../../UI/Input/Input";
 
 import "./Lists.scss";
-import requestConfigSlice from "../../../../../../../redux/reducers/requestConfigSlice";
+import requestConfigSlice from "../../../../../../../redux/reducers/requestUrlSlice";
+import requestSelectedMethodSlice from "../../../../../../../redux/reducers/requestSelectedMethodSlice";
 
 function MethodsList() {
 	const dispatch = useAppDispatch();
 	const customMethods = useAppSelector((state) => state.customRequestMethodsListReducer);
 	const { addCustomMethod } = customRequestMethodsListSlice.actions;
-	const { updateMethod } = requestConfigSlice.actions;
+	const { updateRequestMethod } = requestSelectedMethodSlice.actions;
 
 	const [customMethodModalView, setCustomMethodModalView] = useState(false);
 	const [inputError, setInputError] = useState<string | null>(null);
@@ -47,7 +48,7 @@ function MethodsList() {
 
 					setInputError(null);
 					dispatch(addCustomMethod(customMethodNameRef.current?.value.toUpperCase()!));
-					dispatch(updateMethod(customMethodNameRef.current?.value.toUpperCase()!));
+					dispatch(updateRequestMethod(customMethodNameRef.current?.value.toUpperCase()!));
 
 					return true;
 				}}

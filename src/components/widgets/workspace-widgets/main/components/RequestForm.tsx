@@ -16,14 +16,13 @@ function RequestForm(): JSX.Element {
 	const quieryParams = useAppSelector((state) => state.requestQueryParameters);
 	const requestHeaders = useAppSelector((state) => state.requestHeadersSlice);
 	const requestMethod = useAppSelector((state) => state.requestSelctedMethod);
-
-	const { requestParams } = useAppSelector((state) => state.requestConfigReducer);
+	const requestUrl = useAppSelector((state) => state.requestConfigReducer);
 
 	const { values, saveFuildValue } = useForm<APIT.RequestConfigI>({
 		initialValues: { requestMethod: "GET", requestParams: {}, requestUrl: "" }
 	});
 
-	const requestUrl = useRef<HTMLInputElement>(null);
+	const requestUrlref = useRef<HTMLInputElement>(null);
 
 	return (
 		<>
@@ -32,9 +31,9 @@ function RequestForm(): JSX.Element {
 					<div className={"request_main_data"}>
 						<MethodSelect />
 						<RequestInput
-							inputRef={requestUrl}
+							inputRef={requestUrlref}
 							onChange={() => {
-								saveFuildValue("requestUrl", requestUrl.current?.value);
+								saveFuildValue("requestUrl", requestUrlref.current?.value);
 							}}
 						/>
 					</div>
@@ -44,7 +43,6 @@ function RequestForm(): JSX.Element {
 						disabled={false}
 						onClick={() => {
 							saveFuildValue("requestMethod", requestMethod);
-							saveFuildValue("requestParams", requestParams);
 
 							console.log(">selected request method: " + requestMethod);
 							console.log(">request url: " + values.current.requestUrl);
