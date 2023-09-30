@@ -138,9 +138,9 @@ export const defaultRequestHeaders: Array<string> = [
 
 export const bodyContentTypes: Array<string> = [
 	"none",
+	"raw",
 	"form-data",
-	"x-www-form-urlencoded",
-	"raw"
+	"x-www-form-urlencoded"
 ];
 
-export const bodyRawTypes: Array<string> = ["text", "JSON", "XML", "HTML", "JavaScript"];
+export const bodyRawTypes: Array<string> = ["Text", "JSON", "XML", "HTML", "JavaScript"];
