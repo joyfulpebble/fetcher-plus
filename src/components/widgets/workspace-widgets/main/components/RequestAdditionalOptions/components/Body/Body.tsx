@@ -35,7 +35,7 @@ export const Body = () => {
 					</div>
 					{contentType === "raw" && (
 						<Tippy
-							className="body_content_type_tippy_wrapper"
+							className="body_raw_type_tippy_wrapper"
 							placement="bottom"
 							content={<BodyRawTypesList />}
 							interactive={true}
@@ -44,7 +44,7 @@ export const Body = () => {
 							trigger="click"
 							arrow={false}
 							zIndex={10}
-							offset={[57, 5]}
+							offset={[15, 5]}
 						>
 							<div className="body_raw_type_select">
 								<span className="body_raw_type">{rawType}</span>

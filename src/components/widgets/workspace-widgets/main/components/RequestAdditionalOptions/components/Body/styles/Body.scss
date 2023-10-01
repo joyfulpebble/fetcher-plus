@@ -4,8 +4,7 @@
 }
 
 .request_additional_body_type {
-	min-width: 100px;
-	max-width: 100px;
+	width: 100px;
 	height: 20px;
 	border-radius: 4px;
 	border: 1px solid var(--border-color-default);
@@ -27,6 +26,20 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
+}
+
+.body_raw_type_tippy_wrapper {
+	.tippy-content {
+		padding: 0 5px;
+		padding-top: 5px;
+		padding-bottom: 3px;
+	}
+
+	width: 120px;
+	border: 1px solid var(--border-color-default);
+	background-color: var(--theme-dark-bg-lvl-2);
+	overflow-y: auto;
+	user-select: none;
 }
 
 .body_raw_type_select {
@@ -53,7 +66,6 @@
 		padding-bottom: 3px;
 	}
 
-	position: relative;
 	left: 0px;
 	width: 200px;
 	border: 1px solid var(--border-color-default);
