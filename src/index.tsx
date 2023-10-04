@@ -3,15 +3,18 @@ import ReactDOM from "react-dom/client";
 import persistStore from "redux-persist/es/persistStore";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
+
 import { setupStore } from "./redux/store";
+import { setupIdbStore } from "./idb/idb-store";
 
 import App from "./App";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { OnlineStatusProvider } from "./hooks/react/useOnlineStatus";
 
-const root = ReactDOM.createRoot(document.getElementById("root")!),
-	store = setupStore(),
-	persistor = persistStore(store);
+const root = ReactDOM.createRoot(document.getElementById("root")!);
+const store = setupStore();
+const idbStore = setupIdbStore();
+const persistor = persistStore(store);
 
 root.render(
 	<Provider store={store}>

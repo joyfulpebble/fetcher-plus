@@ -1,13 +1,18 @@
 import { IconChevronDown, IconFilePlus, IconTrash } from "@tabler/icons-react";
+import { BodyContentTypesList } from "./BodyContentTypesList";
+import { BodyRawTypesList } from "./BodyRawTypesList";
 import Tippy from "@tippyjs/react";
 
+import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
+import requestBodyFormDataSlice from "../../../../../../../../redux/reducers/requestBodyFormDataSlice";
+
+import { v1 as uuidv1 } from "uuid";
 import "./styles/Body.scss";
-import { BodyContentTypesList } from "./BodyContentTypesList";
-import { useAppSelector } from "../../../../../../../../hooks/redux/redux";
-import { BodyRawTypesList } from "./BodyRawTypesList";
 
 export const Body = () => {
 	const { contentType, rawType } = useAppSelector((state) => state.requestBodyTypeReducer);
+	const dispatch = useAppDispatch();
+	const { addBodyFormDataTextItem } = requestBodyFormDataSlice.actions;
 
 	return (
 		<>
@@ -89,7 +94,39 @@ export const Body = () => {
 					</div>
 				</div>
 			</section>
-			<section className="headers_body_wrapper"></section>
+			<section className="headers_body_wrapper">
+				<input
+					type="file"
+					onChange={async (event) => {
+						const fileId = uuidv1();
+						const tempUrl = URL.createObjectURL(event.target.files![0]);
+						const blob = await fetch(tempUrl).then((res) => res.blob());
+
+						const idbRequest = indexedDB.open("request-body-files", 1);
+						idbRequest.onsuccess = () => {
+							const db = idbRequest.result;
+							const tx = db.transaction("files", "readwrite");
+							const filesStore = tx.objectStore("files");
+
+							const newFile = filesStore.put(blob, fileId);
+							newFile.onsuccess = () => {
+								tx.oncomplete = () => {
+									db.close();
+								};
+							};
+						};
+
+						dispatch(
+							addBodyFormDataTextItem({
+								_id: fileId,
+								isUsed: true,
+								fieldValueType: "file",
+								fieldKey: uuidv1()
+							})
+						);
+					}}
+				/>
+			</section>
 		</>
 	);
 };
