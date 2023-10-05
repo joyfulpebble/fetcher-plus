@@ -104,37 +104,6 @@ export const Body = () => {
 				</div>
 			</section>
 			<section className={request_body_classnames}>
-				{/* <input
-					type="file"
-					onChange={async (event) => {
-						const fileId = uuidv1();
-						const tempUrl = URL.createObjectURL(event.target.files![0]);
-						const blob = await fetch(tempUrl).then((res) => res.blob());
-
-						const idbRequest = indexedDB.open("request-body-files", 1);
-						idbRequest.onsuccess = () => {
-							const db = idbRequest.result;
-							const tx = db.transaction("files", "readwrite");
-							const filesStore = tx.objectStore("files");
-
-							const newFile = filesStore.put(blob, fileId);
-							newFile.onsuccess = () => {
-								tx.oncomplete = () => {
-									db.close();
-								};
-							};
-						};
-
-						dispatch(
-							addBodyFormDataTextItem({
-								_id: fileId,
-								isUsed: true,
-								fieldValueType: "file",
-								fieldKey: uuidv1()
-							})
-						);
-					}}
-				/> */}
 				{contentType === "none" && <BodyNone />}
 			</section>
 		</>
