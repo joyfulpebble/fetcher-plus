@@ -1,24 +1,32 @@
-import { IconChevronDown, IconFilePlus, IconTrash } from "@tabler/icons-react";
-import { BodyContentTypesList } from "./BodyContentTypesList";
-import { BodyRawTypesList } from "./BodyRawTypesList";
-import Tippy from "@tippyjs/react";
-
 import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
-import requestBodyFormDataSlice from "../../../../../../../../redux/reducers/requestBodyFormDataSlice";
-
-import { v1 as uuidv1 } from "uuid";
-import "./styles/Body.scss";
-import "./styles/BodyNone.scss";
-import { BodyNone } from "./BodyNone";
 import { useClassnames } from "../../../../../../../../hooks/useClassnames";
 
+import { FormDataList } from "./content-types-lists/FormDataBody/FormDataList";
+
+import { IconChevronDown, IconFilePlus, IconPlus, IconTrash } from "@tabler/icons-react";
+import { BodyContentTypesList } from "./content-types-lists/BodyContentTypesList";
+import { BodyRawTypesList } from "./content-types-lists/BodyRawTypesList";
+import Tippy from "@tippyjs/react";
+
+import { BodyNone } from "./BodyNone";
+
+import "./styles/Body.scss";
+import "./styles/BodyNone.scss";
+import "./styles/FormDataList.scss";
+
+// import requestBodyFormDataSlice from "../../../../../../../../redux/reducers/requestBodyFormDataSlice";
+import { FormDataEmptyList } from "./content-types-lists/FormDataBody/FormDataEmptyList";
+
 export const Body = () => {
+	// const dispatch = useAppDispatch();
+	// const { addBodyFormDataTextItem } = requestBodyFormDataSlice.actions;
 	const { contentType, rawType } = useAppSelector((state) => state.requestBodyTypeReducer);
-	const dispatch = useAppDispatch();
-	const { addBodyFormDataTextItem } = requestBodyFormDataSlice.actions;
+	const bodyFormData = useAppSelector((state) => state.requestBodyFormDataReducer);
 
 	const request_body_classnames = useClassnames({
-		request_body_none_wrapper: contentType === "none"
+		request_body_none_wrapper: contentType === "none",
+		request_body_form_data_wrapper: contentType === "form-data",
+		request_body_form_data_wrapper_empty: bodyFormData.length === 0
 	});
 
 	return (
@@ -84,6 +92,21 @@ export const Body = () => {
 							</Tippy>
 						</div>
 					)}
+					{contentType === "form-data" && (
+						<div className="add_new">
+							<Tippy
+								className="base_tippy_wrapper"
+								placement="top"
+								content={"Add new"}
+								animation="shift-away"
+								arrow={true}
+								trigger="mouseenter"
+								zIndex={0}
+							>
+								<IconPlus size={16} />
+							</Tippy>
+						</div>
+					)}
 					<div className="delete_all">
 						<Tippy
 							className="base_tippy_wrapper"
@@ -105,6 +128,11 @@ export const Body = () => {
 			</section>
 			<section className={request_body_classnames}>
 				{contentType === "none" && <BodyNone />}
+				{contentType === "form-data" && !!bodyFormData.length ? (
+					<FormDataList />
+				) : (
+					<FormDataEmptyList openModalFunc={() => {}} />
+				)}
 			</section>
 		</>
 	);

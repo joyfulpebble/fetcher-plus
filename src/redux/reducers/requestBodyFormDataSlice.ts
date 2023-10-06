@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type BodYFormDataItemID = string;
-type FieldValueTextT = "text";
-type FieldValueFileT = "file";
-type BodyFormDataItem = {
+type ValueTextT = "text";
+type ValueFileT = "file";
+export type BodyFormDataItem = {
 	_id: BodYFormDataItemID;
 	isUsed: boolean;
-	fieldValueType: FieldValueFileT | FieldValueTextT;
-	fieldKey: string;
-	fieldValue?: string;
+	valueType: ValueFileT | ValueTextT;
+	key: string;
+	value: string;
 };
 type BodyFormDataStore = Array<BodyFormDataItem>;
 

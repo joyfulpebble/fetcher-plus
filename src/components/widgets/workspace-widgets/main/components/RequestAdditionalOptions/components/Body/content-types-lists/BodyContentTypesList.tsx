@@ -1,12 +1,12 @@
-import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
+import { useAppDispatch, useAppSelector } from "../../../../../../../../../hooks/redux/redux";
 
 import { IconCheck } from "@tabler/icons-react";
 
-import { bodyContentTypes } from "../../../../../../../../tools/constants";
-import requestBodyTypeSlice from "../../../../../../../../redux/reducers/requestBodyTypeSlice";
+import { bodyContentTypes } from "../../../../../../../../../tools/constants";
+import requestBodyTypeSlice from "../../../../../../../../../redux/reducers/requestBodyTypeSlice";
 
-import { CommonT } from "../../../../../../../../types/common";
-import "./styles/BodyContentTypeList.scss";
+import { CommonT } from "../../../../../../../../../types/common";
+import "../styles/BodyContentTypeList.scss";
 
 export const BodyContentTypesList = () => {
 	const dispatch = useAppDispatch();

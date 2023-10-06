@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, memo } from "react";
 import { useClassnames } from "../../../hooks/useClassnames";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 
@@ -21,7 +21,7 @@ interface DropdownProps {
 	onChange: (newValue: string) => void;
 }
 
-export const Dropdown = ({
+export const Dropdown = memo(function Dropdown({
 	data,
 	placeholder,
 	searchIcon = true,
@@ -32,7 +32,7 @@ export const Dropdown = ({
 	disableSearch = true,
 	onChange,
 	initValue
-}: DropdownProps) => {
+}: DropdownProps) {
 	const [value, setValue] = useState<string>(initValue || "");
 	const [listIsActive, setListIsActive] = useState(false);
 	const [filteredData, setFilteredData] = useState<Array<any> | null>(data);
@@ -159,4 +159,4 @@ export const Dropdown = ({
 			)}
 		</div>
 	);
-};
+});

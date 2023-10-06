@@ -5,7 +5,10 @@ import requestHeadersSlice from "../../../../../../../../redux/reducers/requestH
 
 import { defaultRequestHeaders } from "../../../../../../../../tools/constants";
 
+import Input from "../../../../../../../UI/Input/Input";
 import { HeadersList } from "./HeadersList";
+import { HeadersEmptyList } from "./HeadersEmptyList";
+
 import { IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
 import Modal from "../../../../../../../UI/Modal/Modal";
@@ -13,8 +16,6 @@ import { Dropdown } from "../../../../../../../UI/Dropdown/Dropdown";
 
 import { v1 as uuidv1 } from "uuid";
 import "./styles/Headers.scss";
-import Input from "../../../../../../../UI/Input/Input";
-import { HeadersEmptyList } from "./HeadersEmptyList";
 
 export const Headers = () => {
 	const [newHeaderModalView, setNewHeaderModalView] = useState(false);
