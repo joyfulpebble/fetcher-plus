@@ -14,7 +14,9 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 import "../../styles/FormDataListItem.scss";
-import { BodyFormDataItem } from "../../../../../../../../../../redux/reducers/requestBodyFormDataSlice";
+import requestBodyFormDataSlice, {
+	BodyFormDataItem
+} from "../../../../../../../../../../redux/reducers/requestBodyFormDataSlice";
 import Tippy from "@tippyjs/react";
 
 interface FormDataListItem {
@@ -22,9 +24,14 @@ interface FormDataListItem {
 }
 
 export const FormDataListItem = ({ formData }: FormDataListItem) => {
-	// const dispatch = useAppDispatch();
-	// const { deleteHeader, updateHeaderState, updateHeaderName, updateHeaderValue } =
-	// 	requestHeadersSlice.actions;
+	const dispatch = useAppDispatch();
+	const {
+		updateFormDataState,
+		updateFormDataKey,
+		updateFormDataValueType,
+		updateFormDataValue,
+		deleteFormData
+	} = requestBodyFormDataSlice.actions;
 
 	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
 		id: formData._id
@@ -57,14 +64,16 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 					{formData.isUsed ? (
 						<IconCheckbox
 							size={16}
-							// onClick={() => {
-							// }}
+							onClick={() => {
+								dispatch(updateFormDataState(formData._id));
+							}}
 						/>
 					) : (
 						<IconSquare
 							size={16}
-							// onClick={() => {
-							// }}
+							onClick={() => {
+								dispatch(updateFormDataState(formData._id));
+							}}
 						/>
 					)}
 				</div>
@@ -75,10 +84,14 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 						name={`form_data_key=${formData.key}`}
 						placeholder="Data key"
 						inputStyle="invisible"
-						// onChange={(e) => {
-						// 	dispatch(
-						// 	);
-						// }}
+						onChange={(event) => {
+							dispatch(
+								updateFormDataKey({
+									formDataID: formData._id,
+									newKey: event?.target.value
+								})
+							);
+						}}
 						defaultValue={formData.key}
 					/>
 					<Tippy
@@ -90,6 +103,14 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 									className={`form_data_type_item ${
 										formData.valueType.toLowerCase() === "text" && "selected"
 									}`}
+									onClick={() => {
+										dispatch(
+											updateFormDataValueType({
+												formDataID: formData._id,
+												type: "text"
+											})
+										);
+									}}
 								>
 									<span>Text</span>
 									{formData.valueType.toLowerCase() === "text" && <IconCheck size={14} />}
@@ -98,6 +119,14 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 									className={`form_data_type_item ${
 										formData.valueType.toLowerCase() === "file" && "selected"
 									}`}
+									onClick={() => {
+										dispatch(
+											updateFormDataValueType({
+												formDataID: formData._id,
+												type: "file"
+											})
+										);
+									}}
 								>
 									<span>File</span>
 									{formData.valueType.toLowerCase() === "file" && <IconCheck size={14} />}
@@ -123,17 +152,22 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 						name={`form_data_value=${formData.value}`}
 						placeholder="Data value"
 						inputStyle="invisible"
-						// onChange={(e) => {
-						// 	dispatch(
-						// 	);
-						// }}
+						onChange={(event) => {
+							dispatch(
+								updateFormDataValue({
+									formDataID: formData._id,
+									newValue: event?.target.value
+								})
+							);
+						}}
 						defaultValue={formData.value}
 					/>
 					<div className="form_data_delete">
 						<IconTrash
 							size={16}
-							// onClick={() => {
-							// }}
+							onClick={() => {
+								dispatch(deleteFormData(formData._id));
+							}}
 						/>
 					</div>
 				</div>

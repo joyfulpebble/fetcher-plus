@@ -62,8 +62,7 @@
 				user-select: none;
 			}
 			.form_data_select {
-				display: flex;
-				flex-direction: row;
+				min-width: 50px;
 				margin-left: 5px;
 				cursor: pointer;
 				display: flex;

@@ -1,6 +1,7 @@
 import { useEffect, useState, memo } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../../../../../../../../../hooks/redux/redux";
+import requestBodyFormDataSlice from "../../../../../../../../../../redux/reducers/requestBodyFormDataSlice";
 
 import {
 	DndContext,
@@ -22,12 +23,11 @@ import { restrictToFirstScrollableAncestor, restrictToVerticalAxis } from "@dnd-
 import { FormDataListItem } from "./FormDataListItem";
 
 export const FormDataList = memo(function FormDataList() {
-	// const dispatch = useAppDispatch();
-	// const { updateHeadersOrder } = requestHeadersSlice.actions;
-	// const requestHeaders = useAppSelector((state) => state.requestHeadersSlice);
+	const dispatch = useAppDispatch();
+	const { updateFormDataOrder } = requestBodyFormDataSlice.actions;
 	const bodyFormData = useAppSelector((state) => state.requestBodyFormDataReducer);
 
-	const [draggableHeaders, setDraggableHeaders] = useState(bodyFormData);
+	const [draggableFormData, setDraggableFormData] = useState(bodyFormData);
 
 	const dragSensors = useSensors(
 		useSensor(PointerSensor),
@@ -39,7 +39,7 @@ export const FormDataList = memo(function FormDataList() {
 	function handleDragEnd(event: DragCancelEvent) {
 		const { active, over } = event;
 		if (active?.id !== over?.id) {
-			setDraggableHeaders((prev) => {
+			setDraggableFormData((prev) => {
 				const activeIndex = prev.findIndex((item) => item._id === active.id);
 				const overIndex = prev.findIndex((item) => item._id === over?.id);
 				return arrayMove(prev, activeIndex, overIndex);
@@ -47,13 +47,13 @@ export const FormDataList = memo(function FormDataList() {
 		}
 	}
 
-	// useEffect(() => {
-	// 	dispatch(updateHeadersOrder(draggableHeaders));
-	// }, [draggableHeaders]);
+	useEffect(() => {
+		dispatch(updateFormDataOrder(draggableFormData));
+	}, [draggableFormData]);
 
-	// useEffect(() => {
-	// 	setDraggableHeaders(requestHeaders);
-	// }, [requestHeaders]);
+	useEffect(() => {
+		setDraggableFormData(bodyFormData);
+	}, [bodyFormData]);
 
 	return (
 		<>
@@ -64,10 +64,10 @@ export const FormDataList = memo(function FormDataList() {
 				modifiers={[restrictToVerticalAxis, restrictToFirstScrollableAncestor]}
 			>
 				<SortableContext
-					items={draggableHeaders.map((header) => header._id)}
+					items={draggableFormData.map((header) => header._id)}
 					strategy={verticalListSortingStrategy}
 				>
-					{draggableHeaders.map((formData) => (
+					{draggableFormData.map((formData) => (
 						<FormDataListItem
 							key={formData._id}
 							formData={formData}

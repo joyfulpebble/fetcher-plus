@@ -1,25 +1,26 @@
 import { useAppDispatch, useAppSelector } from "../../../../../../../../hooks/redux/redux";
 import { useClassnames } from "../../../../../../../../hooks/useClassnames";
 
+import requestBodyFormDataSlice from "../../../../../../../../redux/reducers/requestBodyFormDataSlice";
+
+import { BodyNone } from "./BodyNone";
 import { FormDataList } from "./content-types-lists/FormDataBody/FormDataList";
+import { FormDataEmptyList } from "./content-types-lists/FormDataBody/FormDataEmptyList";
 
 import { IconChevronDown, IconFilePlus, IconPlus, IconTrash } from "@tabler/icons-react";
 import { BodyContentTypesList } from "./content-types-lists/BodyContentTypesList";
 import { BodyRawTypesList } from "./content-types-lists/BodyRawTypesList";
 import Tippy from "@tippyjs/react";
 
-import { BodyNone } from "./BodyNone";
+import { v1 } from "uuid";
 
 import "./styles/Body.scss";
 import "./styles/BodyNone.scss";
 import "./styles/FormDataList.scss";
 
-// import requestBodyFormDataSlice from "../../../../../../../../redux/reducers/requestBodyFormDataSlice";
-import { FormDataEmptyList } from "./content-types-lists/FormDataBody/FormDataEmptyList";
-
 export const Body = () => {
-	// const dispatch = useAppDispatch();
-	// const { addBodyFormDataTextItem } = requestBodyFormDataSlice.actions;
+	const dispatch = useAppDispatch();
+	const { addBodyFormDataTextItem } = requestBodyFormDataSlice.actions;
 	const { contentType, rawType } = useAppSelector((state) => state.requestBodyTypeReducer);
 	const bodyFormData = useAppSelector((state) => state.requestBodyFormDataReducer);
 
@@ -103,7 +104,20 @@ export const Body = () => {
 								trigger="mouseenter"
 								zIndex={0}
 							>
-								<IconPlus size={16} />
+								<IconPlus
+									size={16}
+									onClick={() => {
+										dispatch(
+											addBodyFormDataTextItem({
+												_id: v1(),
+												isUsed: true,
+												key: "key",
+												value: "value",
+												valueType: "text"
+											})
+										);
+									}}
+								/>
 							</Tippy>
 						</div>
 					)}
