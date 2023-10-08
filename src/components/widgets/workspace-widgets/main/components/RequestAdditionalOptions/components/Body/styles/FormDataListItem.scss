@@ -117,6 +117,50 @@
 			justify-content: space-between;
 			border: solid 1px var(--border-color-default);
 			border-top: none;
+
+			.form_data_file_item {
+				border: 1px solid var(--border-color-default);
+				border-radius: 4px;
+				padding: 0 5px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+
+				.form_data_file_item_delete {
+					margin-left: 5px;
+					display: flex;
+					align-items: center;
+
+					&:hover {
+						color: var(--font-color-red);
+						transition: color 0.1s ease-in-out;
+					}
+				}
+
+				&:hover {
+					background-color: var(--border-color-default);
+					transition: background-color 0.1s ease-in-out;
+				}
+			}
+
+			input[type="file"] {
+				display: none;
+			}
+
+			.form_data_file_add_button {
+				border-radius: 4px;
+				padding: 3px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+
+				&:hover {
+					background-color: var(--border-color-default);
+					transition: background-color 0.1s ease-in-out;
+				}
+			}
 		}
 
 		&:hover .form_data_delete {

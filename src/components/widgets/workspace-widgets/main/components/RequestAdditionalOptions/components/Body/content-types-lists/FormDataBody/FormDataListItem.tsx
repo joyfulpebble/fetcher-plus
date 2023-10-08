@@ -1,29 +1,37 @@
+import { useState } from "react";
+
 import Input from "../../../../../../../../../UI/Input/Input";
+import Tippy from "@tippyjs/react";
+
 import {
 	IconTrash,
 	IconGripVertical,
 	IconCheckbox,
 	IconSquare,
 	IconChevronDown,
-	IconCheck
+	IconCheck,
+	IconPlus,
+	IconX
 } from "@tabler/icons-react";
 
-import { useAppDispatch } from "../../../../../../../../../../hooks/redux/redux";
+import { useAppDispatch, useAppSelector } from "../../../../../../../../../../hooks/redux/redux";
+import requestBodyFormDataSlice, {
+	BodyFormDataItem
+} from "../../../../../../../../../../redux/reducers/requestBodyFormDataSlice";
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
+import { v1 as uuidv1 } from "uuid";
 import "../../styles/FormDataListItem.scss";
-import requestBodyFormDataSlice, {
-	BodyFormDataItem
-} from "../../../../../../../../../../redux/reducers/requestBodyFormDataSlice";
-import Tippy from "@tippyjs/react";
 
 interface FormDataListItem {
 	formData: BodyFormDataItem;
 }
 
 export const FormDataListItem = ({ formData }: FormDataListItem) => {
+	const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
+
 	const dispatch = useAppDispatch();
 	const {
 		updateFormDataState,
@@ -44,6 +52,23 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 	// const onChange = useCallback((newValue: any) => {
 	// 	dispatch(updateHeaderName({ parameterID: header._id, newName: newValue }));
 	// }, []);
+
+	const idbRequest = indexedDB.open("request-body-files", 1);
+	idbRequest.onsuccess = () => {
+		const db = idbRequest.result;
+		const tx = db.transaction("files", "readwrite");
+		const filesStore = tx.objectStore("files");
+
+		const file = filesStore.get(formData.value);
+
+		file.onsuccess = () => {
+			setSelectedFileName(file.result.name);
+
+			tx.oncomplete = () => {
+				db.close();
+			};
+		};
+	};
 
 	return (
 		<section
@@ -110,6 +135,28 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 												type: "text"
 											})
 										);
+										dispatch(
+											updateFormDataValue({
+												formDataID: formData._id,
+												newValue: ""
+											})
+										);
+
+										const idbRequest = indexedDB.open("request-body-files", 1);
+
+										idbRequest.onsuccess = () => {
+											const db = idbRequest.result;
+											const tx = db.transaction("files", "readwrite");
+											const filesStore = tx.objectStore("files");
+
+											const deletingFile = filesStore.delete(formData.value);
+
+											deletingFile.onsuccess = () => {
+												tx.oncomplete = () => {
+													db.close();
+												};
+											};
+										};
 									}}
 								>
 									<span>Text</span>
@@ -124,6 +171,12 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 											updateFormDataValueType({
 												formDataID: formData._id,
 												type: "file"
+											})
+										);
+										dispatch(
+											updateFormDataValue({
+												formDataID: formData._id,
+												newValue: ""
 											})
 										);
 									}}
@@ -148,25 +201,112 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 					</Tippy>
 				</div>
 				<div className="form_data_val">
-					<Input
-						name={`form_data_value=${formData.value}`}
-						placeholder="Data value"
-						inputStyle="invisible"
-						onChange={(event) => {
-							dispatch(
-								updateFormDataValue({
-									formDataID: formData._id,
-									newValue: event?.target.value
-								})
-							);
-						}}
-						defaultValue={formData.value}
-					/>
+					{formData.valueType === "text" ? (
+						<Input
+							name={`form_data_value=${formData.value}`}
+							placeholder="Data value"
+							inputStyle="invisible"
+							onChange={(event) => {
+								dispatch(
+									updateFormDataValue({
+										formDataID: formData._id,
+										newValue: event?.target.value
+									})
+								);
+							}}
+							defaultValue={formData.value}
+						/>
+					) : formData.value ? (
+						<div className="form_data_file_item">
+							<div>{selectedFileName}</div>
+							<IconX
+								className="form_data_file_item_delete"
+								size={12}
+								onClick={() => {
+									const idbRequest = indexedDB.open("request-body-files", 1);
+									idbRequest.onsuccess = () => {
+										const db = idbRequest.result;
+										const tx = db.transaction("files", "readwrite");
+										const filesStore = tx.objectStore("files");
+
+										const deletingFile = filesStore.delete(formData.value);
+
+										deletingFile.onsuccess = () => {
+											tx.oncomplete = () => {
+												db.close();
+											};
+										};
+									};
+								}}
+							/>
+						</div>
+					) : (
+						<label>
+							<div className="form_data_file_add_button">
+								<IconPlus size={16} />
+							</div>
+							<input
+								type="file"
+								onChange={async (event) => {
+									const fileId: string = uuidv1();
+									const fileName: string = event.target.files![0].name;
+									const tempUrlToFile = URL.createObjectURL(event.target.files![0]);
+									const blobFromFile = await fetch(tempUrlToFile).then((res) => res.blob());
+
+									setSelectedFileName(fileName);
+
+									const idbRequest = indexedDB.open("request-body-files", 1);
+									idbRequest.onsuccess = () => {
+										const db = idbRequest.result;
+										const tx = db.transaction("files", "readwrite");
+										const filesStore = tx.objectStore("files");
+
+										const newFile = filesStore.put({
+											id: fileId,
+											name: fileName,
+											blob: blobFromFile
+										});
+
+										newFile.onsuccess = () => {
+											tx.oncomplete = () => {
+												db.close();
+											};
+										};
+									};
+
+									dispatch(
+										updateFormDataValue({
+											formDataID: formData._id,
+											newValue: fileId
+										})
+									);
+								}}
+							/>
+						</label>
+					)}
 					<div className="form_data_delete">
 						<IconTrash
 							size={16}
 							onClick={() => {
 								dispatch(deleteFormData(formData._id));
+
+								if (formData.valueType === "file") {
+									const idbRequest = indexedDB.open("request-body-files", 1);
+
+									idbRequest.onsuccess = () => {
+										const db = idbRequest.result;
+										const tx = db.transaction("files", "readwrite");
+										const filesStore = tx.objectStore("files");
+
+										const deletingFile = filesStore.delete(formData.value);
+
+										deletingFile.onsuccess = () => {
+											tx.oncomplete = () => {
+												db.close();
+											};
+										};
+									};
+								}
 							}}
 						/>
 					</div>

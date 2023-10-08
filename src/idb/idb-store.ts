@@ -11,7 +11,7 @@ export const setupIdbStore = () => {
 		const db = requestBodyFormDataFiles.result;
 
 		if (!db.objectStoreNames.contains("files")) {
-			db.createObjectStore("files");
+			db.createObjectStore("files", { keyPath: "id" });
 		}
 	};
 };

@@ -18,6 +18,14 @@ import "./styles/Body.scss";
 import "./styles/BodyNone.scss";
 import "./styles/FormDataList.scss";
 
+/** TODO:
+ * - Пофиксить сообщение об отсутствии елементов в form-data сторе
+ * - Пофиксить отображение items в кастомных методах запроса
+ * - Сделать разный функционал кнопки которая очищает весь стор в body для разных contentType
+ * - Модалка для добавления form-data элементов
+ * - Декомпозировать элементы по типу списков и всплывающих подсказок
+ */
+
 export const Body = () => {
 	const dispatch = useAppDispatch();
 	const { addBodyFormDataTextItem } = requestBodyFormDataSlice.actions;
@@ -27,7 +35,9 @@ export const Body = () => {
 	const request_body_classnames = useClassnames({
 		request_body_none_wrapper: contentType === "none",
 		request_body_form_data_wrapper: contentType === "form-data",
+		// !
 		request_body_form_data_wrapper_empty: bodyFormData.length === 0
+		// !
 	});
 
 	return (
