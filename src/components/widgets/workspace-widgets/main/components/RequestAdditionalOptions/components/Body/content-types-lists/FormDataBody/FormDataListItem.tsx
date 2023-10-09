@@ -223,6 +223,13 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 								className="form_data_file_item_delete"
 								size={12}
 								onClick={() => {
+									dispatch(
+										updateFormDataValue({
+											formDataID: formData._id,
+											newValue: ""
+										})
+									);
+
 									const idbRequest = indexedDB.open("request-body-files", 1);
 									idbRequest.onsuccess = () => {
 										const db = idbRequest.result;
