@@ -1,12 +1,12 @@
 .tippy_method_select_wrapper {
 	.tippy-content {
-		padding: 5px 5px;
+		padding: 5px 5px 0px 5px;
 	}
 
 	border: 1px solid var(--border-color-default);
 	background-color: var(--theme-dark-bg-lvl-2);
 	width: 150px;
-	max-height: 255px;
+	max-height: 259px;
 	overflow-y: auto;
 	user-select: none;
 }

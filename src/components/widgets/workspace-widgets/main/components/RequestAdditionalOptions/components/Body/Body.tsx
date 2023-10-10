@@ -5,7 +5,6 @@ import requestBodyFormDataSlice from "../../../../../../../../redux/reducers/req
 
 import { BodyNone } from "./BodyNone";
 import { FormDataList } from "./content-types-lists/FormDataBody/FormDataList";
-import { FormDataEmptyList } from "./content-types-lists/FormDataBody/FormDataEmptyList";
 
 import { IconChevronDown, IconFilePlus, IconPlus, IconTrash } from "@tabler/icons-react";
 import { BodyContentTypesList } from "./content-types-lists/BodyContentTypesList";
@@ -16,29 +15,37 @@ import { v1 } from "uuid";
 
 import "./styles/Body.scss";
 import "./styles/BodyNone.scss";
-import "./styles/FormDataList.scss";
 
 /** TODO:
- * - Пофиксить сообщение об отсутствии елементов в form-data сторе
- * - Пофиксить отображение items в кастомных методах запроса
- * - Сделать разный функционал кнопки которая очищает весь стор в body для разных contentType
+ * ✓ Пофиксить сообщение об отсутствии елементов в form-data сторе
+ * ✓ Пофиксить отображение items в кастомных методах запроса
+ * ✓ Сделать разный функционал кнопки которая очищает весь стор в body для разных contentType
  * - Модалка для добавления form-data элементов
- * - Декомпозировать элементы по типу списков и всплывающих подсказок
+ * ✓ Декомпозировать элементы по типу списков и всплывающих подсказок
  */
+
+const body_types = {
+	"none": <BodyNone />,
+	"form-data": <FormDataList />,
+	"x-www-form-urlencoded": <>x-www-form-urlencoded</>,
+	"raw": <>raw</>
+};
 
 export const Body = () => {
 	const dispatch = useAppDispatch();
-	const { addBodyFormDataTextItem } = requestBodyFormDataSlice.actions;
+	const { addBodyFormDataItem, clearFormData } = requestBodyFormDataSlice.actions;
 	const { contentType, rawType } = useAppSelector((state) => state.requestBodyTypeReducer);
-	const bodyFormData = useAppSelector((state) => state.requestBodyFormDataReducer);
 
 	const request_body_classnames = useClassnames({
 		request_body_none_wrapper: contentType === "none",
-		request_body_form_data_wrapper: contentType === "form-data",
-		// !
-		request_body_form_data_wrapper_empty: bodyFormData.length === 0
-		// !
+		request_body_wrapper: contentType !== "none"
 	});
+
+	const clear_all_functions = {
+		"form-data": clearFormData,
+		"x-www-form-urlencoded": clearFormData, // ? Изменить на urlencodedData
+		"raw": clearFormData // ? Изменить на rawData
+	};
 
 	return (
 		<>
@@ -118,7 +125,7 @@ export const Body = () => {
 									size={16}
 									onClick={() => {
 										dispatch(
-											addBodyFormDataTextItem({
+											addBodyFormDataItem({
 												_id: v1(),
 												isUsed: true,
 												key: "key",
@@ -135,33 +142,31 @@ export const Body = () => {
 							</Tippy>
 						</div>
 					)}
-					<div className="delete_all">
-						<Tippy
-							className="base_tippy_wrapper"
-							placement="top"
-							content={"Clear all"}
-							animation="shift-away"
-							arrow={true}
-							trigger="mouseenter"
-							zIndex={0}
-							offset={[-15, 10]}
-						>
-							<IconTrash
-								size={16}
-								stroke={2}
-							/>
-						</Tippy>
-					</div>
+					{contentType !== "none" && (
+						<div className="delete_all">
+							<Tippy
+								className="base_tippy_wrapper"
+								placement="top"
+								content={"Clear all"}
+								animation="shift-away"
+								arrow={true}
+								trigger="mouseenter"
+								zIndex={0}
+								offset={[-15, 10]}
+							>
+								<IconTrash
+									size={16}
+									stroke={2}
+									onClick={() => {
+										dispatch(clear_all_functions[contentType]());
+									}}
+								/>
+							</Tippy>
+						</div>
+					)}
 				</div>
 			</section>
-			<section className={request_body_classnames}>
-				{contentType === "none" && <BodyNone />}
-				{contentType === "form-data" && !!bodyFormData.length ? (
-					<FormDataList />
-				) : (
-					<FormDataEmptyList openModalFunc={() => {}} />
-				)}
-			</section>
+			<section className={request_body_classnames}>{body_types[contentType]}</section>
 		</>
 	);
 };

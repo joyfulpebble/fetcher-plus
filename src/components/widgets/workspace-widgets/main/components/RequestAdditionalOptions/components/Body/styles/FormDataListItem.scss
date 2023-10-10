@@ -40,6 +40,7 @@
 		user-select: none;
 
 		.form_data_key {
+			min-width: 200px;
 			padding: 5px;
 			width: 100%;
 			display: flex;
@@ -119,6 +120,7 @@
 			border-top: none;
 
 			.form_data_file_item {
+				max-width: 200px;
 				border: 1px solid var(--border-color-default);
 				border-radius: 4px;
 				padding: 0 5px;
@@ -126,6 +128,13 @@
 				align-items: center;
 				justify-content: center;
 				cursor: pointer;
+
+				.file_name {
+					max-width: 170px;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
 
 				.form_data_file_item_delete {
 					margin-left: 5px;

@@ -13,7 +13,8 @@ interface ValueTypeListProps {
 
 export const ValueTypeList = ({ item }: ValueTypeListProps) => {
 	const dispatch = useAppDispatch();
-	const { updateFormDataValueType, updateFormDataValue } = requestBodyFormDataSlice.actions;
+	const { updateFormDataValueType, updateFormDataValue, updateFormDataFileInfo } =
+		requestBodyFormDataSlice.actions;
 
 	return (
 		<div className="form_data_value_type_list">
@@ -27,9 +28,12 @@ export const ValueTypeList = ({ item }: ValueTypeListProps) => {
 						})
 					);
 					dispatch(
-						updateFormDataValue({
-							formDataID: item._id,
-							newValue: ""
+						updateFormDataFileInfo({
+							id: item._id,
+							value: {
+								id: "",
+								name: ""
+							}
 						})
 					);
 
@@ -40,7 +44,7 @@ export const ValueTypeList = ({ item }: ValueTypeListProps) => {
 						const tx = db.transaction("files", "readwrite");
 						const filesStore = tx.objectStore("files");
 
-						const deletingFile = filesStore.delete(item.value);
+						const deletingFile = filesStore.delete(item.fileInfo.id);
 
 						deletingFile.onsuccess = () => {
 							tx.oncomplete = () => {

@@ -44,23 +44,6 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 		transition
 	};
 
-	// const idbRequest = indexedDB.open("request-body-files", 1);
-	// idbRequest.onsuccess = () => {
-	// 	const db = idbRequest.result;
-	// 	const tx = db.transaction("files", "readwrite");
-	// 	const filesStore = tx.objectStore("files");
-
-	// 	const file = filesStore.get(formData.value);
-
-	// 	file.onsuccess = () => {
-	// 		setSelectedFileName(file.result.name);
-
-	// 		tx.oncomplete = () => {
-	// 			db.close();
-	// 		};
-	// 	};
-	// };
-
 	return (
 		<section
 			ref={setNodeRef}
@@ -146,7 +129,7 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 						/>
 					) : formData.fileInfo.id ? (
 						<div className="form_data_file_item">
-							<div>{formData.fileInfo.name}</div>
+							<div className="file_name">{formData.fileInfo.name}</div>
 							<IconX
 								className="form_data_file_item_delete"
 								size={12}

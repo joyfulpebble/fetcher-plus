@@ -52,7 +52,7 @@ export const requestBodyFormDataSlice = createSlice({
 		clearFormData: () => initialState,
 		updateFormDataOrder: (state, action: PayloadAction<BodyFormDataStore>) =>
 			(state = action.payload),
-		addBodyFormDataTextItem: (state, action: PayloadAction<BodyFormDataItem>) => [
+		addBodyFormDataItem: (state, action: PayloadAction<BodyFormDataItem>) => [
 			...state,
 			action.payload
 		],

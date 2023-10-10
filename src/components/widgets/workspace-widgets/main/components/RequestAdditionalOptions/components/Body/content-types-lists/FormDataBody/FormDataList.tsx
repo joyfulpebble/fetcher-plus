@@ -21,6 +21,9 @@ import {
 import { restrictToFirstScrollableAncestor, restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 import { FormDataListItem } from "./FormDataListItem";
+import { FormDataEmptyList } from "./FormDataEmptyList";
+
+import "../../styles/FormDataList.scss";
 
 export const FormDataList = memo(function FormDataList() {
 	const dispatch = useAppDispatch();
@@ -56,25 +59,29 @@ export const FormDataList = memo(function FormDataList() {
 	}, [bodyFormData]);
 
 	return (
-		<>
-			<DndContext
-				sensors={dragSensors}
-				onDragEnd={handleDragEnd}
-				collisionDetection={closestCenter}
-				modifiers={[restrictToVerticalAxis, restrictToFirstScrollableAncestor]}
-			>
-				<SortableContext
-					items={draggableFormData.map((header) => header._id)}
-					strategy={verticalListSortingStrategy}
+		<div className={bodyFormData.length === 0 ? "request_body_form_data_wrapper_empty" : ""}>
+			{bodyFormData.length ? (
+				<DndContext
+					sensors={dragSensors}
+					onDragEnd={handleDragEnd}
+					collisionDetection={closestCenter}
+					modifiers={[restrictToVerticalAxis, restrictToFirstScrollableAncestor]}
 				>
-					{draggableFormData.map((formData) => (
-						<FormDataListItem
-							key={formData._id}
-							formData={formData}
-						/>
-					))}
-				</SortableContext>
-			</DndContext>
-		</>
+					<SortableContext
+						items={draggableFormData.map((header) => header._id)}
+						strategy={verticalListSortingStrategy}
+					>
+						{draggableFormData.map((formData) => (
+							<FormDataListItem
+								key={formData._id}
+								formData={formData}
+							/>
+						))}
+					</SortableContext>
+				</DndContext>
+			) : (
+				<FormDataEmptyList openModalFunc={() => {}} />
+			)}
+		</div>
 	);
 });

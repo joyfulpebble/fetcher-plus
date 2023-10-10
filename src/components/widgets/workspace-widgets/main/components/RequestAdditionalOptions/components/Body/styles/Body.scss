@@ -73,3 +73,9 @@
 	overflow-y: auto;
 	user-select: none;
 }
+.request_body_wrapper {
+	height: 100%;
+	user-select: none;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
