@@ -123,7 +123,11 @@ export const Body = () => {
 												isUsed: true,
 												key: "key",
 												value: "value",
-												valueType: "text"
+												valueType: "text",
+												fileInfo: {
+													id: "",
+													name: ""
+												}
 											})
 										);
 									}}

@@ -23,17 +23,21 @@ import { CSS } from "@dnd-kit/utilities";
 import "../../styles/FormDataListItem.scss";
 import { ValueTypeList } from "./components/ValueTypeList";
 import { FileSelect } from "./components/FileSelect";
+import { IdbRequest } from "../../../../../../../../../../idb/idb-request";
 
 interface FormDataListItem {
 	formData: BodyFormDataItem;
 }
 
 export const FormDataListItem = ({ formData }: FormDataListItem) => {
-	const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
-
 	const dispatch = useAppDispatch();
-	const { updateFormDataState, updateFormDataKey, updateFormDataValue, deleteFormData } =
-		requestBodyFormDataSlice.actions;
+	const {
+		updateFormDataState,
+		updateFormDataKey,
+		updateFormDataValue,
+		updateFormDataFileInfo,
+		deleteFormData
+	} = requestBodyFormDataSlice.actions;
 
 	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
 		id: formData._id
@@ -43,22 +47,22 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 		transition
 	};
 
-	const idbRequest = indexedDB.open("request-body-files", 1);
-	idbRequest.onsuccess = () => {
-		const db = idbRequest.result;
-		const tx = db.transaction("files", "readwrite");
-		const filesStore = tx.objectStore("files");
+	// const idbRequest = indexedDB.open("request-body-files", 1);
+	// idbRequest.onsuccess = () => {
+	// 	const db = idbRequest.result;
+	// 	const tx = db.transaction("files", "readwrite");
+	// 	const filesStore = tx.objectStore("files");
 
-		const file = filesStore.get(formData.value);
+	// 	const file = filesStore.get(formData.value);
 
-		file.onsuccess = () => {
-			setSelectedFileName(file.result.name);
+	// 	file.onsuccess = () => {
+	// 		setSelectedFileName(file.result.name);
 
-			tx.oncomplete = () => {
-				db.close();
-			};
-		};
-	};
+	// 		tx.oncomplete = () => {
+	// 			db.close();
+	// 		};
+	// 	};
+	// };
 
 	return (
 		<section
@@ -143,27 +147,20 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 							}}
 							defaultValue={formData.value}
 						/>
-					) : formData.value ? (
+					) : formData.fileInfo.id ? (
 						<div className="form_data_file_item">
-							<div>{selectedFileName}</div>
+							<div>{formData.fileInfo.name}</div>
 							<IconX
 								className="form_data_file_item_delete"
 								size={12}
 								onClick={() => {
-									dispatch(
-										updateFormDataValue({
-											formDataID: formData._id,
-											newValue: ""
-										})
-									);
-
 									const idbRequest = indexedDB.open("request-body-files", 1);
 									idbRequest.onsuccess = () => {
 										const db = idbRequest.result;
 										const tx = db.transaction("files", "readwrite");
 										const filesStore = tx.objectStore("files");
 
-										const deletingFile = filesStore.delete(formData.value);
+										const deletingFile = filesStore.delete(formData.fileInfo.id);
 
 										deletingFile.onsuccess = () => {
 											tx.oncomplete = () => {
@@ -171,14 +168,27 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 											};
 										};
 									};
+
+									dispatch(
+										updateFormDataValue({
+											formDataID: formData._id,
+											newValue: ""
+										})
+									);
+									dispatch(
+										updateFormDataFileInfo({
+											id: formData._id,
+											value: {
+												id: "",
+												name: ""
+											}
+										})
+									);
 								}}
 							/>
 						</div>
 					) : (
-						<FileSelect
-							item={formData}
-							setFunc={setSelectedFileName}
-						/>
+						<FileSelect item={formData} />
 					)}
 					<div className="form_data_delete">
 						<IconTrash
@@ -194,7 +204,7 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 										const tx = db.transaction("files", "readwrite");
 										const filesStore = tx.objectStore("files");
 
-										const deletingFile = filesStore.delete(formData.value);
+										const deletingFile = filesStore.delete(formData.fileInfo.id);
 
 										deletingFile.onsuccess = () => {
 											tx.oncomplete = () => {

@@ -9,26 +9,37 @@ export type BodyFormDataItem = {
 	valueType: ValueFileT | ValueTextT;
 	key: string;
 	value: string;
+	fileInfo: {
+		id: string;
+		name: string;
+	};
 };
-type FormDataValueUpdateObject = {
+interface FormDataFileInfoUpdateObject {
+	id: FormDataItemID;
+	value: {
+		id: string;
+		name: string;
+	};
+}
+interface FormDataValueUpdateObject {
 	formDataID: FormDataItemID;
 	newValue: string;
-};
-type FormDataKeyUpdateObject = {
+}
+interface FormDataKeyUpdateObject {
 	formDataID: FormDataItemID;
 	newKey: string;
-};
-type FormDataUpdateObject = {
+}
+interface FormDataUpdateObject {
 	formDataID: FormDataItemID;
 	newValues: {
 		key: string;
 		value: string;
 	};
-};
-type FormDataValueTypeUpdateObject = {
+}
+interface FormDataValueTypeUpdateObject {
 	formDataID: FormDataItemID;
 	type: ValueFileT | ValueTextT;
-};
+}
 
 type BodyFormDataStore = Array<BodyFormDataItem>;
 
@@ -63,6 +74,11 @@ export const requestBodyFormDataSlice = createSlice({
 		updateFormDataValue: (state, action: PayloadAction<FormDataValueUpdateObject>) => {
 			[...state].map((item) => {
 				if (item._id === action.payload.formDataID) item.value = action.payload.newValue;
+			});
+		},
+		updateFormDataFileInfo: (state, action: PayloadAction<FormDataFileInfoUpdateObject>) => {
+			[...state].map((item) => {
+				if (item._id === action.payload.id) item.fileInfo = action.payload.value;
 			});
 		},
 		updateFormDataKey: (state, action: PayloadAction<FormDataKeyUpdateObject>) => {

@@ -11,12 +11,11 @@ import "../../../styles/FormDataListItem.scss";
 
 interface FileSelectProps {
 	item: BodyFormDataItem;
-	setFunc: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-export const FileSelect = ({ item, setFunc }: FileSelectProps) => {
+export const FileSelect = ({ item }: FileSelectProps) => {
 	const dispatch = useAppDispatch();
-	const { updateFormDataValue } = requestBodyFormDataSlice.actions;
+	const { updateFormDataFileInfo } = requestBodyFormDataSlice.actions;
 
 	return (
 		<label>
@@ -30,8 +29,6 @@ export const FileSelect = ({ item, setFunc }: FileSelectProps) => {
 					const fileName: string = event.target.files![0].name;
 					const tempUrlToFile = URL.createObjectURL(event.target.files![0]);
 					const blobFromFile = await fetch(tempUrlToFile).then((res) => res.blob());
-
-					setFunc(fileName);
 
 					const idbRequest = indexedDB.open("request-body-files", 1);
 					idbRequest.onsuccess = () => {
@@ -53,9 +50,12 @@ export const FileSelect = ({ item, setFunc }: FileSelectProps) => {
 					};
 
 					dispatch(
-						updateFormDataValue({
-							formDataID: item._id,
-							newValue: fileId
+						updateFormDataFileInfo({
+							id: item._id,
+							value: {
+								id: fileId,
+								name: fileName
+							}
 						})
 					);
 				}}
