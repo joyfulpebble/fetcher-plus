@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import Input from "../../../../../../../../../UI/Input/Input";
 import Tippy from "@tippyjs/react";
 
@@ -23,7 +21,6 @@ import { CSS } from "@dnd-kit/utilities";
 import "../../styles/FormDataListItem.scss";
 import { ValueTypeList } from "./components/ValueTypeList";
 import { FileSelect } from "./components/FileSelect";
-import { IdbRequest } from "../../../../../../../../../../idb/idb-request";
 
 interface FormDataListItem {
 	formData: BodyFormDataItem;
