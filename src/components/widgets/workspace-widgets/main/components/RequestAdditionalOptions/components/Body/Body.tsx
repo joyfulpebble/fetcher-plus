@@ -11,10 +11,15 @@ import { BodyContentTypesList } from "./content-types-lists/BodyContentTypesList
 import { BodyRawTypesList } from "./content-types-lists/BodyRawTypesList";
 import Tippy from "@tippyjs/react";
 
-import { v1 } from "uuid";
+import { v1 as uuidv1 } from "uuid";
 
 import "./styles/Body.scss";
 import "./styles/BodyNone.scss";
+import Modal from "../../../../../../../UI/Modal/Modal";
+import { useState, useRef } from "react";
+import Input from "../../../../../../../UI/Input/Input";
+import { FileSelect } from "../../../../../../../UI/FileSelect/FileSelect";
+import { Dropdown } from "../../../../../../../UI/Dropdown/Dropdown";
 
 /** TODO:
  * ✓ Пофиксить сообщение об отсутствии елементов в form-data сторе
@@ -32,6 +37,22 @@ const body_types = {
 };
 
 export const Body = () => {
+	const [newFormDataModalView, setNewFormDataModalView] = useState(false);
+
+	// ! -----------------------------------------------------------------------------------------------
+
+	const [newFormDataItem, setNewFormDataItem] = useState<null | {
+		id: string;
+		name: string;
+		blob: Blob;
+	}>(null);
+	const [newFormDataItemType, setNewFormDataItemType] = useState<null | string>("Text");
+
+	const formDataItemKeyRef = useRef<HTMLInputElement>(null);
+	const formDataItemValueRef = useRef<HTMLInputElement>(null);
+
+	// ! -----------------------------------------------------------------------------------------------
+
 	const dispatch = useAppDispatch();
 	const { addBodyFormDataItem, clearFormData } = requestBodyFormDataSlice.actions;
 	const { contentType, rawType } = useAppSelector((state) => state.requestBodyTypeReducer);
@@ -42,13 +63,140 @@ export const Body = () => {
 	});
 
 	const clear_all_functions = {
-		"form-data": clearFormData,
+		"form-data": () => {
+			dispatch(clearFormData());
+			// ! -------------------------------------------------------
+
+			const idbRequest = indexedDB.open("request-body-files", 1);
+			idbRequest.onsuccess = () => {
+				const db = idbRequest.result;
+				const tx = db.transaction("files", "readwrite");
+				const filesStore = tx.objectStore("files");
+				const emptyStore = filesStore.clear();
+
+				emptyStore.onsuccess = () => {
+					tx.oncomplete = () => {
+						db.close();
+					};
+				};
+			};
+
+			// ! -------------------------------------------------------
+		},
 		"x-www-form-urlencoded": clearFormData, // ? Изменить на urlencodedData
 		"raw": clearFormData // ? Изменить на rawData
 	};
 
 	return (
 		<>
+			<Modal
+				title="Adding a new form-data body item"
+				visibility={newFormDataModalView}
+				onSubmit={() => {
+					if (!!newFormDataItem) {
+						const idbRequest = indexedDB.open("request-body-files", 1);
+						idbRequest.onsuccess = () => {
+							const db = idbRequest.result;
+							const tx = db.transaction("files", "readwrite");
+							const filesStore = tx.objectStore("files");
+
+							const newFile = filesStore.put({
+								id: newFormDataItem.id,
+								name: newFormDataItem.name,
+								blob: newFormDataItem.blob
+							});
+
+							newFile.onsuccess = () => {
+								tx.oncomplete = () => {
+									db.close();
+								};
+							};
+						};
+						dispatch(
+							addBodyFormDataItem({
+								_id: uuidv1(),
+								isUsed: true,
+								valueType: "file",
+								value: "",
+								key: formDataItemKeyRef.current!.value,
+								fileInfo: {
+									id: newFormDataItem.id,
+									name: newFormDataItem.name
+								}
+							})
+						);
+					} else {
+						dispatch(
+							addBodyFormDataItem({
+								_id: uuidv1(),
+								isUsed: true,
+								valueType: "text",
+								value: formDataItemValueRef.current!.value,
+								key: formDataItemKeyRef.current!.value,
+								fileInfo: {
+									id: "",
+									name: ""
+								}
+							})
+						);
+					}
+					return true;
+				}}
+				onCancel={() => true}
+				onClose={() => setNewFormDataModalView(false)}
+			>
+				<div className="form_data_item_adding_modal">
+					<div className="form_data_modal_item_key">
+						<Input
+							label="Enter form-data key:"
+							placeholder="Some key..."
+							innerRef={formDataItemKeyRef}
+						/>
+					</div>
+					<div className="form_data_modal_item_value">
+						<div>
+							<Dropdown
+								data={["Text", "File"]}
+								onChange={(value) => {
+									setNewFormDataItemType(value);
+								}}
+								title="Select form-data item value type:"
+								placeholder="Type..."
+								searchIcon={false}
+								initValue={newFormDataItemType!}
+								disableSearch={true}
+							/>
+						</div>
+						{newFormDataItemType === "Text" ? (
+							<div>
+								<Input
+									label="Enter form-data value:"
+									placeholder="Some value..."
+									innerRef={formDataItemValueRef}
+								/>
+							</div>
+						) : (
+							<div className="form_data_modal_select_file">
+								<FileSelect
+									placeholder="Click to upload file"
+									onChange={async (event) => {
+										const fileId: string = uuidv1();
+										const fileName: string = event.target.files![0].name;
+										const tempUrlToFile = URL.createObjectURL(event.target.files![0]);
+										const blobFromFile = await fetch(tempUrlToFile).then((res) => res.blob());
+
+										setNewFormDataItem({
+											id: fileId,
+											name: fileName,
+											blob: blobFromFile
+										});
+									}}
+								/>
+							</div>
+						)}
+					</div>
+				</div>
+			</Modal>
 			<section className="request_additional_option_header_wrapper">
 				<div className="body_conntent_type_select_wrapper">
 					<span className="request_additional_option_name">Body</span>
@@ -124,19 +272,7 @@ export const Body = () => {
 								<IconPlus
 									size={16}
 									onClick={() => {
-										dispatch(
-											addBodyFormDataItem({
-												_id: v1(),
-												isUsed: true,
-												key: "key",
-												value: "value",
-												valueType: "text",
-												fileInfo: {
-													id: "",
-													name: ""
-												}
-											})
-										);
+										setNewFormDataModalView(true);
 									}}
 								/>
 							</Tippy>
@@ -158,7 +294,7 @@ export const Body = () => {
 									size={16}
 									stroke={2}
 									onClick={() => {
-										dispatch(clear_all_functions[contentType]());
+										clear_all_functions[contentType]();
 									}}
 								/>
 							</Tippy>

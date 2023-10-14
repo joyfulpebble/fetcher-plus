@@ -119,12 +119,12 @@ export const Dropdown = memo(function Dropdown({
 					value={value}
 					readOnly={disableSearch}
 					onChange={(event) => {
+						if (!disableSearch) search(event.target.value);
 						setValue(event.target.value);
-						search(event.target.value);
 						onChange(event.target.value);
 					}}
 					onFocus={(event) => {
-						if (data === filteredData) search(event.target.value);
+						if (!disableSearch && data === filteredData) search(event.target.value);
 					}}
 				></input>
 				{disableSearch && (
@@ -145,7 +145,7 @@ export const Dropdown = memo(function Dropdown({
 									key={uuidv1()}
 									className={`dropdown_list_item`}
 									onClick={() => {
-										search(element);
+										if (!disableSearch) search(element);
 										setValue(element);
 										onChange(element);
 										setListIsActive(false);

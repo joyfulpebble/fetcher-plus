@@ -79,3 +79,19 @@
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
+
+// ! ----------------------------------------------------
+.form_data_item_adding_modal {
+	.form_data_modal_item_key {
+		margin-bottom: 16px;
+	}
+	.form_data_modal_item_value {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-end;
+		justify-content: space-between;
+	}
+	.form_data_modal_select_file {
+		width: 200px;
+	}
+}

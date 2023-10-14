@@ -1,6 +1,7 @@
+import { ValueTypeList } from "./components/ValueTypeList";
+import { FileSelect } from "../../../../../../../../../UI/FileSelect/FileSelect";
 import Input from "../../../../../../../../../UI/Input/Input";
 import Tippy from "@tippyjs/react";
-
 import {
 	IconTrash,
 	IconGripVertical,
@@ -9,6 +10,8 @@ import {
 	IconChevronDown,
 	IconX
 } from "@tabler/icons-react";
+
+import { v1 as uuidv1 } from "uuid";
 
 import { useAppDispatch } from "../../../../../../../../../../hooks/redux/redux";
 import requestBodyFormDataSlice, {
@@ -19,8 +22,6 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 import "../../styles/FormDataListItem.scss";
-import { ValueTypeList } from "./components/ValueTypeList";
-import { FileSelect } from "./components/FileSelect";
 
 interface FormDataListItem {
 	formData: BodyFormDataItem;
@@ -168,7 +169,41 @@ export const FormDataListItem = ({ formData }: FormDataListItem) => {
 							/>
 						</div>
 					) : (
-						<FileSelect item={formData} />
+						<FileSelect
+							elementStyle="small"
+							onChange={async (event) => {
+								const fileId: string = uuidv1();
+								const fileName: string = event.target.files![0].name;
+								const tempUrlToFile = URL.createObjectURL(event.target.files![0]);
+								const blobFromFile = await fetch(tempUrlToFile).then((res) => res.blob());
+
+								const idbRequest = indexedDB.open("request-body-files", 1);
+								idbRequest.onsuccess = () => {
+									const db = idbRequest.result;
+									const tx = db.transaction("files", "readwrite");
+									const filesStore = tx.objectStore("files");
+									const newFile = filesStore.put({
+										id: fileId,
+										name: fileName,
+										blob: blobFromFile
+									});
+									newFile.onsuccess = () => {
+										tx.oncomplete = () => {
+											db.close();
+										};
+									};
+								};
+								dispatch(
+									updateFormDataFileInfo({
+										id: formData._id,
+										value: {
+											id: fileId,
+											name: fileName
+										}
+									})
+								);
+							}}
+						/>
 					)}
 					<div className="form_data_delete">
 						<IconTrash
