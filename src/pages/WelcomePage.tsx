@@ -1,5 +1,5 @@
-import Statusbar from "../components/widgets/Statusbar/Statusbar";
-import LinkButton from "../components/UI/Buttons/RedirectButton";
+import RedirectButton from "../components/ui/Buttons/RedirectButton";
+import Statusbar from "../widgets/statusbar-widgets/Statusbar";
 
 function WelcomePage(): JSX.Element {
 	return (
@@ -13,7 +13,7 @@ function WelcomePage(): JSX.Element {
 		>
 			<h1>WelcomePage</h1>
 			<div style={{ display: "flex", justifyContent: "space-evenly" }}>
-				<LinkButton
+				<RedirectButton
 					content={"Go to workspace"}
 					redirectPath={"/workspace"}
 					buttonStyle="secondary"

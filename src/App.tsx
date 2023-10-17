@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import WelcomePage from "./pages/WelcomePage";
-import Workspace from "./pages/Workspace";
+import WorkspacePage from "./pages/WorkspacePage";
 
 import "./styles/main.css";
 import "./styles/variables.css";
@@ -16,7 +16,7 @@ function App(): JSX.Element {
 				/>
 				<Route
 					path="/workspace"
-					element={<Workspace />}
+					element={<WorkspacePage />}
 				/>
 				{/* <Route
 					path="/get-fetch-form"
