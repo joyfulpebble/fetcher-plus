@@ -86,3 +86,32 @@ body {
 ::placeholder {
 	user-select: none;
 }
+
+.default_tippy {
+	border: 1px solid var(--border-color-default);
+	background-color: var(--theme-dark-bg-lvl-2);
+	overflow-y: auto;
+	user-select: none;
+
+	.tippy-content {
+		padding: 0 5px;
+		padding-top: 5px;
+		padding-bottom: 3px;
+	}
+}
+
+.info_tippy {
+	border: 1px solid var(--border-color-default);
+	background-color: var(--theme-dark-bg-lvl-2);
+	border-radius: var(--border-radius-default);
+	user-select: none;
+
+	.tippy-arrow::before {
+		color: var(--theme-dark-bg-lvl-2);
+	}
+	.tippy-content {
+		font-weight: 200;
+		font-size: var(--font-size-paragraph);
+		line-height: var(--font-line-height);
+	}
+}

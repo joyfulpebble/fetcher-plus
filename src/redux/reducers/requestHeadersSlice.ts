@@ -1,29 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type HeaderID = string;
-export type Header = {
+export type RequestHeaderItem = {
 	_id: HeaderID;
 	isUsed: boolean;
-	name: string;
+	key: string;
 	value: string;
 };
 type HeaderStateUpdate = HeaderID;
 type HeaderValueUpdateObject = {
-	parameterID: HeaderID;
-	newValue: string;
+	headerID: HeaderID;
+	value: string;
 };
 type HeaderNameUpdateObject = {
-	parameterID: HeaderID;
-	newName: string;
+	headerID: HeaderID;
+	key: string;
 };
 type HeaderUpdateObject = {
-	parameterID: HeaderID;
-	newHeader: {
-		header_name: string;
-		header_value: string;
+	headerID: HeaderID;
+	data: {
+		key: string;
+		value: string;
 	};
 };
-type HeadersStore = Array<Header>;
+type HeadersStore = Array<RequestHeaderItem>;
 
 const initialState: HeadersStore = [];
 
@@ -33,9 +33,9 @@ export const requestHeadersSlice = createSlice({
 	reducers: {
 		deleteAllHeaders: () => [],
 		updateHeadersOrder: (state, action: PayloadAction<HeadersStore>) => (state = action.payload),
-		addHeader: (state, action: PayloadAction<Header>) => [...state, action.payload],
+		addHeader: (state, action: PayloadAction<RequestHeaderItem>) => [...state, action.payload],
 		deleteHeader: (state, action: PayloadAction<HeaderID>) =>
-			[...state].filter((header: Header) => header._id !== action.payload),
+			[...state].filter((header: RequestHeaderItem) => header._id !== action.payload),
 		updateHeaderState: (state, action: PayloadAction<HeaderStateUpdate>) => {
 			[...state].map((header): void => {
 				if (header._id === action.payload) header.isUsed = !header.isUsed;
@@ -43,20 +43,20 @@ export const requestHeadersSlice = createSlice({
 		},
 		updateHeader: (state, action: PayloadAction<HeaderUpdateObject>) => {
 			[...state].map((parameter): void => {
-				if (parameter._id === action.payload.parameterID) {
-					parameter.name = action.payload.newHeader.header_name;
-					parameter.value = action.payload.newHeader.header_value;
+				if (parameter._id === action.payload.headerID) {
+					parameter.key = action.payload.data.key;
+					parameter.value = action.payload.data.value;
 				}
 			});
 		},
 		updateHeaderValue: (state, action: PayloadAction<HeaderValueUpdateObject>) => {
 			[...state].map((header) => {
-				if (header._id === action.payload.parameterID) header.value = action.payload.newValue;
+				if (header._id === action.payload.headerID) header.value = action.payload.value;
 			});
 		},
 		updateHeaderName: (state, action: PayloadAction<HeaderNameUpdateObject>) => {
 			[...state].map((header) => {
-				if (header._id === action.payload.parameterID) header.name = action.payload.newName;
+				if (header._id === action.payload.headerID) header.key = action.payload.key;
 			});
 		}
 	}

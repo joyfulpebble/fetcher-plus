@@ -1,4 +1,14 @@
-.list_element {
+.custom_method_element_wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+.methods_list_request_name_wrapper {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.methods_list_element {
 	font-weight: 400;
 	display: flex;
 	align-items: center;
@@ -17,7 +27,7 @@
 		background-color: var(--border-color-default);
 	}
 }
-.list_delete_button {
+.methods_list_delete_button {
 	color: var(--font-color-white);
 	transition: color ease 0.1s;
 	&:hover {
@@ -25,8 +35,8 @@
 		transition: color ease 0.1s;
 	}
 }
-.list_request_name {
-	width: 90px;
+.methods_list_request_name {
+	width: 80px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

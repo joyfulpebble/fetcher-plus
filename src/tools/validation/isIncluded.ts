@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import type { CommonT } from "../../types/common";
 
 type IncludeType = (

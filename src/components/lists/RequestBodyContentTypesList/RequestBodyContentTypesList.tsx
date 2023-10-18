@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux/redux";
 
-import { IconCheck } from "@tabler/icons-react";
-
 import { bodyContentTypes } from "../../../tools/constants";
 import requestBodyTypeSlice from "../../../redux/reducers/requestBodyTypeSlice";
+
+import { IconCheck } from "@tabler/icons-react";
 
 import { CommonT } from "../../../types/common";
 import "./RequestBodyContentTypesList.scss";

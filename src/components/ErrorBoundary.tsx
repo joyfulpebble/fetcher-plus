@@ -1,7 +1,10 @@
 import React from "react";
-import type { ElementsT } from "../types/elements";
 
-class ErrorBoundary extends React.Component<any, ElementsT.ErrorBoundaryStateI> {
+type ErrorBoundaryStateT = {
+	error: boolean;
+};
+
+class ErrorBoundary extends React.Component<any, ErrorBoundaryStateT> {
 	constructor(props: {}) {
 		super(props);
 		this.state = {

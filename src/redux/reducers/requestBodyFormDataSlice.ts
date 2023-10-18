@@ -3,7 +3,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type FormDataItemID = string;
 type ValueTextT = "text";
 type ValueFileT = "file";
-export type BodyFormDataItem = {
+
+export interface BodyFormDataItem {
 	_id: FormDataItemID;
 	isUsed: boolean;
 	valueType: ValueFileT | ValueTextT;
@@ -13,7 +14,7 @@ export type BodyFormDataItem = {
 		id: string;
 		name: string;
 	};
-};
+}
 interface FormDataFileInfoUpdateObject {
 	id: FormDataItemID;
 	value: {
@@ -23,15 +24,15 @@ interface FormDataFileInfoUpdateObject {
 }
 interface FormDataValueUpdateObject {
 	formDataID: FormDataItemID;
-	newValue: string;
+	value: string;
 }
 interface FormDataKeyUpdateObject {
 	formDataID: FormDataItemID;
-	newKey: string;
+	key: string;
 }
 interface FormDataUpdateObject {
 	formDataID: FormDataItemID;
-	newValues: {
+	data: {
 		key: string;
 		value: string;
 	};
@@ -66,14 +67,14 @@ export const requestBodyFormDataSlice = createSlice({
 		updateFormData: (state, action: PayloadAction<FormDataUpdateObject>) => {
 			[...state].map((item): void => {
 				if (item._id === action.payload.formDataID) {
-					item.key = action.payload.newValues.key;
-					item.value = action.payload.newValues.value;
+					item.key = action.payload.data.key;
+					item.value = action.payload.data.value;
 				}
 			});
 		},
 		updateFormDataValue: (state, action: PayloadAction<FormDataValueUpdateObject>) => {
 			[...state].map((item) => {
-				if (item._id === action.payload.formDataID) item.value = action.payload.newValue;
+				if (item._id === action.payload.formDataID) item.value = action.payload.value;
 			});
 		},
 		updateFormDataFileInfo: (state, action: PayloadAction<FormDataFileInfoUpdateObject>) => {
@@ -83,7 +84,7 @@ export const requestBodyFormDataSlice = createSlice({
 		},
 		updateFormDataKey: (state, action: PayloadAction<FormDataKeyUpdateObject>) => {
 			[...state].map((item) => {
-				if (item._id === action.payload.formDataID) item.key = action.payload.newKey;
+				if (item._id === action.payload.formDataID) item.key = action.payload.key;
 			});
 		},
 		updateFormDataValueType: (state, action: PayloadAction<FormDataValueTypeUpdateObject>) => {

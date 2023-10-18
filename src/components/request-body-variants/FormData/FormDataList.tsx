@@ -25,7 +25,7 @@ import FormDataEmptyList from "./FormDataEmptyList";
 
 import "./styles/FormData.scss";
 
-export const FormDataList = memo(function FormDataList() {
+const FormDataList = memo(function FormDataList() {
 	const dispatch = useAppDispatch();
 	const { updateFormDataOrder } = requestBodyFormDataSlice.actions;
 	const bodyFormData = useAppSelector((state) => state.requestBodyFormDataReducer);
@@ -85,3 +85,5 @@ export const FormDataList = memo(function FormDataList() {
 		</div>
 	);
 });
+
+export default FormDataList;

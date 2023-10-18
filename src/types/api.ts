@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
-import type { CommonT } from "./common";
 import { EmptyObject } from "type-fest";
 
 export namespace APIT {

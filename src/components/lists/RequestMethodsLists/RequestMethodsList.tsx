@@ -1,22 +1,22 @@
 import { useState, useRef } from "react";
 
-import { defaultRequestMethods as defaultMethods } from "../../../tools/constants";
+import { IconPlus } from "@tabler/icons-react";
 
+import DefaultRequestMethodsList from "./DefaultRequestMethodsList";
+import CustomRequestMethodsList from "./CustomRequestMethodsList";
+import Divider from "../../ui/Divider/Divider";
+import Modal from "../../ui/Modal/Modal";
+import Input from "../../ui/Input/Input";
+
+import { defaultRequestMethods as defaultMethods } from "../../../tools/constants";
 import { isRequired } from "../../../tools/validation/isRequired";
 import { isIncluded } from "../../../tools/validation/isIncluded";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux/redux";
 import customRequestMethodsListSlice from "../../../redux/reducers/customRequestMethodsListSlice";
-
-import DefaultRequestMethodsList from "./DefaultRequestMethodsList";
-import CustomRequestMethodsList from "./CustomRequestMethodsList";
-import { IconPlus } from "@tabler/icons-react";
-import Divider from "../../ui/Divider/Divider";
-import Modal from "../../ui/Modal/Modal";
-import Input from "../../ui/Input/Input";
+import requestSelectedMethodSlice from "../../../redux/reducers/requestSelectedMethodSlice";
 
 import "./RequestMethodsLists.scss";
-import requestSelectedMethodSlice from "../../../redux/reducers/requestSelectedMethodSlice";
 
 function MethodsList() {
 	const dispatch = useAppDispatch();
@@ -24,7 +24,7 @@ function MethodsList() {
 	const { addCustomMethod } = customRequestMethodsListSlice.actions;
 	const { updateRequestMethod } = requestSelectedMethodSlice.actions;
 
-	const [customMethodModalView, setCustomMethodModalView] = useState(false);
+	const [customMethodModalView, setCustomMethodModalView] = useState<boolean>(false);
 	const [inputError, setInputError] = useState<string | null>(null);
 
 	const customMethodNameRef = useRef<HTMLInputElement>(null);
@@ -84,7 +84,7 @@ function MethodsList() {
 					onClick={() => {
 						setCustomMethodModalView(true);
 					}}
-					className="list_element"
+					className="methods_list_element"
 				>
 					<IconPlus
 						size={15}

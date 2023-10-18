@@ -1,9 +1,17 @@
-import { useAppDispatch, useAppSelector } from "../../../../hooks/redux/redux";
+import { useState, useRef } from "react";
+import { useAppSelector } from "../../../../hooks/redux/redux";
 import { useClassnames } from "../../../../hooks/useClassnames";
-
-import requestBodyFormDataSlice from "../../../../redux/reducers/requestBodyFormDataSlice";
+import useRequestBody from "./hooks/useRequestBody";
 
 import { BodyNone } from "./RequestBodyNone";
+import FormDataList from "../../../../components/request-body-variants/FormData/FormDataList";
+import RequestBodyContentTypesList from "../../../../components/lists/RequestBodyContentTypesList/RequestBodyContentTypesList";
+import RequestBodyRawTypesList from "../../../../components/lists/RequestBodyRawTypesList/RequestBodyRawTypesList";
+
+import Modal from "../../../../components/ui/Modal/Modal";
+import Input from "../../../../components/ui/Input/Input";
+import { FileSelect } from "../../../../components/ui/FileSelect/FileSelect";
+import { Select } from "../../../../components/ui/Select/Select";
 
 import { IconChevronDown, IconFilePlus, IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
@@ -12,35 +20,18 @@ import { v1 as uuidv1 } from "uuid";
 
 import "./styles/RequestBody.scss";
 import "./styles/RequestBodyNone.scss";
-import Modal from "../../../../components/ui/Modal/Modal";
-import { useState, useRef } from "react";
-import Input from "../../../../components/ui/Input/Input";
-import { FileSelect } from "../../../../components/ui/FileSelect/FileSelect";
-import { Select } from "../../../../components/ui/Select/Select";
-import { FormDataList } from "../../../../components/request-body-variants/FormData/FormDataList";
-import RequestBodyContentTypesList from "../../../../components/lists/RequestBodyContentTypesList/RequestBodyContentTypesList";
-import RequestBodyRawTypesList from "../../../../components/lists/RequestBodyRawTypesList/RequestBodyRawTypesList";
 
-/** TODO:
- * ✓ Пофиксить сообщение об отсутствии елементов в form-data сторе
- * ✓ Пофиксить отображение items в кастомных методах запроса
- * ✓ Сделать разный функционал кнопки которая очищает весь стор в body для разных contentType
- * ✓ Модалка для добавления form-data элементов
- * ✓ Декомпозировать элементы по типу списков и всплывающих подсказок
- */
-
-const body_types = {
+const body_variants = {
 	"none": <BodyNone />,
 	"form-data": <FormDataList />,
 	"x-www-form-urlencoded": <>x-www-form-urlencoded</>,
 	"raw": <>raw</>
 };
 
-export const RequestBody = () => {
+const RequestBody = () => {
+	// !FIXME: Logic of modal elements -----------------------------------------------------------------------
+
 	const [newFormDataModalView, setNewFormDataModalView] = useState(false);
-
-	// ! -----------------------------------------------------------------------------------------------
-
 	const [newFormDataItem, setNewFormDataItem] = useState<null | {
 		id: string;
 		name: string;
@@ -51,10 +42,14 @@ export const RequestBody = () => {
 	const formDataItemKeyRef = useRef<HTMLInputElement>(null);
 	const formDataItemValueRef = useRef<HTMLInputElement>(null);
 
-	// ! -----------------------------------------------------------------------------------------------
+	// !FIXME: -----------------------------------------------------------------------------------------------
 
-	const dispatch = useAppDispatch();
-	const { addBodyFormDataItem, clearFormData } = requestBodyFormDataSlice.actions;
+	const { modalSubmitFunc, clearFunctions } = useRequestBody(
+		formDataItemKeyRef,
+		formDataItemValueRef,
+		newFormDataItem
+	);
+
 	const { contentType, rawType } = useAppSelector((state) => state.requestBodyTypeReducer);
 
 	const request_body_classnames = useClassnames({
@@ -62,86 +57,12 @@ export const RequestBody = () => {
 		request_body_wrapper: contentType !== "none"
 	});
 
-	const clear_all_functions = {
-		"form-data": () => {
-			dispatch(clearFormData());
-			// ! -------------------------------------------------------
-
-			const idbRequest = indexedDB.open("request-body-files", 1);
-			idbRequest.onsuccess = () => {
-				const db = idbRequest.result;
-				const tx = db.transaction("files", "readwrite");
-				const filesStore = tx.objectStore("files");
-				const emptyStore = filesStore.clear();
-
-				emptyStore.onsuccess = () => {
-					tx.oncomplete = () => {
-						db.close();
-					};
-				};
-			};
-
-			// ! -------------------------------------------------------
-		},
-		"x-www-form-urlencoded": clearFormData, // ? Изменить на urlencodedData
-		"raw": clearFormData // ? Изменить на rawData
-	};
-
 	return (
 		<>
 			<Modal
 				title="Adding a new form-data body item"
 				visibility={newFormDataModalView}
-				onSubmit={() => {
-					if (!!newFormDataItem) {
-						const idbRequest = indexedDB.open("request-body-files", 1);
-						idbRequest.onsuccess = () => {
-							const db = idbRequest.result;
-							const tx = db.transaction("files", "readwrite");
-							const filesStore = tx.objectStore("files");
-
-							const newFile = filesStore.put({
-								id: newFormDataItem.id,
-								name: newFormDataItem.name,
-								blob: newFormDataItem.blob
-							});
-
-							newFile.onsuccess = () => {
-								tx.oncomplete = () => {
-									db.close();
-								};
-							};
-						};
-						dispatch(
-							addBodyFormDataItem({
-								_id: uuidv1(),
-								isUsed: true,
-								valueType: "file",
-								value: "",
-								key: formDataItemKeyRef.current!.value,
-								fileInfo: {
-									id: newFormDataItem.id,
-									name: newFormDataItem.name
-								}
-							})
-						);
-					} else {
-						dispatch(
-							addBodyFormDataItem({
-								_id: uuidv1(),
-								isUsed: true,
-								valueType: "text",
-								value: formDataItemValueRef.current!.value,
-								key: formDataItemKeyRef.current!.value,
-								fileInfo: {
-									id: "",
-									name: ""
-								}
-							})
-						);
-					}
-					return true;
-				}}
+				onSubmit={() => modalSubmitFunc()}
 				onCancel={() => true}
 				onClose={() => setNewFormDataModalView(false)}
 			>
@@ -202,7 +123,7 @@ export const RequestBody = () => {
 					<span className="request_additional_option_name">Body</span>
 					<div className="request_additional_body_type">
 						<Tippy
-							className="body_content_type_tippy_wrapper"
+							className="default_tippy body_content_type_tippy_wrapper"
 							placement="bottom"
 							content={<RequestBodyContentTypesList />}
 							interactive={true}
@@ -221,7 +142,7 @@ export const RequestBody = () => {
 					</div>
 					{contentType === "raw" && (
 						<Tippy
-							className="body_raw_type_tippy_wrapper"
+							className="default_tippy body_raw_type_tippy_wrapper"
 							placement="bottom"
 							content={<RequestBodyRawTypesList />}
 							interactive={true}
@@ -243,7 +164,7 @@ export const RequestBody = () => {
 					{contentType === "raw" && (
 						<div className="add_new">
 							<Tippy
-								className="base_tippy_wrapper"
+								className="info_tippy"
 								placement="top"
 								content={"Import"}
 								animation="shift-away"
@@ -261,7 +182,7 @@ export const RequestBody = () => {
 					{contentType === "form-data" && (
 						<div className="add_new">
 							<Tippy
-								className="base_tippy_wrapper"
+								className="info_tippy"
 								placement="top"
 								content={"Add new"}
 								animation="shift-away"
@@ -281,7 +202,7 @@ export const RequestBody = () => {
 					{contentType !== "none" && (
 						<div className="delete_all">
 							<Tippy
-								className="base_tippy_wrapper"
+								className="info_tippy"
 								placement="top"
 								content={"Clear all"}
 								animation="shift-away"
@@ -294,7 +215,7 @@ export const RequestBody = () => {
 									size={16}
 									stroke={2}
 									onClick={() => {
-										clear_all_functions[contentType]();
+										clearFunctions[contentType]();
 									}}
 								/>
 							</Tippy>
@@ -302,7 +223,9 @@ export const RequestBody = () => {
 					)}
 				</div>
 			</section>
-			<section className={request_body_classnames}>{body_types[contentType]}</section>
+			<section className={request_body_classnames}>{body_variants[contentType]}</section>
 		</>
 	);
 };
+
+export default RequestBody;

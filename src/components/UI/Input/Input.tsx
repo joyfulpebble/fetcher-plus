@@ -13,11 +13,6 @@ interface InputPropsI extends React.HTMLProps<HTMLInputElement> {
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-/** TODO:
- * - Вынести интерфейс в типы
- * - Добавить к классам инпута приставки [itput_]
- */
-
 function Input({
 	innerRef,
 	placeholder,
@@ -30,8 +25,8 @@ function Input({
 }: InputPropsI): JSX.Element {
 	const inputClasses = useClassnames({
 		error: !!error,
-		invisible: inputStyle === "invisible",
-		default: inputStyle === "default"
+		input_invisible: inputStyle === "invisible",
+		input_default: inputStyle === "default"
 	});
 
 	return (

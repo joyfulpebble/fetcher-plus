@@ -1,4 +1,4 @@
-.button {
+.button_wrapper {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -16,7 +16,7 @@
 	font-size: var(--font-size-paragraph);
 }
 
-.btn_icon {
+.button_icon {
 	display: flex;
 	margin-right: 2px;
 }
@@ -30,9 +30,7 @@
 	}
 }
 
-/* Button styles */
-
-.btn_primary {
+.button_primary {
 	background-color: var(--btn-color-default);
 	&:hover {
 		background: var(--btn-color-default-hover);
@@ -43,7 +41,7 @@
 		background-color: var(--btn-color-default-disabled);
 	}
 }
-.btn_danger {
+.button_danger {
 	background-color: var(--btn-color-danger);
 	&:hover {
 		background: var(--btn-color-danger-hover);
@@ -54,7 +52,7 @@
 		background-color: var(--btn-color-danger-disabled);
 	}
 }
-.btn_secondary {
+.button_secondary {
 	background-color: var(--btn-color-secondary);
 	color: var(--font-color-dark);
 	&:hover {
@@ -66,7 +64,7 @@
 		background-color: var(--btn-color-secondary-disabled);
 	}
 }
-.btn_invisible {
+.button_invisible {
 	color: var(--font-color-invisible);
 	border-color: var(--border-color-none);
 	background-color: var(--btn-color-invisible);

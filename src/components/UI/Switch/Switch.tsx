@@ -1,12 +1,17 @@
 import SwitchToggle from "react-switch";
+import type { HTMLAttributes } from "react";
 
-import type { ElementsT } from "../../../types/elements";
+interface SwitchPropsT extends HTMLAttributes<HTMLButtonElement> {
+	needParameters: boolean;
+	handleIsCheckedParameters: () => void;
+	spanText: string | number;
+}
 
 function Switch({
 	handleIsCheckedParameters,
 	needParameters,
 	spanText
-}: ElementsT.SwitchProps): JSX.Element {
+}: SwitchPropsT): JSX.Element {
 	return (
 		<div style={{ display: "flex", alignItems: "center" }}>
 			<SwitchToggle

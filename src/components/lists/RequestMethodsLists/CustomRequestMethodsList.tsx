@@ -18,19 +18,20 @@ const CustomRequestMethodsList = () => {
 	const list = customMethods.map((element: string) => (
 		<div
 			key={element}
-			className={`list_element ${requestMethod === element ? "selected" : ""}`}
-			style={{ display: "flex", justifyContent: "space-between" }}
+			className={`methods_list_element custom_method_element_wrapper ${
+				requestMethod === element ? "selected" : ""
+			}`}
 		>
 			<div
-				style={{ display: "flex", alignItems: "center", width: "100%" }}
+				className="methods_list_request_name_wrapper"
 				onClick={() => {
 					dispatch(updateRequestMethod(element));
 				}}
 			>
-				<span className="list_request_name">{element}</span>
+				<span className="methods_list_request_name">{element}</span>
 			</div>
 			<IconTrash
-				className="list_delete_button"
+				className="methods_list_delete_button"
 				size={16}
 				onClick={() => {
 					dispatch(deleteCustomMethod(element));

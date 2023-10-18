@@ -13,7 +13,7 @@ const DefaultRequestMethodsList = () => {
 
 	const list = defaultRequestMethods.map((element: CommonT.MainRequestMethods, index: number) => (
 		<div
-			className={`list_element ${
+			className={`methods_list_element ${
 				requestMethod === element ? "selected" : ""
 			} ${element.toLowerCase()}`}
 			key={index}

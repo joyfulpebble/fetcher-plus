@@ -49,19 +49,6 @@
 			border-top: none;
 			border-right: none;
 
-			.form_data_value_type_tippy {
-				.tippy-content {
-					padding: 0 5px;
-					padding-top: 5px;
-					padding-bottom: 3px;
-				}
-
-				width: 70px;
-				border: 1px solid var(--border-color-default);
-				background-color: var(--theme-dark-bg-lvl-2);
-				overflow-y: auto;
-				user-select: none;
-			}
 			.form_data_select {
 				min-width: 50px;
 				margin-left: 5px;

@@ -7,7 +7,9 @@ import { IconTrash, IconGripVertical, IconCheckbox, IconSquare } from "@tabler/i
 import { defaultRequestHeaders } from "../../../../tools/constants";
 
 import { useAppDispatch } from "../../../../hooks/redux/redux";
-import requestHeadersSlice, { type Header } from "../../../../redux/reducers/requestHeadersSlice";
+import requestHeadersSlice, {
+	type RequestHeaderItem
+} from "../../../../redux/reducers/requestHeadersSlice";
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -15,7 +17,7 @@ import { CSS } from "@dnd-kit/utilities";
 import "./styles/RequestHeadersListItem.scss";
 
 interface HeadersListItem {
-	header: Header;
+	header: RequestHeaderItem;
 }
 
 export const HeadersListItem = ({ header }: HeadersListItem) => {
@@ -32,7 +34,7 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 	};
 
 	const onChange = useCallback((newValue: any) => {
-		dispatch(updateHeaderName({ parameterID: header._id, newName: newValue }));
+		dispatch(updateHeaderName({ headerID: header._id, key: newValue }));
 	}, []);
 
 	return (
@@ -76,7 +78,7 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 						disableSearch={false}
 						searchIcon={false}
 						data={defaultRequestHeaders}
-						initValue={header.name}
+						initValue={header.key}
 						onChange={onChange}
 					/>
 				</div>
@@ -88,8 +90,8 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 						onChange={(e) => {
 							dispatch(
 								updateHeaderValue({
-									parameterID: header._id,
-									newValue: e.target.value
+									headerID: header._id,
+									value: e.target.value
 								})
 							);
 						}}

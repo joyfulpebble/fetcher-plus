@@ -43,7 +43,7 @@ export const RequestHeaders = () => {
 						addHeader({
 							_id: uuidv1(),
 							isUsed: true,
-							name: selectedHeader,
+							key: selectedHeader,
 							value: String(newHeaderValueRef.current?.value)
 						})
 					);

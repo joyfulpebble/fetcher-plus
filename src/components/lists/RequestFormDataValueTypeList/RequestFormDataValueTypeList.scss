@@ -1,6 +1,7 @@
 .form_data_value_type_list {
 	display: flex;
 	flex-direction: column;
+	user-select: none;
 
 	.form_data_type_item {
 		display: flex;

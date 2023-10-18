@@ -16,6 +16,7 @@
 	cursor: pointer;
 	display: flex;
 	align-items: center;
+	user-select: none;
 
 	.body_content_type {
 		margin-right: 5px;
@@ -29,17 +30,7 @@
 }
 
 .body_raw_type_tippy_wrapper {
-	.tippy-content {
-		padding: 0 5px;
-		padding-top: 5px;
-		padding-bottom: 3px;
-	}
-
 	width: 120px;
-	border: 1px solid var(--border-color-default);
-	background-color: var(--theme-dark-bg-lvl-2);
-	overflow-y: auto;
-	user-select: none;
 }
 
 .body_raw_type_select {
@@ -52,6 +43,7 @@
 	border-radius: 4px;
 	margin: 0 5px;
 	padding: 0 2px 0 5px;
+	user-select: none;
 
 	.body_raw_type {
 		margin-right: 5px;
@@ -60,19 +52,9 @@
 }
 
 .body_content_type_tippy_wrapper {
-	.tippy-content {
-		padding: 0 5px;
-		padding-top: 5px;
-		padding-bottom: 3px;
-	}
-
-	left: 0px;
 	width: 200px;
-	border: 1px solid var(--border-color-default);
-	background-color: var(--theme-dark-bg-lvl-2);
-	overflow-y: auto;
-	user-select: none;
 }
+
 .request_body_wrapper {
 	height: 100%;
 	user-select: none;

@@ -12,7 +12,7 @@ function MethodSelect() {
 	return (
 		<>
 			<Tippy
-				className="tippy_method_select_wrapper"
+				className="default_tippy tippy_method_select_wrapper"
 				placement="bottom"
 				content={<MethodsList />}
 				interactive={true}
@@ -20,7 +20,7 @@ function MethodSelect() {
 				animation="shift-away"
 				trigger="click"
 				arrow={false}
-				offset={[13, 5]}
+				offset={[11, 5]}
 				maxWidth={160}
 				zIndex={10}
 			>
@@ -33,7 +33,7 @@ function MethodSelect() {
 					</div>
 					<IconChevronDown
 						style={{ marginLeft: 5 }}
-						size={15}
+						size={16}
 						stroke={2}
 					/>
 				</div>

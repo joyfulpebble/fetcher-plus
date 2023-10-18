@@ -1,5 +1,7 @@
 import { IconCheck } from "@tabler/icons-react";
 
+import removeFile from "../../../idb/actions/removeFile";
+
 import { useAppDispatch } from "../../../hooks/redux/redux";
 import requestBodyFormDataSlice, {
 	type BodyFormDataItem
@@ -7,11 +9,11 @@ import requestBodyFormDataSlice, {
 
 import "./RequestFormDataValueTypeList.scss";
 
-interface ValueTypeListProps {
+interface RequestFormDataValueTypeListProps {
 	item: BodyFormDataItem;
 }
 
-const RequestFormDataValueTypeList = ({ item }: ValueTypeListProps) => {
+const RequestFormDataValueTypeList = ({ item }: RequestFormDataValueTypeListProps) => {
 	const dispatch = useAppDispatch();
 	const { updateFormDataValueType, updateFormDataValue, updateFormDataFileInfo } =
 		requestBodyFormDataSlice.actions;
@@ -37,21 +39,7 @@ const RequestFormDataValueTypeList = ({ item }: ValueTypeListProps) => {
 						})
 					);
 
-					const idbRequest = indexedDB.open("request-body-files", 1);
-
-					idbRequest.onsuccess = () => {
-						const db = idbRequest.result;
-						const tx = db.transaction("files", "readwrite");
-						const filesStore = tx.objectStore("files");
-
-						const deletingFile = filesStore.delete(item.fileInfo.id);
-
-						deletingFile.onsuccess = () => {
-							tx.oncomplete = () => {
-								db.close();
-							};
-						};
-					};
+					removeFile(item.fileInfo.id);
 				}}
 			>
 				<span>Text</span>
@@ -69,7 +57,7 @@ const RequestFormDataValueTypeList = ({ item }: ValueTypeListProps) => {
 					dispatch(
 						updateFormDataValue({
 							formDataID: item._id,
-							newValue: ""
+							value: ""
 						})
 					);
 				}}

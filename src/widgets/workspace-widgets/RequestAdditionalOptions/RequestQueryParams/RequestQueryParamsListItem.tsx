@@ -3,7 +3,7 @@ import { IconTrash, IconGripVertical, IconCheckbox, IconSquare } from "@tabler/i
 
 import { useAppDispatch } from "../../../../hooks/redux/redux";
 import requestQueryParamsSlice, {
-	type QueryParameter
+	type QueryParameterItem
 } from "../../../../redux/reducers/requestQueryParamsSlice";
 
 import { useSortable } from "@dnd-kit/sortable";
@@ -12,7 +12,7 @@ import { CSS } from "@dnd-kit/utilities";
 import "./styles/RequestQueryParamsListItem.scss";
 
 interface RequestQueryParamsListItemProps {
-	parameter: QueryParameter;
+	parameter: QueryParameterItem;
 }
 
 export const ParamsListItem = ({ parameter }: RequestQueryParamsListItemProps) => {

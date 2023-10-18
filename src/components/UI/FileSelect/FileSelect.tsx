@@ -29,7 +29,7 @@ export const FileSelect = ({
 			{selectedFileName && <div className="selected_file_name">{selectedFileName}</div>}
 			{selectedFileName ? (
 				<Tippy
-					className="select_another_file_tippy"
+					className="file_select_select_another_file_tippy"
 					placement="top-end"
 					content={"Click to upload another"}
 					hideOnClick={true}

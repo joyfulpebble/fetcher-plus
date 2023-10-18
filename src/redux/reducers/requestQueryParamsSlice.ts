@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type QueryParameterID = string;
-export type QueryParameter = {
+export type QueryParameterItem = {
 	_id: QueryParameterID;
 	isUsed: boolean;
 	key: string;
@@ -14,11 +14,11 @@ type QueryParameterValuesUpdateObject = {
 	value:
 		| string
 		| {
-				param_key: string;
-				param_value: string;
+				key: string;
+				value: string;
 		  };
 };
-type QueryParamsStore = Array<QueryParameter>;
+type QueryParamsStore = Array<QueryParameterItem>;
 
 const initialState: QueryParamsStore = [];
 
@@ -28,9 +28,9 @@ export const requestQueryParamsSlice = createSlice({
 	reducers: {
 		deleteAllParams: () => [],
 		updateParamsOrder: (state, action: PayloadAction<QueryParamsStore>) => (state = action.payload),
-		addParameter: (state, action: PayloadAction<QueryParameter>) => [...state, action.payload],
+		addParameter: (state, action: PayloadAction<QueryParameterItem>) => [...state, action.payload],
 		deleteParameter: (state, action: PayloadAction<QueryParameterID>) =>
-			[...state].filter((parameter: QueryParameter) => parameter._id !== action.payload),
+			[...state].filter((parameter: QueryParameterItem) => parameter._id !== action.payload),
 		updateParameterState: (state, action: PayloadAction<QueryParameterStateUpdate>) => {
 			[...state].map((parameter): void => {
 				if (parameter._id === action.payload) parameter.isUsed = !parameter.isUsed;
@@ -44,8 +44,8 @@ export const requestQueryParamsSlice = createSlice({
 						if (action.payload.updateType === "value") parameter.value = action.payload.value;
 					}
 					if (typeof action.payload.value === "object") {
-						parameter.key = action.payload.value.param_key;
-						parameter.value = action.payload.value.param_value;
+						parameter.key = action.payload.value.key;
+						parameter.value = action.payload.value.value;
 					}
 				}
 			});

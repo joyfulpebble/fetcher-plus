@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import "./RequestAdditionalOptions.scss";
 import { RequestQueryParams } from "./RequestQueryParams/RequestQueryParams";
-import { RequestBody } from "./RequestBody/RequestBody";
+import RequestBody from "./RequestBody/RequestBody";
 import { RequestHeaders } from "./RequestHeaders/RequestHeaders";
 
 export const AdditionalOptions = () => {
