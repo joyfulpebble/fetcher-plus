@@ -3,15 +3,15 @@ import { useAppSelector } from "../../../../hooks/redux/redux";
 import { useClassnames } from "../../../../hooks/useClassnames";
 import useRequestBody from "./hooks/useRequestBody";
 
-import { BodyNone } from "./RequestBodyNone";
+import BodyNone from "./RequestBodyNone";
 import FormDataList from "../../../../components/request-body-variants/FormData/FormDataList";
 import RequestBodyContentTypesList from "../../../../components/lists/RequestBodyContentTypesList/RequestBodyContentTypesList";
 import RequestBodyRawTypesList from "../../../../components/lists/RequestBodyRawTypesList/RequestBodyRawTypesList";
 
 import Modal from "../../../../components/ui/Modal/Modal";
 import Input from "../../../../components/ui/Input/Input";
-import { FileSelect } from "../../../../components/ui/FileSelect/FileSelect";
-import { Select } from "../../../../components/ui/Select/Select";
+import FileSelect from "../../../../components/ui/FileSelect/FileSelect";
+import Select from "../../../../components/ui/Select/Select";
 
 import { IconChevronDown, IconFilePlus, IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
@@ -20,13 +20,6 @@ import { v1 as uuidv1 } from "uuid";
 
 import "./styles/RequestBody.scss";
 import "./styles/RequestBodyNone.scss";
-
-const body_variants = {
-	"none": <BodyNone />,
-	"form-data": <FormDataList />,
-	"x-www-form-urlencoded": <>x-www-form-urlencoded</>,
-	"raw": <>raw</>
-};
 
 const RequestBody = () => {
 	// !FIXME: Logic of modal elements -----------------------------------------------------------------------
@@ -56,6 +49,13 @@ const RequestBody = () => {
 		request_body_none_wrapper: contentType === "none",
 		request_body_wrapper: contentType !== "none"
 	});
+
+	const body_variants = {
+		"none": <BodyNone />,
+		"form-data": <FormDataList modalFunc={setNewFormDataModalView} />,
+		"x-www-form-urlencoded": <>x-www-form-urlencoded</>,
+		"raw": <>raw</>
+	};
 
 	return (
 		<>

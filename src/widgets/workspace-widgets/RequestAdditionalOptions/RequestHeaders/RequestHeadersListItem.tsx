@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { Select } from "../../../../components/ui/Select/Select";
+import Select from "../../../../components/ui/Select/Select";
 import Input from "../../../../components/ui/Input/Input";
 import { IconTrash, IconGripVertical, IconCheckbox, IconSquare } from "@tabler/icons-react";
 
@@ -20,7 +20,7 @@ interface HeadersListItem {
 	header: RequestHeaderItem;
 }
 
-export const HeadersListItem = ({ header }: HeadersListItem) => {
+const HeadersListItem = ({ header }: HeadersListItem) => {
 	const dispatch = useAppDispatch();
 	const { deleteHeader, updateHeaderState, updateHeaderName, updateHeaderValue } =
 		requestHeadersSlice.actions;
@@ -110,3 +110,5 @@ export const HeadersListItem = ({ header }: HeadersListItem) => {
 		</section>
 	);
 };
+
+export default HeadersListItem;

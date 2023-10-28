@@ -9,13 +9,13 @@ import "./RequestConfiguration.scss";
 import type { APIT } from "../../../types/api";
 import MethodSelect from "../RequestMethodSelect/RequestMethodSelect";
 import RequestInput from "../RequestInput/RequestInput";
-import { AdditionalOptions } from "../RequestAdditionalOptions/RequestAdditionalOptions";
+import AdditionalOptions from "../RequestAdditionalOptions/RequestAdditionalOptions";
 
 function RequestForm(): JSX.Element {
 	const quieryParams = useAppSelector((state) => state.requestQueryParameters);
 	const requestHeaders = useAppSelector((state) => state.requestHeadersSlice);
 	const requestMethod = useAppSelector((state) => state.requestSelctedMethod);
-	const requestUrl = useAppSelector((state) => state.requestConfigReducer);
+	const requestFormDataBody = useAppSelector((state) => state.requestBodyFormDataReducer);
 
 	const { values, saveFuildValue } = useForm<APIT.RequestConfigI>({
 		initialValues: { requestMethod: "GET", requestParams: {}, requestUrl: "" }
@@ -49,6 +49,8 @@ function RequestForm(): JSX.Element {
 							console.table(quieryParams);
 							console.log(">request headers: ");
 							console.table(requestHeaders);
+							console.log(">request `form-data` body: ");
+							console.table(requestFormDataBody);
 						}}
 					/>
 				</section>

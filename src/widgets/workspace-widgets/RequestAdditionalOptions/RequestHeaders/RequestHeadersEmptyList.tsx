@@ -7,7 +7,7 @@ interface HeadersEmptyListProps {
 	openModalFunc: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const HeadersEmptyList = ({ openModalFunc }: HeadersEmptyListProps) => (
+const HeadersEmptyList = ({ openModalFunc }: HeadersEmptyListProps) => (
 	<div className="headers_body_empty">
 		<div className="headers_empty_text">This request does not have headers...</div>
 		<Button
@@ -25,3 +25,5 @@ export const HeadersEmptyList = ({ openModalFunc }: HeadersEmptyListProps) => (
 		/>
 	</div>
 );
+
+export default HeadersEmptyList;

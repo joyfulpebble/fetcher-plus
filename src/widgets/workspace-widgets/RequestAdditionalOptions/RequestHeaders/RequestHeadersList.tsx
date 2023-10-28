@@ -18,9 +18,9 @@ import {
 	verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { restrictToFirstScrollableAncestor, restrictToVerticalAxis } from "@dnd-kit/modifiers";
-import { HeadersListItem } from "./RequestHeadersListItem";
+import HeadersListItem from "./RequestHeadersListItem";
 
-export const HeadersList = memo(function HeadersList() {
+const HeadersList = memo(function HeadersList() {
 	const dispatch = useAppDispatch();
 	const { updateHeadersOrder } = requestHeadersSlice.actions;
 	const requestHeaders = useAppSelector((state) => state.requestHeadersSlice);
@@ -76,3 +76,5 @@ export const HeadersList = memo(function HeadersList() {
 		</>
 	);
 });
+
+export default HeadersList;

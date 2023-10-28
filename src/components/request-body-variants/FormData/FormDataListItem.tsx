@@ -1,5 +1,5 @@
 import RequestFormDataValueTypeList from "../../lists/RequestFormDataValueTypeList/RequestFormDataValueTypeList";
-import { FileSelect } from "../../ui/FileSelect/FileSelect";
+import FileSelect from "../../ui/FileSelect/FileSelect";
 import Input from "../../ui/Input/Input";
 
 import { useFormDataListItem } from "./hooks/useFormDataListItem";
@@ -89,7 +89,7 @@ const FormDataListItem = ({ formData }: FormDataListItemProps) => {
 						trigger="click"
 						arrow={false}
 						zIndex={10}
-						offset={[10, 5]}
+						offset={[9, 5]}
 					>
 						<div className="form_data_select">
 							<span className="form_data_current">{formData.valueType}</span>

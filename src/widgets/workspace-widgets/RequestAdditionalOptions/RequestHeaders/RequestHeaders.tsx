@@ -10,14 +10,14 @@ import Input from "../../../../components/ui/Input/Input";
 import { IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
 import Modal from "../../../../components/ui/Modal/Modal";
-import { Select } from "../../../../components/ui/Select/Select";
+import Select from "../../../../components/ui/Select/Select";
 
 import { v1 as uuidv1 } from "uuid";
 import "./styles/RequestHeaders.scss";
-import { HeadersList } from "./RequestHeadersList";
-import { HeadersEmptyList } from "./RequestHeadersEmptyList";
+import HeadersList from "./RequestHeadersList";
+import HeadersEmptyList from "./RequestHeadersEmptyList";
 
-export const RequestHeaders = () => {
+const RequestHeaders = () => {
 	const [newHeaderModalView, setNewHeaderModalView] = useState(false);
 	const [selectedHeader, setSelectedHeader] = useState<string>("");
 
@@ -132,3 +132,5 @@ export const RequestHeaders = () => {
 		</>
 	);
 };
+
+export default RequestHeaders;

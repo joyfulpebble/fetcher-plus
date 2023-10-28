@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import requestConfigSlice from "./reducers/requestUrlSlice";
+import requestUrlSlice from "./reducers/requestUrlSlice";
 import customRequestMethodsListSlice from "./reducers/customRequestMethodsListSlice";
 import requestQueryParamsSlice from "./reducers/requestQueryParamsSlice";
 import requestSelectedMethodSlice from "./reducers/requestSelectedMethodSlice";
@@ -18,7 +18,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
 	requestBodyFormDataReducer: requestBodyFormDataSlice.reducer,
 	requestBodyTypeReducer: requestBodyTypeSlice.reducer,
-	requestConfigReducer: requestConfigSlice.reducer,
+	requestUrlReducer: requestUrlSlice.reducer,
 	requestHeadersSlice: requestHeadersSlice.reducer,
 	requestQueryParameters: requestQueryParamsSlice.reducer,
 	requestSelctedMethod: requestSelectedMethodSlice.reducer,

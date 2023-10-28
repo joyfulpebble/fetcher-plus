@@ -18,9 +18,9 @@ import {
 	verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { restrictToFirstScrollableAncestor, restrictToVerticalAxis } from "@dnd-kit/modifiers";
-import { ParamsListItem } from "./RequestQueryParamsListItem";
+import RequestParamsListItem from "./RequestQueryParamsListItem";
 
-export const ParamsList = () => {
+const RequestParamsList = () => {
 	const dispatch = useAppDispatch();
 	const { updateParamsOrder } = requestQueryParamsSlice.actions;
 	const requestQueryParams = useAppSelector((state) => state.requestQueryParameters);
@@ -66,7 +66,7 @@ export const ParamsList = () => {
 					strategy={verticalListSortingStrategy}
 				>
 					{draggableParams.map((parameter) => (
-						<ParamsListItem
+						<RequestParamsListItem
 							key={parameter._id}
 							parameter={parameter}
 						/>
@@ -76,3 +76,5 @@ export const ParamsList = () => {
 		</>
 	);
 };
+
+export default RequestParamsList;

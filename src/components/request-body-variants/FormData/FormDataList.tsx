@@ -25,7 +25,11 @@ import FormDataEmptyList from "./FormDataEmptyList";
 
 import "./styles/FormData.scss";
 
-const FormDataList = memo(function FormDataList() {
+interface FormDataListProps {
+	modalFunc: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const FormDataList = memo(function FormDataList({ modalFunc }: FormDataListProps) {
 	const dispatch = useAppDispatch();
 	const { updateFormDataOrder } = requestBodyFormDataSlice.actions;
 	const bodyFormData = useAppSelector((state) => state.requestBodyFormDataReducer);
@@ -80,7 +84,7 @@ const FormDataList = memo(function FormDataList() {
 					</SortableContext>
 				</DndContext>
 			) : (
-				<FormDataEmptyList openModalFunc={() => {}} />
+				<FormDataEmptyList openModalFunc={modalFunc} />
 			)}
 		</div>
 	);

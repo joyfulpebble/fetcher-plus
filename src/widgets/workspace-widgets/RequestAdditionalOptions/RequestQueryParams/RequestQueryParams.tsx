@@ -12,8 +12,8 @@ import { v1 as uuidv1 } from "uuid";
 
 import "./styles/RequestQueryParams.scss";
 import "../RequestAdditionalOptions.scss";
-import { ParamsList } from "./RequestQueryParamsList";
-import { ParamsEmptyList } from "./RequestQueryParamsEmptyList";
+import RequestParamsList from "./RequestQueryParamsList";
+import EmptyRequestParamsList from "./RequestQueryParamsEmptyList";
 
 export const RequestQueryParams = () => {
 	const dispatch = useAppDispatch();
@@ -124,9 +124,9 @@ export const RequestQueryParams = () => {
 				}`}
 			>
 				{queryParams.length ? (
-					<ParamsList />
+					<RequestParamsList />
 				) : (
-					<ParamsEmptyList openModalFunc={setNewParameterModalView} />
+					<EmptyRequestParamsList openModalFunc={setNewParameterModalView} />
 				)}
 			</section>
 		</>

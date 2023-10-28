@@ -18,7 +18,7 @@ const RequestBodyRawTypesList = () => {
 			{bodyRawTypes.map((element: CommonT.BodyRawType) => (
 				<div
 					key={element}
-					className={`body_content_type_list_element ${element === rawType && "selected"}`}
+					className={`body_raw_type_list_element ${element === rawType && "selected"}`}
 					onClick={() => {
 						dispatch(updateRawType(element));
 					}}

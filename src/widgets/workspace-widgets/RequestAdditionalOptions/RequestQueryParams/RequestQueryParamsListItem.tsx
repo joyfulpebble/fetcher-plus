@@ -15,7 +15,7 @@ interface RequestQueryParamsListItemProps {
 	parameter: QueryParameterItem;
 }
 
-export const ParamsListItem = ({ parameter }: RequestQueryParamsListItemProps) => {
+const RequestParamsListItem = ({ parameter }: RequestQueryParamsListItemProps) => {
 	const dispatch = useAppDispatch();
 	const { deleteParameter, updateParameterState, updateParameter } =
 		requestQueryParamsSlice.actions;
@@ -108,3 +108,5 @@ export const ParamsListItem = ({ parameter }: RequestQueryParamsListItemProps) =
 		</section>
 	);
 };
+
+export default RequestParamsListItem;

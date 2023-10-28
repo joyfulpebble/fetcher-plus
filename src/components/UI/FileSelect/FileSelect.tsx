@@ -12,11 +12,7 @@ interface FileSelectProps {
 	placeholder?: string;
 }
 
-export const FileSelect = ({
-	placeholder,
-	elementStyle = "default",
-	onChange
-}: FileSelectProps) => {
+const FileSelect = ({ placeholder, elementStyle = "default", onChange }: FileSelectProps) => {
 	const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
 
 	const file_select_classnames = useClassnames({
@@ -73,3 +69,5 @@ export const FileSelect = ({
 		</div>
 	);
 };
+
+export default FileSelect;

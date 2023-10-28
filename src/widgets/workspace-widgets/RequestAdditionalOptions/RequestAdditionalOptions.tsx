@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import "./RequestAdditionalOptions.scss";
 import { RequestQueryParams } from "./RequestQueryParams/RequestQueryParams";
 import RequestBody from "./RequestBody/RequestBody";
-import { RequestHeaders } from "./RequestHeaders/RequestHeaders";
+import RequestHeaders from "./RequestHeaders/RequestHeaders";
 
-export const AdditionalOptions = () => {
+const AdditionalOptions = () => {
 	const [selectedTab, setSelectedTab] = useState<number>(1);
 
 	const optionsTabNames = ["Parameters", "Body", "Headers", "Authorization"];
@@ -42,3 +42,5 @@ export const AdditionalOptions = () => {
 		</>
 	);
 };
+
+export default AdditionalOptions;

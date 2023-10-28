@@ -21,7 +21,7 @@ interface SelectProps {
 	onChange: (newValue: string) => void;
 }
 
-export const Select = memo(function Select({
+const Select = memo(function Select({
 	data,
 	placeholder,
 	searchIcon = true,
@@ -160,3 +160,5 @@ export const Select = memo(function Select({
 		</div>
 	);
 });
+
+export default Select;

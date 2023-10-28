@@ -7,7 +7,7 @@ interface ParamsEmptyListProps {
 	openModalFunc: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ParamsEmptyList = ({ openModalFunc }: ParamsEmptyListProps) => (
+const EmptyRequestParamsList = ({ openModalFunc }: ParamsEmptyListProps) => (
 	<div className="query_params_body_empty">
 		<div className="params_empty_text">This request does not have query parameters...</div>
 		<Button
@@ -25,3 +25,5 @@ export const ParamsEmptyList = ({ openModalFunc }: ParamsEmptyListProps) => (
 		/>
 	</div>
 );
+
+export default EmptyRequestParamsList;
