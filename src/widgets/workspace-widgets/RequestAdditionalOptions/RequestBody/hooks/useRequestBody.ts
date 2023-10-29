@@ -4,38 +4,71 @@ import requestBodyFormDataSlice from "../../../../../redux/reducers/requestBodyF
 import { v1 as uuidv1 } from "uuid";
 import loadFile from "../../../../../idb/actions/loadFile";
 import removeAllFiles from "../../../../../idb/actions/removeAllFiles";
+import requestBodyUrlEncodedSlice from "../../../../../redux/reducers/requestBodyUrlEncodedSlice";
 
-type NewItemT = null | {
-	id: string;
-	name: string;
-	blob: Blob;
+type NewFormDataItemT = {
+	type: string;
+	blob: Blob | undefined;
+	name: string | undefined;
+	keyRef: React.RefObject<HTMLInputElement>;
+	valueRef: React.RefObject<HTMLInputElement>;
+};
+type NewUrlEncodedItemT = {
+	keyRef: React.RefObject<HTMLInputElement>;
+	valueRef: React.RefObject<HTMLInputElement>;
 };
 
-function useRequestBody(
-	keyInputRef: React.RefObject<HTMLInputElement>,
-	valueInputRef: React.RefObject<HTMLInputElement>,
-	newItem: NewItemT
-) {
+function useRequestBody() {
 	const dispatch = useAppDispatch();
 	const { addBodyFormDataItem, clearFormData } = requestBodyFormDataSlice.actions;
+	const { addUrlEncodedItem } = requestBodyUrlEncodedSlice.actions;
 
-	const modalSubmitFunc = () => {
-		if (!!newItem) {
-			loadFile({
-				id: newItem.id,
-				name: newItem.name,
-				blob: newItem.blob
-			});
+	const urlEncodedModalSubmitFunc = ({ keyRef, valueRef }: NewUrlEncodedItemT) => {
+		dispatch(
+			addUrlEncodedItem({
+				_id: uuidv1(),
+				isUsed: true,
+				key: String(keyRef.current!.value),
+				value: String(valueRef.current!.value)
+			})
+		);
+
+		return true;
+	};
+
+	const formDataModalSubmitFunc = ({ type, blob, keyRef, name, valueRef }: NewFormDataItemT) => {
+		if (type === "File") {
+			if (blob && name) {
+				const fileId: string = uuidv1();
+				loadFile({
+					id: fileId,
+					name: name,
+					blob: blob
+				});
+				dispatch(
+					addBodyFormDataItem({
+						_id: uuidv1(),
+						isUsed: true,
+						valueType: "file",
+						value: "",
+						key: keyRef.current!.value,
+						fileInfo: {
+							id: fileId,
+							name: name
+						}
+					})
+				);
+			}
 			dispatch(
 				addBodyFormDataItem({
 					_id: uuidv1(),
 					isUsed: true,
 					valueType: "file",
 					value: "",
-					key: keyInputRef.current!.value,
+					key: keyRef.current!.value,
 					fileInfo: {
-						id: newItem.id,
-						name: newItem.name
+						id: "",
+						name: ""
 					}
 				})
 			);
@@ -45,8 +78,8 @@ function useRequestBody(
 					_id: uuidv1(),
 					isUsed: true,
 					valueType: "text",
-					value: valueInputRef.current!.value,
-					key: keyInputRef.current!.value,
+					value: valueRef.current!.value,
+					key: keyRef.current!.value,
 					fileInfo: {
 						id: "",
 						name: ""
@@ -66,7 +99,7 @@ function useRequestBody(
 		"raw": clearFormData // ?FIXME: Изменить на rawData
 	};
 
-	return { clearFunctions, modalSubmitFunc };
+	return { clearFunctions, formDataModalSubmitFunc, urlEncodedModalSubmitFunc };
 }
 
 export default useRequestBody;

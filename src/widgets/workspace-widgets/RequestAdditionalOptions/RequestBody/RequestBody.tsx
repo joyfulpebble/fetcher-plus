@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useAppSelector } from "../../../../hooks/redux/redux";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/redux/redux";
 import { useClassnames } from "../../../../hooks/useClassnames";
 import useRequestBody from "./hooks/useRequestBody";
 
@@ -16,32 +16,39 @@ import Select from "../../../../components/ui/Select/Select";
 import { IconChevronDown, IconFilePlus, IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
 
-import { v1 as uuidv1 } from "uuid";
+import { v1 as uuidv1, v1 } from "uuid";
 
 import "./styles/RequestBody.scss";
 import "./styles/RequestBodyNone.scss";
+import requestBodyUrlEncodedSlice from "../../../../redux/reducers/requestBodyUrlEncodedSlice";
+import UrlEncodedList from "../../../../components/request-body-variants/UrlEncoded/UrlEncodedList";
 
 const RequestBody = () => {
 	// !FIXME: Logic of modal elements -----------------------------------------------------------------------
 
 	const [newFormDataModalView, setNewFormDataModalView] = useState(false);
-	const [newFormDataItem, setNewFormDataItem] = useState<null | {
-		id: string;
-		name: string;
-		blob: Blob;
-	}>(null);
-	const [newFormDataItemType, setNewFormDataItemType] = useState<null | string>("Text");
+	const [newFormDataItem, setNewFormDataItem] = useState<{
+		name: string | undefined;
+		blob: Blob | undefined;
+	}>({
+		name: undefined,
+		blob: undefined
+	});
+	const [newFormDataItemType, setNewFormDataItemType] = useState<string>("Text");
 
 	const formDataItemKeyRef = useRef<HTMLInputElement>(null);
 	const formDataItemValueRef = useRef<HTMLInputElement>(null);
 
 	// !FIXME: -----------------------------------------------------------------------------------------------
 
-	const { modalSubmitFunc, clearFunctions } = useRequestBody(
-		formDataItemKeyRef,
-		formDataItemValueRef,
-		newFormDataItem
-	);
+	const [newUrlEncodedModalView, setNewUrlEncodedModalView] = useState(false);
+
+	const urlEncodedKeyRef = useRef<HTMLInputElement>(null);
+	const urlEncodedValueRef = useRef<HTMLInputElement>(null);
+
+	// !FIXME: -----------------------------------------------------------------------------------------------
+
+	const { urlEncodedModalSubmitFunc, formDataModalSubmitFunc, clearFunctions } = useRequestBody();
 
 	const { contentType, rawType } = useAppSelector((state) => state.requestBodyTypeReducer);
 
@@ -53,16 +60,53 @@ const RequestBody = () => {
 	const body_variants = {
 		"none": <BodyNone />,
 		"form-data": <FormDataList modalFunc={setNewFormDataModalView} />,
-		"x-www-form-urlencoded": <>x-www-form-urlencoded</>,
+		"x-www-form-urlencoded": <UrlEncodedList modalFunc={setNewUrlEncodedModalView} />,
 		"raw": <>raw</>
 	};
 
 	return (
 		<>
+			{/* FIXME: */}
+			<Modal
+				title="Adding a new url-encoded body item"
+				visibility={newUrlEncodedModalView}
+				onSubmit={() =>
+					urlEncodedModalSubmitFunc({ keyRef: urlEncodedKeyRef, valueRef: urlEncodedValueRef })
+				}
+				onCancel={() => true}
+				onClose={() => setNewUrlEncodedModalView(false)}
+			>
+				<div className="url_encoded_item_adding_modal">
+					<div className="url_encoded_modal_item_key">
+						<Input
+							label="Enter form-data key:"
+							placeholder="Some key..."
+							innerRef={urlEncodedKeyRef}
+						/>
+					</div>
+					<div className="url_encoded_modal_item_value">
+						<div>
+							<Input
+								label="Enter form-data value:"
+								placeholder="Some value..."
+								innerRef={urlEncodedValueRef}
+							/>
+						</div>
+					</div>
+				</div>
+			</Modal>
 			<Modal
 				title="Adding a new form-data body item"
 				visibility={newFormDataModalView}
-				onSubmit={() => modalSubmitFunc()}
+				onSubmit={() =>
+					formDataModalSubmitFunc({
+						type: newFormDataItemType,
+						blob: newFormDataItem!.blob,
+						name: newFormDataItem!.name,
+						keyRef: formDataItemKeyRef,
+						valueRef: formDataItemValueRef
+					})
+				}
 				onCancel={() => true}
 				onClose={() => setNewFormDataModalView(false)}
 			>
@@ -101,13 +145,11 @@ const RequestBody = () => {
 								<FileSelect
 									placeholder="Click to upload file"
 									onChange={async (event) => {
-										const fileId: string = uuidv1();
 										const fileName: string = event.target.files![0].name;
 										const tempUrlToFile = URL.createObjectURL(event.target.files![0]);
 										const blobFromFile = await fetch(tempUrlToFile).then((res) => res.blob());
 
 										setNewFormDataItem({
-											id: fileId,
 											name: fileName,
 											blob: blobFromFile
 										});
@@ -118,6 +160,7 @@ const RequestBody = () => {
 					</div>
 				</div>
 			</Modal>
+			{/* FIXME: */}
 			<section className="request_additional_option_header_wrapper">
 				<div className="body_conntent_type_select_wrapper">
 					<span className="request_additional_option_name">Body</span>
@@ -161,6 +204,7 @@ const RequestBody = () => {
 					)}
 				</div>
 				<div className="request_additional_option_controls">
+					{/* FIXME: */}
 					{contentType === "raw" && (
 						<div className="add_new">
 							<Tippy
@@ -175,6 +219,26 @@ const RequestBody = () => {
 								<IconFilePlus
 									size={16}
 									stroke={2}
+								/>
+							</Tippy>
+						</div>
+					)}
+					{contentType === "x-www-form-urlencoded" && (
+						<div className="add_new">
+							<Tippy
+								className="info_tippy"
+								placement="top"
+								content={"Add new"}
+								animation="shift-away"
+								arrow={true}
+								trigger="mouseenter"
+								zIndex={0}
+							>
+								<IconPlus
+									size={16}
+									onClick={() => {
+										setNewUrlEncodedModalView(true);
+									}}
 								/>
 							</Tippy>
 						</div>
@@ -221,6 +285,7 @@ const RequestBody = () => {
 							</Tippy>
 						</div>
 					)}
+					{/* FIXME: */}
 				</div>
 			</section>
 			<section className={request_body_classnames}>{body_variants[contentType]}</section>

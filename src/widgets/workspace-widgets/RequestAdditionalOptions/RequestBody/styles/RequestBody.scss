@@ -62,7 +62,7 @@
 	overflow-x: hidden;
 }
 
-// ! ----------------------------------------------------
+// ! FIXME:----------------------------------------------------
 .form_data_item_adding_modal {
 	.form_data_modal_item_key {
 		margin-bottom: 16px;
@@ -75,5 +75,16 @@
 	}
 	.form_data_modal_select_file {
 		width: 200px;
+	}
+}
+// ! FIXME: ----------------------------------------------------
+.url_encoded_item_adding_modal {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	justify-content: space-between;
+	.url_encoded_modal_item_key {
+	}
+	.url_encoded_modal_item_value {
 	}
 }

@@ -1,0 +1,20 @@
+.request_body_url_encoded_wrapper_empty {
+	user-select: none;
+	margin-top: 150px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.url_encoded_empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	.url_encoded_empty_text {
+		letter-spacing: 0.5px;
+		color: var(--font-color-invisible);
+		margin-bottom: 8px;
+	}
+}
