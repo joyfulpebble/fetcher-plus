@@ -1,54 +1,34 @@
 import { useState, useRef } from "react";
-import { useAppDispatch, useAppSelector } from "../../../../hooks/redux/redux";
+import { useAppSelector } from "../../../../hooks/redux/redux";
 import { useClassnames } from "../../../../hooks/useClassnames";
 import useRequestBody from "./hooks/useRequestBody";
 
 import BodyNone from "./RequestBodyNone";
 import FormDataList from "../../../../components/request-body-variants/FormData/FormDataList";
-import RequestBodyContentTypesList from "../../../../components/lists/RequestBodyContentTypesList/RequestBodyContentTypesList";
+import UrlEncodedList from "../../../../components/request-body-variants/UrlEncoded/UrlEncodedList";
 import RequestBodyRawTypesList from "../../../../components/lists/RequestBodyRawTypesList/RequestBodyRawTypesList";
+import RequestBodyContentTypesList from "../../../../components/lists/RequestBodyContentTypesList/RequestBodyContentTypesList";
 
 import Modal from "../../../../components/ui/Modal/Modal";
 import Input from "../../../../components/ui/Input/Input";
-import FileSelect from "../../../../components/ui/FileSelect/FileSelect";
-import Select from "../../../../components/ui/Select/Select";
 
 import { IconChevronDown, IconFilePlus, IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
 
-import { v1 as uuidv1, v1 } from "uuid";
-
 import "./styles/RequestBody.scss";
 import "./styles/RequestBodyNone.scss";
-import requestBodyUrlEncodedSlice from "../../../../redux/reducers/requestBodyUrlEncodedSlice";
-import UrlEncodedList from "../../../../components/request-body-variants/UrlEncoded/UrlEncodedList";
+import NewFormDataBodyItemModal from "../../../../components/modals/NewFormDataBodyItemModal";
 
 const RequestBody = () => {
-	// !FIXME: Logic of modal elements -----------------------------------------------------------------------
-
-	const [newFormDataModalView, setNewFormDataModalView] = useState(false);
-	const [newFormDataItem, setNewFormDataItem] = useState<{
-		name: string | undefined;
-		blob: Blob | undefined;
-	}>({
-		name: undefined,
-		blob: undefined
-	});
-	const [newFormDataItemType, setNewFormDataItemType] = useState<string>("Text");
-
-	const formDataItemKeyRef = useRef<HTMLInputElement>(null);
-	const formDataItemValueRef = useRef<HTMLInputElement>(null);
-
 	// !FIXME: -----------------------------------------------------------------------------------------------
-
-	const [newUrlEncodedModalView, setNewUrlEncodedModalView] = useState(false);
 
 	const urlEncodedKeyRef = useRef<HTMLInputElement>(null);
 	const urlEncodedValueRef = useRef<HTMLInputElement>(null);
-
 	// !FIXME: -----------------------------------------------------------------------------------------------
 
-	const { urlEncodedModalSubmitFunc, formDataModalSubmitFunc, clearFunctions } = useRequestBody();
+	const { urlEncodedModalSubmitFunc, clearFunctions } = useRequestBody();
+	const [newUrlEncodedModalView, setNewUrlEncodedModalView] = useState(false);
+	const [formDataModalView, setFormDataModalView] = useState(false);
 
 	const { contentType, rawType } = useAppSelector((state) => state.requestBodyTypeReducer);
 
@@ -59,7 +39,7 @@ const RequestBody = () => {
 
 	const body_variants = {
 		"none": <BodyNone />,
-		"form-data": <FormDataList modalFunc={setNewFormDataModalView} />,
+		"form-data": <FormDataList modalFunc={setFormDataModalView} />,
 		"x-www-form-urlencoded": <UrlEncodedList modalFunc={setNewUrlEncodedModalView} />,
 		"raw": <>raw</>
 	};
@@ -95,72 +75,12 @@ const RequestBody = () => {
 					</div>
 				</div>
 			</Modal>
-			<Modal
-				title="Adding a new form-data body item"
-				visibility={newFormDataModalView}
-				onSubmit={() =>
-					formDataModalSubmitFunc({
-						type: newFormDataItemType,
-						blob: newFormDataItem!.blob,
-						name: newFormDataItem!.name,
-						keyRef: formDataItemKeyRef,
-						valueRef: formDataItemValueRef
-					})
-				}
-				onCancel={() => true}
-				onClose={() => setNewFormDataModalView(false)}
-			>
-				<div className="form_data_item_adding_modal">
-					<div className="form_data_modal_item_key">
-						<Input
-							label="Enter form-data key:"
-							placeholder="Some key..."
-							innerRef={formDataItemKeyRef}
-						/>
-					</div>
-					<div className="form_data_modal_item_value">
-						<div>
-							<Select
-								data={["Text", "File"]}
-								onChange={(value) => {
-									setNewFormDataItemType(value);
-								}}
-								title="Select form-data item value type:"
-								placeholder="Type..."
-								searchIcon={false}
-								initValue={newFormDataItemType!}
-								disableSearch={true}
-							/>
-						</div>
-						{newFormDataItemType === "Text" ? (
-							<div>
-								<Input
-									label="Enter form-data value:"
-									placeholder="Some value..."
-									innerRef={formDataItemValueRef}
-								/>
-							</div>
-						) : (
-							<div className="form_data_modal_select_file">
-								<FileSelect
-									placeholder="Click to upload file"
-									onChange={async (event) => {
-										const fileName: string = event.target.files![0].name;
-										const tempUrlToFile = URL.createObjectURL(event.target.files![0]);
-										const blobFromFile = await fetch(tempUrlToFile).then((res) => res.blob());
 
-										setNewFormDataItem({
-											name: fileName,
-											blob: blobFromFile
-										});
-									}}
-								/>
-							</div>
-						)}
-					</div>
-				</div>
-			</Modal>
 			{/* FIXME: */}
+			<NewFormDataBodyItemModal
+				view={formDataModalView}
+				setView={setFormDataModalView}
+			/>
 			<section className="request_additional_option_header_wrapper">
 				<div className="body_conntent_type_select_wrapper">
 					<span className="request_additional_option_name">Body</span>
@@ -257,7 +177,7 @@ const RequestBody = () => {
 								<IconPlus
 									size={16}
 									onClick={() => {
-										setNewFormDataModalView(true);
+										setFormDataModalView(true);
 									}}
 								/>
 							</Tippy>
