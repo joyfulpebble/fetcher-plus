@@ -1,31 +1,23 @@
-import useRequestBody, {
-	type NewFormDataItemType
-} from "../../widgets/workspace-widgets/RequestAdditionalOptions/RequestBody/hooks/useRequestBody";
-import FileSelect from "../ui/FileSelect/FileSelect";
-import Input from "../ui/Input/Input";
-import Modal from "../ui/Modal/Modal";
-import Select from "../ui/Select/Select";
+import FileSelect from "../../../ui/FileSelect/FileSelect";
+import Input from "../../../ui/Input/Input";
+import Modal from "../../../ui/Modal/Modal";
+import Select from "../../../ui/Select/Select";
+import useFormDataModal, { type NewFormDataItemType } from "./hooks/useFormDataModal";
 
-interface NewFormDataBodyItemModalProps {
+interface NewFormDataItemModalProps {
 	view: boolean;
 	setView: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const NewFormDataBodyItemModal = ({ view, setView }: NewFormDataBodyItemModalProps) => {
-	const {
-		formDataModalSubmitFunc,
-		formDataFieldsValues,
-		saveFormDataFieldsValue,
-		formDataValueType,
-		formDataValueTypeUpdate
-	} = useRequestBody();
+const NewFormDataItemModal = ({ view, setView }: NewFormDataItemModalProps) => {
+	const { values, valueType, modalSubmitFunc, saveFuildValue, setValueType } = useFormDataModal();
 
 	return (
 		<>
 			<Modal
 				title="Adding a new form-data body item"
 				visibility={view}
-				onSubmit={() => formDataModalSubmitFunc(formDataFieldsValues.current!, formDataValueType)}
+				onSubmit={() => modalSubmitFunc(values.current!, valueType)}
 				onCancel={() => true}
 				onClose={() => setView(false)}
 			>
@@ -35,7 +27,7 @@ const NewFormDataBodyItemModal = ({ view, setView }: NewFormDataBodyItemModalPro
 							label="Enter form-data key:"
 							placeholder="Some key..."
 							onChange={(event) => {
-								saveFormDataFieldsValue("key", event.target.value);
+								saveFuildValue("key", event.target.value);
 							}}
 						/>
 					</div>
@@ -44,22 +36,22 @@ const NewFormDataBodyItemModal = ({ view, setView }: NewFormDataBodyItemModalPro
 							<Select
 								data={["text", "file"]}
 								onChange={(value) => {
-									formDataValueTypeUpdate(value as NewFormDataItemType);
+									setValueType(value as NewFormDataItemType);
 								}}
 								title="Select form-data item value type:"
 								placeholder="Type..."
 								searchIcon={false}
-								initValue={formDataValueType}
+								initValue={valueType}
 								disableSearch={true}
 							/>
 						</div>
-						{formDataValueType === "text" ? (
+						{valueType === "text" ? (
 							<div>
 								<Input
 									label="Enter form-data value:"
 									placeholder="Some value..."
 									onChange={(event) => {
-										saveFormDataFieldsValue("value", event.target.value);
+										saveFuildValue("value", event.target.value);
 									}}
 								/>
 							</div>
@@ -73,8 +65,8 @@ const NewFormDataBodyItemModal = ({ view, setView }: NewFormDataBodyItemModalPro
 											const blobFromFile = await fetch(tempUrlToFile).then((res) => res.blob());
 											const fileName: string = event.target.files[0].name;
 
-											saveFormDataFieldsValue("name", fileName);
-											saveFormDataFieldsValue("blob", blobFromFile);
+											saveFuildValue("name", fileName);
+											saveFuildValue("blob", blobFromFile);
 										}
 									}}
 								/>
@@ -87,4 +79,4 @@ const NewFormDataBodyItemModal = ({ view, setView }: NewFormDataBodyItemModalPro
 	);
 };
 
-export default NewFormDataBodyItemModal;
+export default NewFormDataItemModal;

@@ -17,11 +17,10 @@ import Tippy from "@tippyjs/react";
 
 import "./styles/RequestBody.scss";
 import "./styles/RequestBodyNone.scss";
-import NewFormDataBodyItemModal from "../../../../components/modals/NewFormDataBodyItemModal";
+import NewFormDataItemModal from "../../../../components/modals/RequestBody/FormDataItemModal/NewFormDataItemModal";
 
 const RequestBody = () => {
 	// !FIXME: -----------------------------------------------------------------------------------------------
-
 	const urlEncodedKeyRef = useRef<HTMLInputElement>(null);
 	const urlEncodedValueRef = useRef<HTMLInputElement>(null);
 	// !FIXME: -----------------------------------------------------------------------------------------------
@@ -77,7 +76,7 @@ const RequestBody = () => {
 			</Modal>
 
 			{/* FIXME: */}
-			<NewFormDataBodyItemModal
+			<NewFormDataItemModal
 				view={formDataModalView}
 				setView={setFormDataModalView}
 			/>
