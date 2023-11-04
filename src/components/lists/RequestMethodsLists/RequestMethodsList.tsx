@@ -17,6 +17,7 @@ import customRequestMethodsListSlice from "../../../redux/reducers/customRequest
 import requestSelectedMethodSlice from "../../../redux/reducers/requestSelectedMethodSlice";
 
 import "./RequestMethodsLists.scss";
+import AddingCustomRequestMethodModal from "../../modals/RequestMethods/AddingCustomRequestMethodModal";
 
 function MethodsList() {
 	const dispatch = useAppDispatch();
@@ -31,52 +32,10 @@ function MethodsList() {
 
 	return (
 		<>
-			<Modal
-				title="Adding a custom request name"
-				visibility={customMethodModalView}
-				onSubmit={() => {
-					if (isRequired(customMethodNameRef.current?.value, setInputError)) return false;
-					if (
-						isIncluded(
-							customMethodNameRef.current?.value.toUpperCase(),
-							[customMethods, defaultMethods],
-							setInputError
-						)
-					)
-						return false;
-
-					setInputError(null);
-					dispatch(addCustomMethod(customMethodNameRef.current?.value.toUpperCase()!));
-					dispatch(updateRequestMethod(customMethodNameRef.current?.value.toUpperCase()!));
-
-					return true;
-				}}
-				onCancel={() => true}
-				onClose={() => {
-					setInputError(null);
-					setCustomMethodModalView(false);
-				}}
-			>
-				<Input
-					name="requestName"
-					label="Enter request name: "
-					placeholder="Some text"
-					maxLength={20}
-					error={inputError}
-					innerRef={customMethodNameRef}
-					onChange={() => {
-						isRequired(customMethodNameRef.current?.value, setInputError);
-						isIncluded(
-							customMethodNameRef.current?.value.toUpperCase(),
-							[customMethods, defaultMethods],
-							setInputError
-						);
-					}}
-					onKeyDown={(event) => {
-						if (event.code === "Space") event.preventDefault();
-					}}
-				/>
-			</Modal>
+			<AddingCustomRequestMethodModal
+				view={customMethodModalView}
+				setView={setCustomMethodModalView}
+			/>
 			<div>
 				<DefaultRequestMethodsList />
 				<Divider />
