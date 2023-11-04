@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { v1 as uuidv1 } from "uuid";
-import { useAppDispatch } from "../../../../../hooks/redux/redux";
 import { useForm } from "../../../../../hooks/useForm";
-import requestBodyFormDataSlice from "../../../../../redux/reducers/requestBodyFormDataSlice";
+
+import { v1 as uuidv1 } from "uuid";
 import loadFile from "../../../../../idb/actions/loadFile";
+
+import { useAppDispatch } from "../../../../../hooks/redux/redux";
+import requestBodyFormDataSlice from "../../../../../redux/reducers/requestBodyFormDataSlice";
 
 export type NewFormDataItemType = "text" | "file";
 export interface NewFormDataItemI {
@@ -17,7 +19,7 @@ function useFormDataModal() {
 	const dispatch = useAppDispatch();
 	const { addBodyFormDataItem } = requestBodyFormDataSlice.actions;
 	const { values, saveFuildValue } = useForm<NewFormDataItemI>({
-		initialValues: { blob: null, name: "", key: "", value: "asd" }
+		initialValues: { blob: null, name: "", key: "", value: "" }
 	});
 	const [valueType, setValueType] = useState<NewFormDataItemType>("text");
 
