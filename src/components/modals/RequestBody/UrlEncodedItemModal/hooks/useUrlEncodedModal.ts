@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useAppDispatch } from "../../../../../hooks/redux/redux";
 import { useForm } from "../../../../../hooks/useForm";
 
@@ -14,9 +15,11 @@ function useUrlEncodedModal() {
 	const dispatch = useAppDispatch();
 	const { addUrlEncodedItem } = requestBodyUrlEncodedSlice.actions;
 
-	const { values, saveFuildValue } = useForm<NewUrlEncodedItemT>({
-		initialValues: { key: "", value: "" }
-	});
+	const keyInputRef = useRef<HTMLInputElement>(null);
+	const valueInputRef = useRef<HTMLInputElement>(null);
+	// const { values, saveFuildValue } = useForm<NewUrlEncodedItemT>({
+	// 	initialValues: { key: "", value: "" }
+	// });
 
 	const modalSubmitFunc = ({ key, value }: NewUrlEncodedItemT) => {
 		dispatch(
@@ -28,14 +31,16 @@ function useUrlEncodedModal() {
 			})
 		);
 
-		saveFuildValue("value", "");
-		saveFuildValue("key", "");
+		// saveFuildValue("value", "");
+		// saveFuildValue("key", "");
 
 		return true;
 	};
 	return {
-		values,
-		saveFuildValue,
+		// values,
+		keyInputRef,
+		valueInputRef,
+		// saveFuildValue,
 		modalSubmitFunc
 	};
 }

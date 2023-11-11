@@ -9,14 +9,16 @@ interface NewFormDataItemModalProps {
 }
 
 const NewUrlEncodedItemModal = ({ view, setView }: NewFormDataItemModalProps) => {
-	const { values, saveFuildValue, modalSubmitFunc } = useUrlEncodedModal();
+	const { keyInputRef, valueInputRef, modalSubmitFunc } = useUrlEncodedModal();
 
 	return (
 		<>
 			<Modal
 				title="Adding a new url-encoded body item"
 				visibility={view}
-				onSubmit={() => modalSubmitFunc({ key: values.current!.key, value: values.current!.value })}
+				onSubmit={() =>
+					modalSubmitFunc({ key: keyInputRef.current!.value, value: valueInputRef.current!.value })
+				}
 				onCancel={() => true}
 				onClose={() => setView(false)}
 			>
@@ -25,9 +27,7 @@ const NewUrlEncodedItemModal = ({ view, setView }: NewFormDataItemModalProps) =>
 						<Input
 							label="Enter form-data key:"
 							placeholder="Some key..."
-							onChange={(event) => {
-								saveFuildValue("key", event.target.value);
-							}}
+							innerRef={keyInputRef}
 						/>
 					</div>
 					<div className="url_encoded_modal_item_value">
@@ -35,9 +35,7 @@ const NewUrlEncodedItemModal = ({ view, setView }: NewFormDataItemModalProps) =>
 							<Input
 								label="Enter form-data value:"
 								placeholder="Some value..."
-								onChange={(event) => {
-									saveFuildValue("value", event.target.value);
-								}}
+								innerRef={valueInputRef}
 							/>
 						</div>
 					</div>
