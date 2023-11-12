@@ -17,9 +17,6 @@ function useUrlEncodedModal() {
 
 	const keyInputRef = useRef<HTMLInputElement>(null);
 	const valueInputRef = useRef<HTMLInputElement>(null);
-	// const { values, saveFuildValue } = useForm<NewUrlEncodedItemT>({
-	// 	initialValues: { key: "", value: "" }
-	// });
 
 	const modalSubmitFunc = ({ key, value }: NewUrlEncodedItemT) => {
 		dispatch(
@@ -31,16 +28,11 @@ function useUrlEncodedModal() {
 			})
 		);
 
-		// saveFuildValue("value", "");
-		// saveFuildValue("key", "");
-
 		return true;
 	};
 	return {
-		// values,
 		keyInputRef,
 		valueInputRef,
-		// saveFuildValue,
 		modalSubmitFunc
 	};
 }

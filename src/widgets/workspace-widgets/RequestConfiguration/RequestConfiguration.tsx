@@ -16,6 +16,8 @@ function RequestForm(): JSX.Element {
 	const requestHeaders = useAppSelector((state) => state.requestHeadersSlice);
 	const requestMethod = useAppSelector((state) => state.requestSelctedMethod);
 	const requestFormDataBody = useAppSelector((state) => state.requestBodyFormDataReducer);
+	const requestUrlEncodedBody = useAppSelector((state) => state.requestBodyUrlEncodedReducer);
+	const rawBodyContent = useAppSelector((state) => state.requestBodyRawContentReducer);
 
 	const { values, saveFuildValue } = useForm<APIT.RequestConfigI>({
 		initialValues: { requestMethod: "GET", requestParams: {}, requestUrl: "" }
@@ -51,6 +53,10 @@ function RequestForm(): JSX.Element {
 							console.table(requestHeaders);
 							console.log(">request `form-data` body: ");
 							console.table(requestFormDataBody);
+							console.log(">request `url-encoded` body: ");
+							console.table(requestUrlEncodedBody);
+							console.log(">request `raw` body: ");
+							console.table(rawBodyContent);
 						}}
 					/>
 				</section>

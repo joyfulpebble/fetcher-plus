@@ -8,14 +8,15 @@ import FormDataList from "../../../../components/request-body-variants/FormData/
 import UrlEncodedList from "../../../../components/request-body-variants/UrlEncoded/UrlEncodedList";
 import RequestBodyRawTypesList from "../../../../components/lists/RequestBodyRawTypesList/RequestBodyRawTypesList";
 import RequestBodyContentTypesList from "../../../../components/lists/RequestBodyContentTypesList/RequestBodyContentTypesList";
+import NewFormDataItemModal from "../../../../components/modals/RequestBody/FormDataItemModal/NewFormDataItemModal";
+import NewUrlEncodedItemModal from "../../../../components/modals/RequestBody/UrlEncodedItemModal/NewUrlEncodedItemModal";
+import RawBodyImport from "../../../../components/request-body-variants/Raw/RawBodyImport";
 
-import { IconChevronDown, IconFilePlus, IconPlus, IconTrash } from "@tabler/icons-react";
+import { IconChevronDown, IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
 
 import "./styles/RequestBody.scss";
 import "./styles/RequestBodyNone.scss";
-import NewFormDataItemModal from "../../../../components/modals/RequestBody/FormDataItemModal/NewFormDataItemModal";
-import NewUrlEncodedItemModal from "../../../../components/modals/RequestBody/UrlEncodedItemModal/NewUrlEncodedItemModal";
 
 const RequestBody = () => {
 	const { clearFunctions } = useRequestBody();
@@ -89,24 +90,21 @@ const RequestBody = () => {
 					)}
 				</div>
 				<div className="request_additional_option_controls">
-					{/* FIXME: */}
 					{contentType === "raw" && (
-						<div className="add_new">
-							<Tippy
-								className="info_tippy"
-								placement="top"
-								content={"Import"}
-								animation="shift-away"
-								arrow={true}
-								trigger="mouseenter"
-								zIndex={0}
-							>
-								<IconFilePlus
-									size={16}
-									stroke={2}
-								/>
-							</Tippy>
-						</div>
+						<Tippy
+							className="info_tippy"
+							placement="top"
+							content={"Import"}
+							animation="shift-away"
+							arrow={true}
+							trigger="mouseenter"
+							zIndex={0}
+							offset={[0, 7]}
+						>
+							<div className="add_new">
+								<RawBodyImport />
+							</div>
+						</Tippy>
 					)}
 					{contentType === "x-www-form-urlencoded" && (
 						<div className="add_new">
@@ -149,17 +147,17 @@ const RequestBody = () => {
 						</div>
 					)}
 					{contentType !== "none" && (
-						<div className="delete_all">
-							<Tippy
-								className="info_tippy"
-								placement="top"
-								content={"Clear all"}
-								animation="shift-away"
-								arrow={true}
-								trigger="mouseenter"
-								zIndex={0}
-								offset={[-15, 10]}
-							>
+						<Tippy
+							className="info_tippy"
+							placement="top"
+							content={"Clear all"}
+							animation="shift-away"
+							arrow={true}
+							trigger="mouseenter"
+							zIndex={0}
+							offset={[-15, 7]}
+						>
+							<div className="delete_all">
 								<IconTrash
 									size={16}
 									stroke={2}
@@ -167,10 +165,9 @@ const RequestBody = () => {
 										clearFunctions[contentType]();
 									}}
 								/>
-							</Tippy>
-						</div>
+							</div>
+						</Tippy>
 					)}
-					{/* FIXME: */}
 				</div>
 			</section>
 			<section className={request_body_classnames}>{body_variants[contentType]}</section>
