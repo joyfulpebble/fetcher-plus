@@ -29,7 +29,7 @@ function Modal({
 	onSubmit,
 	onClose
 }: ModalPropsI) {
-	const modalLayerRef = useRef(null);
+	const modalLayerRef = useRef<HTMLDivElement>(null);
 
 	useOutsideClick(modalLayerRef, () => {
 		onClose();
@@ -40,6 +40,8 @@ function Modal({
 			if (event.key === "Enter") {
 				event.preventDefault();
 
+				console.log("enter");
+
 				if (visibility) {
 					onSubmit();
 					onClose();
@@ -47,7 +49,9 @@ function Modal({
 			}
 		};
 
-		document.addEventListener("keydown", keyDownHandler);
+		if (modalLayerRef && modalLayerRef.current) {
+			modalLayerRef.current.addEventListener("keydown", keyDownHandler);
+		}
 
 		return () => {
 			document.removeEventListener("keydown", keyDownHandler);
@@ -68,6 +72,7 @@ function Modal({
 								ease: "easeOut"
 							}}
 							exit={{ opacity: 0 }}
+							id="modal_layer"
 							className="modal_layer"
 						>
 							<motion.div
