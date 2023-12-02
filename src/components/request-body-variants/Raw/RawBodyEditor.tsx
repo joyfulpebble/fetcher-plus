@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux/redux";
 import requestBodyRawContentSlice from "../../../redux/reducers/requestBodyRawContentSlice";
 
-import Editor, { OnMount, BeforeMount } from "@monaco-editor/react";
+import Editor, { BeforeMount } from "@monaco-editor/react";
 
 /** TODO:
  * ✓ Найти/настроить линтеры
@@ -42,7 +42,10 @@ const RawBodyEditor = () => {
 				"editor.background": "#1e1e1e",
 				"editor.lineHighlightBackground": "#61616150",
 				"editor.selectionBackground": "#61616150",
-				"editor.selectionHighlightBackground": "#ffcc0020",
+				"editor.selectionHighlightBackground": "#61616150",
+				"editor.findMatchBackground": "#614fd1",
+				"editor.findMatchHighlightBackground": "#61616150",
+				"editor.findRangeHighlightBackground": "#61616150",
 				"editorError.foreground": "#ff537070",
 				"editorLineNumber.activeForeground": "#614fd1",
 				"editorLineNumber.foreground": "#ffffff80",
@@ -68,17 +71,65 @@ const RawBodyEditor = () => {
 				"list.focusForeground": "#b2bdbd",
 				"list.hoverBackground": "#1a1a1a",
 				"list.hoverForeground": "#bababa",
-				"scrollbarSlider.activeBackground": "#614fd1",
+				"scrollbarSlider.activeBackground": "#614fd190",
 				"scrollbarSlider.background": "#eeffff10",
 				"scrollbarSlider.hoverBackground": "#eeffff20"
 			},
 			rules: [
+				{
+					token: "comment",
+					foreground: "#80a271"
+				},
 				{
 					token: "keyword.js",
 					foreground: "#614fd1"
 				},
 				{
 					token: "typeKeywords",
+					foreground: "#614fd1"
+				},
+				{
+					token: "metatag.html",
+					foreground: "#614fd1"
+				},
+				{
+					token: "metatag.content.html",
+					foreground: "#9084df"
+				},
+				{
+					token: "tag",
+					foreground: "#614fd1"
+				},
+				{
+					token: "attribute.name",
+					foreground: "#9084df"
+				},
+				{
+					token: "attribute.value",
+					foreground: "#ddde98"
+				},
+				{
+					token: "attribute.value.hex.css",
+					foreground: "#ddde98"
+				},
+				{
+					token: "metatag.xml",
+					foreground: "#614fd1"
+				},
+				{
+					token: "metatag.content.xml",
+					foreground: "#9084df"
+				},
+				{
+					token: "number.json",
+					foreground: "#80a271"
+				},
+				{
+					token: "string.value.json",
+					foreground: "#9084df"
+				},
+				{
+					token: "string.key.json",
 					foreground: "#614fd1"
 				}
 			]
@@ -100,7 +151,7 @@ const RawBodyEditor = () => {
 				height={"100%"}
 				width={"100%"}
 				theme="js-dark"
-				defaultLanguage="javascript"
+				defaultLanguage="text"
 				onChange={(value) => {
 					setVal(value || "");
 				}}
@@ -115,7 +166,8 @@ const RawBodyEditor = () => {
 					find: { autoFindInSelection: "multiline", addExtraSpaceOnTop: false },
 					contextmenu: false,
 					fixedOverflowWidgets: true,
-					hover: { enabled: false }
+					hover: { enabled: false },
+					links: false
 				}}
 				beforeMount={editorSetup}
 			/>
