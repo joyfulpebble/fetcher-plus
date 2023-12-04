@@ -1,29 +1,27 @@
-import { useState } from "react";
-
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux/redux";
 import requestBodyRawContentSlice from "../../../redux/reducers/requestBodyRawContentSlice";
 
-import Editor, { BeforeMount } from "@monaco-editor/react";
+import Editor, { BeforeMount, OnMount } from "@monaco-editor/react";
 
 /** TODO:
  * ✓ Найти/настроить линтеры
+ * - Декомпозиция
  * - Настроить сам редактор
  * * - Изменить контекстное меню
  * * - Убрать лишние бинды
  * * * ✓ Настроить поиск
  * * ✓ Убрать минимапу
  * ✓ Отредактировать тему
- * * - Сделать стили для разных языков
+ * * ✓ Сделать стили для разных языков
  * - Реализовать смену языка
- * - Оптимизировать обновление `content storage`
+ * ✓ Оптимизировать обновление `content storage`
+ * - Настроить prettier
  */
 
 const RawBodyEditor = () => {
 	const dispatch = useAppDispatch();
-	const storageContent = useAppSelector((state) => state.requestBodyRawContentReducer);
+	const storageRawContent = useAppSelector((state) => state.requestBodyRawContentReducer);
 	const { updateRawContent } = requestBodyRawContentSlice.actions;
-
-	const [val, setVal] = useState(storageContent);
 
 	const editorSetup: BeforeMount = (monaco) => {
 		monaco.editor.defineTheme("js-dark", {
@@ -137,6 +135,15 @@ const RawBodyEditor = () => {
 
 		monaco.editor.setTheme("js-dark");
 	};
+	const handleEditorMount: OnMount = (editor) => {
+		editor.onDidBlurEditorText(() => {
+			const correntEditorValue = editor.getValue();
+
+			if (!(storageRawContent === correntEditorValue)) {
+				dispatch(updateRawContent(correntEditorValue));
+			}
+		});
+	};
 
 	return (
 		<div
@@ -147,14 +154,13 @@ const RawBodyEditor = () => {
 			}}
 		>
 			<Editor
-				value={val}
+				value={storageRawContent}
 				height={"100%"}
 				width={"100%"}
 				theme="js-dark"
-				defaultLanguage="text"
-				onChange={(value) => {
-					setVal(value || "");
-				}}
+				language="javascript"
+				onMount={handleEditorMount}
+				beforeMount={editorSetup}
 				options={{
 					cursorStyle: "line-thin",
 					cursorBlinking: "smooth",
@@ -169,7 +175,6 @@ const RawBodyEditor = () => {
 					hover: { enabled: false },
 					links: false
 				}}
-				beforeMount={editorSetup}
 			/>
 		</div>
 	);
