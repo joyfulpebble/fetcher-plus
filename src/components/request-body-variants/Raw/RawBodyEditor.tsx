@@ -2,18 +2,19 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/redux/redux";
 import requestBodyRawContentSlice from "../../../redux/reducers/requestBodyRawContentSlice";
 
 import Editor, { BeforeMount, OnMount } from "@monaco-editor/react";
+import { KeyCode } from "monaco-editor";
 
 /** TODO:
  * ✓ Найти/настроить линтеры
  * - Декомпозиция
- * - Настроить сам редактор
- * * - Изменить контекстное меню
- * * - Убрать лишние бинды
+ * ✓ Настроить сам редактор
+ * * ✓ Изменить контекстное меню
+ * * ✓ Убрать лишние бинды
  * * * ✓ Настроить поиск
  * * ✓ Убрать минимапу
  * ✓ Отредактировать тему
  * * ✓ Сделать стили для разных языков
- * - Реализовать смену языка
+ * ✓ Реализовать смену языка
  * ✓ Оптимизировать обновление `content storage`
  * - Настроить prettier
  */
@@ -21,6 +22,7 @@ import Editor, { BeforeMount, OnMount } from "@monaco-editor/react";
 const RawBodyEditor = () => {
 	const dispatch = useAppDispatch();
 	const storageRawContent = useAppSelector((state) => state.requestBodyRawContentReducer);
+	const { rawType } = useAppSelector((state) => state.requestBodyTypeReducer);
 	const { updateRawContent } = requestBodyRawContentSlice.actions;
 
 	const editorSetup: BeforeMount = (monaco) => {
@@ -143,6 +145,13 @@ const RawBodyEditor = () => {
 				dispatch(updateRawContent(correntEditorValue));
 			}
 		});
+
+		editor.addAction({
+			id: "asd",
+			label: "asd",
+			keybindings: [KeyCode.F1],
+			run: () => {}
+		});
 	};
 
 	return (
@@ -158,7 +167,7 @@ const RawBodyEditor = () => {
 				height={"100%"}
 				width={"100%"}
 				theme="js-dark"
-				language="javascript"
+				language={rawType.toLocaleLowerCase()}
 				onMount={handleEditorMount}
 				beforeMount={editorSetup}
 				options={{
