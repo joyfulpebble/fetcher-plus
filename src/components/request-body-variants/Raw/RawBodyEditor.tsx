@@ -2,7 +2,12 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/redux/redux";
 import requestBodyRawContentSlice from "../../../redux/reducers/requestBodyRawContentSlice";
 
 import Editor, { BeforeMount, OnMount } from "@monaco-editor/react";
-import { KeyCode } from "monaco-editor";
+import { KeyCode, KeyMod } from "monaco-editor";
+
+import prettier from "prettier/standalone";
+import html from "prettier/parser-html";
+import babel from "prettier/parser-babel";
+import xml from "prettier/";
 
 /** TODO:
  * ✓ Найти/настроить линтеры
@@ -138,19 +143,26 @@ const RawBodyEditor = () => {
 		monaco.editor.setTheme("js-dark");
 	};
 	const handleEditorMount: OnMount = (editor) => {
-		editor.onDidBlurEditorText(() => {
-			const correntEditorValue = editor.getValue();
-
-			if (!(storageRawContent === correntEditorValue)) {
-				dispatch(updateRawContent(correntEditorValue));
-			}
+		editor.addAction({
+			id: "cmdpaletteoff",
+			label: "cmdpaletteoff",
+			keybindings: [KeyCode.F1],
+			run: () => {}
 		});
 
 		editor.addAction({
-			id: "asd",
-			label: "asd",
-			keybindings: [KeyCode.F1],
-			run: () => {}
+			id: "CP",
+			label: "Code prettify",
+			keybindings: [KeyMod.CtrlCmd | KeyCode.KeyS],
+			run: () => {
+				const prettifyed = prettier.format(editor.getValue(), {
+					parser: "html",
+					plugins: [html]
+				});
+
+				editor.setValue(prettifyed);
+				dispatch(updateRawContent(prettifyed));
+			}
 		});
 	};
 
@@ -168,6 +180,11 @@ const RawBodyEditor = () => {
 				width={"100%"}
 				theme="js-dark"
 				language={rawType.toLocaleLowerCase()}
+				onChange={(value) => {
+					if (value && storageRawContent !== value) {
+						dispatch(updateRawContent(value));
+					}
+				}}
 				onMount={handleEditorMount}
 				beforeMount={editorSetup}
 				options={{
@@ -182,7 +199,11 @@ const RawBodyEditor = () => {
 					contextmenu: false,
 					fixedOverflowWidgets: true,
 					hover: { enabled: false },
-					links: false
+					links: false,
+					formatOnPaste: true,
+					formatOnType: true,
+					autoIndent: "full",
+					autoClosingBrackets: "always"
 				}}
 			/>
 		</div>
