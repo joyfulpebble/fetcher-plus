@@ -12,7 +12,7 @@ function MethodSelect() {
 	return (
 		<>
 			<Tippy
-				className="default_tippy tippy_method_select_wrapper"
+				className="tippy_method_select_wrapper"
 				placement="bottom"
 				content={<MethodsList />}
 				interactive={true}
@@ -20,7 +20,7 @@ function MethodSelect() {
 				animation="shift-away"
 				trigger="click"
 				arrow={false}
-				offset={[11, 5]}
+				offset={[6, 5]}
 				maxWidth={160}
 				zIndex={10}
 			>

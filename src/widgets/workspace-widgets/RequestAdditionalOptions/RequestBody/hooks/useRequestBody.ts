@@ -3,11 +3,13 @@ import requestBodyFormDataSlice from "../../../../../redux/reducers/requestBodyF
 
 import removeAllFiles from "../../../../../idb/actions/removeAllFiles";
 import requestBodyUrlEncodedSlice from "../../../../../redux/reducers/requestBodyUrlEncodedSlice";
+import requestBodyRawContentSlice from "../../../../../redux/reducers/requestBodyRawContentSlice";
 
 function useRequestBody() {
 	const dispatch = useAppDispatch();
 	const { clearFormData } = requestBodyFormDataSlice.actions;
 	const { clearUrlEncoded } = requestBodyUrlEncodedSlice.actions;
+	const { clearRawContent } = requestBodyRawContentSlice.actions;
 
 	const clearFunctions = {
 		"form-data": () => {
@@ -15,7 +17,7 @@ function useRequestBody() {
 			removeAllFiles();
 		},
 		"x-www-form-urlencoded": () => dispatch(clearUrlEncoded()),
-		"raw": clearFormData // ?FIXME: Изменить на rawData
+		"raw": () => dispatch(clearRawContent())
 	};
 
 	return {

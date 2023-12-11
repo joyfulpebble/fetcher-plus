@@ -12,18 +12,7 @@ import type { BuiltInParserName, CustomParser, LiteralUnion, Plugin } from "pret
 import { editorCodeColors, editorStyleColors } from "../../../tools/constants";
 
 /** TODO:
- * ✓ Найти/настроить линтеры
  * - Декомпозиция
- * ✓ Настроить сам редактор
- * * ✓ Изменить контекстное меню
- * * ✓ Убрать лишние бинды
- * * * ✓ Настроить поиск
- * * ✓ Убрать минимапу
- * ✓ Отредактировать тему
- * * ✓ Сделать стили для разных языков
- * ✓ Реализовать смену языка
- * ✓ Оптимизировать обновление `content storage`
- * ✓ Настроить prettier
  */
 
 type PrettierModesT = {

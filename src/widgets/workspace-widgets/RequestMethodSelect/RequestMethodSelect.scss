@@ -1,5 +1,19 @@
 .tippy_method_select_wrapper {
 	max-height: 259px;
+	overflow-y: scroll;
+
+	border: 1px solid var(--border-color-default);
+	background-color: var(--theme-dark-bg-lvl-2);
+	user-select: none;
+
+	.tippy-content {
+		padding-right: 5px;
+		padding-left: 5px;
+		padding-bottom: 0px;
+	}
+}
+.tippy_method_select_wrapper::-webkit-scrollbar {
+	width: 0px;
 }
 
 .method_select_wrapper {

@@ -94,7 +94,6 @@ body {
 .default_tippy {
 	border: 1px solid var(--border-color-default);
 	background-color: var(--theme-dark-bg-lvl-2);
-	overflow-y: auto;
 	user-select: none;
 
 	.tippy-content {
