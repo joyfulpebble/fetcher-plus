@@ -7,7 +7,7 @@ import { KeyCode, KeyMod } from "monaco-editor";
 import prettier from "prettier/standalone";
 import html from "prettier/parser-html";
 import babel from "prettier/parser-babel";
-import xml from "prettier/";
+import { BuiltInParserName, CustomParser, LiteralUnion, Plugin } from "prettier";
 
 /** TODO:
  * ✓ Найти/настроить линтеры
@@ -23,6 +23,21 @@ import xml from "prettier/";
  * ✓ Оптимизировать обновление `content storage`
  * - Настроить prettier
  */
+
+type PrettierModesT = {
+	html: {
+		plugins: (string | Plugin<any>)[] | undefined;
+		parser: LiteralUnion<BuiltInParserName, string> | CustomParser | undefined;
+	};
+	javascript: {
+		plugins: (string | Plugin<any>)[] | undefined;
+		parser: LiteralUnion<BuiltInParserName, string> | CustomParser | undefined;
+	};
+	json: {
+		plugins: (string | Plugin<any>)[] | undefined;
+		parser: LiteralUnion<BuiltInParserName, string> | CustomParser | undefined;
+	};
+};
 
 const RawBodyEditor = () => {
 	const dispatch = useAppDispatch();
@@ -155,9 +170,37 @@ const RawBodyEditor = () => {
 			label: "Code prettify",
 			keybindings: [KeyMod.CtrlCmd | KeyCode.KeyS],
 			run: () => {
+				const prettierModes: PrettierModesT = {
+					html: {
+						plugins: [html],
+						parser: "html"
+					},
+					javascript: {
+						plugins: [babel],
+						parser: "babel"
+					},
+					json: {
+						plugins: [babel],
+						parser: "json"
+					}
+				};
+
 				const prettifyed = prettier.format(editor.getValue(), {
-					parser: "html",
-					plugins: [html]
+					parser: prettierModes[rawType.toLowerCase() as keyof PrettierModesT].parser,
+					plugins: prettierModes[rawType.toLowerCase() as keyof PrettierModesT].plugins,
+					printWidth: 100,
+					tabWidth: 2,
+					useTabs: false,
+					semi: true,
+					singleQuote: false,
+					quoteProps: "consistent",
+					jsxSingleQuote: false,
+					trailingComma: "none",
+					bracketSpacing: true,
+					bracketSameLine: false,
+					arrowParens: "always",
+					endOfLine: "lf",
+					singleAttributePerLine: true
 				});
 
 				editor.setValue(prettifyed);
