@@ -1,0 +1,63 @@
+.auth_type_select_wrapper {
+	display: flex;
+	flex-direction: row;
+}
+.auth_type_tippy_wrapper {
+	width: 120px;
+}
+
+.request_additional_option_auth_type {
+	width: 105px;
+	height: 20px;
+	border-radius: 4px;
+	border: 1px solid var(--border-color-default);
+	margin-left: 5px;
+	padding: 0 2px 0 5px;
+}
+
+.auth_type_select {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	user-select: none;
+
+	.auth_type {
+		margin-right: 5px;
+		line-height: 18px;
+
+		width: 80px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+.auth_api_type_select {
+	width: 90px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border: 1px solid var(--border-color-default);
+	border-radius: 4px;
+	margin: 0 5px;
+	padding: 0 2px 0 5px;
+	user-select: none;
+
+	.auth_api_type {
+		margin-right: 5px;
+		line-height: 18px;
+	}
+}
+
+.auth_empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	.auth_empty_text {
+		letter-spacing: 0.5px;
+		color: var(--font-color-invisible);
+		margin-bottom: 8px;
+	}
+}

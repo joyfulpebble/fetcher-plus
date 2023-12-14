@@ -3,18 +3,19 @@ import { motion } from "framer-motion";
 
 import "./RequestAdditionalOptions.scss";
 import { RequestQueryParams } from "./RequestQueryParams/RequestQueryParams";
+import RequestAuth from "./RequestAuth/RequestAuth";
 import RequestBody from "./RequestBody/RequestBody";
 import RequestHeaders from "./RequestHeaders/RequestHeaders";
 
 const AdditionalOptions = () => {
-	const [selectedTab, setSelectedTab] = useState<number>(1);
+	const [selectedTab, setSelectedTab] = useState<number>(3);
 
 	const optionsTabNames = ["Parameters", "Body", "Headers", "Authorization"];
 	const optionElements = [
 		<RequestQueryParams key="params_tab" />,
 		<RequestBody key="body_tab" />,
 		<RequestHeaders key="headers_tab" />,
-		<></>
+		<RequestAuth key="auth_tab" />
 	];
 
 	return (

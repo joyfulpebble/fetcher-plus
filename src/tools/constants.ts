@@ -143,7 +143,15 @@ export const bodyContentTypes: Array<string> = [
 	"x-www-form-urlencoded"
 ];
 
-export const bodyRawTypes: Array<string> = ["Text", "JSON", "XML", "HTML", "JavaScript"];
+export const bodyRawTypes: Array<CommonT.BodyRawType> = [
+	"Text",
+	"JSON",
+	"XML",
+	"HTML",
+	"JavaScript"
+];
+export const authTypes: Array<CommonT.AuthType> = ["none", "basic-auth", "bearer-token", "api-key"];
+export const authApiTypes: Array<CommonT.AuthApiKeyType> = ["header", "parameter"];
 
 export const editorStyleColors = {
 	"breadcrumb.activeSelectionForeground": "#614fd1",

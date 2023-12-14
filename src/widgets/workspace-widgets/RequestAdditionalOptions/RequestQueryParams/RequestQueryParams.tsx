@@ -79,7 +79,7 @@ export const RequestQueryParams = () => {
 				<div className="request_additional_option_controls">
 					<div className="add_new">
 						<Tippy
-							className="base_tippy_wrapper"
+							className="info_tippy base_tippy_wrapper"
 							placement="top"
 							content={"Add new"}
 							animation="shift-away"
@@ -98,7 +98,7 @@ export const RequestQueryParams = () => {
 					</div>
 					<div className="delete_all">
 						<Tippy
-							className="base_tippy_wrapper"
+							className="info_tippy base_tippy_wrapper"
 							placement="top"
 							content={"Clear all"}
 							animation="shift-away"

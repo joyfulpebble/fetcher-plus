@@ -9,7 +9,7 @@ interface ParamsEmptyListProps {
 
 const EmptyRequestParamsList = ({ openModalFunc }: ParamsEmptyListProps) => (
 	<div className="query_params_body_empty">
-		<div className="params_empty_text">This request does not have query parameters...</div>
+		<div className="params_empty_text">This request does not have a query parameters...</div>
 		<Button
 			icon={
 				<IconPlus

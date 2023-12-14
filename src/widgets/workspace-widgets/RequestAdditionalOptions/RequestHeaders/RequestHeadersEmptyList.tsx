@@ -9,7 +9,7 @@ interface HeadersEmptyListProps {
 
 const HeadersEmptyList = ({ openModalFunc }: HeadersEmptyListProps) => (
 	<div className="headers_body_empty">
-		<div className="headers_empty_text">This request does not have headers...</div>
+		<div className="headers_empty_text">This request does not have a headers...</div>
 		<Button
 			icon={
 				<IconPlus

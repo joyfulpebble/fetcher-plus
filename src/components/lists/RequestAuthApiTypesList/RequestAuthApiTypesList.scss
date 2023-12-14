@@ -1,0 +1,24 @@
+.api_key_type_list_element {
+	font-weight: 300;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+	padding: 4px;
+	color: var(--font-color-light);
+	line-height: 18px;
+	font-size: 12px;
+	border-radius: var(--border-radius-default);
+	margin-bottom: 3px;
+	transition: background-color ease 0.2s;
+	user-select: none;
+
+	&.selected {
+		transition: background-color ease 0.2s;
+		background-color: var(--border-color-default);
+	}
+	&:hover {
+		transition: background-color ease 0.2s;
+		background-color: var(--border-color-default);
+	}
+}

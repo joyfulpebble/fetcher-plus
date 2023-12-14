@@ -11,6 +11,7 @@ import requestBodyTypeSlice from "./reducers/requestBodyTypeSlice";
 import requestBodyFormDataSlice from "./reducers/requestBodyFormDataSlice";
 import requestBodyUrlEncodedSlice from "./reducers/requestBodyUrlEncodedSlice";
 import requestBodyRawContentSlice from "./reducers/requestBodyRawContentSlice";
+import requestAuthTypeSlice from "./reducers/requestAuthTypeSlice";
 
 const persistConfig = {
 	key: "root",
@@ -20,6 +21,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
 	requestBodyUrlEncodedReducer: requestBodyUrlEncodedSlice.reducer,
 	requestBodyFormDataReducer: requestBodyFormDataSlice.reducer,
+	requestAuthTypeReducer: requestAuthTypeSlice.reducer,
 	requestBodyTypeReducer: requestBodyTypeSlice.reducer,
 	requestBodyRawContentReducer: requestBodyRawContentSlice.reducer,
 	requestUrlReducer: requestUrlSlice.reducer,
