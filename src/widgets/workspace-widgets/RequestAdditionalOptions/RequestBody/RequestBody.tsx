@@ -11,7 +11,7 @@ import RequestBodyContentTypesList from "../../../../components/lists/RequestBod
 import NewFormDataItemModal from "../../../../components/modals/RequestBody/FormDataItemModal/NewFormDataItemModal";
 import NewUrlEncodedItemModal from "../../../../components/modals/RequestBody/UrlEncodedItemModal/NewUrlEncodedItemModal";
 import RawBodyImport from "../../../../components/request-body-variants/Raw/RawBodyImport";
-import RawBodyEditor from "../../../../components/request-body-variants/Raw/RawBodyEditor";
+import CustomEditor from "../../../../components/request-body-variants/Raw/CustomEditor";
 
 import { IconChevronDown, IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
@@ -35,7 +35,7 @@ const RequestBody = () => {
 		"none": <BodyNone />,
 		"form-data": <FormDataList modalFunc={setFormDataModalView} />,
 		"x-www-form-urlencoded": <UrlEncodedList modalFunc={setUrlEncodedModalView} />,
-		"raw": <RawBodyEditor />
+		"raw": <CustomEditor />
 	};
 
 	return (
