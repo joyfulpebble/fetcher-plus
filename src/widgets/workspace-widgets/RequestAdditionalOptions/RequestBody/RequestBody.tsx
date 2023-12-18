@@ -11,7 +11,7 @@ import RequestBodyContentTypesList from "../../../../components/lists/RequestBod
 import NewFormDataItemModal from "../../../../components/modals/RequestBody/FormDataItemModal/NewFormDataItemModal";
 import NewUrlEncodedItemModal from "../../../../components/modals/RequestBody/UrlEncodedItemModal/NewUrlEncodedItemModal";
 import RawBodyImport from "../../../../components/request-body-variants/Raw/RawBodyImport";
-import CustomEditor from "../../../../components/request-body-variants/Raw/CustomEditor";
+import CustomEditor from "../../../../components/ui/CustomEditor/CustomEditor";
 
 import { IconChevronDown, IconPlus, IconTrash } from "@tabler/icons-react";
 import Tippy from "@tippyjs/react";
