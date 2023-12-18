@@ -151,12 +151,12 @@ const RequestBody = () => {
 						<Tippy
 							className="info_tippy"
 							placement="top"
-							content={"Clear all"}
+							content={"Clear current"}
 							animation="shift-away"
 							arrow={true}
 							trigger="mouseenter"
 							zIndex={0}
-							offset={[-15, 7]}
+							offset={[-30, 7]}
 						>
 							<div className="delete_all">
 								<IconTrash

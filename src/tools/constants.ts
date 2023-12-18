@@ -151,7 +151,7 @@ export const bodyRawTypes: Array<CommonT.BodyRawType> = [
 	"JavaScript"
 ];
 export const authTypes: Array<CommonT.AuthType> = ["none", "basic-auth", "bearer-token", "api-key"];
-export const authApiTypes: Array<CommonT.AuthApiKeyType> = ["header", "parameter"];
+export const authApiTypes: Array<CommonT.AuthApiKeyType> = ["parameter", "header"];
 
 export const editorStyleColors = {
 	"breadcrumb.activeSelectionForeground": "#614fd1",

@@ -53,6 +53,16 @@
 	display: flex;
 	flex-direction: row;
 
+	.enabled {
+		margin-right: 5px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		font-weight: 500;
+		user-select: none;
+	}
+
 	.delete_all {
 		padding: 3px;
 		display: flex;

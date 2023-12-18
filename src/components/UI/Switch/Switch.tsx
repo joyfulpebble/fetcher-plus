@@ -2,22 +2,20 @@ import SwitchToggle from "react-switch";
 import type { HTMLAttributes } from "react";
 
 interface SwitchPropsT extends HTMLAttributes<HTMLButtonElement> {
-	needParameters: boolean;
-	handleIsCheckedParameters: () => void;
-	spanText: string | number;
+	checked: boolean;
+	spanText?: string;
+	handleIsCheckedParameters?: () => void;
 }
 
-function Switch({
-	handleIsCheckedParameters,
-	needParameters,
-	spanText
-}: SwitchPropsT): JSX.Element {
+function Switch({ handleIsCheckedParameters, checked, spanText }: SwitchPropsT): JSX.Element {
 	return (
 		<div style={{ display: "flex", alignItems: "center" }}>
 			<SwitchToggle
-				onChange={handleIsCheckedParameters}
-				checked={needParameters}
-				onColor={"#5839af"}
+				onChange={() => {
+					if (!!handleIsCheckedParameters) handleIsCheckedParameters;
+				}}
+				checked={checked}
+				onColor={"#614fd1"}
 				activeBoxShadow={"none"}
 				handleDiameter={13}
 				uncheckedIcon={false}

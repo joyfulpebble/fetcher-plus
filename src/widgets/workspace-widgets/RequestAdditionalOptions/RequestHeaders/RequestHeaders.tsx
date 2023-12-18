@@ -51,7 +51,7 @@ const RequestHeaders = () => {
 						<Tippy
 							className="info_tippy"
 							placement="top"
-							content={"Clear all"}
+							content={"Delete all"}
 							animation="shift-away"
 							arrow={true}
 							trigger="mouseenter"

@@ -1,24 +1,32 @@
-import { IconChevronDown, IconTrash } from "@tabler/icons-react";
-import Tippy from "@tippyjs/react";
-
+import { useState } from "react";
 import { useAppSelector } from "../../../../hooks/redux/redux";
 import { useClassnames } from "../../../../hooks/useClassnames";
 
+import Tippy from "@tippyjs/react";
+import { IconChevronDown, IconTrash } from "@tabler/icons-react";
+
+import Switch from "../../../../components/ui/Switch/Switch";
+
+import BasicAuth from "../../../../components/request-auth-variants/Basic/BasicAuth";
+import ApiKeyAuth from "../../../../components/request-auth-variants/ApiKey/ApiKeyAuth";
+import BearerAuth from "../../../../components/request-auth-variants/Bearer/BearerAuth";
 import RequestAuthEmpty from "./RequestAuthEmpty";
 import RequestAuthTypesList from "../../../../components/lists/RequestAuthTypesList/RequestAuthTypesList";
 import RequestAuthApiTypesList from "../../../../components/lists/RequestAuthApiTypesList/RequestAuthApiTypesList";
 
+import "./styles/RequestAuth.scss";
 import "../RequestAdditionalOptions.scss";
 
 function RequestAuth() {
 	const auth_variants = {
 		"none": <RequestAuthEmpty />,
-		"api-key": <>api</>,
-		"bearer-token": <>bearer</>,
-		"basic-auth": <>basic</>
+		"api-key": <ApiKeyAuth />,
+		"bearer-token": <BearerAuth />,
+		"basic-auth": <BasicAuth />
 	};
 
 	const { authType, authApiKeyType } = useAppSelector((state) => state.requestAuthTypeReducer);
+	const [authEnabled, setAuthEnabled] = useState<boolean>(true);
 
 	const request_auth_classnames = useClassnames({
 		request_body_none_wrapper: authType === "none",
@@ -70,6 +78,15 @@ function RequestAuth() {
 					)}
 				</div>
 				<div className="request_additional_option_controls">
+					<div
+						className="enabled"
+						onClick={() => setAuthEnabled(!authEnabled)}
+					>
+						<Switch
+							checked={authEnabled}
+							spanText={"Enabled"}
+						/>
+					</div>
 					<div className="delete_all">
 						<Tippy
 							className="info_tippy"

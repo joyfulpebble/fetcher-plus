@@ -100,7 +100,7 @@ export const RequestQueryParams = () => {
 						<Tippy
 							className="info_tippy base_tippy_wrapper"
 							placement="top"
-							content={"Clear all"}
+							content={"Delete all"}
 							animation="shift-away"
 							arrow={true}
 							trigger="mouseenter"

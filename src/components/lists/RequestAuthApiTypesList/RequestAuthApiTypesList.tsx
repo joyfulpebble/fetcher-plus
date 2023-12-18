@@ -23,7 +23,7 @@ const RequestAuthApiTypesList = () => {
 						dispatch(updateAuthApiKeyType(element));
 					}}
 				>
-					{element}
+					{`as ${element}`}
 					{element === authApiKeyType && <IconCheck size={12} />}
 				</div>
 			))}
