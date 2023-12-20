@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { useAppSelector } from "../../../../hooks/redux/redux";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/redux/redux";
 import { useClassnames } from "../../../../hooks/useClassnames";
+
+import requestAuthBearerSlice from "../../../../redux/reducers/requestAuthBearerSlice";
+import requestAuthApiSlice from "../../../../redux/reducers/requestAuthApiSlice";
+import requestAuthBasicSlice from "../../../../redux/reducers/requestAuthBasicSlice";
 
 import Tippy from "@tippyjs/react";
 import { IconChevronDown, IconTrash } from "@tabler/icons-react";
@@ -25,6 +29,17 @@ function RequestAuth() {
 		"basic-auth": <BasicAuth />
 	};
 
+	const { clearApiAuth } = requestAuthApiSlice.actions;
+	const { clearAuthToken } = requestAuthBearerSlice.actions;
+	const { clearBasicAuth } = requestAuthBasicSlice.actions;
+
+	const auth_values_clear_func = {
+		"api-key": clearApiAuth,
+		"bearer-token": clearAuthToken,
+		"basic-auth": clearBasicAuth
+	};
+
+	const dispatch = useAppDispatch();
 	const { authType, authApiKeyType } = useAppSelector((state) => state.requestAuthTypeReducer);
 	const [authEnabled, setAuthEnabled] = useState<boolean>(true);
 
@@ -77,37 +92,40 @@ function RequestAuth() {
 						</Tippy>
 					)}
 				</div>
-				<div className="request_additional_option_controls">
-					<div
-						className="enabled"
-						onClick={() => setAuthEnabled(!authEnabled)}
-					>
-						<Switch
-							checked={authEnabled}
-							spanText={"Enabled"}
-						/>
-					</div>
-					<div className="delete_all">
-						<Tippy
-							className="info_tippy"
-							placement="top"
-							content={"Clear current"}
-							animation="shift-away"
-							arrow={true}
-							trigger="mouseenter"
-							zIndex={0}
-							offset={[-30, 10]}
+				{authType != "none" && (
+					<div className="request_additional_option_controls">
+						<div
+							className="enabled"
+							onClick={() => setAuthEnabled(!authEnabled)}
 						>
-							<IconTrash
-								size={16}
-								stroke={2}
-								onClick={() => {
-									// dispatch(deleteAllHeaders());
-								}}
+							<Switch
+								checked={authEnabled}
+								spanText={"Enabled"}
 							/>
-						</Tippy>
+						</div>
+
+						<div className="delete_all">
+							<Tippy
+								className="info_tippy"
+								placement="top"
+								content={"Clear current"}
+								animation="shift-away"
+								arrow={true}
+								trigger="mouseenter"
+								zIndex={0}
+								offset={[-30, 10]}
+							>
+								<IconTrash
+									size={16}
+									stroke={2}
+									onClick={() => {
+										dispatch(auth_values_clear_func[authType]());
+									}}
+								/>
+							</Tippy>
+						</div>
 					</div>
-				</div>
+				)}
 			</section>
 			<section className={request_auth_classnames}>{auth_variants[authType]}</section>
 		</>

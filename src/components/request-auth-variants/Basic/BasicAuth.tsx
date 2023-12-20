@@ -1,18 +1,12 @@
-import { useForm } from "../../../hooks/useForm";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux/redux";
+import requestAuthBasicSlice from "../../../redux/reducers/requestAuthBasicSlice";
+
 import Input from "../../ui/Input/Input";
 
-interface BasicAuthForm {
-	key: string;
-	value: string;
-}
-
 function BasicAuth() {
-	const { values, saveFuildValue } = useForm<BasicAuthForm>({
-		initialValues: {
-			key: "",
-			value: ""
-		}
-	});
+	const dispatch = useAppDispatch();
+	const basicAuth = useAppSelector((state) => state.requestAuthBasicReducer);
+	const { updateBasicAuthKey, updateBasicAuthValue } = requestAuthBasicSlice.actions;
 
 	return (
 		<>
@@ -27,13 +21,13 @@ function BasicAuth() {
 			>
 				<Input
 					placeholder="Key"
-					defaultValue={values.current.key}
-					onChange={(event) => saveFuildValue("key", event.target.value)}
+					value={basicAuth.key}
+					onChange={(event) => dispatch(updateBasicAuthKey(event.target.value))}
 				/>
 				<Input
 					placeholder="Value"
-					defaultValue={values.current.value}
-					onChange={(event) => saveFuildValue("value", event.target.value)}
+					value={basicAuth.value}
+					onChange={(event) => dispatch(updateBasicAuthValue(event.target.value))}
 				/>
 			</section>
 		</>

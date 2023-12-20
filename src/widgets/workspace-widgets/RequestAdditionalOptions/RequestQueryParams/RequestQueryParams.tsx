@@ -105,7 +105,7 @@ export const RequestQueryParams = () => {
 							arrow={true}
 							trigger="mouseenter"
 							zIndex={0}
-							offset={[-15, 10]}
+							offset={[-19, 10]}
 						>
 							<IconTrash
 								size={16}

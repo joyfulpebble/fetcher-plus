@@ -1,18 +1,12 @@
-import { useForm } from "../../../hooks/useForm";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux/redux";
+import requestAuthApiSlice from "../../../redux/reducers/requestAuthApiSlice";
+
 import Input from "../../ui/Input/Input";
 
-interface ApiKeyAuthForm {
-	key: string;
-	value: string;
-}
-
 function ApiKeyAuth() {
-	const { values, saveFuildValue } = useForm<ApiKeyAuthForm>({
-		initialValues: {
-			key: "",
-			value: ""
-		}
-	});
+	const dispatch = useAppDispatch();
+	const apiAuth = useAppSelector((state) => state.requestAuthApiReducer);
+	const { updateApiAuthKey, updateApiAuthValue } = requestAuthApiSlice.actions;
 
 	return (
 		<>
@@ -27,13 +21,13 @@ function ApiKeyAuth() {
 			>
 				<Input
 					placeholder="Key"
-					defaultValue={values.current.key}
-					onChange={(event) => saveFuildValue("key", event.target.value)}
+					value={apiAuth.key}
+					onChange={(event) => dispatch(updateApiAuthKey(event.target.value))}
 				/>
 				<Input
 					placeholder="Value"
-					defaultValue={values.current.value}
-					onChange={(event) => saveFuildValue("value", event.target.value)}
+					value={apiAuth.value}
+					onChange={(event) => dispatch(updateApiAuthValue(event.target.value))}
 				/>
 			</section>
 		</>

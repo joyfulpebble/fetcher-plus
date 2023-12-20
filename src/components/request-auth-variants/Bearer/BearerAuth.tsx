@@ -1,16 +1,12 @@
-import { useForm } from "../../../hooks/useForm";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux/redux";
+import requestAuthBearerSlice from "../../../redux/reducers/requestAuthBearerSlice";
+
 import Input from "../../ui/Input/Input";
 
-interface BearerAuthForm {
-	token: string;
-}
-
 function BearerAuth() {
-	const { values, saveFuildValue } = useForm<BearerAuthForm>({
-		initialValues: {
-			token: ""
-		}
-	});
+	const dispatch = useAppDispatch();
+	const bearerAuthToken = useAppSelector((state) => state.requestAuthBearerReducer);
+	const { updateAuthBearerToken } = requestAuthBearerSlice.actions;
 
 	return (
 		<>
@@ -25,8 +21,8 @@ function BearerAuth() {
 			>
 				<Input
 					placeholder="Token"
-					defaultValue={values.current.token}
-					onChange={(event) => saveFuildValue("token", event.target.value)}
+					value={bearerAuthToken}
+					onChange={(event) => dispatch(updateAuthBearerToken(event.target.value))}
 				/>
 			</section>
 		</>
