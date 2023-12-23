@@ -1,12 +1,13 @@
 import { main_instance } from "./api-config";
-import { AxiosResponse } from "axios";
 
-import type { EmptyObject } from "type-fest";
+import type { APIT } from "../types/api";
+import { type AxiosResponse } from "axios";
 
 export default class Service {
-	public static async get(path: string, params: Object | EmptyObject): Promise<AxiosResponse> {
-		const response = await main_instance.get(path, {
-			params: params
+	public async get(config: APIT.RequestConfigI): Promise<AxiosResponse> {
+		const response = await main_instance.request({
+			url: config.url,
+			method: config.method
 		});
 
 		return response;

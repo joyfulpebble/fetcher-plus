@@ -8,7 +8,7 @@ import RequestBody from "./RequestBody/RequestBody";
 import RequestHeaders from "./RequestHeaders/RequestHeaders";
 
 const AdditionalOptions = () => {
-	const [selectedTab, setSelectedTab] = useState<number>(3);
+	const [selectedTab, setSelectedTab] = useState<number>(0);
 
 	const optionsTabNames = ["Parameters", "Body", "Headers", "Authorization"];
 	const optionElements = [

@@ -1,27 +1,26 @@
 import { useRef } from "react";
 
-import { useForm } from "../../../hooks/useForm";
 import { useAppSelector } from "../../../hooks/redux/redux";
 
 import Button from "../../../components/ui/Buttons/Button";
 
 import "./RequestConfiguration.scss";
-import type { APIT } from "../../../types/api";
+
 import MethodSelect from "../RequestMethodSelect/RequestMethodSelect";
 import RequestInput from "../RequestInput/RequestInput";
 import AdditionalOptions from "../RequestAdditionalOptions/RequestAdditionalOptions";
 
-function RequestForm(): JSX.Element {
-	const quieryParams = useAppSelector((state) => state.requestQueryParameters);
-	const requestHeaders = useAppSelector((state) => state.requestHeadersSlice);
-	const requestMethod = useAppSelector((state) => state.requestSelctedMethod);
-	const requestFormDataBody = useAppSelector((state) => state.requestBodyFormDataReducer);
-	const requestUrlEncodedBody = useAppSelector((state) => state.requestBodyUrlEncodedReducer);
-	const rawBodyContent = useAppSelector((state) => state.requestBodyRawContentReducer);
+import Service from "../../../API/Service";
 
-	const { values, saveFuildValue } = useForm<APIT.RequestConfigI>({
-		initialValues: { requestMethod: "GET", requestParams: {}, requestUrl: "" }
-	});
+function RequestForm(): JSX.Element {
+	const url = useAppSelector((state) => state.requestUrlReducer);
+	const method = useAppSelector((state) => state.requestSelctedMethod);
+
+	// const params = useAppSelector((state) => state.requestQueryParameters);
+	// const headers = useAppSelector((state) => state.requestHeadersSlice);
+	// const requestFormDataBody = useAppSelector((state) => state.requestBodyFormDataReducer);
+	// const requestUrlEncodedBody = useAppSelector((state) => state.requestBodyUrlEncodedReducer);
+	// const rawBodyContent = useAppSelector((state) => state.requestBodyRawContentReducer);
 
 	const requestUrlref = useRef<HTMLInputElement>(null);
 
@@ -31,32 +30,17 @@ function RequestForm(): JSX.Element {
 				<section className={"main_data_wrapper"}>
 					<div className={"request_main_data"}>
 						<MethodSelect />
-						<RequestInput
-							inputRef={requestUrlref}
-							onChange={() => {
-								saveFuildValue("requestUrl", requestUrlref.current?.value);
-							}}
-						/>
+						<RequestInput inputRef={requestUrlref} />
 					</div>
 					<Button
 						content="Send"
 						buttonStyle="primary"
 						disabled={false}
-						onClick={() => {
-							saveFuildValue("requestMethod", requestMethod);
+						onClick={async () => {
+							const api = new Service();
+							const result = await api.get({ url, method });
 
-							console.log(">selected request method: " + requestMethod);
-							console.log(">request url: " + values.current.requestUrl);
-							console.log(">request params: ");
-							console.table(quieryParams);
-							console.log(">request headers: ");
-							console.table(requestHeaders);
-							console.log(">request `form-data` body: ");
-							console.table(requestFormDataBody);
-							console.log(">request `url-encoded` body: ");
-							console.table(requestUrlEncodedBody);
-							console.log(">request `raw` body: ");
-							console.table(rawBodyContent);
+							console.log(result);
 						}}
 					/>
 				</section>
