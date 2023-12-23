@@ -1,12 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type QueryParameterID = string;
-export type QueryParameterItem = {
-	_id: QueryParameterID;
-	isUsed: boolean;
-	key: string;
-	value: string;
-};
 type QueryParameterStateUpdate = QueryParameterID;
 type QueryParameterValuesUpdateObject = {
 	parameterID: QueryParameterID;
@@ -17,6 +11,13 @@ type QueryParameterValuesUpdateObject = {
 				key: string;
 				value: string;
 		  };
+};
+
+export type QueryParameterItem = {
+	_id: QueryParameterID;
+	isUsed: boolean;
+	key: string;
+	value: string;
 };
 type QueryParamsStore = Array<QueryParameterItem>;
 

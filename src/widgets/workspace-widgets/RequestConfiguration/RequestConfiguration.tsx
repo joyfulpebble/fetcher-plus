@@ -15,8 +15,8 @@ import Service from "../../../API/Service";
 function RequestForm(): JSX.Element {
 	const url = useAppSelector((state) => state.requestUrlReducer);
 	const method = useAppSelector((state) => state.requestSelctedMethod);
+	const params = useAppSelector((state) => state.requestQueryParameters);
 
-	// const params = useAppSelector((state) => state.requestQueryParameters);
 	// const headers = useAppSelector((state) => state.requestHeadersSlice);
 	// const requestFormDataBody = useAppSelector((state) => state.requestBodyFormDataReducer);
 	// const requestUrlEncodedBody = useAppSelector((state) => state.requestBodyUrlEncodedReducer);
@@ -38,7 +38,7 @@ function RequestForm(): JSX.Element {
 						disabled={false}
 						onClick={async () => {
 							const api = new Service();
-							const result = await api.get({ url, method });
+							const result = await api.get({ url, method, params });
 
 							console.log(result);
 						}}
