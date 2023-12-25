@@ -1,15 +1,16 @@
 /* eslint-disable no-unused-vars */
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
-import { EmptyObject } from "type-fest";
-import { QueryParameterItem } from "../redux/reducers/requestQueryParamsSlice";
+import { type QueryParameterItem } from "../redux/reducers/requestQueryParamsSlice";
+import { type RequestHeaderItem } from "../redux/reducers/requestHeadersSlice";
 
 export namespace APIT {
 	export type Method = "get" | "delete" | "post" | "put" | "patch";
 
-	export interface RequestConfigI extends AxiosRequestConfig {
+	export interface RequestConfigI {
 		url: string;
 		method: Method | string;
 		params?: Array<QueryParameterItem>;
+		headers?: Array<RequestHeaderItem>;
 	}
 
 	export interface InterceptorI extends AxiosRequestConfig {

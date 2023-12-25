@@ -14,8 +14,8 @@ function RequestUrlBar() {
 	const url = useAppSelector((state) => state.requestUrlReducer);
 	const method = useAppSelector((state) => state.requestSelctedMethod);
 	const params = useAppSelector((state) => state.requestQueryParameters);
+	const headers = useAppSelector((state) => state.requestHeadersSlice);
 
-	// const headers = useAppSelector((state) => state.requestHeadersSlice);
 	// const requestFormDataBody = useAppSelector((state) => state.requestBodyFormDataReducer);
 	// const requestUrlEncodedBody = useAppSelector((state) => state.requestBodyUrlEncodedReducer);
 	// const rawBodyContent = useAppSelector((state) => state.requestBodyRawContentReducer);
@@ -39,7 +39,7 @@ function RequestUrlBar() {
 				disabled={false}
 				onClick={async () => {
 					const api = new Service();
-					const result = await api.get({ url, method, params });
+					const result = await api.get({ url, method, params, headers });
 
 					console.log(result);
 				}}
