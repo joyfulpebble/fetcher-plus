@@ -21,17 +21,17 @@ export default class Service {
 	}
 
 	private paramsPreparation(
-		paramsStore: Array<QueryParameterItem> | EmptyObject | Params
+		paramsStore: Array<QueryParameterItem> | undefined
 	): Params | EmptyObject {
-		if (Array.isArray(paramsStore) && paramsStore.length === 0) return {};
-		if (!Array.isArray(paramsStore)) return paramsStore;
+		if (!paramsStore || paramsStore.length === 0) return {};
 
 		const unreadyParams = paramsStore;
-		const result = [];
+		const result = [{}];
 
 		for (let i = 0; i < unreadyParams.length; i++) {
-			let currentParam = unreadyParams[i];
-			if (currentParam.isUsed) result.push({ [currentParam.key]: currentParam.value });
+			if (!unreadyParams[i].isUsed || !unreadyParams[i].key || !unreadyParams[i].key) break;
+
+			result.push({ [unreadyParams[i].key]: unreadyParams[i].value });
 		}
 
 		return result.reduce((prev, curr) => Object.assign(prev, curr));

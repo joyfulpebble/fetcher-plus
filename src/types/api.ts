@@ -9,7 +9,7 @@ export namespace APIT {
 	export interface RequestConfigI extends AxiosRequestConfig {
 		url: string;
 		method: Method | string;
-		params: { [k: string]: string } | Array<QueryParameterItem> | EmptyObject;
+		params?: Array<QueryParameterItem>;
 	}
 
 	export interface InterceptorI extends AxiosRequestConfig {

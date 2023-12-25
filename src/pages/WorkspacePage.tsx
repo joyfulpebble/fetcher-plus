@@ -1,7 +1,7 @@
 import WorkspaceHeader from "../widgets/header/WorkspaceHeader";
+import WorkspaceResizer from "../widgets/workspace-widgets/WorkspaceResizer";
 import WorkspaceSidebar from "../widgets/sidebar-navigation/WorkspaceSidebarNavigation";
 import Statusbar from "../widgets/statusbar-widgets/Statusbar";
-import WorkspaceMain from "../widgets/workspace-widgets/WorkspaceMain";
 
 import "./styles/WorkspacePage.scss";
 
@@ -12,7 +12,7 @@ function WorkspacePage(): JSX.Element {
 				<WorkspaceHeader />
 				<section className={"workspace_main_wrapper"}>
 					<WorkspaceSidebar />
-					<WorkspaceMain />
+					<WorkspaceResizer />
 				</section>
 				<Statusbar />
 			</div>

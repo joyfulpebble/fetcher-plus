@@ -1,5 +1,5 @@
 import { Allotment, setSashSize } from "allotment";
-import RequestForm from "./RequestConfiguration/RequestConfiguration";
+import RequestConfiguration from "./RequestConfiguration";
 
 import "allotment/dist/style.css";
 
@@ -15,7 +15,7 @@ function WorkspaceMain() {
 					<div>Collections</div>
 				</Allotment.Pane>
 				<Allotment.Pane minSize={546}>
-					<RequestForm></RequestForm>
+					<RequestConfiguration />
 				</Allotment.Pane>
 				<Allotment.Pane minSize={0}>
 					<div>Response</div>

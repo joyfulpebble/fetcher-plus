@@ -9,7 +9,7 @@ interface InputPropsI extends React.HTMLProps<HTMLInputElement> {
 	label?: string;
 	disabled?: boolean;
 	inputStyle?: "invisible" | "default";
-	// eslint-disable-next-line no-unused-vars
+	className?: string; // eslint-disable-next-line no-unused-vars
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -21,6 +21,7 @@ function Input({
 	label,
 	onChange,
 	inputStyle = "default",
+	className,
 	...props
 }: InputPropsI): JSX.Element {
 	const inputClasses = useClassnames({
@@ -46,7 +47,7 @@ function Input({
 					{...props}
 					ref={innerRef}
 					disabled={disabled}
-					className={inputClasses}
+					className={`${className} ${inputClasses}`}
 					placeholder={placeholder}
 					onChange={(event) => {
 						if (!!onChange) return onChange(event);
