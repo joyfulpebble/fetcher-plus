@@ -6,6 +6,7 @@ import Button from "../../../components/ui/Buttons/Button";
 import Input from "../../../components/ui/Input/Input";
 
 import Service from "../../../API/Service";
+import getFile from "../../../idb/actions/getFile";
 
 function RequestUrlBar() {
 	const dispatch = useAppDispatch();
@@ -15,8 +16,9 @@ function RequestUrlBar() {
 	const method = useAppSelector((state) => state.requestSelctedMethod);
 	const params = useAppSelector((state) => state.requestQueryParameters);
 	const headers = useAppSelector((state) => state.requestHeadersSlice);
+	const body_type = useAppSelector((state) => state.requestBodyTypeReducer);
 
-	// const requestFormDataBody = useAppSelector((state) => state.requestBodyFormDataReducer);
+	const requestFormDataBody = useAppSelector((state) => state.requestBodyFormDataReducer);
 	// const requestUrlEncodedBody = useAppSelector((state) => state.requestBodyUrlEncodedReducer);
 	// const rawBodyContent = useAppSelector((state) => state.requestBodyRawContentReducer);
 
@@ -39,7 +41,18 @@ function RequestUrlBar() {
 				disabled={false}
 				onClick={async () => {
 					const api = new Service();
-					const result = await api.get({ url, method, params, headers });
+					const result = await api.get({
+						url,
+						method,
+						params,
+						headers,
+						body: {
+							type: { contentType: body_type.contentType, rawType: body_type.rawType },
+							data: {
+								form: requestFormDataBody
+							}
+						}
+					});
 
 					console.log(result);
 				}}

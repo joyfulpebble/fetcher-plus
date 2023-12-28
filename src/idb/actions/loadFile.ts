@@ -1,22 +1,20 @@
+import { openDB } from "idb";
+
 interface LoadedFileData {
 	id: string;
 	name: string;
 	blob: Blob;
 }
 
-function loadFile(fileData: LoadedFileData) {
-	const idbRequest = indexedDB.open("request-body-files", 1);
-	idbRequest.onsuccess = () => {
-		const db = idbRequest.result;
-		const tx = db.transaction("files", "readwrite");
-		const filesStore = tx.objectStore("files");
-		const newFile = filesStore.put(fileData);
-		newFile.onsuccess = () => {
-			tx.oncomplete = () => {
-				db.close();
-			};
-		};
-	};
+async function loadFile(fileData: LoadedFileData) {
+	(await openDB("request-form-data-files", 1))
+		.transaction("files", "readwrite")
+		.objectStore("files")
+		.put({
+			id: fileData.id,
+			name: fileData.name,
+			blob: fileData.blob
+		});
 }
 
 export default loadFile;

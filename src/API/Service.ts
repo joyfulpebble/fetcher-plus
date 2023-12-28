@@ -6,9 +6,10 @@ import { type EmptyObject } from "type-fest";
 import { type QueryParameterItem } from "../redux/reducers/requestQueryParamsSlice";
 import { type RequestHeaderItem } from "../redux/reducers/requestHeadersSlice";
 
-type Params = {
-	[key: string]: string;
-};
+import getFile from "../idb/actions/getFile";
+
+//TODO: Сделать обработку ошибок в запросе (ошибка в заголовках, теле запроса и тп...)
+//TODO: Реализовать автоустановку заголовков при смене типа тела завпроса
 
 export default class Service {
 	public async get(config: APIT.RequestConfigI): Promise<AxiosResponse> {
@@ -16,15 +17,42 @@ export default class Service {
 			url: config.url,
 			method: config.method,
 			params: this.paramsPreparation(config.params),
-			headers: this.headersPreparation(config.headers)
+			headers: this.headersPreparation(config.headers),
+			data: this.bodyDataPreparation(config.body)
 		});
 
 		return response;
 	}
 
+	private bodyDataPreparation(body: APIT.Body | undefined) {
+		if (!body || !body.data) return null;
+		if (body.type.contentType === "none") return null;
+
+		if (body.type.contentType === "raw" && body.data.raw) return body.data;
+		if (body.type.contentType === "form-data" && body.data.form) {
+			const form_data = new FormData();
+
+			body.data.form.map(async (item) => {
+				if (!item.isUsed) return;
+				if (item.valueType === "text") {
+					form_data.append(item.key, item.value);
+				} else {
+					const result = await getFile(item.fileInfo.id);
+
+					if (!result) return;
+					form_data.append(item.key, result.blob);
+				}
+			});
+
+			return form_data;
+		}
+
+		return null;
+	}
+
 	private paramsPreparation(
 		paramsStore: Array<QueryParameterItem> | undefined
-	): Params | EmptyObject {
+	): APIT.StringKeyVal | EmptyObject {
 		if (!paramsStore || paramsStore.length === 0) return {};
 
 		const unreadyParams = paramsStore;
@@ -41,7 +69,7 @@ export default class Service {
 
 	private headersPreparation(
 		headersStore: Array<RequestHeaderItem> | undefined
-	): Params | EmptyObject {
+	): APIT.StringKeyVal | EmptyObject {
 		if (!headersStore || headersStore.length === 0) return {};
 
 		const unreadyHeaders = headersStore;

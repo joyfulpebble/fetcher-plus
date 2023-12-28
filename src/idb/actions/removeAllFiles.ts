@@ -1,17 +1,10 @@
-const removeAllFiles = () => {
-	const idbRequest = indexedDB.open("request-body-files", 1);
-	idbRequest.onsuccess = () => {
-		const db = idbRequest.result;
-		const tx = db.transaction("files", "readwrite");
-		const filesStore = tx.objectStore("files");
-		const emptyStore = filesStore.clear();
+import { openDB } from "idb";
 
-		emptyStore.onsuccess = () => {
-			tx.oncomplete = () => {
-				db.close();
-			};
-		};
-	};
+const removeAllFiles = async () => {
+	(await openDB("request-form-data-files", 1))
+		.transaction("files", "readwrite")
+		.objectStore("files")
+		.clear();
 };
 
 export default removeAllFiles;
