@@ -8,9 +8,6 @@ import { type QueryParameterItem } from "../redux/reducers/requestQueryParamsSli
 import { type RequestHeaderItem } from "../redux/reducers/requestHeadersSlice";
 
 import getFile from "../idb/actions/getFile";
-/** IN PROCESS */
-//TODO: Реализовать автоустановку заголовков при смене типа тела завпроса
-/** IN PROCESS */
 
 //TODO: Сделать обработку ошибок в запросе (ошибка в заголовках, теле запроса и тп...)
 //TODO: Реализовать автосчитывание параметров из ссылки
@@ -38,6 +35,10 @@ export default class Service {
 			method: this.method,
 			headers: this.headers
 		};
+	}
+
+	public updateHeader(key: string, new_value: string) {
+		Object.assign(this.headers, { [key]: new_value });
 	}
 
 	// public async doRequest(): Promise<AxiosResponse> {

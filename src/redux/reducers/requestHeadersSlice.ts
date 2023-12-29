@@ -31,7 +31,7 @@ export const requestHeadersSlice = createSlice({
 	name: "requestHeadersSlice",
 	initialState,
 	reducers: {
-		deleteAllHeaders: () => [],
+		deleteAllHeaders: () => initialState,
 		updateHeadersOrder: (state, action: PayloadAction<HeadersStore>) => (state = action.payload),
 		addHeader: (state, action: PayloadAction<RequestHeaderItem>) => [...state, action.payload],
 		deleteHeader: (state, action: PayloadAction<HeaderID>) =>

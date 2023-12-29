@@ -1,4 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux/redux";
+import useCheckReqContentType from "../../../hooks/useUpdateReqContentType";
+
 import requestUrlSlice from "../../../redux/reducers/requestUrlSlice";
 
 import MethodSelect from "../RequestMethodSelect/RequestMethodSelect";
@@ -6,13 +8,12 @@ import Button from "../../../components/ui/Buttons/Button";
 import Input from "../../../components/ui/Input/Input";
 
 import Service from "../../../API/Service";
-import getFile from "../../../idb/actions/getFile";
-import { CommonT } from "../../../types/common";
 import { APIT } from "../../../types/api";
-import { ValueOf } from "type-fest";
 
 function RequestUrlBar() {
 	const dispatch = useAppDispatch();
+	const headersCheck = useCheckReqContentType();
+
 	const { updateUrl } = requestUrlSlice.actions;
 
 	const url = useAppSelector((state) => state.requestUrlReducer);
@@ -65,6 +66,8 @@ function RequestUrlBar() {
 				buttonStyle="primary"
 				disabled={false}
 				onClick={async () => {
+					headersCheck(body_type.contentType, API);
+
 					console.log(API.getRequestConfig);
 				}}
 			/>

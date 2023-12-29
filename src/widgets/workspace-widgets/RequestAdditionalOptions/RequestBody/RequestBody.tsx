@@ -35,7 +35,7 @@ const RequestBody = () => {
 		"none": <BodyNone />,
 		"form-data": <FormDataList modalFunc={setFormDataModalView} />,
 		"x-www-form-urlencoded": <UrlEncodedList modalFunc={setUrlEncodedModalView} />,
-		"raw": <CustomEditor />
+		"raw": <CustomEditor style={{ marginTop: 2 }} />
 	};
 
 	return (

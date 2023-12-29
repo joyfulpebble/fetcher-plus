@@ -5,7 +5,12 @@ import requestBodyRawContentSlice from "../../../redux/reducers/requestBodyRawCo
 
 import Editor from "@monaco-editor/react";
 
-const CustomEditor = () => {
+interface CustomEditorProps {
+	className?: string;
+	style?: React.CSSProperties;
+}
+
+const CustomEditor = ({ className, style }: CustomEditorProps) => {
 	const dispatch = useAppDispatch();
 	const storageRawContent = useAppSelector((state) => state.requestBodyRawContentReducer);
 	const { rawType } = useAppSelector((state) => state.requestBodyTypeReducer);
@@ -15,9 +20,10 @@ const CustomEditor = () => {
 
 	return (
 		<div
+			className={className}
 			style={{
+				...style,
 				border: "1px solid #eeffff10",
-				borderTop: "none",
 				height: "100%"
 			}}
 		>

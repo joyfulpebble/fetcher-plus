@@ -41,7 +41,7 @@ function RequestAuth() {
 
 	const dispatch = useAppDispatch();
 	const { authType, authApiKeyType } = useAppSelector((state) => state.requestAuthTypeReducer);
-	const [authEnabled, setAuthEnabled] = useState<boolean>(true);
+	const [authEnabled, setAuthEnabled] = useState<boolean>(false);
 
 	const request_auth_classnames = useClassnames({
 		request_body_none_wrapper: authType === "none",
