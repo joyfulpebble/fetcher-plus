@@ -7,6 +7,9 @@ import Input from "../../../components/ui/Input/Input";
 
 import Service from "../../../API/Service";
 import getFile from "../../../idb/actions/getFile";
+import { CommonT } from "../../../types/common";
+import { APIT } from "../../../types/api";
+import { ValueOf } from "type-fest";
 
 function RequestUrlBar() {
 	const dispatch = useAppDispatch();
@@ -19,8 +22,30 @@ function RequestUrlBar() {
 	const body_type = useAppSelector((state) => state.requestBodyTypeReducer);
 
 	const requestFormDataBody = useAppSelector((state) => state.requestBodyFormDataReducer);
-	// const requestUrlEncodedBody = useAppSelector((state) => state.requestBodyUrlEncodedReducer);
-	// const rawBodyContent = useAppSelector((state) => state.requestBodyRawContentReducer);
+	const requestUrlEncodedBody = useAppSelector((state) => state.requestBodyUrlEncodedReducer);
+	const rawBodyContent = useAppSelector((state) => state.requestBodyRawContentReducer);
+
+	const request_data = {
+		"none": null,
+		"form-data": requestFormDataBody,
+		"raw": rawBodyContent,
+		"x-www-form-urlencoded": requestUrlEncodedBody
+	};
+
+	const API = new Service({
+		url,
+		method,
+		params,
+		headers,
+		body:
+			request_data[body_type.contentType] === "none"
+				? ({
+						data: request_data[body_type.contentType],
+						data_type: body_type.contentType,
+						raw_data_type: body_type.rawType
+				  } as APIT.Body)
+				: undefined
+	});
 
 	return (
 		<>
@@ -40,21 +65,7 @@ function RequestUrlBar() {
 				buttonStyle="primary"
 				disabled={false}
 				onClick={async () => {
-					const api = new Service();
-					const result = await api.get({
-						url,
-						method,
-						params,
-						headers,
-						body: {
-							type: { contentType: body_type.contentType, rawType: body_type.rawType },
-							data: {
-								form: requestFormDataBody
-							}
-						}
-					});
-
-					console.log(result);
+					console.log(API.getRequestConfig);
 				}}
 			/>
 		</>

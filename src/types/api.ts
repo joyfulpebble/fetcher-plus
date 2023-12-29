@@ -7,17 +7,12 @@ import { type BodyUrlEncodedItem } from "../redux/reducers/requestBodyUrlEncoded
 import { type CommonT } from "./common";
 
 export namespace APIT {
-	export type Method = "get" | "delete" | "post" | "put" | "patch";
+	export type Method = "GET" | "DELETE" | "POST" | "PUT" | "PATCH";
+	export type Data = string | Array<BodyFormDataItem> | Array<BodyUrlEncodedItem>;
 	export type Body = {
-		type: {
-			contentType: CommonT.BodyContentType;
-			rawType: CommonT.BodyRawType;
-		};
-		data: {
-			raw?: string;
-			form?: Array<BodyFormDataItem>;
-			urlencoded?: Array<BodyUrlEncodedItem>;
-		};
+		data: Data;
+		data_type: CommonT.BodyContentType;
+		raw_data_type: CommonT.BodyRawType;
 	};
 	export type StringKeyVal = {
 		[key: string]: string;
