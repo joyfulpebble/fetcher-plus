@@ -9,8 +9,7 @@ import { type RequestHeaderItem } from "../redux/reducers/requestHeadersSlice";
 
 import getFile from "../idb/actions/getFile";
 
-//TODO: Сделать обработку ошибок в запросе (ошибка в заголовках, теле запроса и тп...)
-//TODO: Реализовать автосчитывание параметров из ссылки
+//TODO: Сделать обработку ошибок в запросе (ошибка в заголовках, теле запроса и тп...
 
 export default class Service {
 	private url: string;
@@ -36,11 +35,6 @@ export default class Service {
 			headers: this.headers
 		};
 	}
-
-	public updateHeader(key: string, new_value: string) {
-		Object.assign(this.headers, { [key]: new_value });
-	}
-
 	// public async doRequest(): Promise<AxiosResponse> {
 	// 	const response = await main_instance.request({
 	// 		url: config.url,

@@ -1,5 +1,4 @@
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux/redux";
-import useCheckReqContentType from "../../../hooks/useUpdateReqContentType";
 
 import requestUrlSlice from "../../../redux/reducers/requestUrlSlice";
 
@@ -12,8 +11,6 @@ import { APIT } from "../../../types/api";
 
 function RequestUrlBar() {
 	const dispatch = useAppDispatch();
-	const headersCheck = useCheckReqContentType();
-
 	const { updateUrl } = requestUrlSlice.actions;
 
 	const url = useAppSelector((state) => state.requestUrlReducer);
@@ -66,8 +63,6 @@ function RequestUrlBar() {
 				buttonStyle="primary"
 				disabled={false}
 				onClick={async () => {
-					headersCheck(body_type.contentType, API);
-
 					console.log(API.getRequestConfig);
 				}}
 			/>

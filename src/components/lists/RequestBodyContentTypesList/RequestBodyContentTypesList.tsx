@@ -1,5 +1,4 @@
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux/redux";
-import useCheckReqContentType from "../../../hooks/useUpdateReqContentType";
 
 import { bodyContentTypes } from "../../../tools/constants";
 
@@ -12,7 +11,6 @@ import "./RequestBodyContentTypesList.scss";
 
 const RequestBodyContentTypesList = () => {
 	const dispatch = useAppDispatch();
-	const headersCheck = useCheckReqContentType();
 
 	const { updateContentType } = requestBodyTypeSlice.actions;
 	const { contentType } = useAppSelector((state) => state.requestBodyTypeReducer);
@@ -25,7 +23,6 @@ const RequestBodyContentTypesList = () => {
 					className={`body_content_type_list_element ${element === contentType && "selected"}`}
 					onClick={() => {
 						dispatch(updateContentType(element));
-						headersCheck(element);
 					}}
 				>
 					{element}
