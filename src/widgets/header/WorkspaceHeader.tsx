@@ -6,7 +6,7 @@ function WorkspaceHeader() {
 		<>
 			<div className={"header"}>
 				<RedirectButton
-					redirectPath="/home"
+					redirectPath="/"
 					content={"Back to main page"}
 					buttonStyle="secondary"
 				/>

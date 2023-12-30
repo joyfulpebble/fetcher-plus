@@ -36,7 +36,7 @@ function RequestUrlBar() {
 		params,
 		headers,
 		body:
-			request_data[body_type.contentType] === "none"
+			request_data[body_type.contentType] !== "none"
 				? ({
 						data: request_data[body_type.contentType],
 						data_type: body_type.contentType,

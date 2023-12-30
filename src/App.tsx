@@ -13,7 +13,7 @@ function App(): JSX.Element {
 		<BrowserRouter>
 			<Routes>
 				<Route
-					path="/home"
+					path="/"
 					element={<WelcomePage />}
 				/>
 				<Route
