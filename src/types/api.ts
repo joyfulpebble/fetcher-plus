@@ -8,22 +8,24 @@ import { type CommonT } from "./common";
 
 export namespace APIT {
 	export type Method = "GET" | "DELETE" | "POST" | "PUT" | "PATCH";
-	export type Data = string | Array<BodyFormDataItem> | Array<BodyUrlEncodedItem>;
-	export type Body = {
-		data: Data;
+	export type ConfigBodyData = string | Array<BodyFormDataItem> | Array<BodyUrlEncodedItem>;
+	export type ConfigBody = {
+		data: ConfigBodyData;
 		data_type: CommonT.BodyContentType;
 		raw_data_type: CommonT.BodyRawType;
 	};
+
 	export type StringKeyVal = {
 		[key: string]: string;
 	};
 
+	export type RequestBody = string | FormData | StringKeyVal;
 	export interface RequestConfigI {
 		url: string;
 		method: Method | string;
 		params?: Array<QueryParameterItem>;
 		headers?: Array<RequestHeaderItem>;
-		body?: Body;
+		body?: ConfigBody;
 	}
 
 	export interface InterceptorI extends AxiosRequestConfig {

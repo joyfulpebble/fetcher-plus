@@ -30,21 +30,6 @@ function RequestUrlBar() {
 		"x-www-form-urlencoded": requestUrlEncodedBody
 	};
 
-	const API = new Service({
-		url,
-		method,
-		params,
-		headers,
-		body:
-			request_data[body_type.contentType] !== "none"
-				? ({
-						data: request_data[body_type.contentType],
-						data_type: body_type.contentType,
-						raw_data_type: body_type.rawType
-				  } as APIT.Body)
-				: undefined
-	});
-
 	return (
 		<>
 			<div className={"request_url_bar"}>
@@ -63,7 +48,21 @@ function RequestUrlBar() {
 				buttonStyle="primary"
 				disabled={false}
 				onClick={async () => {
-					console.log(API.getRequestConfig);
+					const API = new Service({
+						url,
+						method,
+						params,
+						headers,
+						body: {
+							data: request_data[body_type.contentType] as APIT.ConfigBodyData,
+							data_type: body_type.contentType,
+							raw_data_type: body_type.rawType
+						}
+					});
+
+					const res = await API.doRequest();
+					// console.log(API.getRequestConfig);
+					// console.log(res);
 				}}
 			/>
 		</>
