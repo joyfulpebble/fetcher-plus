@@ -1,8 +1,6 @@
-import { main_instance } from "./api-config";
-
 import { type APIT } from "../types/api";
 import { type CommonT } from "../types/common";
-import { type AxiosResponse } from "axios";
+
 import { type EmptyObject } from "type-fest";
 
 import { type QueryParameterItem } from "../redux/reducers/requestQueryParamsSlice";
@@ -12,29 +10,24 @@ import { type BodyFormDataItem } from "../redux/reducers/requestBodyFormDataSlic
 import getFile from "../idb/actions/getFile";
 
 //TODO: Сделать обработку ошибок в запросе (ошибка в заголовках, теле запроса и тп...
+
+// ✓ Пофиксить получение файлов из Indexed store для форм дата тела запроса
 // Добавить логику для обработки raw тела запроса
-// [🤔] Пофиксить получение файлов из Indexed store для форм дата тела запроса
+// Переделать обработку `query` параметров (добавлять их сразу в ссылку)
 
 export default class Service {
-	public prepearedRequestConfig: Promise<any>;
+	public preparedRequestConfig: Promise<APIT.RequestConfig>;
 
-	constructor(config: APIT.RequestConfigI) {
-		this.prepearedRequestConfig = this.prepareConfig(config);
+	constructor(config: APIT.RawRequestConfig) {
+		this.preparedRequestConfig = this.prepareConfig(config);
 	}
 
-	// public get getRequestConfig() {
-	// 	return {
-	// 		url: this.url,
-	// 		body: this.body,
-	// 		params: this.params,
-	// 		method: this.method,
-	// 		headers: this.headers
-	// 	};
-	// }
-	public async doRequest(): Promise<any> {
-		const result = this.prepearedRequestConfig.then((cfg) => {
-			console.log(cfg);
+	public get getRequestConfig() {
+		return this.preparedRequestConfig;
+	}
 
+	public doRequest(): Promise<Response> {
+		const result = this.preparedRequestConfig.then((cfg) => {
 			const response = fetch(cfg.url, {
 				method: cfg.method,
 				headers: cfg.headers,
@@ -48,26 +41,33 @@ export default class Service {
 		return result;
 	}
 
-	private async prepareConfig(config: APIT.RequestConfigI) {
+	private async prepareConfig(config: APIT.RawRequestConfig): Promise<APIT.RequestConfig> {
 		const url = config.url;
 		const method = config.method;
 		const headers = this.headersPrepare(config.headers);
 		const query = this.paramsPrepare(config.params);
+		const body = await this.bodyPrepare(config.body);
 
-		const prepearedBodyPromise = await this.finalBodyPrepare(config.body);
-		const prepearedBody = prepearedBodyPromise;
-
-		return { url, method, query, headers, body: prepearedBody };
+		return { url, method, query, headers, body };
 	}
 
-	private async finalBodyPrepare(unpreparedData: APIT.ConfigBody | undefined) {
-		const prepearedData = await this.initBodyPrepare(unpreparedData);
+	private async bodyPrepare(
+		unpreparedData: APIT.ConfigBody | undefined
+	): Promise<APIT.RequestBody> {
+		if (!unpreparedData) return null;
 
-		if (prepearedData && prepearedData.type == "form") {
+		const preparedData = this.initBodyPrepare(unpreparedData);
+
+		// if (preparedData && preparedData.type == "raw") return preparedData;
+		// if (preparedData && preparedData.type == "urlencoded") return preparedData;
+
+		if (preparedData && preparedData.type == "form") {
 			const form = new FormData();
-			const data = await Promise.all(prepearedData.data);
+			const awaitedData: Array<Awaited<APIT.InitPreparetedFormDataBodyItem>> = await Promise.all(
+				preparedData.data as APIT.InitPreparetedFormDataBody
+			);
 
-			data.map((obj) => {
+			awaitedData.map((obj) => {
 				Object.entries(obj).forEach(([key, value]) => {
 					form.append(key, value);
 				});
@@ -75,24 +75,16 @@ export default class Service {
 
 			return form;
 		}
-
 		return null;
 	}
-	private async initBodyPrepare(body: APIT.ConfigBody | undefined): Promise<{
-		type: string;
-		data: Promise<
-			| {
-					[x: string]: Blob;
-			  }
-			| {
-					[x: string]: string;
-			  }
-		>[];
-	} | null> {
+
+	private initBodyPrepare(body: APIT.ConfigBody | undefined): APIT.InitBodyPrepare | null {
 		if (!body || !body.data) return null;
+
 		if (body.data_type === "form-data") {
-			const data = body.data as Array<BodyFormDataItem>;
-			const prepearedFormData = data.map(async (item) => {
+			const unpreparedData = body.data as Array<BodyFormDataItem>;
+			const isUsedPreparedData = unpreparedData.map((item) => item).filter((item) => item.isUsed);
+			const preparetedData = isUsedPreparedData.map(async (item) => {
 				if (item.valueType == "file") {
 					const file_data = await getFile(item.fileInfo.id);
 
@@ -105,18 +97,21 @@ export default class Service {
 				}
 			});
 
-			const result = {
+			const form_data_result: APIT.InitBodyPrepare = {
 				type: "form",
-				data: prepearedFormData
+				data: preparetedData
 			};
 
-			return result;
+			return form_data_result;
+		} else if (body.data_type === "raw") {
+		} else if (body.data_type === "x-www-form-urlencoded") {
 		}
+
 		return null;
 	}
 	private paramsPrepare(
 		paramsStore: Array<QueryParameterItem> | undefined
-	): APIT.StringKeyVal | EmptyObject {
+	): CommonT.StringKeyVal | EmptyObject {
 		if (!paramsStore || paramsStore.length === 0) return {};
 
 		const unreadyParams = paramsStore;
@@ -132,7 +127,7 @@ export default class Service {
 	}
 	private headersPrepare(
 		headersStore: Array<RequestHeaderItem> | undefined
-	): APIT.StringKeyVal | EmptyObject {
+	): CommonT.StringKeyVal | EmptyObject {
 		if (!headersStore || headersStore.length === 0) return {};
 
 		const unreadyHeaders = headersStore;

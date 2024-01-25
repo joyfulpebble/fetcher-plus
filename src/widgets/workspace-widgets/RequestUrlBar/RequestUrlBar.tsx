@@ -61,8 +61,7 @@ function RequestUrlBar() {
 					});
 
 					const res = await API.doRequest();
-					// console.log(API.getRequestConfig);
-					// console.log(res);
+					console.log(await API.getRequestConfig);
 				}}
 			/>
 		</>
