@@ -28,27 +28,10 @@ export namespace APIT {
 		url: string;
 		method: Method | string;
 		query: CommonT.StringKeyVal | EmptyObject;
-		headers: CommonT.StringKeyVal | EmptyObject;
+		headers: Headers;
 		body: RequestBody;
 	}
 
 	export type InitPreparetedFormDataBody = Array<Promise<{ [key: string]: Blob | string }>>;
 	export type InitPreparetedFormDataBodyItem = Promise<{ [key: string]: Blob | string }>;
-	export interface InitBodyPrepare {
-		type: "form" | "raw" | "urlencoded";
-		data: InitPreparetedFormDataBody | string | CommonT.StringKeyVal;
-	}
-
-	// ? ------------------- ? \\
-	export interface InterceptorI extends AxiosRequestConfig {
-		metadata?: {
-			endTime?: number;
-			startTime?: number;
-			duration?: number;
-		};
-	}
-	export interface InterceptorResponseI extends AxiosResponse {
-		config: InterceptorI;
-		duration?: number;
-	}
 }

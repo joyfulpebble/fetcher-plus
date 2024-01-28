@@ -9,14 +9,16 @@ import { type BodyFormDataItem } from "../redux/reducers/requestBodyFormDataSlic
 
 import getFile from "../idb/actions/getFile";
 
-//TODO: Сделать обработку ошибок в запросе (ошибка в заголовках, теле запроса и тп...
+//TODO:	Реализовать обработку ошибок в запросе (ошибка в заголовках, теле запроса и тп...)
+//TODO: Реализовать возможность настраивать `fetch` (cache, referrer, redirect и тп...)
 
 // ✓ Пофиксить получение файлов из Indexed store для форм дата тела запроса
-// Добавить логику для обработки raw тела запроса
+// ✓ Добавить логику для обработки raw тела запроса
+// Добавить логику для обработки `url-encoded` тела запроса
 // Переделать обработку `query` параметров (добавлять их сразу в ссылку)
 
 export default class Service {
-	public preparedRequestConfig: Promise<APIT.RequestConfig>;
+	private preparedRequestConfig: Promise<APIT.RequestConfig>;
 
 	constructor(config: APIT.RawRequestConfig) {
 		this.preparedRequestConfig = this.prepareConfig(config);
@@ -32,7 +34,7 @@ export default class Service {
 				method: cfg.method,
 				headers: cfg.headers,
 				body: cfg.body,
-				mode: "no-cors"
+				mode: "cors"
 			});
 
 			return response;
@@ -44,8 +46,8 @@ export default class Service {
 	private async prepareConfig(config: APIT.RawRequestConfig): Promise<APIT.RequestConfig> {
 		const url = config.url;
 		const method = config.method;
-		const headers = this.headersPrepare(config.headers);
 		const query = this.paramsPrepare(config.params);
+		const headers = new Headers(this.headersPrepare(config.headers));
 		const body = await this.bodyPrepare(config.body);
 
 		return { url, method, query, headers, body };
@@ -54,20 +56,23 @@ export default class Service {
 	private async bodyPrepare(
 		unpreparedData: APIT.ConfigBody | undefined
 	): Promise<APIT.RequestBody> {
-		if (!unpreparedData) return null;
+		if (!unpreparedData || !unpreparedData.data) return null;
 
-		const preparedData = this.initBodyPrepare(unpreparedData);
+		if (unpreparedData.data_type == "raw") {
+			if (unpreparedData.raw_data_type == "JSON") return JSON.stringify(unpreparedData.data);
 
-		// if (preparedData && preparedData.type == "raw") return preparedData;
-		// if (preparedData && preparedData.type == "urlencoded") return preparedData;
+			return unpreparedData.data.toString();
+		}
+		// if (unpreparedData.data_type == "x-www-form-urlencoded") return "url-encode";
+		if (unpreparedData.data_type == "form-data") {
+			const asyncFormData = this.initFormDataBodyPrepare(unpreparedData);
+			if (!asyncFormData) return null;
 
-		if (preparedData && preparedData.type == "form") {
 			const form = new FormData();
-			const awaitedData: Array<Awaited<APIT.InitPreparetedFormDataBodyItem>> = await Promise.all(
-				preparedData.data as APIT.InitPreparetedFormDataBody
-			);
+			const awaitedFormData: Array<Awaited<APIT.InitPreparetedFormDataBodyItem>> =
+				await Promise.all(asyncFormData as APIT.InitPreparetedFormDataBody);
 
-			awaitedData.map((obj) => {
+			awaitedFormData.map((obj) => {
 				Object.entries(obj).forEach(([key, value]) => {
 					form.append(key, value);
 				});
@@ -75,40 +80,34 @@ export default class Service {
 
 			return form;
 		}
+
 		return null;
 	}
 
-	private initBodyPrepare(body: APIT.ConfigBody | undefined): APIT.InitBodyPrepare | null {
+	private initFormDataBodyPrepare(
+		body: APIT.ConfigBody | undefined
+	): APIT.InitPreparetedFormDataBody | null {
 		if (!body || !body.data) return null;
 
-		if (body.data_type === "form-data") {
-			const unpreparedData = body.data as Array<BodyFormDataItem>;
-			const isUsedPreparedData = unpreparedData.map((item) => item).filter((item) => item.isUsed);
-			const preparetedData = isUsedPreparedData.map(async (item) => {
-				if (item.valueType == "file") {
-					const file_data = await getFile(item.fileInfo.id);
+		const unpreparedData = body.data as Array<BodyFormDataItem>;
+		const isUsedPreparedData = unpreparedData.map((item) => item).filter((item) => item.isUsed);
+		const preparetedData = isUsedPreparedData.map(async (item) => {
+			if (item.valueType == "file") {
+				const file_data = await getFile(item.fileInfo.id);
 
-					if (!file_data)
-						throw Error(`File by this: ${item.fileInfo.id} id not found in local database`);
+				if (!file_data)
+					// ! Нужен кастомный обработчик ошибок
+					throw Error(`File by this: ${item.fileInfo.id} id not found in local database`);
 
-					return { [item.key]: file_data.blob };
-				} else {
-					return { [item.key]: item.value };
-				}
-			});
+				return { [item.key]: file_data.blob };
+			} else {
+				return { [item.key]: item.value };
+			}
+		});
 
-			const form_data_result: APIT.InitBodyPrepare = {
-				type: "form",
-				data: preparetedData
-			};
-
-			return form_data_result;
-		} else if (body.data_type === "raw") {
-		} else if (body.data_type === "x-www-form-urlencoded") {
-		}
-
-		return null;
+		return preparetedData;
 	}
+	// ? Переписать функции ниже ↓ в одну, которая будет принимать в себя generic type ? \\
 	private paramsPrepare(
 		paramsStore: Array<QueryParameterItem> | undefined
 	): CommonT.StringKeyVal | EmptyObject {
