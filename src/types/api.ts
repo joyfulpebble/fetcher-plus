@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import type { AxiosRequestConfig, AxiosResponse } from "axios";
 import { type QueryParameterItem } from "../redux/reducers/requestQueryParamsSlice";
 import { type RequestHeaderItem } from "../redux/reducers/requestHeadersSlice";
 import { type BodyFormDataItem } from "../redux/reducers/requestBodyFormDataSlice";
@@ -32,6 +31,14 @@ export namespace APIT {
 		body: RequestBody;
 	}
 
-	export type InitPreparetedFormDataBody = Array<Promise<{ [key: string]: Blob | string }>>;
-	export type InitPreparetedFormDataBodyItem = Promise<{ [key: string]: Blob | string }>;
+	interface InitPreparetedFormDataFileInfo {
+		blob: Blob;
+		name: string;
+	}
+	export type InitPreparetedFormDataBody = Array<
+		Promise<{ [key: string]: InitPreparetedFormDataFileInfo | string }>
+	>;
+	export type InitPreparetedFormDataBodyItem = Promise<{
+		[key: string]: InitPreparetedFormDataFileInfo | string;
+	}>;
 }

@@ -74,7 +74,8 @@ export default class Service {
 
 			awaitedFormData.map((obj) => {
 				Object.entries(obj).forEach(([key, value]) => {
-					form.append(key, value);
+					if (typeof value !== "string") form.append(key, value.blob, value.name);
+					else form.append(key, value);
 				});
 			});
 
@@ -99,7 +100,12 @@ export default class Service {
 					// ! Нужен кастомный обработчик ошибок
 					throw Error(`File by this: ${item.fileInfo.id} id not found in local database`);
 
-				return { [item.key]: file_data.blob };
+				return {
+					[item.key]: {
+						blob: file_data.blob,
+						name: file_data.name
+					}
+				};
 			} else {
 				return { [item.key]: item.value };
 			}
