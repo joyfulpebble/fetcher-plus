@@ -15,7 +15,7 @@ export namespace APIT {
 		raw_data_type: CommonT.BodyRawType;
 	};
 
-	export type RequestBody = string | FormData | null;
+	export type RequestBody = null | string | FormData | URLSearchParams;
 	export interface RawRequestConfig {
 		url: string;
 		method: Method | string;

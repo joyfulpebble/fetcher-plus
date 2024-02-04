@@ -3,9 +3,10 @@ import { type CommonT } from "../types/common";
 
 import { type EmptyObject } from "type-fest";
 
-import { type QueryParameterItem } from "../redux/reducers/requestQueryParamsSlice";
 import { type RequestHeaderItem } from "../redux/reducers/requestHeadersSlice";
 import { type BodyFormDataItem } from "../redux/reducers/requestBodyFormDataSlice";
+import { type QueryParameterItem } from "../redux/reducers/requestQueryParamsSlice";
+import { type BodyUrlEncodedItem } from "../redux/reducers/requestBodyUrlEncodedSlice";
 
 import getFile from "../idb/actions/getFile";
 
@@ -14,18 +15,21 @@ import getFile from "../idb/actions/getFile";
 
 // ✓ Пофиксить получение файлов из Indexed store для форм дата тела запроса
 // ✓ Добавить логику для обработки raw тела запроса
-// Добавить логику для обработки `url-encoded` тела запроса
+// ✓ Добавить логику для обработки `url-encoded` тела запроса
 // Переделать обработку `query` параметров (добавлять их сразу в ссылку)
+
+type ItemsArrayToObjectInput = {
+	_id: string;
+	isUsed: boolean;
+	key: string;
+	value: string;
+};
 
 export default class Service {
 	private preparedRequestConfig: Promise<APIT.RequestConfig>;
 
 	constructor(config: APIT.RawRequestConfig) {
 		this.preparedRequestConfig = this.prepareConfig(config);
-	}
-
-	public get getRequestConfig() {
-		return this.preparedRequestConfig;
 	}
 
 	public doRequest(): Promise<Response> {
@@ -46,8 +50,8 @@ export default class Service {
 	private async prepareConfig(config: APIT.RawRequestConfig): Promise<APIT.RequestConfig> {
 		const url = config.url;
 		const method = config.method;
-		const query = this.paramsPrepare(config.params);
-		const headers = new Headers(this.headersPrepare(config.headers));
+		const query = this.arrayOfStoreItemsToObject<QueryParameterItem>(config.params);
+		const headers = new Headers(this.arrayOfStoreItemsToObject<RequestHeaderItem>(config.headers));
 		const body = await this.bodyPrepare(config.body);
 
 		return { url, method, query, headers, body };
@@ -63,7 +67,14 @@ export default class Service {
 
 			return unpreparedData.data.toString();
 		}
-		// if (unpreparedData.data_type == "x-www-form-urlencoded") return "url-encode";
+		if (unpreparedData.data_type == "x-www-form-urlencoded") {
+			const unprepared_urlencoded = this.arrayOfStoreItemsToObject<BodyUrlEncodedItem>(
+				unpreparedData.data as Array<BodyUrlEncodedItem>
+			);
+			const urlencoded = new URLSearchParams(unprepared_urlencoded);
+
+			return urlencoded;
+		}
 		if (unpreparedData.data_type == "form-data") {
 			const asyncFormData = this.initFormDataBodyPrepare(unpreparedData);
 			if (!asyncFormData) return null;
@@ -113,35 +124,19 @@ export default class Service {
 
 		return preparetedData;
 	}
-	// ? Переписать функции ниже ↓ в одну, которая будет принимать в себя generic type ? \\
-	private paramsPrepare(
-		paramsStore: Array<QueryParameterItem> | undefined
-	): CommonT.StringKeyVal | EmptyObject {
-		if (!paramsStore || paramsStore.length === 0) return {};
 
-		const unreadyParams = paramsStore;
+	private arrayOfStoreItemsToObject<Item extends ItemsArrayToObjectInput>(
+		store: Array<Item> | undefined
+	): CommonT.StringKeyVal | EmptyObject {
+		if (!store || store.length == 0) return {};
+
+		const unreadyParams = store;
 		const result = [{}];
 
 		for (let i = 0; i < unreadyParams.length; i++) {
 			if (!unreadyParams[i].isUsed || !unreadyParams[i].key || !unreadyParams[i].key) continue;
 
 			result.push({ [unreadyParams[i].key]: unreadyParams[i].value });
-		}
-
-		return result.reduce((prev, curr) => Object.assign(prev, curr));
-	}
-	private headersPrepare(
-		headersStore: Array<RequestHeaderItem> | undefined
-	): CommonT.StringKeyVal | EmptyObject {
-		if (!headersStore || headersStore.length === 0) return {};
-
-		const unreadyHeaders = headersStore;
-		const result = [{}];
-
-		for (let i = 0; i < unreadyHeaders.length; i++) {
-			if (!unreadyHeaders[i].isUsed || !unreadyHeaders[i].key || !unreadyHeaders[i].key) continue;
-
-			result.push({ [unreadyHeaders[i].key]: unreadyHeaders[i].value });
 		}
 
 		return result.reduce((prev, curr) => Object.assign(prev, curr));

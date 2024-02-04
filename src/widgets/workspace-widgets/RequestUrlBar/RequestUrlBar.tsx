@@ -60,10 +60,8 @@ function RequestUrlBar() {
 						}
 					});
 
-					// console.log(await API.getRequestConfig);
-
 					const res = await API.doRequest();
-					console.log(await res.json());
+					// console.log(await res.json());
 				}}
 			/>
 		</>
