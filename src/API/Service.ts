@@ -1,7 +1,7 @@
+import { type EmptyObject } from "type-fest";
+
 import { type APIT } from "../types/api";
 import { type CommonT } from "../types/common";
-
-import { type EmptyObject } from "type-fest";
 
 import { type RequestHeaderItem } from "../redux/reducers/requestHeadersSlice";
 import { type BodyFormDataItem } from "../redux/reducers/requestBodyFormDataSlice";
@@ -16,7 +16,12 @@ import getFile from "../idb/actions/getFile";
 // ✓ Пофиксить получение файлов из Indexed store для форм дата тела запроса
 // ✓ Добавить логику для обработки raw тела запроса
 // ✓ Добавить логику для обработки `url-encoded` тела запроса
-// Переделать обработку `query` параметров (добавлять их сразу в ссылку)
+// -+✓ Переделать обработку `query` параметров (добавлять их сразу в ссылку)
+// Релизовать авторизацию
+// - API ключ в query
+// - API ключ в heder
+// - Bearer токен
+// - Basic auth
 
 type ItemsArrayToObjectInput = {
 	_id: string;
@@ -29,32 +34,36 @@ export default class Service {
 	private preparedRequestConfig: Promise<APIT.RequestConfig>;
 
 	constructor(config: APIT.RawRequestConfig) {
-		this.preparedRequestConfig = this.prepareConfig(config);
+		this.preparedRequestConfig = this.configPrepare(config);
 	}
 
-	public doRequest(): Promise<Response> {
-		const result = this.preparedRequestConfig.then((cfg) => {
-			const response = fetch(cfg.url, {
-				method: cfg.method,
-				headers: cfg.headers,
-				body: cfg.body,
-				mode: "cors"
-			});
-
-			return response;
+	public async doRequest(): Promise<Response> {
+		const cfg = await this.preparedRequestConfig;
+		const response = fetch(cfg.url, {
+			method: cfg.method,
+			headers: cfg.headers,
+			body: cfg.body,
+			mode: "cors"
 		});
 
-		return result;
+		return response;
 	}
 
-	private async prepareConfig(config: APIT.RawRequestConfig): Promise<APIT.RequestConfig> {
-		const url = config.url;
+	private async configPrepare(config: APIT.RawRequestConfig): Promise<APIT.RequestConfig> {
 		const method = config.method;
-		const query = this.arrayOfStoreItemsToObject<QueryParameterItem>(config.params);
 		const headers = new Headers(this.arrayOfStoreItemsToObject<RequestHeaderItem>(config.headers));
 		const body = await this.bodyPrepare(config.body);
 
-		return { url, method, query, headers, body };
+		let url = config.url;
+
+		if (config.params) {
+			const params_obj = this.arrayOfStoreItemsToObject<QueryParameterItem>(config.params);
+			const query = `?${new URLSearchParams(params_obj).toString()}`;
+
+			url = config.url + query;
+		}
+
+		return { url, method, headers, body };
 	}
 
 	private async bodyPrepare(

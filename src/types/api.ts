@@ -26,7 +26,6 @@ export namespace APIT {
 	export interface RequestConfig {
 		url: string;
 		method: Method | string;
-		query: CommonT.StringKeyVal | EmptyObject;
 		headers: Headers;
 		body: RequestBody;
 	}
