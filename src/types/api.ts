@@ -34,12 +34,6 @@ export namespace APIT {
 		headers?: Array<RequestHeaderItem>;
 		body?: ConfigBody;
 	}
-	export interface RequestConfig {
-		url: string;
-		method: Method | string;
-		headers: Headers;
-		body: RequestBody;
-	}
 
 	interface InitPreparetedFormDataFileInfo {
 		blob: Blob;

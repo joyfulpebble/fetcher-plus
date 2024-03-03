@@ -34,44 +34,63 @@ type ItemsArrayToObjectInput = {
 	value: string;
 };
 
+type SetHeaderInputT = {
+	name: string;
+	value: string;
+};
+
 export default class Service {
-	private preparedRequestConfig: Promise<APIT.RequestConfig>;
+	private url: string;
+	private headers: Headers;
+	private method: APIT.Method | string;
+	private body: Promise<APIT.RequestBody>;
+	private query: CommonT.StringKeyVal | EmptyObject;
 
 	constructor(config: APIT.RawRequestConfig) {
-		this.preparedRequestConfig = this.configPrepare(config);
+		this.url = config.url;
+		this.method = config.method;
+		this.body = this.bodyPrepare(config.body);
+		this.query = this.arrayOfStoreItemsToObject<QueryParameterItem>(config.params);
+		this.headers = new Headers(this.arrayOfStoreItemsToObject<RequestHeaderItem>(config.headers));
+
+		this.authPrepare(config.auth);
 	}
 
 	public async doRequest(): Promise<Response> {
-		const cfg = await this.preparedRequestConfig;
-		const response = fetch(cfg.url, {
-			method: cfg.method,
-			headers: cfg.headers,
-			body: cfg.body,
+		const body = await this.body;
+
+		const response = fetch(this.url, {
+			method: this.method,
+			headers: this.headers,
+			body: body,
 			mode: "cors"
 		});
 
 		return response;
 	}
 
-	private async configPrepare(config: APIT.RawRequestConfig): Promise<APIT.RequestConfig> {
-		const method = config.method;
-		const headers = new Headers(this.arrayOfStoreItemsToObject<RequestHeaderItem>(config.headers));
-		const body = await this.bodyPrepare(config.body);
-
-		const auth = this.authPrepare(config.auth);
-
-		console.log(auth);
-
-		let url = config.url;
-		if (config.params) {
-			const params_obj = this.arrayOfStoreItemsToObject<QueryParameterItem>(config.params);
-			const query = `?${new URLSearchParams(params_obj).toString()}`;
-
-			url = config.url + query;
-		}
-
-		return { url, method, headers, body };
+	private addHeader(newHeader: SetHeaderInputT) {
+		this.headers.append(newHeader.name, newHeader.value);
 	}
+
+	private addQuery(newQuery: CommonT.StringKeyVal | EmptyObject) {
+		Object.assign(this.query, newQuery);
+	}
+
+	// private configPrepare(config: APIT.RawRequestConfig) {
+	// 	const auth = this.authPrepare(config.auth);
+
+	// 	// вынести в отдельную функцию
+	// 	// let url = config.url;
+	// 	// if (config.params) {
+	// 	// 	const params_obj = this.arrayOfStoreItemsToObject<QueryParameterItem>(config.params);
+	// 	// 	const query = `?${new URLSearchParams(params_obj).toString()}`;
+
+	// 	// 	url = config.url + query;
+	// 	// }
+
+	// 	return auth;
+	// }
 
 	private authPrepare(auth_cfg: APIT.ConfigAuth | undefined): APIT.AuthPrepareT | null {
 		if (!auth_cfg || !auth_cfg.auth || auth_cfg.auth_type === "none") return null;
@@ -79,16 +98,24 @@ export default class Service {
 		if (auth_cfg.auth_type === "api-key") {
 			const data = auth_cfg.auth as AuthApiStateT;
 
-			return {
-				[data.key]: data.value
-			};
+			if (auth_cfg.api_key_location === "header") {
+				this.addHeader({
+					name: data.key,
+					value: data.value
+				});
+			} else {
+				this.addQuery({
+					[data.key]: data.value
+				});
+			}
 		}
 		if (auth_cfg.auth_type === "basic-auth") {
 			const data = auth_cfg.auth as AuthBasicStateT;
 
-			return {
-				Authorization: "Basic " + base64.encode(`${data.key}:${data.value}`)
-			};
+			this.addHeader({
+				name: "Authorization",
+				value: "Basic " + base64.encode(`${data.key}:${data.value}`)
+			});
 		}
 		if (auth_cfg.auth_type === "bearer-token") {
 			const data = auth_cfg.auth as string;
