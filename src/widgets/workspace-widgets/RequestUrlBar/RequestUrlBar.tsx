@@ -19,6 +19,11 @@ function RequestUrlBar() {
 	const headers = useAppSelector((state) => state.requestHeadersSlice);
 	const body_type = useAppSelector((state) => state.requestBodyTypeReducer);
 
+	const apiKeyAuth = useAppSelector((state) => state.requestAuthApiReducer);
+	const basicAuth = useAppSelector((state) => state.requestAuthBasicReducer);
+	const bearerAuth = useAppSelector((state) => state.requestAuthBearerReducer);
+	const authType = useAppSelector((state) => state.requestAuthTypeReducer);
+
 	const requestFormDataBody = useAppSelector((state) => state.requestBodyFormDataReducer);
 	const requestUrlEncodedBody = useAppSelector((state) => state.requestBodyUrlEncodedReducer);
 	const rawBodyContent = useAppSelector((state) => state.requestBodyRawContentReducer);
@@ -28,6 +33,13 @@ function RequestUrlBar() {
 		"form-data": requestFormDataBody,
 		"raw": rawBodyContent,
 		"x-www-form-urlencoded": requestUrlEncodedBody
+	};
+
+	const request_auth = {
+		"none": null,
+		"basic-auth": basicAuth,
+		"bearer-token": bearerAuth,
+		"api-key": apiKeyAuth
 	};
 
 	return (
@@ -57,6 +69,11 @@ function RequestUrlBar() {
 							data: request_data[body_type.contentType] as APIT.ConfigBodyData,
 							data_type: body_type.contentType,
 							raw_data_type: body_type.rawType
+						},
+						auth: {
+							auth: request_auth[authType.authType] as APIT.ConfigAuthData,
+							auth_type: authType.authType,
+							api_key_location: authType.authApiKeyType
 						}
 					});
 

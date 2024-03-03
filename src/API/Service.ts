@@ -7,7 +7,10 @@ import { type RequestHeaderItem } from "../redux/reducers/requestHeadersSlice";
 import { type BodyFormDataItem } from "../redux/reducers/requestBodyFormDataSlice";
 import { type QueryParameterItem } from "../redux/reducers/requestQueryParamsSlice";
 import { type BodyUrlEncodedItem } from "../redux/reducers/requestBodyUrlEncodedSlice";
+import { type AuthBasicStateT } from "../redux/reducers/requestAuthBasicSlice";
+import { type AuthApiStateT } from "../redux/reducers/requestAuthApiSlice";
 
+import base64 from "base-64";
 import getFile from "../idb/actions/getFile";
 
 //TODO:	Реализовать обработку ошибок в запросе (ошибка в заголовках, теле запроса и тп...)
@@ -16,12 +19,13 @@ import getFile from "../idb/actions/getFile";
 // ✓ Пофиксить получение файлов из Indexed store для форм дата тела запроса
 // ✓ Добавить логику для обработки raw тела запроса
 // ✓ Добавить логику для обработки `url-encoded` тела запроса
-// -+✓ Переделать обработку `query` параметров (добавлять их сразу в ссылку)
 // Релизовать авторизацию
 // - API ключ в query
 // - API ключ в heder
 // - Bearer токен
 // - Basic auth
+// - Basic в heder
+// -+✓ Переделать обработку `query` параметров (добавлять их сразу в ссылку)
 
 type ItemsArrayToObjectInput = {
 	_id: string;
@@ -54,8 +58,11 @@ export default class Service {
 		const headers = new Headers(this.arrayOfStoreItemsToObject<RequestHeaderItem>(config.headers));
 		const body = await this.bodyPrepare(config.body);
 
-		let url = config.url;
+		const auth = this.authPrepare(config.auth);
 
+		console.log(auth);
+
+		let url = config.url;
 		if (config.params) {
 			const params_obj = this.arrayOfStoreItemsToObject<QueryParameterItem>(config.params);
 			const query = `?${new URLSearchParams(params_obj).toString()}`;
@@ -64,6 +71,34 @@ export default class Service {
 		}
 
 		return { url, method, headers, body };
+	}
+
+	private authPrepare(auth_cfg: APIT.ConfigAuth | undefined): APIT.AuthPrepareT | null {
+		if (!auth_cfg || !auth_cfg.auth || auth_cfg.auth_type === "none") return null;
+
+		if (auth_cfg.auth_type === "api-key") {
+			const data = auth_cfg.auth as AuthApiStateT;
+
+			return {
+				[data.key]: data.value
+			};
+		}
+		if (auth_cfg.auth_type === "basic-auth") {
+			const data = auth_cfg.auth as AuthBasicStateT;
+
+			return {
+				Authorization: "Basic " + base64.encode(`${data.key}:${data.value}`)
+			};
+		}
+		if (auth_cfg.auth_type === "bearer-token") {
+			const data = auth_cfg.auth as string;
+
+			return {
+				Authorization: `Bearer ${data}`
+			};
+		}
+
+		return null;
 	}
 
 	private async bodyPrepare(

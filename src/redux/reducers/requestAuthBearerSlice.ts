@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type Token = string;
+export type Token = string;
 
 const initialState: Token = "";
 

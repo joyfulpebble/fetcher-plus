@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CommonT } from "../../types/common";
 
-interface AuthTypeI {
+export interface AuthTypeI {
 	authType: CommonT.AuthType;
 	authApiKeyType: CommonT.AuthApiKeyType;
 }
