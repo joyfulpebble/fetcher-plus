@@ -20,12 +20,13 @@ import getFile from "../idb/actions/getFile";
 // ✓ Добавить логику для обработки raw тела запроса
 // ✓ Добавить логику для обработки `url-encoded` тела запроса
 // Релизовать авторизацию
-// - API ключ в query
-// - API ключ в heder
-// - Bearer токен
-// - Basic auth
-// - Basic в heder
-// -+✓ Переделать обработку `query` параметров (добавлять их сразу в ссылку)
+// ✓ API ключ в query
+// ✓ API ключ в heder
+// ✓ Bearer токен
+// ✓ Basic auth
+// ✓ Basic в heder
+// ✓ Переделать обработку `query` параметров (добавлять их сразу в ссылку)
+// - Отключение авторизации Select'ом
 
 type ItemsArrayToObjectInput = {
 	_id: string;
@@ -58,8 +59,9 @@ export default class Service {
 
 	public async doRequest(): Promise<Response> {
 		const body = await this.body;
+		const url = this.urlPrepare(this.url);
 
-		const response = fetch(this.url, {
+		const response = fetch(url, {
 			method: this.method,
 			headers: this.headers,
 			body: body,
@@ -69,30 +71,11 @@ export default class Service {
 		return response;
 	}
 
-	private addHeader(newHeader: SetHeaderInputT) {
-		this.headers.append(newHeader.name, newHeader.value);
+	private urlPrepare(raw_url: string) {
+		return `${raw_url}?${new URLSearchParams(this.query).toString()}`;
 	}
 
-	private addQuery(newQuery: CommonT.StringKeyVal | EmptyObject) {
-		Object.assign(this.query, newQuery);
-	}
-
-	// private configPrepare(config: APIT.RawRequestConfig) {
-	// 	const auth = this.authPrepare(config.auth);
-
-	// 	// вынести в отдельную функцию
-	// 	// let url = config.url;
-	// 	// if (config.params) {
-	// 	// 	const params_obj = this.arrayOfStoreItemsToObject<QueryParameterItem>(config.params);
-	// 	// 	const query = `?${new URLSearchParams(params_obj).toString()}`;
-
-	// 	// 	url = config.url + query;
-	// 	// }
-
-	// 	return auth;
-	// }
-
-	private authPrepare(auth_cfg: APIT.ConfigAuth | undefined): APIT.AuthPrepareT | null {
+	private authPrepare(auth_cfg: APIT.ConfigAuth | undefined): null {
 		if (!auth_cfg || !auth_cfg.auth || auth_cfg.auth_type === "none") return null;
 
 		if (auth_cfg.auth_type === "api-key") {
@@ -120,9 +103,10 @@ export default class Service {
 		if (auth_cfg.auth_type === "bearer-token") {
 			const data = auth_cfg.auth as string;
 
-			return {
-				Authorization: `Bearer ${data}`
-			};
+			this.addHeader({
+				name: "Authorization",
+				value: `Bearer ${data}`
+			});
 		}
 
 		return null;
@@ -165,6 +149,14 @@ export default class Service {
 		}
 
 		return null;
+	}
+
+	private addHeader(newHeader: SetHeaderInputT) {
+		this.headers.append(newHeader.name, newHeader.value);
+	}
+
+	private addQuery(newQuery: CommonT.StringKeyVal | EmptyObject) {
+		Object.assign(this.query, newQuery);
 	}
 
 	private initFormDataBodyPrepare(
