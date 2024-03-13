@@ -20,6 +20,7 @@ import RequestAuthApiTypesList from "../../../../components/lists/RequestAuthApi
 
 import "./styles/RequestAuth.scss";
 import "../RequestAdditionalOptions.scss";
+import requestAuthTypeSlice from "../../../../redux/reducers/requestAuthTypeSlice";
 
 function RequestAuth() {
 	const auth_variants = {
@@ -40,8 +41,10 @@ function RequestAuth() {
 	};
 
 	const dispatch = useAppDispatch();
-	const { authType, authApiKeyType } = useAppSelector((state) => state.requestAuthTypeReducer);
-	const [authEnabled, setAuthEnabled] = useState<boolean>(false);
+	const { authType, authApiKeyType, authIsNeed } = useAppSelector(
+		(state) => state.requestAuthTypeReducer
+	);
+	const { updateAuthNeed } = requestAuthTypeSlice.actions;
 
 	const request_auth_classnames = useClassnames({
 		request_body_none_wrapper: authType === "none",
@@ -94,13 +97,13 @@ function RequestAuth() {
 				</div>
 				{authType != "none" && (
 					<div className="request_additional_option_controls">
-						<div
-							className="enabled"
-							onClick={() => setAuthEnabled(!authEnabled)}
-						>
+						<div className="enabled">
 							<Switch
-								checked={authEnabled}
+								checked={authIsNeed}
 								spanText={"Enabled"}
+								handleIsCheckedParameters={(checked) => {
+									dispatch(updateAuthNeed(checked));
+								}}
 							/>
 						</div>
 

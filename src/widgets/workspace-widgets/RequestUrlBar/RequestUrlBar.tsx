@@ -22,7 +22,7 @@ function RequestUrlBar() {
 	const apiKeyAuth = useAppSelector((state) => state.requestAuthApiReducer);
 	const basicAuth = useAppSelector((state) => state.requestAuthBasicReducer);
 	const bearerAuth = useAppSelector((state) => state.requestAuthBearerReducer);
-	const authType = useAppSelector((state) => state.requestAuthTypeReducer);
+	const authConf = useAppSelector((state) => state.requestAuthTypeReducer);
 
 	const requestFormDataBody = useAppSelector((state) => state.requestBodyFormDataReducer);
 	const requestUrlEncodedBody = useAppSelector((state) => state.requestBodyUrlEncodedReducer);
@@ -71,9 +71,10 @@ function RequestUrlBar() {
 							raw_data_type: body_type.rawType
 						},
 						auth: {
-							auth: request_auth[authType.authType] as APIT.ConfigAuthData,
-							auth_type: authType.authType,
-							api_key_location: authType.authApiKeyType
+							auth: request_auth[authConf.authType] as APIT.ConfigAuthData,
+							authIsNeed: authConf.authIsNeed,
+							auth_type: authConf.authType,
+							api_key_location: authConf.authApiKeyType
 						}
 					});
 

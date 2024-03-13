@@ -26,7 +26,7 @@ import getFile from "../idb/actions/getFile";
 // ✓ Basic auth
 // ✓ Basic в heder
 // ✓ Переделать обработку `query` параметров (добавлять их сразу в ссылку)
-// - Отключение авторизации Select'ом
+// ✓ Отключение авторизации Select'ом
 
 type ItemsArrayToObjectInput = {
 	_id: string;
@@ -76,7 +76,8 @@ export default class Service {
 	}
 
 	private authPrepare(auth_cfg: APIT.ConfigAuth | undefined): null {
-		if (!auth_cfg || !auth_cfg.auth || auth_cfg.auth_type === "none") return null;
+		if (!auth_cfg || !auth_cfg.auth || auth_cfg.auth_type === "none" || !auth_cfg.authIsNeed)
+			return null;
 
 		if (auth_cfg.auth_type === "api-key") {
 			const data = auth_cfg.auth as AuthApiStateT;

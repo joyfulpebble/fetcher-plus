@@ -20,6 +20,7 @@ export namespace APIT {
 	export type ConfigAuthData = AuthApiStateT | AuthBasicStateT | AuthBearerStateT;
 	export type ConfigAuth = {
 		auth: ConfigAuthData;
+		authIsNeed: boolean;
 		auth_type: CommonT.AuthType;
 		api_key_location: CommonT.AuthApiKeyType;
 	};
